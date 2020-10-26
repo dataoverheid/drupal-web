@@ -1,0 +1,22 @@
+uuid: 15c7a2e7-c731-451d-a017-37811009492c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_taxonomiebel
+id: taxonomy_term.dcatapdonl_overheid_taxonomiebel.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_taxonomiebel
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

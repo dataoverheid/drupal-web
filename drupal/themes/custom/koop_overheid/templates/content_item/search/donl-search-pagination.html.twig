@@ -1,0 +1,21 @@
+{% if pagination %}
+  <div class="pagination{% if not filters %} no-filters{% endif %}">
+    <div class="pagination__index">
+      <ul>
+        {% for page in pagination %}
+          {% if page.type == 'separator' %}
+            <li>...</li>
+          {% elseif page.type == 'active' %}
+            <li class="active">{{ page.label }}</li>
+          {% else %}
+            <li>{{ page.link }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% if filters %}
+      <div class="pagination__filter">{{ filters }}</div>
+    {% endif %}
+  </div>
+{% endif %}

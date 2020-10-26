@@ -1,0 +1,11 @@
+uuid: d6cef09a-4eca-44aa-92e2-dbdd90ac5096
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+id: node_type_recent
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301

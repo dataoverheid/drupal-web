@@ -1,0 +1,18 @@
+uuid: 6347989c-256a-46b9-92ff-8a62350deb8f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block_uitgevuld
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: block_content.linklist_block_uitgevuld
+target_entity_type_id: block_content
+target_bundle: linklist_block_uitgevuld
+default_langcode: site_default
+language_alterable: false

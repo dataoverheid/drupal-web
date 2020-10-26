@@ -1,0 +1,18 @@
+uuid: 142437ed-e527-42de-af8f-f22886456d69
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.created
+field_name: created
+entity_type: node
+bundle: datarequest
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

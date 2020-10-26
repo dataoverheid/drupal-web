@@ -1,0 +1,19 @@
+uuid: 138f0eb0-1153-4dd5-8592-504b532818a6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.data_eigenaar
+    - node.type.feedback_dataset
+id: node.feedback_dataset.data_eigenaar
+field_name: data_eigenaar
+entity_type: node
+bundle: feedback_dataset
+label: Data-eigenaar
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

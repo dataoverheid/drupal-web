@@ -1,0 +1,17 @@
+uuid: 301f54d3-54a0-4d39-97b6-120923280239
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Organisatie
+type: organization
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,12 @@
+services:
+  donl_search_backlink.backlink:
+    class: Drupal\donl_search_backlink\BackLinkService
+    arguments:
+      - '@tempstore.private'
+
+  donl_search_backlink.previous_search_subscriber:
+    class: Drupal\donl_search_backlink\PreviousSearchSubscriber
+    arguments:
+      - '@tempstore.private'
+    tags:
+      - { name: event_subscriber }

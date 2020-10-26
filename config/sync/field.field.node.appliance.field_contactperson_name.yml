@@ -1,0 +1,19 @@
+uuid: 394accbf-968b-4aef-aff6-49515f9192e1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contactperson_name
+    - node.type.appliance
+id: node.appliance.field_contactperson_name
+field_name: field_contactperson_name
+entity_type: node
+bundle: appliance
+label: Naam
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

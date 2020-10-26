@@ -1,0 +1,22 @@
+uuid: d1af90b2-b465-401d-82ef-f31ca1360bdf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+id: node.recent.status
+field_name: status
+entity_type: node
+bundle: recent
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

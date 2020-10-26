@@ -1,0 +1,19 @@
+uuid: 9adc2153-c4ba-4150-aab7-cf347cf5cdf7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_nl
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.label_nl
+field_name: label_nl
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: 'Label NL'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

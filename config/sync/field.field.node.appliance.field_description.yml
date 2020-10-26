@@ -1,0 +1,19 @@
+uuid: bdd2e57d-0def-4a00-b737-39da00e427b8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.appliance
+id: node.appliance.field_description
+field_name: field_description
+entity_type: node
+bundle: appliance
+label: 'Beschrijving van de toepassing'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

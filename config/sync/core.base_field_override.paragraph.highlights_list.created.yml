@@ -1,0 +1,18 @@
+uuid: 2d9bde0d-c8a9-41c6-a730-0c888517078d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.highlights_list
+id: paragraph.highlights_list.created
+field_name: created
+entity_type: paragraph
+bundle: highlights_list
+label: 'Aangemaakt op'
+description: 'Tijdstip waarop de paragraaf is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

@@ -1,0 +1,55 @@
+uuid: 54951eff-4c6b-4de6-8d39-7af70b53f670
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_block
+    - paragraphs.paragraphs_type.homepage_block
+    - paragraphs.paragraphs_type.homepage_blocks
+  module:
+    - entity_reference_revisions
+id: paragraph.homepage_blocks.field_homepage_block
+field_name: field_homepage_block
+entity_type: paragraph
+bundle: homepage_blocks
+label: 'Homepage block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      homepage_block: homepage_block
+    target_bundles_drag_drop:
+      homepage_blocks:
+        weight: 7
+        enabled: false
+      linklist_block:
+        weight: 8
+        enabled: false
+      linklist_blocks:
+        weight: 9
+        enabled: false
+      homepage_block:
+        enabled: true
+        weight: 10
+      search:
+        weight: 10
+        enabled: false
+      sru_field_paragraph:
+        weight: 11
+        enabled: false
+      text:
+        weight: 12
+        enabled: false
+      links:
+        weight: 14
+        enabled: false
+      nested_links:
+        weight: 15
+        enabled: false
+field_type: entity_reference_revisions

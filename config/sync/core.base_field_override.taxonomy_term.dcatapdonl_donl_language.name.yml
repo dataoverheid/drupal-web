@@ -1,0 +1,18 @@
+uuid: f6dcdb67-928d-46ac-9924-89bb935d9dbf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+id: taxonomy_term.dcatapdonl_donl_language.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

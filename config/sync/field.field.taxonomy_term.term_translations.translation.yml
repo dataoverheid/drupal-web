@@ -1,0 +1,19 @@
+uuid: d4f91742-fa9f-4482-971a-23917d7183c3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.translation
+    - taxonomy.vocabulary.term_translations
+id: taxonomy_term.term_translations.translation
+field_name: translation
+entity_type: taxonomy_term
+bundle: term_translations
+label: 'Display name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

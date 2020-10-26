@@ -1,0 +1,32 @@
+<table class="minimal-table table--striped">
+  <tbody>
+  <tr>
+    <th>{{ 'Result'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'result_datarequest', datarequest.result_datarequest.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Datarequest source'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'request_source', datarequest.request_source.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Dataowner'|t }}</th>
+    <td>{{ ckan_mapping_get_organization_name(datarequest.data_owner.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Dataset'|t }}</th>
+    <td>
+      {% for url in datarequest.datasets %}
+        {{ get_dataset_link_by_identifier(url.value) }}<br />
+      {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <th>{{ 'Latest status of open datarequest'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'state_datarequest', datarequest.state_datarequest.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Explanation state'|t }}</th>
+    <td>{{ datarequest.explanation_state.value|nl2br }}</td>
+  </tr>
+  </tbody>
+</table>

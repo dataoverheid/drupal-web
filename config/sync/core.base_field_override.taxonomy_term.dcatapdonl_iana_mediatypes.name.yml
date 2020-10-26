@@ -1,0 +1,18 @@
+uuid: 88f1739f-051f-4d4e-9b25-31866ea48972
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+id: taxonomy_term.dcatapdonl_iana_mediatypes.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

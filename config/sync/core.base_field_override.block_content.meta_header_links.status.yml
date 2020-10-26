@@ -1,0 +1,22 @@
+uuid: 1bb807b8-9080-42fb-bfed-c19a3ef580e2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.meta_header_links
+id: block_content.meta_header_links.status
+field_name: status
+entity_type: block_content
+bundle: meta_header_links
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

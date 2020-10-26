@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Set default config.
+ */
+function ckan_update_8002() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('ckan.resourcetype.settings');
+  $config->set('webservice', [
+    'http://publications.europa.eu/resource/authority/file-type/WMS_SRVC',
+    'http://publications.europa.eu/resource/authority/file-type/WFS_SRVC',
+    'http://publications.europa.eu/resource/authority/file-type/ATOM',
+    'http://publications.europa.eu/resource/authority/file-type/RSS',
+    'http://publications.europa.eu/resource/authority/file-type/MAP_PRVW',
+    'http://publications.europa.eu/resource/authority/file-type/MAP_SRVC',
+  ]);
+  $config->set('documentation', [
+    'http://publications.europa.eu/resource/authority/file-type/DOCX',
+    'http://publications.europa.eu/resource/authority/file-type/PDF',
+    'http://publications.europa.eu/resource/authority/file-type/ODF',
+    'http://publications.europa.eu/resource/authority/file-type/DOC',
+    'http://publications.europa.eu/resource/authority/file-type/ODT',
+    'http://publications.europa.eu/resource/authority/file-type/PPT',
+    'http://publications.europa.eu/resource/authority/file-type/PDFX',
+    'http://publications.europa.eu/resource/authority/file-type/PPS',
+    'http://publications.europa.eu/resource/authority/file-type/TXT',
+    'http://publications.europa.eu/resource/authority/file-type/HTML',
+    'http://publications.europa.eu/resource/authority/file-type/PPTX',
+    'http://publications.europa.eu/resource/authority/file-type/XHTML',
+  ]);
+  $config->save(TRUE);
+}

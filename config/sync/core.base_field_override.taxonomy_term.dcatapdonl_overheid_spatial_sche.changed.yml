@@ -1,0 +1,18 @@
+uuid: 30d7380d-cdb0-4544-ac26-c1077e8d61b2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_sche
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

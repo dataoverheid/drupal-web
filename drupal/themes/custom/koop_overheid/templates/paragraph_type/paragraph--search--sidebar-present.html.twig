@@ -1,0 +1,14 @@
+<form class="document-search" action="{{ form_action }}" method="post">
+  <fieldset>
+    <legend class="h1">{{ head }}</legend>
+    {{ body|raw }}
+    <div class="document-search__fields">
+      {% for input in inputs %}
+        <label class="visually-hidden" for="{{ input.machine_name }}">{{ field_label }}</label>
+        <input id="{{ input.machine_name }}" type="text" placeholder="{{ input.label }}" name="{{ input.machine_name }}"/>
+      {% endfor %}
+      <input type="submit" value="Zoeken" class="button button--secondary"/>
+    </div>
+    <p>{{ extended_search.link }}</p>
+  </fieldset>
+</form>

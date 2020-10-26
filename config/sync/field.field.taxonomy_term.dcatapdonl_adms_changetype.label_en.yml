@@ -1,0 +1,19 @@
+uuid: c9db4862-0ac9-47d0-8e81-e6a19e67c5a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_en
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.label_en
+field_name: label_en
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: 'Label EN'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

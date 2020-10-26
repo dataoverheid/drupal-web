@@ -1,0 +1,8 @@
+
+<a class="foldable" data-decorator="add-foldability" href="{{ link_url }}">
+  {{ link_title }}
+  {% if content.field_treeview_beschrijving|render %}
+    <small>{{ content.field_treeview_beschrijving }}</small>
+  {% endif %}
+</a>
+{{ content.field_treeview_child }}

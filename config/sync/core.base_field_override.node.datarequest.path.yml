@@ -1,0 +1,20 @@
+uuid: 7f4cf716-c0ac-4730-a35e-fec5f84d745c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+  module:
+    - path
+id: node.datarequest.path
+field_name: path
+entity_type: node
+bundle: datarequest
+label: URL-alias
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

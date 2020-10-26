@@ -1,0 +1,44 @@
+uuid: 0ce2328d-8806-4312-8894-526935eeb804
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.voetnoot.field_id
+    - field.field.paragraph.voetnoot.field_referentie_teruglink
+    - field.field.paragraph.voetnoot.field_voetnoot_tekst
+    - paragraphs.paragraphs_type.voetnoot
+  module:
+    - link
+id: paragraph.voetnoot.default
+targetEntityType: paragraph
+bundle: voetnoot
+mode: default
+content:
+  field_id:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_referentie_teruglink:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_voetnoot_tekst:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

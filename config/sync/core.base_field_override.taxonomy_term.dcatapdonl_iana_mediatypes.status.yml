@@ -1,0 +1,22 @@
+uuid: 07783318-0f27-48ca-99ea-cd04618dd133
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+id: taxonomy_term.dcatapdonl_iana_mediatypes.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

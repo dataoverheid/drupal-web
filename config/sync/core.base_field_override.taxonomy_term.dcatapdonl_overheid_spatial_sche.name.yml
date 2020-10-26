@@ -1,0 +1,18 @@
+uuid: 148ced58-71b0-47da-84bf-c78d070207ce
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_sche
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

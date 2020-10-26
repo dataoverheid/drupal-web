@@ -1,0 +1,8 @@
+uuid: 754f0232-e426-464e-86fd-2cb32a52f93e
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph_block
+label: 'Paragraph block'
+revision: 0
+description: 'A block type with a paragraph field'

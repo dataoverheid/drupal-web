@@ -1,0 +1,64 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Dataset",
+  "includedInDataCatalog": "https://data.overheid.nl",
+  "name": "{{ dataset.title }}",
+  "url": "{{ url('<current>') }}",
+  "isBasedOn": "Bij deze dataset is een wettelijke grondslag opgenomen d.m.v. een verwijzing naar de wettelijke bepaling op <a href='https://wetten.overheid.nl'>wetten.overheid.nl</a>.",
+  "author": {
+    "@context": "http://schema.org/",
+    "@type": "Organization",
+    "name": "{{ ckan_mapping_get_organization_name(dataset.authority) }}"
+  },
+  "dateModified": "{{ ckan_format_date(dataset.modified) }}",
+  "license": "{{ dataset.license_id }}",
+  "inLanguage": "{{ ckan_mapping_get_language_name(dataset.language) }}",
+  "identifier": "{{ dataset.identifier }}",
+  "description": "{{ dataset.notes }}",
+  "genre": "{{ ckan_mapping_get_theme_name(dataset.theme) }}",
+  "workExample": "{{ dataset.sample|join(', ') }}",
+  "version": "{{ dataset.version }}",
+  "datePublished": "{{ dataset.date_planned }}",
+  "publisher": {
+    "@context": "http://schema.org/",
+    "@type": "Organization",
+    "name": "{{ ckan_mapping_get_organization_name(dataset.publisher) }}",
+    "contactpoint": {
+      "@context": "http://schema.org/",
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "alternateName": "{{ dataset.contact_point_title }}",
+      "name": "{{ dataset.contact_point_name }}",
+      "email": "{{ dataset.contact_point_email }}",
+      "url": "{{ dataset.contact_point_website }}",
+      "telephone": "{{ dataset.contact_point_phone }}"
+    }
+  },
+  "keywords":  "{{ dataset.tags | join(' ') }}",
+"distribution":[
+ {% for key, resource in dataset.resources %}
+  {
+      "@context": "http://schema.org/",
+      "@type": "DataDownload",
+      "contentUrl": "{{ resource.url }}",
+      "name": "{{ resource.name }}",
+      "description": "{{ resource.description }}",
+      "inLanguage": "{{ ckan_mapping_get_language_name(resource.language) }}",
+      {% if resource.license_id %}
+        "license": "{{ ckan_mapping_get_license_name(resource.license_id) }}",
+      {% endif %}
+  {% if resource.rights %}
+        "license": "{{ resource.rights }}",
+  {% endif %}
+"fileFormat":  "{{ ckan_mapping_get_file_format_name(resource.format) }}",
+"contentSize":  "{{ resource.size }} KB",
+"encodingFormat":  "{{ ckan_mapping_get_media_type_name(resource.mimetype) }}",
+"uploadDate":  "{{ resource.release_date }}",
+"dateModified":  "{{ resource.modification_date }}"
+    }{% if not loop.last %},{% endif %}
+  {% endfor %}]
+}
+
+</script>
+

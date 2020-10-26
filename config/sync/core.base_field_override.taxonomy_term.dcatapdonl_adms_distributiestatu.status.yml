@@ -1,0 +1,22 @@
+uuid: a0ba9bb0-c79c-4e27-abc1-3cc65c08374d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_distributiestatu
+id: taxonomy_term.dcatapdonl_adms_distributiestatu.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_distributiestatu
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

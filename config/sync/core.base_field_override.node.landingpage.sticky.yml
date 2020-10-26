@@ -1,0 +1,22 @@
+uuid: 16e8a67b-b319-40d0-a844-a6d9b4103b74
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.sticky
+field_name: sticky
+entity_type: node
+bundle: landingpage
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

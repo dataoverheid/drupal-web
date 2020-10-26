@@ -1,0 +1,43 @@
+uuid: 60f90aac-4def-4e8c-8a7a-04d9e3f026eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.highlight.highlight_image
+    - field.field.paragraph.highlight.highlight_link
+    - image.style.highlight
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - link
+    - svg_image
+id: paragraph.highlight.default
+targetEntityType: paragraph
+bundle: highlight
+mode: default
+content:
+  highlight_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: highlight
+      image_link: ''
+      svg_render_as_image: '1'
+      svg_attributes:
+        width: ''
+        height: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  highlight_link:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden: {  }

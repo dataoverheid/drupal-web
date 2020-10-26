@@ -1,0 +1,22 @@
+uuid: 3f1fde2e-94ae-4efa-a31a-be83d254eed8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+id: node.appliance.sticky
+field_name: sticky
+entity_type: node
+bundle: appliance
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

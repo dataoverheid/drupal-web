@@ -1,0 +1,8 @@
+uuid: 12151fef-e29f-4630-b7f2-61f8ed47872d
+langcode: en
+status: true
+dependencies: {  }
+id: payoff_block
+label: 'Payoff block'
+revision: 0
+description: 'Block for the payoff below the site logo'

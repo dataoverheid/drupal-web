@@ -1,0 +1,17 @@
+uuid: 489dbbf0-3d46-463a-b1e2-1c3c4fa090b0
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Toepassing
+type: appliance
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

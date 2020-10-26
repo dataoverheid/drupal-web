@@ -1,0 +1,9 @@
+uuid: eb3c2b54-ff39-4bb4-9d82-277f8a5ddbeb
+langcode: en
+status: true
+dependencies: {  }
+id: block_paragraph
+label: 'Block paragraph'
+icon_uuid: null
+description: 'Paragraph to reference a block'
+behavior_plugins: {  }

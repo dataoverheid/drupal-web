@@ -1,0 +1,21 @@
+uuid: 03b6d1b9-84ca-42bd-be4b-808bec5a80c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.request_source
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.request_source
+field_name: request_source
+entity_type: node
+bundle: datarequest
+label: 'Bron verzoek'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

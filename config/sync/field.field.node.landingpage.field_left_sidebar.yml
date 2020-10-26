@@ -1,0 +1,78 @@
+uuid: 04e2e75b-8487-4e7a-aa07-f8496adddfc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_left_sidebar
+    - node.type.landingpage
+    - paragraphs.paragraphs_type.block_paragraph
+    - paragraphs.paragraphs_type.homepage_block
+    - paragraphs.paragraphs_type.linklist_block
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.treeview
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.landingpage.field_left_sidebar
+field_name: field_left_sidebar
+entity_type: node
+bundle: landingpage
+label: 'Left sidebar'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      homepage_block: homepage_block
+      block_paragraph: block_paragraph
+      linklist_block: linklist_block
+      search: search
+      text: text
+      webform: webform
+      treeview: treeview
+    target_bundles_drag_drop:
+      homepage_block:
+        enabled: true
+        weight: 11
+      block_paragraph:
+        enabled: true
+        weight: 12
+      homepage_blocks:
+        weight: 12
+        enabled: false
+      linklist_block:
+        enabled: true
+        weight: 13
+      linklist_blocks:
+        weight: 14
+        enabled: false
+      links:
+        weight: 15
+        enabled: false
+      treeview_child:
+        weight: 16
+        enabled: false
+      nested_links:
+        weight: 16
+        enabled: false
+      text:
+        enabled: true
+        weight: 19
+      webform:
+        enabled: true
+        weight: 20
+      treeview:
+        enabled: true
+        weight: 27
+      voetnoot:
+        weight: 28
+        enabled: false
+      voetnoten:
+        weight: 29
+        enabled: false
+field_type: entity_reference_revisions

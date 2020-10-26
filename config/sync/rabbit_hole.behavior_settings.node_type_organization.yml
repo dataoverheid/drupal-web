@@ -1,0 +1,11 @@
+uuid: b0df0fe4-8dd5-4ffd-94cc-bc07f858d10f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.organization
+id: node_type_organization
+action: page_redirect
+allow_override: 0
+redirect: '/community/organization/[node:machine_name:value]'
+redirect_code: 307

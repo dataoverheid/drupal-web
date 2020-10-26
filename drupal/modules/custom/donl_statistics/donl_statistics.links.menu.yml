@@ -1,0 +1,5 @@
+donl_statistics.settings.piwik:
+  title: 'Donl statistics piwik'
+  description: 'Manage the webservice settings for the piwik connection.'
+  parent: system.admin_config_services
+  route_name: donl_statistics.settings.piwik

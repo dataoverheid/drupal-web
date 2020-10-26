@@ -1,0 +1,21 @@
+uuid: faea7e34-11f2-4078-bd96-6262118d68c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.requested_start_and_end_date
+    - node.type.datarequest
+  module:
+    - datetime_range
+id: node.datarequest.requested_start_and_end_date
+field_name: requested_start_and_end_date
+entity_type: node
+bundle: datarequest
+label: 'Gewenste start- en einddatum van de data'
+description: 'Indien van toepassing, beschrijf hier de begin- en einddatum van de gevraagde data.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

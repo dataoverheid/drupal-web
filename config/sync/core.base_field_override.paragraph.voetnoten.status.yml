@@ -1,0 +1,22 @@
+uuid: 4a537e9f-c44d-414f-9f27-1cc1a4d54f80
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.voetnoten
+id: paragraph.voetnoten.status
+field_name: status
+entity_type: paragraph
+bundle: voetnoten
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

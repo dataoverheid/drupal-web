@@ -1,0 +1,9 @@
+uuid: 9290d999-b667-4aa5-839d-2681dc1d297b
+langcode: en
+status: true
+dependencies: {  }
+id: homepage_blocks
+label: 'Homepage blocks'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

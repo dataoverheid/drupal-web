@@ -1,0 +1,21 @@
+uuid: b4f8749d-25e1-401b-8911-b46e4ee8e3e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.result_datarequest
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.result_datarequest
+field_name: result_datarequest
+entity_type: node
+bundle: datarequest
+label: 'Afgehandeld resultaat'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

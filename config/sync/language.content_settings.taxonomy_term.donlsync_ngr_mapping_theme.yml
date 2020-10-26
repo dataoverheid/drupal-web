@@ -1,0 +1,18 @@
+uuid: 969e8a91-bd9c-4e6b-9a6a-ea871cdec811
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_theme
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.donlsync_ngr_mapping_theme
+target_entity_type_id: taxonomy_term
+target_bundle: donlsync_ngr_mapping_theme
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,18 @@
+uuid: 5bbc27b7-82ae-4deb-bf6c-588b6a2648d1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_license
+id: taxonomy_term.dcatapdonl_overheid_license.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_license
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

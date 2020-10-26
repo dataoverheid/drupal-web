@@ -1,0 +1,19 @@
+uuid: 4a7e0ce7-662b-4385-8240-378f1db0d5c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.emailaddress_user
+    - node.type.datarequest
+id: node.datarequest.emailaddress_user
+field_name: emailaddress_user
+entity_type: node
+bundle: datarequest
+label: 'Uw emailadres'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

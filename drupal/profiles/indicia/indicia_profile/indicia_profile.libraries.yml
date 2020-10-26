@@ -1,0 +1,11 @@
+install:
+  version: VERSION
+  css:
+    theme:
+      css/install.css: {}
+  js:
+    js/particles.min.js: { minified: true }
+    js/install.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

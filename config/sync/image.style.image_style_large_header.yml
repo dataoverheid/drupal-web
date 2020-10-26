@@ -1,0 +1,25 @@
+uuid: 9753962c-c74e-44f6-b9bd-e7fc0da27aae
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_type_large_header
+  module:
+    - crop
+name: image_style_large_header
+label: 'Large header (1440x354)'
+effects:
+  20aacff4-4e7e-434c-9257-d6ad8eb9261e:
+    uuid: 20aacff4-4e7e-434c-9257-d6ad8eb9261e
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: crop_type_large_header
+  274a7acf-6ae5-40bf-a548-d3cf84c8d4dd:
+    uuid: 274a7acf-6ae5-40bf-a548-d3cf84c8d4dd
+    id: image_scale_and_crop
+    weight: 4
+    data:
+      width: 1440
+      height: 354
+      anchor: center-center

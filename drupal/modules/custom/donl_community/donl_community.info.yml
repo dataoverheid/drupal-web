@@ -1,0 +1,16 @@
+name: DONL community
+description: Module which handles all functionality for communities
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - ckan:ckan
+  - donl:donl
+  - donl_search:donl_search
+  - donl_search_backlink:donl_search_backlink
+  - donl_value_list:donl_value_list
+
+interface translation project: donl_community
+interface translation server pattern: modules/custom/donl_community/translations/donl_community.%language.po

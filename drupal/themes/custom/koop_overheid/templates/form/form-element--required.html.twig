@@ -1,0 +1,7 @@
+{% extends 'form-element.html.twig' %}
+
+{% block label_suffix %}
+  {% if attribute(element, '#required') %}
+    <small>{{ 'Required field'|t }}</small>
+  {% endif %}
+{% endblock %}

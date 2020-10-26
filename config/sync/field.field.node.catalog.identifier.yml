@@ -1,0 +1,19 @@
+uuid: e28e1a9f-8380-453a-abc3-cc41ec88b94a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.identifier
+    - node.type.catalog
+id: node.catalog.identifier
+field_name: identifier
+entity_type: node
+bundle: catalog
+label: Identifier
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

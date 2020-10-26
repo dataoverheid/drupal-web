@@ -1,0 +1,26 @@
+uuid: 5df5758e-6abf-4351-bfce-9276dd279e4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.links.field_homepage_block_flat_links
+    - paragraphs.paragraphs_type.links
+  module:
+    - link
+id: paragraph.links.default
+targetEntityType: paragraph
+bundle: links
+mode: default
+content:
+  field_homepage_block_flat_links:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

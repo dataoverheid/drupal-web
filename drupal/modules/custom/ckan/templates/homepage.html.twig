@@ -1,0 +1,15 @@
+{% if themes %}
+    <div class="container row transitional-size">
+        <h2>{{ 'Themes'|t }}</h2>
+        <ul class="themelist list--unstyled">
+            {% for id, theme in themes %}
+                <li class="themeblock__item">
+                    <a class="themeblock__link themeblock__link--{{ theme.class }}" href="{{ theme.url }}">
+                        <h3 class="themeblock__title">{{ theme.label }}</h3>
+                        <p class="themeblock__counter">{{ ckan_format_number(theme.count) }} <span class="visually-hidden">sets</span></p>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

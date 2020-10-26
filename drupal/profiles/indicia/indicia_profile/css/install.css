@@ -1,0 +1,55 @@
+body.install-page {
+  height: 100%;
+  position: relative;
+  background-color: #ee2248;
+  background-image: url('../images/noise-low.png'), -webkit-radial-gradient(hsl(349, 86%, 53%), hsl(349, 86%, 35%));
+  background-image: url('../images/noise-low.png'), radial-gradient(hsl(349, 86%, 53%), hsl(349, 86%, 35%));
+}
+
+body.install-page canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+body.install-page .layout-container {
+  border-radius: 0;
+  position: relative;
+  z-index: 10;
+}
+
+body.install-page .button--primary {
+  border-radius: 0;
+  background: #ee2248 url('../images/noise-low.png');
+  border-color: #a60c29;
+}
+
+body.install-page .button--primary:hover {
+  background: #f7284d url('../images/noise-low.png');
+}
+
+body.install-page a,
+body.install-page .link {
+  color: #ee2248;
+}
+
+body.install-page .progress__bar {
+  border: 1px #a60c29 solid;
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), -webkit-linear-gradient(left top, #ee2248 0%, #ee2248 25%, #a60c29 25%, #a60c29 50%, #ee2248 50%, #ee2248 75%, #ee2248 100%);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15)), linear-gradient(to right bottom, #ee2248 0%, #ee2248 25%, #a60c29 25%, #a60c29 50%, #ee2248 50%, #ee2248 75%, #ee2248 100%);
+}
+
+body.install-page .form-text:focus,
+body.install-page .form-tel:focus,
+body.install-page .form-email:focus,
+body.install-page .form-url:focus,
+body.install-page .form-search:focus,
+body.install-page .form-number:focus,
+body.install-page .form-color:focus,
+body.install-page .form-file:focus,
+body.install-page .form-textarea:focus,
+body.install-page .form-date:focus,
+body.install-page .form-time:focus {
+  border-color: #bd5493;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05), 0 0 8px #bd5493;
+}

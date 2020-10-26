@@ -1,0 +1,226 @@
+uuid: 5d4136fc-afa4-4341-ba9f-a89a0e5c1711
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.appliance.datasets
+    - field.field.node.appliance.field_appliance_logo
+    - field.field.node.appliance.field_appliance_type
+    - field.field.node.appliance.field_contactperson_email
+    - field.field.node.appliance.field_contactperson_name
+    - field.field.node.appliance.field_contactperson_organization
+    - field.field.node.appliance.field_contactperson_phone
+    - field.field.node.appliance.field_description
+    - field.field.node.appliance.field_link_application
+    - field.field.node.appliance.field_made_by
+    - field.field.node.appliance.field_organization
+    - field.field.node.appliance.field_tags
+    - field.field.node.appliance.theme
+    - image.style.thumbnail
+    - node.type.appliance
+  module:
+    - ckan
+    - field_group
+    - link
+    - svg_image
+third_party_settings:
+  field_group:
+    group_over_de_toepassing:
+      children:
+        - title
+        - field_appliance_logo
+        - field_description
+        - theme
+        - field_appliance_type
+        - field_made_by
+        - field_organization
+        - field_link_application
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+        description: ''
+      label: 'Over de toepassing'
+      region: content
+    group_welke_datasets_zijn_er_geb:
+      children:
+        - datasets
+        - field_tags
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: 'Welke datasets zijn er gebruikt?'
+      region: content
+    group_contact_details:
+      children:
+        - field_contactperson_name
+        - field_contactperson_organization
+        - field_contactperson_phone
+        - field_contactperson_email
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: Contactgegevens
+      region: content
+id: node.appliance.default
+targetEntityType: node
+bundle: appliance
+mode: default
+content:
+  datasets:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: field_dataset_text
+    region: content
+  field_appliance_logo:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_appliance_type:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_contactperson_email:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_contactperson_name:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contactperson_organization:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contactperson_phone:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_description:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_link_application:
+    weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_made_by:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_organization:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_tags:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  theme:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

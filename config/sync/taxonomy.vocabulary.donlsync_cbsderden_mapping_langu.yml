@@ -1,0 +1,8 @@
+uuid: 0a71613a-cdae-453f-bbfd-1a0fafbdb36c
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync CBSDerden Mapping Language'
+vid: donlsync_cbsderden_mapping_langu
+description: ''
+weight: 0

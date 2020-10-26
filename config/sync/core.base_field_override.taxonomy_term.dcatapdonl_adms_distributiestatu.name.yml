@@ -1,0 +1,18 @@
+uuid: 76aa746d-a71e-4e39-bdc2-2b7ee99de588
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_distributiestatu
+id: taxonomy_term.dcatapdonl_adms_distributiestatu.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_distributiestatu
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

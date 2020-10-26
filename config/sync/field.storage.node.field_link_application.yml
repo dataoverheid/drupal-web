@@ -1,0 +1,23 @@
+uuid: a769f7b8-1114-41a2-b968-938e386e0f2b
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - link
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.field_link_application
+field_name: field_link_application
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

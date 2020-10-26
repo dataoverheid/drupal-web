@@ -1,0 +1,20 @@
+uuid: aa8e225c-c4d0-49e0-aa60-d4b15b114d8c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_license
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_license.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_license
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

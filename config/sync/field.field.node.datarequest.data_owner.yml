@@ -1,0 +1,19 @@
+uuid: e9dd7335-125f-42b6-9ffa-e7c66bbafb2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.data_owner
+    - node.type.datarequest
+id: node.datarequest.data_owner
+field_name: data_owner
+entity_type: node
+bundle: datarequest
+label: Data-eigenaar
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

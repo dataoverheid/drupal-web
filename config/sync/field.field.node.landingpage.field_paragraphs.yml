@@ -1,0 +1,78 @@
+uuid: 5339460a-e558-4dce-a959-d7c5edf0f267
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.landingpage
+    - paragraphs.paragraphs_type.homepage_blocks
+    - paragraphs.paragraphs_type.linklist_blocks
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.treeview
+    - paragraphs.paragraphs_type.voetnoten
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.landingpage.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: landingpage
+label: Paragraphs
+description: 'In this field different types of content paragraphs can be added, edited, and ordered.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text: text
+      linklist_blocks: linklist_blocks
+      search: search
+      homepage_blocks: homepage_blocks
+      webform: webform
+      voetnoten: voetnoten
+      treeview: treeview
+    target_bundles_drag_drop:
+      text:
+        enabled: true
+        weight: 4
+      linklist_block:
+        weight: 5
+        enabled: false
+      linklist_blocks:
+        enabled: true
+        weight: 6
+      homepage_block:
+        weight: 10
+        enabled: false
+      homepage_blocks:
+        enabled: true
+        weight: 11
+      webform:
+        enabled: true
+        weight: 11
+      links:
+        weight: 14
+        enabled: false
+      voetnoot:
+        weight: 14
+        enabled: false
+      block_paragraph:
+        weight: 15
+        enabled: false
+      nested_links:
+        weight: 15
+        enabled: false
+      treeview_child:
+        weight: 16
+        enabled: false
+      voetnoten:
+        enabled: true
+        weight: 25
+      treeview:
+        enabled: true
+        weight: 27
+field_type: entity_reference_revisions

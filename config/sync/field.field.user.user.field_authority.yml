@@ -1,0 +1,21 @@
+uuid: 47559d4b-a3c5-4e23-90d5-12fd9525c406
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_authority
+  module:
+    - options
+    - user
+id: user.user.field_authority
+field_name: field_authority
+entity_type: user
+bundle: user
+label: Authority
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,23 @@
+page_pagination_filters:
+  version: 1.0.1
+  js:
+    js/page_pagination_filters.js: {preprocess: false}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+donl_search:
+  version: 0.0.1
+  js:
+    js/donl_search.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+donl_search_facets:
+  version: 1.0.0
+  js:
+    js/donl_search_facets.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

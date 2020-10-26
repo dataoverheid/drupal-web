@@ -1,0 +1,21 @@
+uuid: 67a7a988-d14b-4022-85fb-e53621009a3d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.datasets
+    - node.type.appliance
+  module:
+    - ckan
+id: node.appliance.datasets
+field_name: datasets
+entity_type: node
+bundle: appliance
+label: ' Welke datasets zijn gebruikt'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_simple_sitemap_sitemap_types_alter().
+ */
+function donl_sitemap_simple_sitemap_sitemap_types_alter(array &$sitemap_types) {
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_application';
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_catalog';
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_datarequest';
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_dataset';
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_group';
+  $sitemap_types['default_hreflang']['urlGenerators'][] = 'donl_organization';
+}

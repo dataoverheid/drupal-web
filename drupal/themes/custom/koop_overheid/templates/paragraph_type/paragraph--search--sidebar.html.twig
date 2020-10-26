@@ -1,0 +1,12 @@
+<form action="{{ form_action }}" method="post">
+  <div class="form__element form__element--search">
+    {% for input in inputs %}
+      <label class="visually-hidden" for="{{ input.machine_name }}">{{ head }}</label>
+      <input class="input" id="{{ input.machine_name }}" type="text"
+             placeholder="{{ input.label }}" name="{{ input.machine_name }}"/>
+    {% endfor %}
+    <button class="button button--primary" type="submit">Zoek</button>
+  </div>
+</form>
+
+

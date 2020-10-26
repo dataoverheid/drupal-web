@@ -1,0 +1,24 @@
+uuid: 9b1be3b4-e6d9-4350-964b-34046b234ea7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.well_linklists.field_linklist_block
+    - paragraphs.paragraphs_type.well_linklists
+  module:
+    - entity_reference_revisions
+id: paragraph.well_linklists.default
+targetEntityType: paragraph
+bundle: well_linklists
+mode: default
+content:
+  field_linklist_block:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden: {  }

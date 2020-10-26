@@ -1,0 +1,117 @@
+uuid: 9f852475-0ea6-4121-9ca9-b86ffb90af22
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.appliance.datasets
+    - field.field.node.appliance.field_appliance_logo
+    - field.field.node.appliance.field_appliance_type
+    - field.field.node.appliance.field_contactperson_email
+    - field.field.node.appliance.field_contactperson_name
+    - field.field.node.appliance.field_contactperson_organization
+    - field.field.node.appliance.field_contactperson_phone
+    - field.field.node.appliance.field_description
+    - field.field.node.appliance.field_link_application
+    - field.field.node.appliance.field_made_by
+    - field.field.node.appliance.field_organization
+    - field.field.node.appliance.field_tags
+    - field.field.node.appliance.theme
+    - node.type.appliance
+  module:
+    - ckan
+    - config_default_image
+    - link
+    - options
+    - user
+id: node.appliance.default
+targetEntityType: node
+bundle: appliance
+mode: default
+content:
+  datasets:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_dataset_text
+    region: content
+  field_appliance_logo:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      default_image:
+        path: /themes/custom/koop_overheid/images/theme-icons/migration.svg
+        alt: 'Standaard logo'
+        title: 'Standaard logo'
+        use_image_style: 0
+        width: null
+        height: null
+    third_party_settings: {  }
+    type: config_default_image
+    region: content
+  field_appliance_type:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_description:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_link_application:
+    weight: 8
+    label: above
+    settings:
+      trim_length: 80
+      rel: nofollow
+      target: _blank
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_made_by:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_organization:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_tags:
+    weight: 7
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  theme:
+    weight: 9
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_contactperson_email: true
+  field_contactperson_name: true
+  field_contactperson_organization: true
+  field_contactperson_phone: true
+  langcode: true
+  links: true

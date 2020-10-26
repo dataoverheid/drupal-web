@@ -1,0 +1,8 @@
+uuid: cf7cf807-f743-4ffe-9ea7-4442be6b8fa4
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync CBSDerden Mapping Authority'
+vid: donlsync_cbsderden_mapping_autho
+description: ''
+weight: 0

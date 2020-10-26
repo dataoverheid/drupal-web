@@ -1,0 +1,8 @@
+uuid: b12ee01e-adce-4cab-9515-9dd4ce3229af
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DONL Toepassing tags'
+vid: appliance_tags
+description: ''
+weight: 0

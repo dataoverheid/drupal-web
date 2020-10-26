@@ -1,0 +1,53 @@
+services:
+  donl_solr_sync.application:
+    class: Drupal\donl_solr_sync\SyncApplication
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.catalog:
+    class: Drupal\donl_solr_sync\SyncCatalog
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.community:
+    class: Drupal\donl_solr_sync\SyncCommunity
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.datarequest:
+    class: Drupal\donl_solr_sync\SyncDatarequest
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.group:
+    class: Drupal\donl_solr_sync\SyncGroup
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.news:
+    class: Drupal\donl_solr_sync\SyncNews
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.organization:
+    class: Drupal\donl_solr_sync\SyncOrganization
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.support:
+    class: Drupal\donl_solr_sync\SyncSupport
+    arguments:
+      - '@donl_search.request'
+      - '@entity_type.manager'
+
+  donl_solr_sync.commands:
+    class: \Drupal\donl_solr_sync\Commands\SolrSyncCommands
+    arguments:
+      - '@entity_type.manager'

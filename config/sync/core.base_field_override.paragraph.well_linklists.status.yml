@@ -1,0 +1,22 @@
+uuid: aabad0ad-4f67-40b7-a997-54484700b5c1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.well_linklists
+id: paragraph.well_linklists.status
+field_name: status
+entity_type: paragraph
+bundle: well_linklists
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

@@ -1,0 +1,18 @@
+uuid: 284195e6-9fa6-45fd-9dff-c8914733a431
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_blacklist_r_format
+id: taxonomy_term.donlsync_rdw_blacklist_r_format.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: donlsync_rdw_blacklist_r_format
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

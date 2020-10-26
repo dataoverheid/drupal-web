@@ -1,0 +1,22 @@
+uuid: 94fab178-abd4-48c3-8d1f-bed3339bfa11
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.highlight
+id: paragraph.highlight.status
+field_name: status
+entity_type: paragraph
+bundle: highlight
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

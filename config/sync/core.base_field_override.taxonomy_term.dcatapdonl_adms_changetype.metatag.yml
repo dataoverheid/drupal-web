@@ -1,0 +1,18 @@
+uuid: 7835a084-4287-4560-b39c-6b9ad1e4007a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

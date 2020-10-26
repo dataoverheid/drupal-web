@@ -1,0 +1,22 @@
+uuid: f73e027e-d143-4ef0-a98f-11fa0362d85b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_theme
+id: taxonomy_term.donlsync_cbsderden_mapping_theme.status
+field_name: status
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_theme
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

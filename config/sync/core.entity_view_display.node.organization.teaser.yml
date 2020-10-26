@@ -1,0 +1,29 @@
+uuid: bceedb5b-6ddc-4eb5-a271-06534b89eb8b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.organization.identifier
+    - field.field.node.organization.machine_name
+    - field.field.node.organization.organization_description
+    - field.field.node.organization.organization_type
+    - node.type.organization
+  module:
+    - user
+id: node.organization.teaser
+targetEntityType: node
+bundle: organization
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  identifier: true
+  langcode: true
+  machine_name: true
+  organization_description: true
+  organization_type: true

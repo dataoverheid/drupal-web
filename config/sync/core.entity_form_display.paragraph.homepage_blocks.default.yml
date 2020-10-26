@@ -1,0 +1,32 @@
+uuid: 5ff11ea8-a76c-425b-b2cf-286ffec0ec61
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_blocks.field_homepage_block
+    - paragraphs.paragraphs_type.homepage_blocks
+  module:
+    - paragraphs
+id: paragraph.homepage_blocks.default
+targetEntityType: paragraph
+bundle: homepage_blocks
+mode: default
+content:
+  field_homepage_block:
+    type: paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

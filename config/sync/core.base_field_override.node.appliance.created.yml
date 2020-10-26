@@ -1,0 +1,18 @@
+uuid: 9b9fd227-eb59-4fa5-9b6f-14fa532086ee
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+id: node.appliance.created
+field_name: created
+entity_type: node
+bundle: appliance
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

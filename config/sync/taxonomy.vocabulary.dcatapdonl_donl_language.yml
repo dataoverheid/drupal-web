@@ -1,0 +1,8 @@
+uuid: c1c6275b-2902-4fe1-84ea-a51e727ef552
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - DONL:Language'
+vid: dcatapdonl_donl_language
+description: ''
+weight: 0

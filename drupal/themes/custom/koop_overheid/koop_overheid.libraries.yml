@@ -1,0 +1,31 @@
+componentenbibliotheek:
+  version: 1.0.1
+  header: true
+  css:
+    base:
+      componentenbibliotheek/css/generic.css: {}
+  js:
+    componentenbibliotheek/js/main.js: {minified: true}
+
+chosen:
+  version: 3.1.3
+  css:
+    theme:
+      /libraries/chosen-js/chosen.min.css: {preprocess: false, minified: true}
+  js:
+    /libraries/chosen-js/chosen.jquery.min.js: {preprocess: false, minified: true}
+
+global:
+  version: 1.0.0
+  css:
+    theme:
+      icons/style.css: {}
+      css/dataoverheid.css: {}
+  js:
+    js/indicia.js: {}
+    js/read_more.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.ui
+    - koop_overheid/chosen

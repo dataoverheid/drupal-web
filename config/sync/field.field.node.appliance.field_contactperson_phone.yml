@@ -1,0 +1,19 @@
+uuid: 447444bf-cdc0-429a-9769-a018d2421d5b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contactperson_phone
+    - node.type.appliance
+id: node.appliance.field_contactperson_phone
+field_name: field_contactperson_phone
+entity_type: node
+bundle: appliance
+label: Telefoonnummer
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

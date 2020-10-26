@@ -1,0 +1,31 @@
+uuid: d2929ff9-721b-4c76-a0f3-a432784687b0
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.term_translations.translation
+    - taxonomy.vocabulary.term_translations
+  module:
+    - text
+id: taxonomy_term.term_translations.default
+targetEntityType: taxonomy_term
+bundle: term_translations
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

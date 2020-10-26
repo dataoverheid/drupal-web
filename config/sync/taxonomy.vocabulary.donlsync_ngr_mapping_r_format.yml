@@ -1,0 +1,8 @@
+uuid: a8cb7ad8-1088-4711-97f1-43fd59c2be8b
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync NGR Mapping Resource.Format'
+vid: donlsync_ngr_mapping_r_format
+description: ''
+weight: 0

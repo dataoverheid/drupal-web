@@ -1,0 +1,14 @@
+uuid: 569200aa-7f30-4a29-ba98-6d962bfb6816
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.data_owner
+  module:
+    - user
+id: user_remove_role_action.data_owner
+label: 'Remove the Data eigenaar role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: data_owner

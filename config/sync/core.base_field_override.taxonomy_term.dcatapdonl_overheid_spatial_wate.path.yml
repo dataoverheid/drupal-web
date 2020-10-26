@@ -1,0 +1,20 @@
+uuid: ad3fc511-fbf7-4a13-bd2f-64f0265a798f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_wate
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_overheid_spatial_wate.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_wate
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

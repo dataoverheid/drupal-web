@@ -1,0 +1,18 @@
+uuid: 7ba78910-ed2b-47ea-ba4b-1e7bead44e4c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_wate
+id: taxonomy_term.dcatapdonl_overheid_spatial_wate.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_wate
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

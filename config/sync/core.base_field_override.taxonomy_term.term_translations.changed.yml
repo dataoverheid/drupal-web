@@ -1,0 +1,18 @@
+uuid: 688e767f-20cb-4e2f-b349-e66a4bc6c5b8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.term_translations
+id: taxonomy_term.term_translations.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: term_translations
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

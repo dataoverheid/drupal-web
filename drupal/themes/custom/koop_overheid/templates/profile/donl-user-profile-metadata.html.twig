@@ -1,0 +1,51 @@
+<div class="columns">
+  <table class="table__data-overview">
+    <tbody>
+    <tr>
+      <th scope="row">{{ 'Username'|t }}</th>
+      <td>{{ user.getUsername }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Email address'|t }}</th>
+      <td>{{ user.getEmail }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Preferred language'|t }}</th>
+      <td>{{ user.getPreferredLangcode }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Timezone'|t }}</th>
+      <td>{{ user.getTimeZone }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Member for'|t }}</th>
+      <td>{{ user_registered_since }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Last login'|t }}</th>
+      <td>{{ user.getLastAccessedTime|date('d-m-Y') }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Catalogs'|t }}</th>
+      <td>
+        <ul>
+          {% for catalog,selected in user.catalogs %}
+            {% set catalog_label = ckan_mapping_get_source_catalog_name(catalog) %}
+            {% if catalog_label %}
+              <li>{{ catalog_label }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Data owner'|t }}</th>
+      <td>{{ ckan_mapping_get_organization_name(user.authority)|default('-') }}</td>
+    </tr>
+    <tr>
+      <th scope="row">{{ 'Publishing organization'|t }}</th>
+      <td>{{ ckan_mapping_get_organization_name(user.publisher)|default('-') }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

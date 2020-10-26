@@ -1,0 +1,22 @@
+uuid: 5086b7f7-df33-4344-810d-1a9172a9dd9b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_landi
+id: taxonomy_term.donlsync_cbsderden_mapping_landi.status
+field_name: status
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_landi
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

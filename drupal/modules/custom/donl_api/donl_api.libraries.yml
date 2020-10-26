@@ -1,0 +1,18 @@
+api:
+  version: 1.0.0
+  js:
+    js/donl_api.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - donl_api/swagger
+
+swagger:
+  version: 3.34.0
+  css:
+    theme:
+      /libraries/swagger-ui/dist/swagger-ui.css: { minified: true }
+  js:
+    /libraries/swagger-ui/dist/swagger-ui-bundle.js: {minified: true}
+    /libraries/swagger-ui/dist/swagger-ui-standalone-preset.js: {minified: true}

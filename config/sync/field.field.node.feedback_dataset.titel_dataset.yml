@@ -1,0 +1,19 @@
+uuid: f2906d31-0776-487c-82b6-bd44a26e78be
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.titel_dataset
+    - node.type.feedback_dataset
+id: node.feedback_dataset.titel_dataset
+field_name: titel_dataset
+entity_type: node
+bundle: feedback_dataset
+label: 'Titel dataset'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

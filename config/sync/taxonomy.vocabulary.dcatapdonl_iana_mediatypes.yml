@@ -1,0 +1,8 @@
+uuid: dd1d275b-0971-4f70-83cf-364e0d07b105
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - IANA:Mediatypes'
+vid: dcatapdonl_iana_mediatypes
+description: ''
+weight: 0

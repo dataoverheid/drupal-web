@@ -1,0 +1,156 @@
+donl_community.search.dataset:
+  path: '/communities/{community}/zoeken/datasets/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetCommunityController::content'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search.datarequest:
+  path: '/communities/{community}/zoeken/dataverzoeken/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchDatarequestCommunityController::content'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search.group:
+  path: '/communities/{community}/zoeken/groepen/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchGroupCommunityController::content'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search.application:
+  path: '/communities/{community}/zoeken/toepassingen/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchApplicationCommunityController::content'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search.organization:
+  path: '/communities/{community}/zoeken/organisaties/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchOrganizationCommunityController::content'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.dataset.view:
+  path: '/communities/{community}/dataset/{dataset}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\DatasetCommunityController::content'
+    _title_callback: '\Drupal\donl_community\Controller\DatasetCommunityController::title'
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _dataset_access_check: 'TRUE'
+
+donl_community.datarequest.view:
+  path: '/communities/{community}/community/datarequest/{datarequest}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\DatarequestCommunityController::content'
+    _title_callback: '\Drupal\donl_community\Controller\DatarequestCommunityController::getTitle'
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      datarequest:
+        type: 'donl-datarequest'
+  requirements:
+    _permission: 'access content'
+
+donl_community.application.view:
+  path: '/communities/{community}/community/application/{application}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\ApplicationCommunityController::content'
+    _title_callback: '\Drupal\donl_community\Controller\ApplicationCommunityController::getTitle'
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      application:
+        type: 'donl-application'
+  requirements:
+    _permission: 'access content'
+
+# Group page (with dataset search page).
+donl_community.group.view:
+  path: '/communities/{community}/community/group/{group}/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetGroupCommunityController:view'
+    _title_callback: '\Drupal\donl_community\Controller\Search\SearchDatasetGroupCommunityController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      group:
+        type: 'donl-group'
+  requirements:
+    _permission: 'access content'
+    page: '^[0-9]*$'
+    recordsPerPage: '^[0-9]*$'
+
+# Organization page (with dataset search page).
+donl_community.organization.view:
+  path: '/communities/{community}/community/organization/{organization}/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetOrganizationCommunityController:view'
+    _title_callback: '\Drupal\donl_community\Controller\Search\SearchDatasetOrganizationCommunityController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      organization:
+        type: 'donl-organization'
+  requirements:
+    _permission: 'access content'
+    page: '^[0-9]*$'
+    recordsPerPage: '^[0-9]*$'
+
+donl_community.value_list.communities:
+  path: '/service/waardelijsten/donl_communities'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\ValueListApiController::communities'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,21 @@
+uuid: f66f6390-ce8c-419d-a5de-f196e44cb300
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.field_payoff_span
+field_name: field_payoff_span
+entity_type: block_content
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

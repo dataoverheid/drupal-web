@@ -1,0 +1,22 @@
+uuid: 3e3ea566-b929-4be3-8402-25b8af84fc15
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

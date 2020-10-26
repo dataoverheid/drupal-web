@@ -1,0 +1,20 @@
+uuid: d2a4bdf9-ed4c-41a3-90c9-4ab312d79118
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_metadata
+  module:
+    - path
+id: taxonomy_term.donlsync_ngr_mapping_r_metadata.path
+field_name: path
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_metadata
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

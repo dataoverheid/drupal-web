@@ -1,0 +1,24 @@
+uuid: 75482f90-e1b4-490e-947a-8ef27a982e1f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.voetnoten.field_voetnoten
+    - paragraphs.paragraphs_type.voetnoten
+  module:
+    - entity_reference_revisions
+id: paragraph.voetnoten.default
+targetEntityType: paragraph
+bundle: voetnoten
+mode: default
+content:
+  field_voetnoten:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

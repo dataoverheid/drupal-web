@@ -1,0 +1,9 @@
+uuid: abf97490-c6f5-4646-8156-5aeb139fc97b
+langcode: nl
+status: true
+dependencies: {  }
+id: voetnoot
+label: Voetnoot
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

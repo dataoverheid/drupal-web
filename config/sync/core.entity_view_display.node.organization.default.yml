@@ -1,0 +1,55 @@
+uuid: 39b8ba25-0d11-4918-a183-021c04ca6ba3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.organization.identifier
+    - field.field.node.organization.machine_name
+    - field.field.node.organization.organization_description
+    - field.field.node.organization.organization_type
+    - node.type.organization
+  module:
+    - donl
+    - user
+id: node.organization.default
+targetEntityType: node
+bundle: organization
+mode: default
+content:
+  identifier:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  machine_name:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+  organization_description:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  organization_type:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

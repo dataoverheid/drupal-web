@@ -1,0 +1,6 @@
+donl.settings:
+  title: 'DONL settings'
+  parent: ckan.settings
+  route_name: donl.settings
+  description: 'Manage the global DONL settings.'
+  weight: 1

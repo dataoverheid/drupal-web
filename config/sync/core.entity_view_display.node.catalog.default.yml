@@ -1,0 +1,55 @@
+uuid: c77ba657-7812-4252-bc0d-6cd851091440
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.catalog.catalog_description
+    - field.field.node.catalog.ckan_organization_mapping
+    - field.field.node.catalog.identifier
+    - field.field.node.catalog.machine_name
+    - node.type.catalog
+  module:
+    - donl
+    - user
+id: node.catalog.default
+targetEntityType: node
+bundle: catalog
+mode: default
+content:
+  catalog_description:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  ckan_organization_mapping:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  identifier:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  machine_name:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+hidden:
+  langcode: true

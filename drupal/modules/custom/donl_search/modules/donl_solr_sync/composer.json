@@ -1,0 +1,17 @@
+{
+  "name": "drupal/donl_solr_sync",
+  "description": "Update SOLR index.",
+  "type": "drupal-module",
+  "autoload": {
+    "psr-4": {
+      "Drupal\\donl_solr_sync\\": "src/"
+    }
+  },
+  "extra": {
+    "drush": {
+      "services": {
+        "drush.services.yml": "^9"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{% if relatedResourceLinks %}
+  <h3 class="no-bot-margin">{{ 'Related resources'|t }}</h3>
+  {{ texts.related_resources }}
+  <ul class="list list--linked group-links">
+    {% for link in relatedResourceLinks %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if sourceLinks %}
+  <h3 class="no-bot-margin">{{ 'This dataset is based on'|t }}</h3>
+  {{ texts.sources }}
+  <ul class="list list--linked group-links">
+    {% for link in sourceLinks %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if groupLinks %}
+  <h3 class="no-bot-margin">{{ 'Groups'|t }}</h3>
+  {{ texts.groups }}
+  <ul class="list list--linked group-links">
+    {% for link in groupLinks %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if comparableLinks %}
+  <h3>{{ 'Comparable datasets'|t }}</h3>
+  {{ texts.comparable }}
+  <ol class="comparable-links">
+    {% for link in comparableLinks %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ol>
+{% endif %}

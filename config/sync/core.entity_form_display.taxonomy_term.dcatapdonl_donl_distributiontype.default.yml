@@ -1,0 +1,57 @@
+uuid: 56bfdbb3-1088-4a99-a0f0-80291533e69a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_donl_distributiontype.identifier
+    - field.field.taxonomy_term.dcatapdonl_donl_distributiontype.label_en
+    - field.field.taxonomy_term.dcatapdonl_donl_distributiontype.label_nl
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+mode: default
+content:
+  identifier:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  label_en:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  label_nl:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

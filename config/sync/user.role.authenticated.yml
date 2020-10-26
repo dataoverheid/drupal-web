@@ -1,0 +1,38 @@
+uuid: 19bc4cff-a3f6-41d5-9681-52e943df011c
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Geverifieerde gebruiker'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'create appliance content'
+  - 'create datarequest content'
+  - 'create emailaddress_user'
+  - 'create feedback_dataset content'
+  - 'create field_authority'
+  - 'create field_catalog'
+  - 'create field_publisher'
+  - 'create field_role'
+  - 'create name_user'
+  - 'create organisation_user'
+  - 'create phone_number_user'
+  - 'create terms in appliance_tags'
+  - 'manage datasets'
+  - 'view data_owner'
+  - 'view datarequest_id'
+  - 'view datasets'
+  - 'view explanation_state'
+  - 'view feedback_doorgestuurd_aan_data_e'
+  - 'view phase'
+  - 'view request_date'
+  - 'view request_source'
+  - 'view result_datarequest'
+  - 'view state'
+  - 'view state_datarequest'
+  - 'view target_audience'
+  - 'view url_dataset'

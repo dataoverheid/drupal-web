@@ -1,0 +1,20 @@
+uuid: d1d03081-b801-401e-a996-6c7183163374
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_iana_mediatypes.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

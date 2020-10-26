@@ -1,0 +1,20 @@
+uuid: 4760dde2-e673-4c58-a045-0658b8812159
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_landi
+  module:
+    - path
+id: taxonomy_term.donlsync_cbsderden_mapping_landi.path
+field_name: path
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_landi
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

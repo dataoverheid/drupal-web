@@ -1,0 +1,8 @@
+uuid: fe02f525-80f4-4071-8311-90cd6b3376af
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DONL Facet Term Translations'
+vid: term_translations
+description: 'Vertalingen van facet termen, van de machine_naam naar een leesbare naam.'
+weight: 0

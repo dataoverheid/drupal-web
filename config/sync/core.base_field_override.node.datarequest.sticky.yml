@@ -1,0 +1,22 @@
+uuid: 862976d8-9a85-437f-b5b3-7a2413b16300
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.sticky
+field_name: sticky
+entity_type: node
+bundle: datarequest
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

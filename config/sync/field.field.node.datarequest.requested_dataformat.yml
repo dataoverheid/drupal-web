@@ -1,0 +1,19 @@
+uuid: f383c8e5-f26e-4a0c-8b76-1fd3bbcc0b5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.requested_dataformat
+    - node.type.datarequest
+id: node.datarequest.requested_dataformat
+field_name: requested_dataformat
+entity_type: node
+bundle: datarequest
+label: 'Gewenst dataformaat'
+description: 'Geef hier het gewenste formaat van de data aan waar u naar op zoek bent.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

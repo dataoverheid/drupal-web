@@ -1,0 +1,22 @@
+uuid: 34227e1b-e5b5-44fa-9212-fc230d72a979
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.treeview
+id: paragraph.treeview.status
+field_name: status
+entity_type: paragraph
+bundle: treeview
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

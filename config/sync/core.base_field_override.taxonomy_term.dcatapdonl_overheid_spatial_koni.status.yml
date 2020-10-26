@@ -1,0 +1,22 @@
+uuid: 6eebbd99-7d2f-42f0-a5b2-aee09a1a2db7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

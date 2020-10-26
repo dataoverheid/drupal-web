@@ -1,0 +1,20 @@
+uuid: fe2cb074-9c22-4419-b155-c16217c22da3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.group
+  module:
+    - path
+id: node.group.path
+field_name: path
+entity_type: node
+bundle: group
+label: URL-alias
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

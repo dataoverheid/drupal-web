@@ -1,0 +1,20 @@
+uuid: c01c3e19-e04e-421b-90c0-2acac07ecdf7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_langu
+  module:
+    - text
+id: taxonomy_term.donlsync_cbsderden_mapping_langu.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_langu
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,57 @@
+uuid: 209e06ff-e464-4415-96f1-57df4625fb05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_block_par_links
+    - paragraphs.paragraphs_type.homepage_block
+    - paragraphs.paragraphs_type.links
+    - paragraphs.paragraphs_type.nested_links
+  module:
+    - entity_reference_revisions
+id: paragraph.homepage_block.field_homepage_block_par_links
+field_name: field_homepage_block_par_links
+entity_type: paragraph
+bundle: homepage_block
+label: Links
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      links: links
+      nested_links: nested_links
+    target_bundles_drag_drop:
+      homepage_block:
+        weight: 10
+        enabled: false
+      homepage_blocks:
+        weight: 11
+        enabled: false
+      linklist_block:
+        weight: 12
+        enabled: false
+      linklist_blocks:
+        weight: 13
+        enabled: false
+      links:
+        enabled: true
+        weight: 14
+      nested_links:
+        enabled: true
+        weight: 15
+      search:
+        weight: 16
+        enabled: false
+      sru_field_paragraph:
+        weight: 17
+        enabled: false
+      text:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

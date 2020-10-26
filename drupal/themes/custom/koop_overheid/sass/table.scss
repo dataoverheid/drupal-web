@@ -1,0 +1,56 @@
+.responsive-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  table {
+    width: auto;
+
+    td {
+      white-space: nowrap;
+
+      &.widen {
+        min-width: 200px;
+        white-space: normal;
+
+        &.extra {
+          min-width: 300px;
+        }
+      }
+    }
+  }
+}
+
+.dataTables_wrapper {
+  .dataTables_scrollHeadInner {
+    margin: 0 auto;
+  }
+
+  table.dataTable thead th {
+    vertical-align: bottom;
+    background-position: bottom 13px right;
+  }
+
+  table.dataTable tbody th, table.dataTable tbody td, table.dataTable thead th {
+    padding: 4px 5px;
+  }
+
+  .dataTables_paginate .paginate_button {
+    &:hover, &:focus, &:active {
+      background: $c-blue-400;
+    }
+  }
+}
+
+table.manage-content-table {
+  tbody {
+    td {
+      text-align: right;
+      width: 20%;
+
+      &:first-child {
+        text-align: left;
+        width: auto;
+      }
+    }
+  }
+}

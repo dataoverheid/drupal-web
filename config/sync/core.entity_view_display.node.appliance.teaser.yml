@@ -1,0 +1,47 @@
+uuid: 891b4c47-f940-4457-9165-d1c25d206a8c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.appliance.datasets
+    - field.field.node.appliance.field_appliance_logo
+    - field.field.node.appliance.field_appliance_type
+    - field.field.node.appliance.field_contactperson_email
+    - field.field.node.appliance.field_contactperson_name
+    - field.field.node.appliance.field_contactperson_organization
+    - field.field.node.appliance.field_contactperson_phone
+    - field.field.node.appliance.field_description
+    - field.field.node.appliance.field_link_application
+    - field.field.node.appliance.field_made_by
+    - field.field.node.appliance.field_organization
+    - field.field.node.appliance.field_tags
+    - field.field.node.appliance.theme
+    - node.type.appliance
+  module:
+    - user
+id: node.appliance.teaser
+targetEntityType: node
+bundle: appliance
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  datasets: true
+  field_appliance_logo: true
+  field_appliance_type: true
+  field_contactperson_email: true
+  field_contactperson_name: true
+  field_contactperson_organization: true
+  field_contactperson_phone: true
+  field_description: true
+  field_link_application: true
+  field_made_by: true
+  field_organization: true
+  field_tags: true
+  langcode: true
+  theme: true

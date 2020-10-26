@@ -1,0 +1,21 @@
+uuid: 2fd5c714-c3ea-4c20-969a-c9c41874b9b2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_appliance_type
+    - node.type.appliance
+  module:
+    - options
+id: node.appliance.field_appliance_type
+field_name: field_appliance_type
+entity_type: node
+bundle: appliance
+label: 'Type toepassing'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

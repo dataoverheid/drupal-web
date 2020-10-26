@@ -1,0 +1,19 @@
+uuid: 85108a3d-851c-4ee7-9675-c29e83dcd036
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.name_user
+    - node.type.datarequest
+id: node.datarequest.name_user
+field_name: name_user
+entity_type: node
+bundle: datarequest
+label: 'Uw naam'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

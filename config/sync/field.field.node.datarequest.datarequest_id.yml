@@ -1,0 +1,19 @@
+uuid: a2ce30cf-8b57-46d6-baf9-a5652290f223
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.datarequest_id
+    - node.type.datarequest
+id: node.datarequest.datarequest_id
+field_name: datarequest_id
+entity_type: node
+bundle: datarequest
+label: 'Nummer Dataverzoek'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

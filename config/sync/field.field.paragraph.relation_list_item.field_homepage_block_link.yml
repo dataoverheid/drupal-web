@@ -1,0 +1,23 @@
+uuid: 330add5b-10d8-40d8-a6f1-a0b23d11936e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_block_link
+    - paragraphs.paragraphs_type.relation_list_item
+  module:
+    - link
+id: paragraph.relation_list_item.field_homepage_block_link
+field_name: field_homepage_block_link
+entity_type: paragraph
+bundle: relation_list_item
+label: 'Relation list item link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

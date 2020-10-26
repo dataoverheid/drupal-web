@@ -1,0 +1,9 @@
+name: DONL recent
+description: Module which handles some additional functionality for recent news/events/meetings
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+interface translation project: donl_recent
+interface translation server pattern: modules/custom/donl_recent/translations/donl_recent.%language.po

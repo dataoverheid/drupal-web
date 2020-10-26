@@ -1,0 +1,26 @@
+{% extends '@koop_overheid/content_item/content-item.html.twig' %}
+
+{% block content_item %}
+  {% set content_item_type = 'profile' %}
+  {% set content_item_background_color = 'blue' %}
+  {% set backLink = '  ' %}
+  {{ parent() }}
+{% endblock content_item %}
+
+{% block content_item_title %}
+  <h1>{{ 'Profile page'|t }}</h1>
+{% endblock content_item_title %}
+
+{% block content_item_description %}
+  <table class="main-data minimal-table">
+    <tbody>
+    <tr>
+      <th>{{ 'Username'|t }}</th>
+      <td>{{ user.getUsername }}</td>
+    </tr>
+    <tr>
+      <th>{{ 'Email address'|t }}</th>
+      <td>{{ user.getEmail }}</td>
+    </tr>
+  </table>
+{% endblock content_item_description %}

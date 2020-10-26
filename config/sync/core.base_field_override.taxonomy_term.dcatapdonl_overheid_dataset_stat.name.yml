@@ -1,0 +1,18 @@
+uuid: 569a642f-09de-4ef9-ad0b-75a356102711
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

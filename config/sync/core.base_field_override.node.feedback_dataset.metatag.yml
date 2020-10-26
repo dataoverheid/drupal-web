@@ -1,0 +1,18 @@
+uuid: e04697af-1a54-4b35-a416-da32d42c879f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node.feedback_dataset.metatag
+field_name: metatag
+entity_type: node
+bundle: feedback_dataset
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

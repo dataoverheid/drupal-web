@@ -1,0 +1,19 @@
+uuid: 139bb8c6-5e29-43cd-9e14-767d2e420eca
+langcode: nl
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_referentie_teruglink
+field_name: field_referentie_teruglink
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

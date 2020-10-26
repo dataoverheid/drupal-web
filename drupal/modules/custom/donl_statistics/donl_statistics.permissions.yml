@@ -1,0 +1,3 @@
+'view donl statistics':
+  title: 'View DONL statistics'
+  restrict access: true

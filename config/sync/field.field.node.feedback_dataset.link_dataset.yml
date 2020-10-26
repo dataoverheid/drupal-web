@@ -1,0 +1,23 @@
+uuid: 8134fb12-28d9-4911-a850-2560eeb668b5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.link_dataset
+    - node.type.feedback_dataset
+  module:
+    - link
+id: node.feedback_dataset.link_dataset
+field_name: link_dataset
+entity_type: node
+bundle: feedback_dataset
+label: 'Link dataset'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

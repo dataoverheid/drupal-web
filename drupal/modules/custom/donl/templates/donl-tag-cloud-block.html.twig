@@ -1,0 +1,10 @@
+{% if tags %}
+  <div class="container row transitional-size">
+      <hr />
+      <h2>{{ 'Other popular subjects'|t }}</h2>
+      {% for tag in tags %}
+        {{ tag }}
+      {% endfor %}
+      <hr />
+  </div>
+{% endif %}

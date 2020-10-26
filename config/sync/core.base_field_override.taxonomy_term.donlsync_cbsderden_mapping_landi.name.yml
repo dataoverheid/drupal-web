@@ -1,0 +1,18 @@
+uuid: 529df76c-a764-42a1-8370-e68f94432f0f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_landi
+id: taxonomy_term.donlsync_cbsderden_mapping_landi.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_landi
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

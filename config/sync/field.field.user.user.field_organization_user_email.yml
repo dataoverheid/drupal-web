@@ -1,0 +1,20 @@
+uuid: 11d86b7a-23be-4d8d-8387-5a4fa14025b7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_user_email
+  module:
+    - user
+id: user.user.field_organization_user_email
+field_name: field_organization_user_email
+entity_type: user
+bundle: user
+label: 'Uw e-mailadres'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

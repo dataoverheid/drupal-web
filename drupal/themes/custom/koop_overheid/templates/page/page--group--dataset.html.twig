@@ -1,0 +1,14 @@
+{% extends '@koop_overheid/page/page--dataset.html.twig' %}
+
+{% block content %}
+  {% if group %}
+    <div class="container row">
+      <a href="{{ path('ckan.group.search', {'group': group.name}) }}" class="link cta__backwards">{{ 'Back to all datasets'|t }}</a> in {{ group.title }}
+    </div>
+  {% else %}
+    <div class="container row">
+      <a href="{{ path('donl_search.search.dataset') }}" class="link cta__backwards">{{ 'Back to all datasets'|t }}</a>
+    </div>
+  {% endif %}
+  {{ page.content }}
+{% endblock content %}

@@ -1,0 +1,20 @@
+uuid: dba3ada3-9c6a-472d-83b0-918f56483f88
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_email
+  module:
+    - user
+id: user.user.field_organization_email
+field_name: field_organization_email
+entity_type: user
+bundle: user
+label: 'Algemeen e-mailadres'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

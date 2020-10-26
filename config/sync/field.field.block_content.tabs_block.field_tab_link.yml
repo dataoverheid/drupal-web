@@ -1,0 +1,23 @@
+uuid: 81508d9e-1992-4c1d-b846-fb35328dbfaf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs_block
+    - field.storage.block_content.field_tab_link
+  module:
+    - link
+id: block_content.tabs_block.field_tab_link
+field_name: field_tab_link
+entity_type: block_content
+bundle: tabs_block
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

@@ -1,0 +1,15 @@
+donl_recent.index:
+  path: '/actueel'
+  defaults:
+    _controller: '\Drupal\donl_recent\Controller\RecentController::index'
+    _title_callback: '\Drupal\donl_recent\Controller\RecentController::title'
+  requirements:
+    _permission: 'access content'
+
+donl_recent.type_overview:
+  path: '/actueel/{type}'
+  defaults:
+    _controller: '\Drupal\donl_recent\Controller\RecentController::overview'
+    _title_callback: '\Drupal\donl_recent\Controller\RecentController::title'
+  requirements:
+    _permission: 'access content'

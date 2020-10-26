@@ -1,0 +1,18 @@
+uuid: 39abce29-5580-4b26-978d-c560dac30c69
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_sche
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

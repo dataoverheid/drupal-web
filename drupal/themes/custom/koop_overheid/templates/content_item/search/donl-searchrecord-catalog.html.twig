@@ -1,0 +1,7 @@
+{% extends '@koop_overheid/content_item/search/donl-searchrecord.html.twig' %}
+
+{% block type_name %}{{ 'Catalog'|t }}{% endblock type_name %}
+
+{% block search_content_prefix %}
+  <small>{{ record.uri }}</small>
+{% endblock search_content_prefix %}

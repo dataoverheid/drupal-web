@@ -1,0 +1,97 @@
+uuid: c1cd6821-717f-4e0f-aeca-f34463fb573a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.feedback_dataset.data_eigenaar
+    - field.field.node.feedback_dataset.email
+    - field.field.node.feedback_dataset.feedback_bericht
+    - field.field.node.feedback_dataset.feedback_doorgestuurd_aan_data_e
+    - field.field.node.feedback_dataset.link_dataset
+    - field.field.node.feedback_dataset.naam
+    - field.field.node.feedback_dataset.telefoon
+    - field.field.node.feedback_dataset.titel_dataset
+    - node.type.feedback_dataset
+  module:
+    - link
+    - user
+id: node.feedback_dataset.default
+targetEntityType: node
+bundle: feedback_dataset
+mode: default
+content:
+  data_eigenaar:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  email:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  feedback_bericht:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  feedback_doorgestuurd_aan_data_e:
+    weight: 108
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  link_dataset:
+    weight: 102
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  naam:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  telefoon:
+    weight: 107
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  titel_dataset:
+    weight: 101
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

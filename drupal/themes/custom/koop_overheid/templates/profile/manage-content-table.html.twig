@@ -1,0 +1,26 @@
+{% if links %}
+  <ul class="list list--inline">
+    {% for link in links %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if rows %}
+  <table class="manage-content-table">
+    <tbody>
+    {% for row in rows %}
+      <tr>
+        {% for column in row %}
+          <td>{{ column }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if pagination %}
+    {{ pagination }}
+  {% endif %}
+{% else %}
+  {{ empty_text }}
+{% endif %}

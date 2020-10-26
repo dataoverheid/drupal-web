@@ -1,0 +1,21 @@
+uuid: 5f5ee53c-c095-4b97-94b2-3afb6aed15b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_nested_links_title
+    - paragraphs.paragraphs_type.nested_links
+  module:
+    - text
+id: paragraph.nested_links.field_nested_links_title
+field_name: field_nested_links_title
+entity_type: paragraph
+bundle: nested_links
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

@@ -1,0 +1,67 @@
+{% set container_classes = [
+  'container',
+  'columns',
+  'row',
+] %}
+
+{% set container_attributes = create_attribute().addClass(container_classes) %}
+
+{% if (left_sidebar_filled) %}
+  {% set container_attributes=container_attributes.addClass('columns--sidebar-left') %}
+  {% set sidebar_blocks = sidebar_left %}
+  {% set sidebar_pars = content.field_left_sidebar %}
+{% elseif right_sidebar_filled %}
+  {% set container_attributes=container_attributes.addClass('columns--sidebar-right') %}
+  {% set sidebar_blocks = sidebar_right %}
+  {% set sidebar_pars = content.field_right_sidebar %}
+{% else %}
+  {% set container_attributes = create_attribute() %}
+{% endif %}
+
+{% if (left_sidebar_filled) or (right_sidebar_filled) %}
+  {% set rendered_sidebar_content %}
+    <div>
+      {{ sidebar_pars }}
+      {{ sidebar_blocks }}
+    </div>
+  {% endset %}
+{% endif %}
+
+{% if content.field_landingpage_image|render %}
+  {% set rendered_content %}
+    {{ content|without('body','field_landingpage_image','field_left_sidebar','field_right_sidebar') }}
+  {% endset %}
+  <div class="row row--image row--landing" style="background-image: url({{ image_url }});">
+    <div class="container">
+      <div class="content--onimage">
+        {{ title_markup }}
+        <p class="intro--text">{{ content.body }}</p>
+      </div>
+    </div>
+  </div>
+{% else %}
+ {% if (left_sidebar_filled) or (right_sidebar_filled) %}
+  {% set rendered_content %}
+    <div class="">
+      {{ title_markup }}
+      {{ content.body }}
+    </div>
+    {{ content|without('body','field_landingpage_image','field_left_sidebar','field_right_sidebar') }}
+  {% endset %}
+   {% else %}
+     {% set rendered_content %}
+       <div class="row container">
+         {{ title_markup }}
+         {{ content.body }}
+       </div>
+       {{ content|without('body','field_landingpage_image','field_left_sidebar','field_right_sidebar') }}
+     {% endset %}
+   {% endif %}
+{% endif %}
+
+<div{{ container_attributes }}>
+  <div>
+    {{ rendered_content }}
+  </div>
+  {{ rendered_sidebar_content }}
+</div>

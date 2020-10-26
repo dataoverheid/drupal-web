@@ -1,0 +1,18 @@
+uuid: 332e32a5-532a-4f06-9230-0d4aaad790cc
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_metadata
+id: taxonomy_term.donlsync_ngr_mapping_r_metadata.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_metadata
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

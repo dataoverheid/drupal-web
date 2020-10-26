@@ -1,0 +1,24 @@
+uuid: c4ae13d8-d0c5-4b26-b12e-adbad73ec899
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_access_ckan_storage
+  module:
+    - user
+id: user.user.field_access_ckan_storage
+field_name: field_access_ckan_storage
+entity_type: user
+bundle: user
+label: 'Toegang CKAN storage'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

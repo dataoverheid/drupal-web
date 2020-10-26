@@ -1,0 +1,39 @@
+<div id="layout-wrapper">
+  <div class="layout-container">
+
+    <header role="banner">
+      {% if logo %}
+        <h1 class="page-title">
+          {{ logo }}
+        </h1>
+      {% endif %}
+    </header>
+
+    {% if page.sidebar_first %}
+      <aside class="layout-sidebar-first" role="complementary">
+        {{ page.sidebar_first }}
+      </aside>
+    {% endif %}
+
+    <main role="main">
+      {% if title %}
+        <h2 class="heading-a">{{ title }}</h2>
+      {% endif %}
+      {{ page.highlighted }}
+      {{ page.content }}
+    </main>
+
+    {% if page.sidebar_second %}
+      <aside class="layout-sidebar-second" role="complementary">
+        {{ page.sidebar_second }}
+      </aside>
+    {% endif %}
+
+    {% if page.page_bottom %}
+      <footer role="contentinfo">
+        {{ page.page_bottom }}
+      </footer>
+    {% endif %}
+
+  </div>
+</div>

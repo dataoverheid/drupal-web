@@ -1,0 +1,12 @@
+name: DONL Custom HTTP 4xx Error
+description: Module which handles all DONL HTTP 4xx Errors
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - donl_search:donl_search
+
+interface translation project: donl_custom_http_4xx
+interface translation server pattern: modules/custom/donl_custom_http_4xx/translations/donl_custom_http_4xx.%language.po

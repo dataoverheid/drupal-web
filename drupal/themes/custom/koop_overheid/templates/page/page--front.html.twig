@@ -1,0 +1,18 @@
+{% extends '@koop_overheid/page/page.html.twig' %}
+
+{% block content %}
+  <div class="container container--centered">
+    <h1 class="centered--title">{{ 'Data register of the Dutch government'|t }}</h1>
+  </div>
+  {{ page.content }}
+  {% if page.content_second %}
+    <div id="content-second" class="container transitional-size">
+      {{ page.content_second }}
+    </div>
+  {% endif %}
+  {% if page.content_third %}
+    <div id="content-third">
+      {{ page.content_third }}
+    </div>
+  {% endif %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+uuid: ecc29e83-7267-437b-81f3-22060f206159
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.feedback_doorgestuurd_aan_data_e
+    - node.type.feedback_dataset
+id: node.feedback_dataset.feedback_doorgestuurd_aan_data_e
+field_name: feedback_doorgestuurd_aan_data_e
+entity_type: node
+bundle: feedback_dataset
+label: 'Feedback doorgestuurd aan data-eigenaar'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Afgehandeld
+  off_label: 'Nog niet doorgestuurd'
+field_type: boolean

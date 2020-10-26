@@ -1,0 +1,61 @@
+uuid: bc731b3c-43a0-4b4b-af72-0e551e5d7fb8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.group.datasets
+    - field.field.node.group.group_description
+    - field.field.node.group.group_image
+    - field.field.node.group.machine_name
+    - node.type.group
+  module:
+    - ckan
+    - donl
+    - svg_image
+    - user
+id: node.group.default
+targetEntityType: node
+bundle: group
+mode: default
+content:
+  datasets:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_dataset_text
+    region: content
+  group_description:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  group_image:
+    weight: 6
+    label: above
+    settings:
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  machine_name:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+hidden:
+  langcode: true

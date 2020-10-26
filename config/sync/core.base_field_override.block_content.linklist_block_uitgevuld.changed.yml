@@ -1,0 +1,18 @@
+uuid: 0eba9056-3531-4fb0-9b03-1996cf73f348
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block_uitgevuld
+id: block_content.linklist_block_uitgevuld.changed
+field_name: changed
+entity_type: block_content
+bundle: linklist_block_uitgevuld
+label: Gewijzigd
+description: 'Het tijdstip waarop het aangepaste blok voor het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

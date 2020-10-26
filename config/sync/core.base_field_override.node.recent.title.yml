@@ -1,0 +1,18 @@
+uuid: dc5bc6d9-c0e6-489e-9129-2006ce3dab01
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+id: node.recent.title
+field_name: title
+entity_type: node
+bundle: recent
+label: Titel
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

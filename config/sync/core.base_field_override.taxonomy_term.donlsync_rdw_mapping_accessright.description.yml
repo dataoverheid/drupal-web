@@ -1,0 +1,20 @@
+uuid: feffb33f-8e25-42d6-9037-544b27cbeafc
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_mapping_accessright
+  module:
+    - text
+id: taxonomy_term.donlsync_rdw_mapping_accessright.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_rdw_mapping_accessright
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

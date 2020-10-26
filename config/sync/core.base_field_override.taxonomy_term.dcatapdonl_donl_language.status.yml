@@ -1,0 +1,22 @@
+uuid: 988d088a-4ea0-479a-a8ab-1952dacf8893
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+id: taxonomy_term.dcatapdonl_donl_language.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

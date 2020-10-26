@@ -1,0 +1,7 @@
+donl_migrate.ckan_users:
+  path: '/admin/donl_migrate'
+  defaults:
+    _controller: '\Drupal\donl_migrate\Controller\MigrateController::content'
+    _title: 'Donl migrate'
+  requirements:
+    _permission: 'a non existing permission so only admin kan run'

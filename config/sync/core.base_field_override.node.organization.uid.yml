@@ -1,0 +1,20 @@
+uuid: 3bce6ce9-439c-4da9-b220-3413a1074c3c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.organization
+id: node.organization.uid
+field_name: uid
+entity_type: node
+bundle: organization
+label: 'Geschreven door'
+description: 'De gebruikersnaam van de auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

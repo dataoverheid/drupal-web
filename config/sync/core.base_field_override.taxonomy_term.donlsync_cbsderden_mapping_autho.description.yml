@@ -1,0 +1,20 @@
+uuid: 12d8c996-a334-44d3-89c2-b3dff97720b9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_autho
+  module:
+    - text
+id: taxonomy_term.donlsync_cbsderden_mapping_autho.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_autho
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

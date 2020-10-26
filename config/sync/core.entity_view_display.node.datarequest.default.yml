@@ -1,0 +1,273 @@
+uuid: 1c0ccaa2-0635-4920-9712-3ab4ad580fa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.datarequest.commercial_use
+    - field.field.node.datarequest.data_owner
+    - field.field.node.datarequest.datarequest_id
+    - field.field.node.datarequest.datasets
+    - field.field.node.datarequest.emailaddress_user
+    - field.field.node.datarequest.explanation_state
+    - field.field.node.datarequest.name_user
+    - field.field.node.datarequest.organisation_user
+    - field.field.node.datarequest.phase
+    - field.field.node.datarequest.phone_number_user
+    - field.field.node.datarequest.possible_owner
+    - field.field.node.datarequest.problems_with_search
+    - field.field.node.datarequest.request_date
+    - field.field.node.datarequest.request_source
+    - field.field.node.datarequest.requested_data
+    - field.field.node.datarequest.requested_dataformat
+    - field.field.node.datarequest.requested_start_and_end_date
+    - field.field.node.datarequest.result_datarequest
+    - field.field.node.datarequest.search_attempts
+    - field.field.node.datarequest.state
+    - field.field.node.datarequest.state_datarequest
+    - field.field.node.datarequest.target_audience
+    - field.field.node.datarequest.theme
+    - field.field.node.datarequest.url_dataset
+    - field.field.node.datarequest.want_to_use_it_for
+    - node.type.datarequest
+  module:
+    - ckan
+    - datetime
+    - datetime_range
+    - field_group
+    - options
+    - user
+third_party_settings:
+  field_group:
+    group_state:
+      children:
+        - datarequest_id
+        - request_date
+        - state
+        - result_datarequest
+        - state_datarequest
+        - explanation_state
+        - data_owner
+        - datasets
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: Status
+      region: content
+    group_requested_data:
+      children:
+        - theme
+        - requested_data
+        - requested_start_and_end_date
+        - requested_dataformat
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: ''
+      label: 'Welke data is gevraagd'
+      region: content
+    group_source:
+      children:
+        - possible_owner
+        - problems_with_search
+        - search_attempts
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: ''
+      label: 'Mogelijke bron van de data'
+      region: content
+    group_usage:
+      children:
+        - want_to_use_it_for
+        - commercial_use
+        - target_audience
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: ''
+      label: 'Waar wordt de data voor gebruikt'
+      region: content
+id: node.datarequest.default
+targetEntityType: node
+bundle: datarequest
+mode: default
+content:
+  commercial_use:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  data_owner:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  datarequest_id:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  datasets:
+    type: field_dataset_text
+    weight: 15
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  explanation_state:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  possible_owner:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  problems_with_search:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  request_date:
+    weight: 8
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  requested_data:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  requested_dataformat:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  requested_start_and_end_date:
+    weight: 7
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: short
+      separator: '--'
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  result_datarequest:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  search_attempts:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  state:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  state_datarequest:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  target_audience:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  theme:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  want_to_use_it_for:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  emailaddress_user: true
+  langcode: true
+  links: true
+  name_user: true
+  organisation_user: true
+  phase: true
+  phone_number_user: true
+  request_source: true
+  url_dataset: true

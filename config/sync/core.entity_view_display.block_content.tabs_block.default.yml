@@ -1,0 +1,28 @@
+uuid: a523d124-7824-4c3a-8a87-9052e91e660f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs_block
+    - field.field.block_content.tabs_block.field_tab_link
+  module:
+    - link
+id: block_content.tabs_block.default
+targetEntityType: block_content
+bundle: tabs_block
+mode: default
+content:
+  field_tab_link:
+    type: link
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

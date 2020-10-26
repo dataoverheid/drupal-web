@@ -1,0 +1,17 @@
+uuid: 1b3cfee6-a154-427a-af73-c12d8baf967f
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Groep
+type: group
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

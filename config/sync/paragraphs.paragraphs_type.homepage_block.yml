@@ -1,0 +1,9 @@
+uuid: c8d52058-40f0-4893-a509-82f8c1c239af
+langcode: en
+status: true
+dependencies: {  }
+id: homepage_block
+label: 'Homepage block'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

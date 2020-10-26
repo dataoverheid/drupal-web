@@ -1,0 +1,41 @@
+uuid: 9bc206ab-50a1-4fcf-9e01-62ddf2049908
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_mdr_filetype.identifier
+    - field.field.taxonomy_term.dcatapdonl_mdr_filetype.label_en
+    - field.field.taxonomy_term.dcatapdonl_mdr_filetype.label_nl
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+id: taxonomy_term.dcatapdonl_mdr_filetype.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+mode: default
+content:
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

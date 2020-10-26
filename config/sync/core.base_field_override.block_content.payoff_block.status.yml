@@ -1,0 +1,22 @@
+uuid: ef0558ad-cc21-4bcc-bfbd-f80ae0d938a8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.payoff_block
+id: block_content.payoff_block.status
+field_name: status
+entity_type: block_content
+bundle: payoff_block
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

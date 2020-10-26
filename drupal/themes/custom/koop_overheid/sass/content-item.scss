@@ -1,0 +1,253 @@
+#body .content-item {
+  .content-header {
+    .columns {
+      align-items: center;
+      padding: 20px 15px;
+    }
+
+    @include breakpoint(mobileonly) {
+      .cta__backwards {
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .donl-search-form h2 {
+    display: none;
+  }
+
+  dd {
+    margin: 0;
+
+    & + dd {
+      margin-left: 30px;
+    }
+  }
+
+  .background {
+    padding: 40px 0 0;
+    border-bottom: 1px solid $c-gray-200;
+
+    &.blue {
+      background: $c-blue-100;
+    }
+
+    &.green {
+      background: $c-green-100;
+    }
+
+    .content-item-description {
+      margin: 30px 0 20px 0;
+
+      .minimal-table {
+        margin: 0;
+      }
+    }
+  }
+
+  .tags {
+    margin: 30px 0;
+
+    & > * {
+      display: inline-block;
+      background: $c-gray-200;
+      color: black;
+      text-decoration: none;
+      padding: 1px 5px;
+      border-radius: 5px;
+      margin: 0 5px 5px 0;
+      transition: .5s;
+      text-transform: capitalize;
+    }
+
+    & > a {
+      &:hover, &:focus, &:active {
+        color: black;
+        background: $c-blue-200;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .export-btn {
+    margin-bottom: 20px;
+  }
+
+  &.appliance {
+    .panel-description-content {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .metadata-table {
+    display: table;
+    width: 100%;
+    overflow: scroll;
+
+    h3 {
+      white-space: nowrap;
+      width: 0;
+      overflow: visible;
+      margin-bottom: 0;
+      margin-top: 30px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    .icon {
+      font-family: inherit !important;
+    }
+
+    div {
+      display: table-row;
+
+      span {
+        display: table-cell;
+        padding: 10px;
+        border-bottom: 1px solid $c-gray-200;
+        vertical-align: top;
+
+        &:first-child {
+          padding-left: 0;
+          font-weight: bold;
+          white-space: nowrap;
+        }
+
+        &:last-child {
+          width: 100%;
+        }
+      }
+
+      &:last-child {
+        span {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .panel-description {
+    border-bottom: 1px solid $c-blue-200;
+    padding-bottom: 18px;
+    margin-bottom: 23px;
+
+    :first-child {
+      margin-top: 0;
+    }
+  }
+
+  @include breakpoint(mobileonly) {
+    .metadata-table {
+      display: block;
+
+      div {
+        display: block;
+        margin-bottom: 15px;
+
+        span {
+          border: 0;
+          display: block;
+          padding: 0 10px 0 0;
+        }
+      }
+    }
+  }
+
+  @include breakpoint(mobileonly) {
+    #body .content-item .title .type-icon {
+      margin-right: 15px;
+    }
+    .tabs {
+      display: none;
+    }
+    .panel {
+      display: block !important;
+    }
+
+    .panel + .panel {
+      padding-top: 0;
+    }
+  }
+
+  .content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.content-item-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+
+  > div {
+    width: 100%;
+  }
+
+  .type-icon {
+    position: relative;
+    margin-right: 20px;
+    flex-shrink: 0;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-position: center center;
+      background-color: white;
+      border: 2px solid $c-blue-600;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 5px;
+      right: -10px;
+      z-index: 10;
+    }
+
+    @include breakpoint(mobileonly) {
+      display: none;
+    }
+  }
+
+  h1, h2 {
+    margin: 0;
+    font-size: 24px;
+    display: inline;
+  }
+
+  p.type {
+    margin: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .permanent-link {
+    color: $c-blue-600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: .5s;
+    white-space: nowrap;
+    user-select: none;
+
+    span {
+      transition: .5s;
+    }
+
+    .copied {
+      margin-left: 15px;
+      display: none;
+      color: $c-green-400;
+    }
+
+    &:hover, &:focus, &:active {
+      color: $c-blue-400;
+
+      span.icon--permalink {
+        background-color: $c-blue-400;
+      }
+    }
+  }
+}

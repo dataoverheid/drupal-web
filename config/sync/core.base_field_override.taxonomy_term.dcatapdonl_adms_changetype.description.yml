@@ -1,0 +1,20 @@
+uuid: eb2c23ce-49e1-4fbc-b8b7-ff94d0f470b6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_adms_changetype.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,48 @@
+uuid: e3fe6dda-0920-49d4-afcb-cb6a4f0b594b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.highlight.highlight_image
+    - field.field.paragraph.highlight.highlight_link
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.highlight
+  module:
+    - image_widget_crop
+    - imce
+    - link
+id: paragraph.highlight.default
+targetEntityType: paragraph
+bundle: highlight
+mode: default
+content:
+  highlight_image:
+    weight: 1
+    settings:
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: thumbnail
+      crop_preview_image_style: crop_thumbnail
+      crop_list:
+        - highlight
+      crop_types_required:
+        - highlight
+      progress_indicator: throbber
+      show_crop_area: false
+    third_party_settings:
+      imce:
+        enabled: false
+    type: image_widget_crop
+    region: content
+  highlight_link:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

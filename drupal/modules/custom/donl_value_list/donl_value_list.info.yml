@@ -1,0 +1,9 @@
+name: DONL value list
+description: Module which handles the value lists for the DONL site
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:taxonomy

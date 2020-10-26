@@ -1,0 +1,28 @@
+uuid: 0bdb70b1-e67d-45ef-afb0-9f9112e0f8bc
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.groups
+    - node.type.community
+    - node.type.group
+id: node.community.groups
+field_name: groups
+entity_type: node
+bundle: community
+label: Groepen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      group: group
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

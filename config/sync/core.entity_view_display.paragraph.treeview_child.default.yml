@@ -1,0 +1,47 @@
+uuid: 7d4c52af-4cb5-44d1-9a78-ed996b8a2346
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.treeview_child.field_treeview_beschrijving
+    - field.field.paragraph.treeview_child.field_treeview_child
+    - field.field.paragraph.treeview_child.field_treeview_link
+    - paragraphs.paragraphs_type.treeview_child
+  module:
+    - entity_reference_revisions
+    - link
+id: paragraph.treeview_child.default
+targetEntityType: paragraph
+bundle: treeview_child
+mode: default
+content:
+  field_treeview_beschrijving:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_treeview_child:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_treeview_link:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden: {  }

@@ -1,0 +1,20 @@
+uuid: 41c9680b-f56a-4a8e-8291-bbcb57d7b965
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_phone
+  module:
+    - user
+id: user.user.field_organization_phone
+field_name: field_organization_phone
+entity_type: user
+bundle: user
+label: 'Algemeen telefoonnummer'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

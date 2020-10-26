@@ -1,0 +1,9 @@
+uuid: a43c063b-a6bf-470c-b0d1-d1d4007e9e8d
+langcode: en
+status: true
+dependencies: {  }
+id: highlights_list
+label: 'highlights list'
+icon_uuid: null
+description: 'A list of highlights for DONL'
+behavior_plugins: {  }

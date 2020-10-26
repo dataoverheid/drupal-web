@@ -1,0 +1,8 @@
+uuid: 15c0cd2a-121c-41e5-a561-d59f5a966717
+langcode: nl
+status: true
+dependencies: {  }
+id: tabs_block
+label: 'Tabs block'
+revision: 0
+description: 'Add tabs to a page'

@@ -1,0 +1,19 @@
+uuid: 5b039e25-5778-4f60-8b9c-82285928227a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+id: taxonomy_term.dcatapdonl_donl_language.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: Identifier
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

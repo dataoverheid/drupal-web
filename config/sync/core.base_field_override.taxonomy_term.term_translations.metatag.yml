@@ -1,0 +1,18 @@
+uuid: 02dcd9fb-49e5-4794-bda8-1f8d4db8534f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.term_translations
+id: taxonomy_term.term_translations.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: term_translations
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

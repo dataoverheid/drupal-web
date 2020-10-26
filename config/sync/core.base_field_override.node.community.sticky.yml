@@ -1,0 +1,22 @@
+uuid: f8e01ca2-f749-4e2f-a748-2f22e820b73c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.sticky
+field_name: sticky
+entity_type: node
+bundle: community
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

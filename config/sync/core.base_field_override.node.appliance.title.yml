@@ -1,0 +1,18 @@
+uuid: 38fed6b7-b1d9-44fb-886a-63893c227e5c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+id: node.appliance.title
+field_name: title
+entity_type: node
+bundle: appliance
+label: 'Naam toepassing'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

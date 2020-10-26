@@ -1,0 +1,67 @@
+uuid: d52ca1db-eb6d-48a5-aa66-5554af3023f6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_voetnoten
+    - paragraphs.paragraphs_type.voetnoot
+    - paragraphs.paragraphs_type.voetnoten
+  module:
+    - entity_reference_revisions
+id: paragraph.voetnoten.field_voetnoten
+field_name: field_voetnoten
+entity_type: paragraph
+bundle: voetnoten
+label: Voetnoten
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      voetnoot: voetnoot
+    target_bundles_drag_drop:
+      voetnoot:
+        enabled: true
+        weight: 14
+      block_paragraph:
+        weight: 15
+        enabled: false
+      homepage_block:
+        weight: 16
+        enabled: false
+      homepage_blocks:
+        weight: 17
+        enabled: false
+      linklist_block:
+        weight: 18
+        enabled: false
+      linklist_blocks:
+        weight: 19
+        enabled: false
+      links:
+        weight: 20
+        enabled: false
+      nested_links:
+        weight: 21
+        enabled: false
+      search:
+        weight: 22
+        enabled: false
+      sru_field_paragraph:
+        weight: 23
+        enabled: false
+      text:
+        weight: 24
+        enabled: false
+      voetnoten:
+        weight: 25
+        enabled: false
+      webform:
+        weight: 26
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,23 @@
+{% if description %}
+  <div class="container">
+    <div class="community-description">
+      {{ description }}
+    </div>
+  </div>
+{% endif %}
+
+{% if themes %}
+  <div class="container row transitional-size">
+    <h2>{{ 'Themes'|t }}</h2>
+    <ul class="themelist list--unstyled">
+      {% for uri,theme in themes %}
+        <li class="themeblock__item">
+          <a class="themeblock__link themeblock__link--{{ ckan_mapping_get_theme_class(uri) }}" href="{{ theme.url }}">
+            <h3 class="themeblock__title">{{ ckan_mapping_get_theme_name(uri) }}</h3>
+            <p class="themeblock__counter">{{ theme.count }} <span class="visually-hidden">sets</span></p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

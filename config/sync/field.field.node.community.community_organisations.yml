@@ -1,0 +1,28 @@
+uuid: 02bc6cfc-c659-478f-bb3f-c3af26bdea2f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.community_organisations
+    - node.type.community
+    - node.type.organization
+id: node.community.community_organisations
+field_name: community_organisations
+entity_type: node
+bundle: community
+label: Organisaties
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      organization: organization
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,183 @@
+.search-block {
+  padding: 50px 0;
+}
+
+.donl-search-form {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 800px;
+
+  h2 {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .suggester-result-container {
+    position: relative;
+    width: 100%;
+
+    #suggester {
+      position: absolute;
+      z-index: 10;
+      top: -2px;
+      width: 100%;
+      padding: 17px 15px 15px;
+      border: 1px solid $c-blue-100;
+      border-radius: 0 0 3px 3px;
+      background: white;
+      box-shadow: 0 0 5px 0 $c-blue-100;
+
+      .suggestion-group {
+        margin-bottom: 10px;
+
+        a {
+          display: block;
+        }
+
+        h4 {
+          margin: 0;
+        }
+
+        ul {
+          margin: 0;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .facet-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 15px 0 -30px 0;
+    padding: 0 0 10px 0;
+
+    .facet-remove {
+      font-style: normal;
+      line-height: 30px;
+      display: inline-block;
+      margin: 0 10px 10px 0;
+      padding: 0 35px 0 10px;
+      transition: .5s;
+      text-decoration: none;
+      color: black;
+      border-radius: 10px;
+      outline: none;
+      background: white url('/themes/custom/koop_overheid/images/icon-close.svg') no-repeat center right 15px;
+      background-size: 10px;
+
+      &:hover, &:focus, &:active {
+        color: black;
+        background-color: $c-gray-100;
+      }
+    }
+  }
+}
+
+.content-header .donl-search-form .facet-wrapper {
+  .facet-remove {
+    background-color: $c-blue-100;
+  }
+}
+
+.searchbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  @include breakpoint(mobileonly) {
+    flex-wrap: wrap;
+  }
+
+  .form__element {
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .form-item-type-select {
+    flex-shrink: 0;
+    @include breakpoint(mobileonly) {
+      width: 100%;
+      margin-bottom: 15px;
+      .chosen-container {
+        border-radius: 0 !important;
+      }
+    }
+  }
+
+  .chosen-container {
+    min-width: 165px;
+  }
+
+  .form-item-search {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    @include breakpoint(mobileonly) {
+      width: calc(100% - 110px);
+    }
+
+    input {
+      height: 42px;
+      margin: 0;
+      border-radius: 0;
+    }
+  }
+
+  .submit-wrapper {
+    position: relative;
+    max-width: 110px;
+
+    input {
+      line-height: 22px;
+      width: 100%;
+      margin: 0;
+      padding-right: 40px;
+      text-align: right;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .icon-search {
+      position: absolute;
+      z-index: 99;
+      top: 0;
+      right: 10px;
+      bottom: 0;
+      height: 20px;
+      margin: auto;
+      pointer-events: none;
+    }
+  }
+
+  @include breakpoint(mobileonly) {
+    input {
+      padding-right: 30px;
+    }
+  }
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content-item-title {
+    margin: 0;
+
+    h2 {
+      margin: 0 0 6px 0;
+    }
+  }
+
+  &.type-icon-active {
+    justify-content: space-between;
+  }
+}
+
+

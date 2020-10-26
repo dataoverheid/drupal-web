@@ -1,0 +1,32 @@
+uuid: 6177d1f4-f68e-439a-8936-c284144a61c2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_cbsderden_mapping_r_for.target_value
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_r_for
+id: taxonomy_term.donlsync_cbsderden_mapping_r_for.default
+targetEntityType: taxonomy_term
+bundle: donlsync_cbsderden_mapping_r_for
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  target_value:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  description: true
+  langcode: true
+  path: true

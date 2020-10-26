@@ -1,0 +1,19 @@
+uuid: 2270731a-4cd2-412d-88f6-8f2a4fc45654
+langcode: nl
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_treeview_link
+field_name: field_treeview_link
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

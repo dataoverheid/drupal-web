@@ -1,0 +1,22 @@
+uuid: f2a916c9-ac4c-4652-afdd-ccc4417e0406
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.homepage_blocks
+id: paragraph.homepage_blocks.status
+field_name: status
+entity_type: paragraph
+bundle: homepage_blocks
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

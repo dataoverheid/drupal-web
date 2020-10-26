@@ -1,0 +1,36 @@
+uuid: eae5c8e5-20a9-4479-b0b8-0c6d1a15394a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.nested_links.field_homepage_block_flat_links
+    - field.field.paragraph.nested_links.field_nested_links_title
+    - paragraphs.paragraphs_type.nested_links
+  module:
+    - link
+    - text
+id: paragraph.nested_links.default
+targetEntityType: paragraph
+bundle: nested_links
+mode: default
+content:
+  field_homepage_block_flat_links:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_nested_links_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

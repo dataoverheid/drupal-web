@@ -1,0 +1,9 @@
+uuid: 733dfd66-a511-48f4-bfa3-036e3f448151
+langcode: en
+status: true
+dependencies: {  }
+id: linklist_blocks
+label: 'Linklist blocks'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

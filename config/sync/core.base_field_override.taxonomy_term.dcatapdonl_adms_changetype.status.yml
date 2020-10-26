@@ -1,0 +1,22 @@
+uuid: 7de63edf-fac7-49f4-a493-cd718579c0c9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

@@ -1,0 +1,15 @@
+manage datasets:
+  title: 'Manage datasets'
+  restrict access: true
+
+manage ckan settings:
+  title: 'Manage Ckan settings'
+  restrict access: true
+
+configure ckan request settings:
+  title: 'Configure the CKAN Request settings'
+  restrict access: true
+
+configure ckan resource type settings:
+  title: 'Configure the resource type settings'
+  restrict access: true

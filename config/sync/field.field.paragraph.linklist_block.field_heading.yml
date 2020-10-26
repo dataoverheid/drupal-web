@@ -1,0 +1,21 @@
+uuid: f9c63d16-c161-408e-aa89-0d12d9eee2d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_heading
+    - paragraphs.paragraphs_type.linklist_block
+  module:
+    - text
+id: paragraph.linklist_block.field_heading
+field_name: field_heading
+entity_type: paragraph
+bundle: linklist_block
+label: Heading
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

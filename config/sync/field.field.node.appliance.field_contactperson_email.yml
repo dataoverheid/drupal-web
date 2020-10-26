@@ -1,0 +1,19 @@
+uuid: 7dc8f197-398c-4bce-b6fa-eadc085c576b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contactperson_email
+    - node.type.appliance
+id: node.appliance.field_contactperson_email
+field_name: field_contactperson_email
+entity_type: node
+bundle: appliance
+label: E-mailadres
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

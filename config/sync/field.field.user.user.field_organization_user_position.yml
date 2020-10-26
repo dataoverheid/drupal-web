@@ -1,0 +1,20 @@
+uuid: b9cbb1ae-2a5e-4bd1-9d65-cf051d43a1ce
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_user_position
+  module:
+    - user
+id: user.user.field_organization_user_position
+field_name: field_organization_user_position
+entity_type: user
+bundle: user
+label: 'Uw functie'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

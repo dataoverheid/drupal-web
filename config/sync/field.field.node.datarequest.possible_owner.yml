@@ -1,0 +1,19 @@
+uuid: c30cfdb2-c820-48c3-a73f-b19454c0c185
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.possible_owner
+    - node.type.datarequest
+id: node.datarequest.possible_owner
+field_name: possible_owner
+entity_type: node
+bundle: datarequest
+label: Overheidsorganisatie
+description: 'Kies hier uit de lijst de overheidsorganisatie waarvan u denkt dat deze de data mogelijk ter beschikking heeft.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

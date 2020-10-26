@@ -1,0 +1,39 @@
+{
+  "@context": "http://schema.org/",
+  "@type": "DataCatalog",
+  "name": "data.overheid.nl",
+  "description": "Het Nederlandse open data portaal",
+  "author": {
+    "@context": "http://schema.org/",
+    "@type": "GovernmentOrganization",
+    "contactPoint": {
+      "@context": "http://schema.org/",
+      "@type": "ContactPoint",
+      "availableLanguage": "nl",
+      "contactType": "customer support",
+      "email": "data@koopoverheid.nl",
+      "url": "https://koopoverheid.nl"
+    },
+    "email": "data@koopoverheid.nl",
+    "legalName": "UBR|KOOP",
+    "logo": "https://www.koopoverheid.nl/binaries/content/gallery/koop/channel-afbeeldingen/koop.svg",
+    "parentOrganization": {
+      "@context": "http://schema.org/",
+      "@type": "GovernmentOrganization",
+      "name": "Ministerie van Binnenlandse Zaken en Koninkrijksrelaties",
+      "url": "https://www.rijksoverheid.nl/ministeries/ministerie-van-binnenlandse-zaken-en-koninkrijksrelaties"
+    },
+    "identifier": "https://koopoverheid.nl",
+    "name": "Kennis- en Exploitatiecentrum voor Officiële Overheidspublicaties",
+    "url": "https://koopoverheid.nl"
+  },
+  "inLanguage": [
+    "nl",
+    "en"
+  ],
+  "keywords": "data, opendata, open, koop, overheid, dataset, dcat",
+  "image": "https://data.overheid.nl/themes/custom/koop_overheid/logo.svg",
+  "identifier": "https://data.overheid.nl",
+  "dataset": [],
+  "copyrightYear": 2012
+}

@@ -1,0 +1,37 @@
+uuid: 9dc3ecae-b660-487f-87a9-d3f6240a1b00
+langcode: nl
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonieme gebruiker'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'create appliance content'
+  - 'create datarequest content'
+  - 'create emailaddress_user'
+  - 'create feedback_dataset content'
+  - 'create field_authority'
+  - 'create field_catalog'
+  - 'create field_publisher'
+  - 'create field_role'
+  - 'create name_user'
+  - 'create organisation_user'
+  - 'create phone_number_user'
+  - 'create terms in appliance_tags'
+  - 'view data_owner'
+  - 'view datarequest_id'
+  - 'view datasets'
+  - 'view explanation_state'
+  - 'view feedback_doorgestuurd_aan_data_e'
+  - 'view phase'
+  - 'view request_date'
+  - 'view request_source'
+  - 'view result_datarequest'
+  - 'view state'
+  - 'view state_datarequest'
+  - 'view target_audience'
+  - 'view url_dataset'

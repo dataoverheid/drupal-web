@@ -1,0 +1,34 @@
+uuid: f2616b96-3f0c-450c-9be4-4c1c771142f1
+langcode: nl
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: recent
+label: Actueel
+type: 'canonical_entities:node'
+pattern: '/actueel/[node:recent_type:value]/[node:title]'
+selection_criteria:
+  1e816604-9ae1-4c55-9d18-9aea65869d1c:
+    id: node_type
+    bundles:
+      recent: recent
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 1e816604-9ae1-4c55-9d18-9aea65869d1c
+  8a135e3c-3598-424b-87a4-af15be857344:
+    id: language
+    langcodes:
+      en: en
+      nl: nl
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 8a135e3c-3598-424b-87a4-af15be857344
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Language

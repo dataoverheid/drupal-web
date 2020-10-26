@@ -1,0 +1,11 @@
+uuid: b7c0dcd8-8709-4736-8aad-0fea43cdfc4b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node_type_landingpage
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301

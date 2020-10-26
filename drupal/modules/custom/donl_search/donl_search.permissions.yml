@@ -1,0 +1,3 @@
+configure sorl request settings:
+  title: 'Configure the SORL Request settings'
+  restrict access: true

@@ -1,0 +1,32 @@
+uuid: 018dcb05-8c81-49d3-b08d-d2d86c334fad
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_ngr_mapping_authority.target_value
+    - taxonomy.vocabulary.donlsync_ngr_mapping_authority
+id: taxonomy_term.donlsync_ngr_mapping_authority.default
+targetEntityType: taxonomy_term
+bundle: donlsync_ngr_mapping_authority
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  target_value:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  description: true
+  langcode: true
+  path: true

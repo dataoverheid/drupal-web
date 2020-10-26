@@ -1,0 +1,14 @@
+uuid: 86d49946-20e1-4237-8366-a5e5e570e241
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.community_owner
+  module:
+    - user
+id: user_remove_role_action.community_owner
+label: 'De rol Community eigenaar verwijderen van de geselecteerde gebruikers(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: community_owner

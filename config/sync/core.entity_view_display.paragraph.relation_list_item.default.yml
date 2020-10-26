@@ -1,0 +1,36 @@
+uuid: c3c72bd7-03d5-44bb-a5c4-bdd0af7ac2db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_list_item.field_homepage_block_link
+    - field.field.paragraph.relation_list_item.field_treeview_beschrijving
+    - paragraphs.paragraphs_type.relation_list_item
+  module:
+    - link
+id: paragraph.relation_list_item.default
+targetEntityType: paragraph
+bundle: relation_list_item
+mode: default
+content:
+  field_homepage_block_link:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_treeview_beschrijving:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

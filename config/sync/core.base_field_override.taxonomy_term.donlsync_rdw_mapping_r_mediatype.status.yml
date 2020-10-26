@@ -1,0 +1,22 @@
+uuid: 5f2200c5-5f03-4fa6-ba41-0d7a2d323a71
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_mapping_r_mediatype
+id: taxonomy_term.donlsync_rdw_mapping_r_mediatype.status
+field_name: status
+entity_type: taxonomy_term
+bundle: donlsync_rdw_mapping_r_mediatype
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

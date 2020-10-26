@@ -1,0 +1,18 @@
+uuid: 1d7f12cd-08ba-4deb-9662-32d228512f8f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_catalogs
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.dcatapdonl_donl_catalogs
+target_entity_type_id: taxonomy_term
+target_bundle: dcatapdonl_donl_catalogs
+default_langcode: site_default
+language_alterable: false

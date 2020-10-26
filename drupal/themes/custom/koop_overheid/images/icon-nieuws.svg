@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="57px" height="57px" viewBox="0 0 57 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>icon nieuws</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Presentatie" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02-Kleuren-en-icons" transform="translate(-1284.000000, -336.000000)">
+            <g id="Group-16" transform="translate(1286.000000, 336.000000)">
+                <g id="icon-nieuws" transform="translate(0.000000, 2.000000)">
+                    <circle id="Oval" stroke="#E17000" stroke-width="3.621" fill="#FFFFFF" cx="26.554" cy="26.554" r="26.554"></circle>
+                    <g id="2014-nieuws" transform="translate(12.000000, 16.000000)" fill="#E17000" fill-rule="nonzero">
+                        <g id="Production" transform="translate(0.500000, 0.500000)">
+                            <path d="M14.22345,15.5 C14.3384,15.04485 14.41665,14.53925 14.45985,14 L9.46885,14 C9.4354,14.5237 9.3729,15.02455 9.2831,15.5 L14.22345,15.5 Z" id="Path"></path>
+                            <rect id="Rectangle" x="9.5" y="11.5" width="5" height="1.5"></rect>
+                            <rect id="Rectangle" x="9.5" y="9" width="5" height="1.5"></rect>
+                            <path d="M26,0 L5.5,0 C4.9477,0 4.5,0.4477 4.5,1 L4.5,13.08325 C4.5,13.89495 4.42015,14.65065 4.27235,15.3141 C4.27235,15.3141 4.1244,15.36455 4.09985,15.1634 C3.88555,13.4059 2.927,5 2.927,5 C2.927,5 1.4026,5 0.8871,5 C0.3716,5 0.03165,5.40575 0.0882,5.85955 C0.37155,8.13285 0.9923,12.1426 1.2866,14.1787 C1.7573,17.42945 2.20165,20.5 6,20.5 L22.083,20.5 C25.0698,20.5 27,17.58885 27,13.08325 L27,1 C27,0.4477 26.5523,0 26,0 Z M24.5,13.08325 C24.5,15.4514 23.74365,18 22.083,18 C21.2987,18 5.93165,18 5.93165,18 C6.62185,16.72645 7,15 7,12.5 L7,2.5 L24.5,2.5 L24.5,13.08325 Z" id="Shape"></path>
+                            <rect id="Rectangle" x="9.5" y="5" width="12.5" height="2.5"></rect>
+                            <path d="M16,12 L16,13.08325 C16,13.946 15.9192,14.75175 15.77735,15.5 L21.69925,15.5 C21.95,14.925 22,13.89055 22,13 L22,9 L16,9 L16,12 Z" id="Path"></path>
+                            <path d="M14.45985,14 L9.4689,14 C9.43545,14.5237 9.37295,15.02455 9.2831,15.5 L14.22345,15.5 C14.3384,15.04485 14.41665,14.53925 14.45985,14 Z" id="Path"></path>
+                            <rect id="Rectangle" x="9.5" y="11.5" width="5" height="1.5"></rect>
+                            <rect id="Rectangle" x="9.5" y="9" width="5" height="1.5"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

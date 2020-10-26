@@ -1,0 +1,8 @@
+uuid: 14be2066-fe18-4ee4-ad25-6b591c9c138a
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:SpatialScheme'
+vid: dcatapdonl_overheid_spatial_sche
+description: ''
+weight: 0

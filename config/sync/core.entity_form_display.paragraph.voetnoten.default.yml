@@ -1,0 +1,32 @@
+uuid: 98068222-8645-44c9-8599-a3b922df50bb
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.voetnoten.field_voetnoten
+    - paragraphs.paragraphs_type.voetnoten
+  module:
+    - paragraphs
+id: paragraph.voetnoten.default
+targetEntityType: paragraph
+bundle: voetnoten
+mode: default
+content:
+  field_voetnoten:
+    type: paragraphs
+    weight: 0
+    settings:
+      title: Paragraaf
+      title_plural: Paragrafen
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

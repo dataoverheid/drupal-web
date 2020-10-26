@@ -1,0 +1,18 @@
+uuid: ac53fb59-2d08-4108-8745-c580e6971a2b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.text_block
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: block_content.text_block
+target_entity_type_id: block_content
+target_bundle: text_block
+default_langcode: site_default
+language_alterable: false

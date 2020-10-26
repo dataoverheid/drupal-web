@@ -1,0 +1,255 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_theme().
+ */
+function donl_search_theme($existing, $type, $theme, $path) {
+  return [
+    'donl_search_facets' => [
+      'variables' => [
+        'facets' => [],
+        'show_facets_with_less_than' => [],
+      ],
+    ],
+    'donl_search_pagination' => [
+      'variables' => [
+        'pagination' => [],
+        'filters' => NULL,
+      ],
+    ],
+    'donl_search_sorting' => [
+      'variables' => [
+        'links' => [],
+      ],
+    ],
+    'donl_searchpage' => [
+      'variables' => [
+        'rows' => [],
+        'spellcheck' => [],
+        'above_facets' => NULL,
+        'facets' => NULL,
+        'pagination' => NULL,
+        'total_results' => NULL,
+      ],
+    ],
+    'donl_searchrecord' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_application' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_catalog' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_community' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_datarequest' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_dataset' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_group' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_news' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_organization' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_support' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'above_facets' => [
+      'variables' => [
+        'count' => '',
+        'community' => '',
+        'outside' => '',
+        'outside_url' => '',
+      ],
+    ],
+    'search_block' => [
+      'variables' => [
+        'form' => NULL,
+        'bg_color' => '',
+        'icon' => '',
+        'title' => '',
+      ],
+    ],
+    'homepage_search_block' => [
+      'variables' => [
+        'form' => NULL,
+      ],
+    ],
+    'catalog' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'panels' => [],
+        'tabs' => [],
+      ],
+    ],
+    'group' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'panels' => [],
+        'tabs' => [],
+      ],
+    ],
+    'organization' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'panels' => [],
+        'tabs' => [],
+      ],
+    ],
+    'suggester' => [
+      'variables' => [
+        'suggestions' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function donl_search_page_attachments(array &$page) {
+  $routeMatch = \Drupal::routeMatch();
+  $routeName = $routeMatch->getRouteName();
+
+  // Add a canonical to the search page.
+  if (strpos($routeName, 'donl_search.search') === 0) {
+    // The moment we are searching on something add a canonical to the base
+    // search page without any active facets.
+    if (!empty(\Drupal::requestStack()->getCurrentRequest()->query->all())) {
+      $canonical = [
+        '#tag' => 'link',
+        '#attributes' => [
+          'rel' => 'canonical',
+          'href' => Url::fromRoute($routeName, [
+            'page' => $routeMatch->getParameter('page'),
+            'recordsPerPage' => $routeMatch->getParameter('recordsPerPage'),
+          ])->toString(),
+        ],
+      ];
+      $page['#attached']['html_head'][] = [
+        $canonical,
+        'ckan_dataset_search_canonical',
+      ];
+    }
+  }
+}
+
+/**
+ * Implements taxonomy_term_insert().
+ */
+function donl_search_taxonomy_term_insert(Term $term) {
+  if ($term->getVocabularyId() === 'term_translations') {
+    donl_search_invalidate_facet_rename_cache('terms');
+  }
+}
+
+/**
+ * Implements hook_taxonomy_term_update().
+ */
+function donl_search_taxonomy_term_update(Term $term) {
+  if ($term->getVocabularyId() === 'term_translations') {
+    donl_search_invalidate_facet_rename_cache('terms');
+  }
+}
+
+/**
+ * Implements taxonomy_term_delete().
+ */
+function donl_search_taxonomy_term_delete(Term $term) {
+  if ($term->getVocabularyId() === 'term_translations') {
+    donl_search_invalidate_facet_rename_cache('terms');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function donl_search_node_insert(Node $node) {
+  if ($node->getType() === 'community') {
+    donl_search_invalidate_facet_rename_cache('community');
+  }
+
+  if ($node->getType() === 'group') {
+    donl_search_invalidate_facet_rename_cache('group');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function donl_search_node_presave(Node $node) {
+  if ($node->getType() === 'community') {
+    donl_search_invalidate_facet_rename_cache('community');
+  }
+
+  if ($node->getType() === 'group') {
+    donl_search_invalidate_facet_rename_cache('group');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function donl_search_node_delete(Node $node) {
+  if ($node->getType() === 'community') {
+    donl_search_invalidate_facet_rename_cache('community');
+  }
+
+  if ($node->getType() === 'group') {
+    donl_search_invalidate_facet_rename_cache('group');
+  }
+}
+
+/**
+ *
+ */
+function donl_search_invalidate_facet_rename_cache($cid) {
+  foreach (\Drupal::languageManager()->getLanguages() as $language) {
+    \Drupal::cache()->invalidate('facet_rename:' . $cid . ':' . $language->getId());
+  }
+}

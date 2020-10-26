@@ -1,0 +1,19 @@
+uuid: 3bd3b6ec-900e-442e-92bd-bff6daf0f577
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.ckan_organization_mapping
+    - node.type.catalog
+id: node.catalog.ckan_organization_mapping
+field_name: ckan_organization_mapping
+entity_type: node
+bundle: catalog
+label: 'CKAN organisatie mapping'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

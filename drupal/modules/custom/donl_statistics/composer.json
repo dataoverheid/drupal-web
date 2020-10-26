@@ -1,0 +1,17 @@
+{
+  "name": "drupal/donl_statistics",
+  "description": "Commands for the donl statistics module.",
+  "type": "drupal-module",
+  "autoload": {
+    "psr-4": {
+      "Drupal\\donl_statistics\\": "src/"
+    }
+  },
+  "extra": {
+    "drush": {
+      "services": {
+        "drush.services.yml": "^9"
+      }
+    }
+  }
+}

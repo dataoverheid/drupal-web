@@ -1,0 +1,32 @@
+diff --git a/src/BehaviorInvoker.php b/src/BehaviorInvoker.php
+index 63ad8a2..0d3c08e 100644
+--- a/src/BehaviorInvoker.php
++++ b/src/BehaviorInvoker.php
+@@ -93,11 +93,6 @@ class BehaviorInvoker implements BehaviorInvokerInterface {
+    *   intended behavior.
+    */
+   public function processEntity(ContentEntityInterface $entity, Response $current_response = NULL) {
+-    $permission = 'rabbit hole bypass ' . $entity->getEntityTypeId();
+-    if ($this->currentUser->hasPermission($permission)) {
+-      return NULL;
+-    }
+-
+     $values = $this->getRabbitHoleValuesForEntity($entity);
+ 
+     if (empty($values['rh_action'])) {
+diff --git a/src/RabbitHolePermissionGenerator.php b/src/RabbitHolePermissionGenerator.php
+index 77279b2..cd42c6c 100644
+--- a/src/RabbitHolePermissionGenerator.php
++++ b/src/RabbitHolePermissionGenerator.php
+@@ -63,11 +63,6 @@ class RabbitHolePermissionGenerator implements ContainerInjectionInterface {
+                       'Administer Rabbit Hole settings for %entity_type',
+                       ['%entity_type' => $entity_type->getLabel()]),
+         ],
+-        'rabbit hole bypass ' . $def['entityType'] => [
+-          'title' => $this->t(
+-                      'Bypass Rabbit Hole action for %entity_type',
+-                      ['%entity_type' => $entity_type->getLabel()]),
+-        ],
+       ];
+     }
+ 

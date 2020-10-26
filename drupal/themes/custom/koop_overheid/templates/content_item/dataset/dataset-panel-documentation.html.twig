@@ -1,0 +1,46 @@
+<h2 class="visible-xs">{{ 'Documentation'|t }}</h2>
+{% if text %}
+  <div class="panel-description">
+    {{ text }}
+  </div>
+{% endif %}
+
+{% for key, resource in resources %}
+  <div class="resource">
+
+    <div class="resource-header">
+      <h3>{{ resource.name }}</h3>
+      <span class="label">{{ ckan_mapping_get_file_format_name(resource.format) }}</span>
+      <span class="label label-licence">{{ ckan_mapping_get_license_name(resource.license_id) }}</span>
+    </div>
+
+    <i>Download:</i>  <a href="{{ resource.url }}" class="download-link" target="_blank">{{ resource.url }}</a>
+    <p>{{ resource.description }}</p>
+
+    {% if resource.previewUrl %}
+      <div class="preview-action button button--primary" data-preview-id="{{ key }}" data-preview-url="{{ resource.previewUrl }}">{{ 'Preview'|t }}</div>
+    {% endif %}
+
+    {% if resource.previewUrl %}
+      <table id="preview-{{ key }}" class="preview-table"></table>
+    {% endif %}
+  </div>
+{% endfor %}
+
+{% for item in documentation %}
+  <div class="resource">
+    <div class="resource-header">
+      <h3>{{ 'Documentation'|t }}</h3>
+    </div>
+    {{ item }}
+  </div>
+{% endfor %}
+
+{% for item in confirmsTo %}
+  <div class="resource">
+    <div class="resource-header">
+      <h3>{{ 'Conforms to the following standard'|t }}</h3>
+    </div>
+    {{ item }}
+  </div>
+{% endfor %}

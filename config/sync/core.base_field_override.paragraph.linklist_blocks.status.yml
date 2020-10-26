@@ -1,0 +1,22 @@
+uuid: be3f2dd0-82fb-471d-9a67-fde44d3651d6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linklist_blocks
+id: paragraph.linklist_blocks.status
+field_name: status
+entity_type: paragraph
+bundle: linklist_blocks
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

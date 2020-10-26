@@ -1,0 +1,7 @@
+{
+  "siteUrl": "sitename.local",
+  "browserSyncPort": 1547,
+  "browsers": [
+    "firefox"
+  ]
+}

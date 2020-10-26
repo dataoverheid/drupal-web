@@ -1,0 +1,18 @@
+uuid: 1e209013-0e29-4064-be5e-7b7732dfa581
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.appliance
+target_entity_type_id: node
+target_bundle: appliance
+default_langcode: site_default
+language_alterable: false

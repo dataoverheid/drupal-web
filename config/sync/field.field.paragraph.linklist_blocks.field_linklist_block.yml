@@ -1,0 +1,34 @@
+uuid: c661e2ea-1169-405e-b2ae-3f1a53c10b0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_linklist_block
+    - paragraphs.paragraphs_type.linklist_block
+    - paragraphs.paragraphs_type.linklist_blocks
+  module:
+    - entity_reference_revisions
+id: paragraph.linklist_blocks.field_linklist_block
+field_name: field_linklist_block
+entity_type: paragraph
+bundle: linklist_blocks
+label: 'Linklist block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      linklist_block: linklist_block
+    target_bundles_drag_drop:
+      linklist_blocks:
+        weight: 2
+        enabled: false
+      linklist_block:
+        enabled: true
+        weight: 3
+field_type: entity_reference_revisions

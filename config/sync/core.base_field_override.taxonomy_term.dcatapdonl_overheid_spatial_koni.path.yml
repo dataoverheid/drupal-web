@@ -1,0 +1,20 @@
+uuid: 64558115-55b9-4124-b971-13723bd88c27
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -1,0 +1,23 @@
+uuid: 696585f7-fd86-43d0-ba97-603afb48b5f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_block_flat_links
+    - paragraphs.paragraphs_type.links
+  module:
+    - link
+id: paragraph.links.field_homepage_block_flat_links
+field_name: field_homepage_block_flat_links
+entity_type: paragraph
+bundle: links
+label: Links
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

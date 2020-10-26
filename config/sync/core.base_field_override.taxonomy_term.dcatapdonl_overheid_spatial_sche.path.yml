@@ -1,0 +1,20 @@
+uuid: 84094a97-ceef-460d-911f-70079bdcc049
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_sche
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

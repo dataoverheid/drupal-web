@@ -1,0 +1,262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dataregister: API",
+    "description": "This page contains a description of the API calls.",
+    "version": "1.0.0"
+  },
+  "basePath": "/json/api/1",
+  "paths": {
+    "/json/api/1/action/datarequest_show": {
+      "get": {
+        "tags": [
+          "Datarequest"
+        ],
+        "summary": "Get datarequest.",
+        "description": "Get a specific datarequest.",
+        "operationId": "datarequest_show",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id_required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/datarequest_search": {
+      "get": {
+        "tags": [
+          "Datarequest"
+        ],
+        "summary": "Search datarequests.",
+        "description": "Search datarequests.",
+        "operationId": "datarequest_search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/records_per_page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/application_show": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get application.",
+        "description": "Get a specific application.",
+        "operationId": "application_show",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id_required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/application_search": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "summary": "Search applications.",
+        "description": "Search applications.",
+        "operationId": "application_search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/records_per_page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/group_show": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "Get group.",
+        "description": "Get a specific group.",
+        "operationId": "group_show",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id_required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/group_search": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "Search groups.",
+        "description": "Search groups.",
+        "operationId": "group_search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/records_per_page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/organization_show": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get organization.",
+        "description": "Get a specific organization.",
+        "operationId": "organization_show",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id_required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/organization_search": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Search organizations.",
+        "description": "Search organizations.",
+        "operationId": "organization_search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/records_per_page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/community_show": {
+      "get": {
+        "tags": [
+          "Community"
+        ],
+        "summary": "Get community.",
+        "description": "Get a specific community.",
+        "operationId": "community_show",
+        "parameters": [
+          {
+            "$ref": "#/parameters/id_required"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    },
+    "/json/api/1/action/community_search": {
+      "get": {
+        "tags": [
+          "Community"
+        ],
+        "summary": "Search communities.",
+        "description": "Search communities.",
+        "operationId": "community_search",
+        "parameters": [
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/records_per_page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/successful"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "id_required": {
+      "name": "id",
+      "in": "query",
+      "description": "The unique id.",
+      "required": true,
+      "type": "integer"
+    },
+    "name": {
+      "name": "name",
+      "in": "query",
+      "description": "The unique name.",
+      "required": false,
+      "type": "string"
+    },
+    "page": {
+      "name": "page",
+      "in": "query",
+      "description": "The page. Defaults to 1.",
+      "required": false,
+      "type": "integer"
+    },
+    "records_per_page": {
+      "name": "records_per_page",
+      "in": "query",
+      "description": "The amount of records per page (must be between 1 and 200). Defaults to 10.",
+      "required": false,
+      "type": "integer"
+    }
+  },
+  "responses": {
+    "successful": {
+      "description": "Successful call.<br />The returned json array will contain some base information with all the requested values inside the children element."
+    }
+  }
+}

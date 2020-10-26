@@ -1,0 +1,32 @@
+uuid: fe3d5381-c890-428c-9a59-cefc10ea8069
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_cbs_mapping_r_language.target_value
+    - taxonomy.vocabulary.donlsync_cbs_mapping_r_language
+id: taxonomy_term.donlsync_cbs_mapping_r_language.default
+targetEntityType: taxonomy_term
+bundle: donlsync_cbs_mapping_r_language
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  target_value:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  description: true
+  langcode: true
+  path: true

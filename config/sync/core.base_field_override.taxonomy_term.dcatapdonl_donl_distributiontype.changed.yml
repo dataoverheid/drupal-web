@@ -1,0 +1,18 @@
+uuid: c7ccc6b4-9494-480e-9907-81028372ca8d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

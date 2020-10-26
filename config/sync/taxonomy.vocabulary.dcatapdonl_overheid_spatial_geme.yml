@@ -1,0 +1,8 @@
+uuid: eb440186-4877-4a4e-8753-2396568c2587
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:SpatialGemeente'
+vid: dcatapdonl_overheid_spatial_geme
+description: ''
+weight: 0

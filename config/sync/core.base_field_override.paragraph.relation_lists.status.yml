@@ -1,0 +1,22 @@
+uuid: 0ac200b0-60ae-4fec-9449-34b2cdd32947
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.relation_lists
+id: paragraph.relation_lists.status
+field_name: status
+entity_type: paragraph
+bundle: relation_lists
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

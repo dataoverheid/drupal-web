@@ -1,0 +1,22 @@
+<table class="minimal-table table--striped">
+  <tbody>
+  <tr>
+    <th>{{ 'Possible dataowner'|t }}</th>
+    <td>{{ ckan_mapping_get_organization_name(datarequest.possible_owner.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Data owner'|t }}</th>
+    <td>{{ ckan_mapping_get_organization_name(datarequest.data_owner.value) }}</td>
+  </tr>
+  </tbody>
+</table>
+
+{% if comparableLinks %}
+  <h2>{{ 'Comparable data requests'|t }}</h2>
+  {{ texts.comparable }}
+  <ol class="comparable-links">
+    {% for link in comparableLinks %}
+      <li>{{ link }}</li>
+    {% endfor %}
+  </ol>
+{% endif %}

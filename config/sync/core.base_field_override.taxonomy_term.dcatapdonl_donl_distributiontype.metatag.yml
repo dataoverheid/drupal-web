@@ -1,0 +1,18 @@
+uuid: 2875d00f-6d5d-47a4-9889-21b7cda2659e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: Metatags
+description: 'The meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

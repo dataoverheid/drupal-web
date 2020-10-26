@@ -1,0 +1,18 @@
+uuid: 6c2a6327-aeb3-4479-b822-256cb0f367dd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_metad
+id: taxonomy_term.donlsync_cbsderden_mapping_metad.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_metad
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,50 @@
+uuid: d4894aa4-3962-4d91-9e90-e22125c12fe4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_overheid_taxonomiebel.identifier
+    - field.field.taxonomy_term.dcatapdonl_overheid_taxonomiebel.label_en
+    - field.field.taxonomy_term.dcatapdonl_overheid_taxonomiebel.label_nl
+    - field.field.taxonomy_term.dcatapdonl_overheid_taxonomiebel.parent_identifier
+    - taxonomy.vocabulary.dcatapdonl_overheid_taxonomiebel
+id: taxonomy_term.dcatapdonl_overheid_taxonomiebel.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_overheid_taxonomiebel
+mode: default
+content:
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  parent_identifier:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

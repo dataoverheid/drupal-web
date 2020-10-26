@@ -1,0 +1,35 @@
+uuid: c92a5760-5811-40b6-93a5-11d0724b7d49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_list_item.field_homepage_block_link
+    - field.field.paragraph.relation_list_item.field_treeview_beschrijving
+    - paragraphs.paragraphs_type.relation_list_item
+  module:
+    - link
+id: paragraph.relation_list_item.default
+targetEntityType: paragraph
+bundle: relation_list_item
+mode: default
+content:
+  field_homepage_block_link:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_treeview_beschrijving:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,18 @@
+uuid: ac5a3f1d-19d7-4e13-aa4d-748eea72821b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+id: taxonomy_term.dcatapdonl_donl_language.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

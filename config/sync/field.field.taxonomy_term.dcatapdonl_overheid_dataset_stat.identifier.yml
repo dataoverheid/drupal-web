@@ -1,0 +1,19 @@
+uuid: 15a0920e-d557-42cd-b2df-d0a9b288d60e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Identifier
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

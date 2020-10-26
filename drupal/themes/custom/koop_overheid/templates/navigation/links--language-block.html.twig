@@ -1,0 +1,21 @@
+<div class="profile" data-decorator="init-profile-toggle">
+  <p data-toggler><span class="languageswitch-icon"></span></p>
+  <div class="profile__options" data-toggled id="profile-options-2">
+    <h3 class="visually-hidden">Opties:</h3>
+    {% if links -%}
+      <ul class="list list--unstyled profile__option-list">
+        {%- for item in links -%}
+          <li{{ item.attributes }}>
+            {%- if item.link -%}
+              {{ item.link }}
+            {%- elseif item.text_attributes -%}
+              <span{{ item.text_attributes }}>{{ item.text }}</span>
+            {%- else -%}
+              {{ item.text }}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif %}
+  </div>
+</div>

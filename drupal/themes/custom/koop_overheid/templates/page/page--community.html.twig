@@ -1,0 +1,20 @@
+{% extends '@koop_overheid/page/page.html.twig' %}
+{% block header %}
+  {% include '@koop_overheid/page/header/header_community.html.twig' %}
+{% endblock header %}
+
+{% block content %}
+  {% if(page.menu) %}
+    <div class="community-menu-wrapper">
+      <div class="container">
+        <div class="community-menu">
+          {% for item in page.menu %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {{ page.precontent }}
+  {{ page.content }}
+{% endblock content %}

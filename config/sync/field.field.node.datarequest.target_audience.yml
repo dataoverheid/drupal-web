@@ -1,0 +1,21 @@
+uuid: d4f329a0-5725-484e-8b80-36e8d5cb50e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.target_audience
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.target_audience
+field_name: target_audience
+entity_type: node
+bundle: datarequest
+label: 'Doelgroep aanvrager'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

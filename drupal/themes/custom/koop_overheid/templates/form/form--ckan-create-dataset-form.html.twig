@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{% block header %}
+    {% include '@koop_overheid/form/form--ckan-header.html.twig' %}
+{% endblock header %}
+
+<h1>{{ 'Create Dataset'|t }}</h1>
+
+{% block footer %}
+    {% include '@koop_overheid/form/form--ckan-footer.html.twig' %}
+{% endblock footer %}

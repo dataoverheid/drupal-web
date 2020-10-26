@@ -1,0 +1,19 @@
+uuid: 91450efb-ba52-40ae-9261-1da56bc7f32b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_en
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+id: taxonomy_term.dcatapdonl_donl_distributiontype.label_en
+field_name: label_en
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: 'Label EN'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

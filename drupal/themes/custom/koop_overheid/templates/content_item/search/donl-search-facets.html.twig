@@ -1,0 +1,48 @@
+{% if facets %}
+  {% set showError = 1 %}
+  <div id="facets">
+    {% if facets['available']|length > 0 %}
+      {% for label, facets in facets['available'] %}
+        {% if(facets|length) > 0 %}
+          {% set showError = 0 %}
+          {% if label == 'Thema' %}
+            <div class="facet--group {% if facets|length <= show_facets_with_less_than %}active{% endif %}">
+              <h4 class="facet--label">{{ label }} ({{ facets|length }})</h4>
+              <ul class="list--facet facet-{{ label|clean_class }}">
+                {% set show_more_link = false %}
+                {% for facet in facets %}
+                  <li>
+                    {{ facet.theme }}
+                    {% if facet.subThemes %}
+                      {% set show_more_link = true %}
+                      <ul class="list" hidden>
+                        {% for facet in facet.subThemes %}
+                          <li>{{ facet }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+                {% if show_more_link %}
+                  <li class="link link--down theme-show-more">{{ 'Show sub themes'|t }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          {% else %}
+            <div class="facet--group {% if facets|length <= show_facets_with_less_than %}active{% endif %}">
+              <h4 class="facet--label">{{ label }} ({{ facets|length }})</h4>
+              <ul class="list--facet facet-{{ label|clean_class }}">
+                {% for facet in facets %}
+                  <li>{{ facet }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if showError %}
+      {{ 'No further refinement available.'|t }}
+    {% endif %}
+  </div>
+{% endif %}

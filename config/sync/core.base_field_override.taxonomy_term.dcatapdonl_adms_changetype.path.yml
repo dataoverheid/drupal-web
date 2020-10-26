@@ -1,0 +1,20 @@
+uuid: e9fdf643-6d75-46d6-8b5c-66c12bc848ec
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_adms_changetype.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

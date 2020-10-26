@@ -1,0 +1,18 @@
+uuid: 9f6d7122-9bab-46d3-9097-29a31ac8b43f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

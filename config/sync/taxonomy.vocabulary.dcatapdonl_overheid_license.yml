@@ -1,0 +1,8 @@
+uuid: 53204f73-07e6-41b5-b2b8-6ae83864351a
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:License'
+vid: dcatapdonl_overheid_license
+description: ''
+weight: 0

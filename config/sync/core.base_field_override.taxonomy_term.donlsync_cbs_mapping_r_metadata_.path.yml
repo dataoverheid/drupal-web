@@ -1,0 +1,20 @@
+uuid: edc2ece4-75a0-4a1b-98e2-8d570a98d303
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_r_metadata_
+  module:
+    - path
+id: taxonomy_term.donlsync_cbs_mapping_r_metadata_.path
+field_name: path
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_r_metadata_
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

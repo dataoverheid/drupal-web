@@ -1,0 +1,18 @@
+uuid: 26b220fb-3f63-40ac-9c0d-0275aff9a514
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+id: taxonomy_term.dcatapdonl_iana_mediatypes.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

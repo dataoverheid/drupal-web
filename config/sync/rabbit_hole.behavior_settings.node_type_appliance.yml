@@ -1,0 +1,11 @@
+uuid: 849ef297-3a33-47e8-8cc6-eefcf8bc0509
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+id: node_type_appliance
+action: page_redirect
+allow_override: 0
+redirect: '/community/application/[node:nid]'
+redirect_code: 307

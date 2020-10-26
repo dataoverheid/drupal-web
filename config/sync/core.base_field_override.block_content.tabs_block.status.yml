@@ -1,0 +1,22 @@
+uuid: 7e41b21a-4564-4cd1-8cd0-6b48438b4204
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs_block
+id: block_content.tabs_block.status
+field_name: status
+entity_type: block_content
+bundle: tabs_block
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

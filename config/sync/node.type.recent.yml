@@ -1,0 +1,17 @@
+uuid: b47f00a9-61c7-4231-b971-197c8a213e17
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Actueel
+type: recent
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

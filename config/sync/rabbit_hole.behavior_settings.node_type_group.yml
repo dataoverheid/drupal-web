@@ -1,0 +1,11 @@
+uuid: f485de17-2f76-47f9-877e-65d59cf73c08
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.group
+id: node_type_group
+action: page_redirect
+allow_override: 0
+redirect: '/community/group/[node:machine_name:value]'
+redirect_code: 307

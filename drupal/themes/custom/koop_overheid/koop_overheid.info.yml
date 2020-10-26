@@ -1,0 +1,32 @@
+name: Koop Overheid
+type: theme
+description: Koop Component Library integration theme for Drupal 8
+package: indicia
+core_version_requirement: ^8 || ^9
+
+interface translation project: koop_overheid
+interface translation server pattern: themes/custom/koop_overheid/translations/koop_overheid.%language.po
+
+libraries:
+  - koop_overheid/componentenbibliotheek
+  - koop_overheid/global
+
+base theme: stable
+
+regions:
+  logo: 'Logo'
+  payoff: 'Payoff'
+  header_meta: 'Meta header'
+  header_primary_nav: 'Primary navigation'
+  header_search: 'Header search'
+  header_more: 'Header More'
+  content_before: 'Content before'
+  tabs: 'Tabs'
+  page_title: 'Page title'
+  sidebar_left: 'Left sidebar'
+  precontent: 'Precontent'
+  content: 'Content'
+  content_second: 'Content Second'
+  content_third: 'Content Third'
+  sidebar_right: 'Right sidebar'
+  footer: 'Footer'

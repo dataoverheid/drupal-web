@@ -1,0 +1,18 @@
+uuid: 9317a5af-8a00-4063-b07f-37b48bdd348f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_distributiestatu
+id: taxonomy_term.dcatapdonl_adms_distributiestatu.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_distributiestatu
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

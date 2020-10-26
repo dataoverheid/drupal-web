@@ -1,0 +1,8 @@
+uuid: 58434e1c-eb4d-45f9-9450-a2d68e3f3046
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - DONL:DistributionType'
+vid: dcatapdonl_donl_distributiontype
+description: ''
+weight: 0

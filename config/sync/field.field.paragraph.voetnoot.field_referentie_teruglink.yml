@@ -1,0 +1,23 @@
+uuid: 617ce4fa-a141-479a-8f4e-d881c9f842a1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_referentie_teruglink
+    - paragraphs.paragraphs_type.voetnoot
+  module:
+    - link
+id: paragraph.voetnoot.field_referentie_teruglink
+field_name: field_referentie_teruglink
+entity_type: paragraph
+bundle: voetnoot
+label: 'Referentie teruglink'
+description: 'Een link terug naar de referentie. De titel wordt visueel verborgen. De anchor moet overeenkomen met de id van de referentielink op de pagina. Let op dat de url met # begint.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

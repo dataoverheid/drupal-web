@@ -1,0 +1,19 @@
+uuid: 4d82a440-b285-43c9-9a2e-0a7e02ce1aee
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_en
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.label_en
+field_name: label_en
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+label: 'Label EN'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

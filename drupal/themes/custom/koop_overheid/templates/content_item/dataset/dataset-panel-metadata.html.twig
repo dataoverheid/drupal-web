@@ -1,0 +1,300 @@
+{% macro metadata(label, value, class) %}
+  {% if value %}
+    <div>
+      <span>{{ label|t }}</span>
+      <span {% if class %}class="{{ class }}"{% endif %}>{{ value }}</span>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+<div class="{# columns columns--sticky-sidebar row#}">
+
+  {#<div class="columns--sticky-sidebar__sidebar" data-decorator="add-mobile-foldability">
+    <div>
+      <h2>Inhoudsopgave</h2>
+      <ul class="treeview treeview--foldable">
+        <li><a class="link" href="#deel1">{{ 'Dataset data' |t }}</a></li>
+        <li><a class="link" href="#deel2">{{ 'Information about the provider'|t }}</a></li>
+        <li>
+          <a class="foldable" href="#deel3" data-decorator="add-foldability">{{ 'Rights and visibility'|t }}</a>
+          <ul id="lijst1" hidden="true">
+            <li><a href="#deel3a"><span>Data eigenaar</span></a></li>
+            <li><a href="#deel3b"><span>Publiceerder</span></a></li>
+            <li><a href="#deel3c"><span>Contactpunt</span></a></li>
+          </ul>
+        </li>
+        <li><a class="link" href="#deel4">{{ 'Relationships and references'|t }}</a></li>
+      </ul>
+    </div>
+  </div>#}
+
+  <div>
+    <h2 class="visible-xs">{{ 'Metadata'|t }}</h2>
+    {% if text %}
+      <div class="panel-description">
+        {{ text }}
+      </div>
+    {% endif %}
+    <a href="{{ url('ckan.dataset.rdf', {'dataset': dataset.name}) }}" target="_blank" class="button button--primary export-btn">{{ 'Export as RDF' |t }}</a>
+    <div class="metadata-table">
+      <h3 id="deel1">{{ 'Dataset data' |t }}</h3>
+      {{ _self.metadata('Title', dataset.title) }}
+      {{ _self.metadata('Identifier', ckan_link(dataset.identifier)) }}
+      {{ _self.metadata('Alternative identifier', dataset.alternate_identifier|join(', ')) }}
+      {{ _self.metadata('Permanent link', permanent_link) }}
+      {{ _self.metadata('Language', ckan_mapping_get_language_name(dataset.language)) }}
+      {{ _self.metadata('Metadata language', ckan_mapping_get_language_name(dataset.metadata_language)) }}
+      {{ _self.metadata('Description', ckan_markdown(dataset.notes, false)) }}
+      {{ _self.metadata('Tags', dataset.tags|join(', ')) }}
+
+      {% set theme %}
+        {% for uri in dataset.theme %}
+          <dd class="icon icon--{{ ckan_mapping_get_theme_class(uri) }}">{{ ckan_mapping_get_theme_name(uri) }}</dd>
+        {% endfor %}
+      {% endset %}
+      {{ _self.metadata('Theme', theme) }}
+
+      {{ _self.metadata('Landing page', ckan_link(dataset.url)) }}
+
+      {% if dataset.documentation %}
+        {% set documentation %}
+          {% for documentation in dataset.documentation %}
+            {{ ckan_link(documentation) }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endset %}
+        {{ _self.metadata('Documentation',  documentation) }}
+      {% endif %}
+
+      {% if dataset.sample %}
+        {% set sample %}
+          {% for sample in dataset.sample %}
+            {{ ckan_link(sample) }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endset %}
+        {{ _self.metadata('Sample',  sample) }}
+      {% endif %}
+
+      {% if dataset.provenance %}
+        {% set provenance %}
+          {% for provenance in dataset.provenance %}
+            {{ ckan_link(provenance) }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endset %}
+        {{ _self.metadata('Provenance',  provenance) }}
+      {% endif %}
+
+      {% set classification %}
+        <table class="minimal-table">
+          <tr>
+            <th>{{ 'High value dataset'|t }}:</th>
+            <td>{% if dataset.high_value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Base register'|t }}:</th>
+            <td>{% if dataset.base_register %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Reference data'|t }}:</th>
+            <td>{% if dataset.reference_data %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
+          <tr>
+            <th>{{ 'National coverage'|t }}:</th>
+            <td>{% if dataset.national_coverage %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
+        </table>
+      {% endset %}
+      {{ _self.metadata('Dataset classification', classification) }}
+
+      {% if dataset.spatial_scheme and dataset.spatial_value %}
+        {% set geo %}
+          {% for idx, scheme in dataset.spatial_scheme %}
+            <strong>{{ ckan_mapping_get_spatial_scheme_name(scheme) }}: </strong>
+            {{ ckan_mapping_get_spatial_value(scheme, dataset.spatial_value[idx]) }}<br/>
+          {% endfor %}
+        {% endset %}
+      {% endif %}
+      {{ _self.metadata('Geographical data', geo) }}
+
+      {% set version %}
+        <table class="minimal-table">
+          <tbody>
+          {% if dataset.issued %}
+            <tr>
+              <th>{{ 'Create date'|t }}:</th>
+              <td>{{ ckan_format_date(dataset.issued) }}</td>
+            </tr>
+          {% endif %}
+          {% if dataset.version %}
+            <tr>
+              <th>{{ 'Version'|t }}:</th>
+              <td>{{ dataset.version }}</td>
+            </tr>
+          {% endif %}
+          {% if dataset.version_notes %}
+            <tr>
+              <th>{{ 'Version notes'|t }}:</th>
+              <td>
+                {% for version_notes in dataset.version_notes %}
+                  {{ version_notes|nl2br }}<br/>
+                {% endfor %}
+              </td>
+            </tr>
+          {% endif %}
+          {% if dataset.dataset_status %}
+            <tr>
+              <th>{{ 'State'|t }}:</th>
+              <td>{{ ckan_mapping_get_status_name(dataset.dataset_status) }}</td>
+            </tr>
+          {% endif %}
+          {% if dataset.date_planned %}
+            <tr>
+              <th>{{ 'Expected publication date'|t }}:</th>
+              <td>{{ dataset.date_planned }}</td>
+            </tr>
+          {% endif %}
+          {% if dataset.frequency %}
+            <tr>
+              <th>{{ 'Frequency of changes'|t }}:</th>
+              <td>{{ ckan_mapping_get_frequency_name(dataset.frequency) }}</td>
+            </tr>
+          {% endif %}
+          </tbody>
+        </table>
+      {% endset %}
+      {{ _self.metadata('Version', version) }}
+
+      {% if dataset.temporal_label or dataset.temporal_start or dataset.temporal_end %}
+        {% set temporal %}
+          <table class="main-data minimal-table">
+            <tbody>
+            {% if dataset.temporal_label %}
+              <tr>
+                <th>{{ 'Name of the coverage period'|t }}</th>
+                <td>{{ dataset.temporal_label }}</td>
+              </tr>
+            {% endif %}
+
+            {% if dataset.temporal_start %}
+              <tr>
+                <th>{{ 'Start coverage period'|t }}</th>
+                <td>{{ dataset.temporal_start }}</td>
+              </tr>
+            {% endif %}
+
+            {% if dataset.temporal_end %}
+              <tr>
+                <th>{{ 'End coverage period'|t }}</th>
+                <td>{{ dataset.temporal_end }}</td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
+        {% endset %}
+        {{ _self.metadata('Time coverage', temporal) }}
+      {% endif %}
+
+      <h3 id="deel2">{{ 'Information about the provider'|t }}</h3>
+      {{ _self.metadata('Data owner', ckan_mapping_get_organization_name(dataset.authority)) }}
+      {{ _self.metadata('Publisher', ckan_mapping_get_organization_name(dataset.publisher)) }}
+
+      {% if dataset.contact_point_title or dataset.contact_point_name %}
+        {% set contactpoint %}
+          <table class="minimal-table">
+            <tbody>
+            {% if dataset.contact_point_title %}
+              <tr>
+                <th>{{ 'Title'|t }}</th>
+                <td>{{ dataset.contact_point_title }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.contact_point_name %}
+              <tr>
+                <th>{{ 'Name'|t }}:</th>
+                <td>{{ dataset.contact_point_name }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.contact_point_email %}
+              <tr>
+                <th>{{ 'Email'|t }}:</th>
+                <td>{{ dataset.contact_point_email }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.contact_point_website %}
+              <tr>
+                <th>{{ 'Website'|t }}:</th>
+                <td>{{ dataset.contact_point_website }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.contact_point_phone %}
+              <tr>
+                <th>{{ 'Phonenumber'|t }}:</th>
+                <td>{{ dataset.contact_point_phone }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.contact_point_address %}
+              <tr>
+                <th>{{ 'Address'|t }}:</th>
+                <td> {{ dataset.contact_point_address }}</td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
+        {% endset %}
+        {{ _self.metadata('Contact point', contactpoint) }}
+      {% endif %}
+
+      <h3 id="deel3">{{ 'Rights and visibility'|t }}</h3>
+      {{ _self.metadata('License', ckan_mapping_get_license_name(dataset.license_id)) }}
+      {% if dataset.restrictions_statement %}
+        <div>
+          <span>{{ 'License explanation'|t }}</span>
+          <span>{{ dataset.restrictions_statement|nl2br }}</span>
+        </div>
+      {% endif %}
+      {{ _self.metadata('Publicity level', ckan_mapping_get_access_rights_name(dataset.access_rights)) }}
+
+      {% if dataset.legal_foundation_label or dataset.legal_foundation_uri or dataset.legal_foundation_ref %}
+        {% set legal %}
+          <table class="minimal-table">
+            <tbody>
+            {% if dataset.legal_foundation_label %}
+              <tr>
+                <th>{{ 'Quote title'|t }}:</th>
+                <td>{{ dataset.legal_foundation_label }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.legal_foundation_uri %}
+              <tr>
+                <th>{{ 'Link'|t }}:</th>
+                <td>{{ dataset.legal_foundation_uri }}</td>
+              </tr>
+            {% endif %}
+            {% if dataset.legal_foundation_ref %}
+              <tr>
+                <th>{{ 'Juriconnect reference'|t }}:</th>
+                <td>{{ dataset.legal_foundation_ref }}</td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
+        {% endset %}
+      {% endif %}
+
+      <h3>{{ 'Relationships and references'|t }}</h3>
+      {{ _self.metadata('Related resources', cdataset.related_resource|join(', ')) }}
+      {% if dataset.conforms_to %}
+        {% set conforms_to %}
+          {% for conforms_to in dataset.conforms_to %}
+            {{ ckan_link(conforms_to) }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        {% endset %}
+        {{ _self.metadata('Conforms to the following standards',  conforms_to) }}
+      {% endif %}
+
+      {{ _self.metadata('Source Catalog', ckan_mapping_get_source_catalog_name(dataset.source_catalog) ) }}
+      {{ _self.metadata('Basis', legal) }}
+      {{ _self.metadata('Groups', groupLinks|join(', ')) }}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,20 @@
+uuid: 0e31204a-bfad-496b-b77b-dc203c016a6c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,19 @@
+uuid: 5e478aad-80bc-4d43-a475-92b4f6271a10
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.organization_type
+    - node.type.organization
+id: node.organization.organization_type
+field_name: organization_type
+entity_type: node
+bundle: organization
+label: 'Organisatie type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

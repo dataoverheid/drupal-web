@@ -1,0 +1,20 @@
+uuid: 13966725-da2a-4158-9d2a-ba50ba925e0d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.appliance
+id: node.appliance.menu_link
+field_name: menu_link
+entity_type: node
+bundle: appliance
+label: Menulink
+description: 'Berekende menulink van de node (alleen beschikbaar tijdens het opslaan).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

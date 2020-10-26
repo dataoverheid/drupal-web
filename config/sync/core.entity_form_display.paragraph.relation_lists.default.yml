@@ -1,0 +1,35 @@
+uuid: 7a22c6a4-86ea-4ac3-ae59-9e765592d7bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_lists.relation_lists
+    - paragraphs.paragraphs_type.relation_lists
+  module:
+    - paragraphs
+id: paragraph.relation_lists.default
+targetEntityType: paragraph
+bundle: relation_lists
+mode: default
+content:
+  relation_lists:
+    type: paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      closed_mode: summary
+      autocollapse: none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

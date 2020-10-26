@@ -1,0 +1,43 @@
+uuid: cadab92f-fc6f-4825-9c6f-1b9a8325e479
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block
+    - field.storage.block_content.field_linklist_block
+    - paragraphs.paragraphs_type.linklist_blocks
+  module:
+    - entity_reference_revisions
+id: block_content.linklist_block.field_linklist_block
+field_name: field_linklist_block
+entity_type: block_content
+bundle: linklist_block
+label: 'Linklist block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      linklist_blocks: linklist_blocks
+    target_bundles_drag_drop:
+      linklist_block:
+        weight: 6
+        enabled: false
+      linklist_blocks:
+        enabled: true
+        weight: 7
+      search:
+        weight: 8
+        enabled: false
+      sru_field_paragraph:
+        weight: 9
+        enabled: false
+      text:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

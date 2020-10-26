@@ -1,0 +1,30 @@
+uuid: 30e23437-550e-4af7-beaf-574afd5187f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.paragraph_block
+    - block_content.type.text_block
+    - field.storage.paragraph.field_block
+    - paragraphs.paragraphs_type.block_paragraph
+id: paragraph.block_paragraph.field_block
+field_name: field_block
+entity_type: paragraph
+bundle: block_paragraph
+label: Block
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:block_content'
+  handler_settings:
+    target_bundles:
+      paragraph_block: paragraph_block
+      text_block: text_block
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: paragraph_block
+field_type: entity_reference

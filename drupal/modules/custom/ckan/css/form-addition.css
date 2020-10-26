@@ -1,0 +1,9 @@
+#ckan-datasettext-settings-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#ckan-datasettext-settings-form > .form-item {
+  width: 49%;
+}

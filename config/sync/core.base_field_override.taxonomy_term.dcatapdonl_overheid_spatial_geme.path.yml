@@ -1,0 +1,20 @@
+uuid: aa7dfa1b-9c0e-47f9-be43-2c41eae7df8f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_geme
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_overheid_spatial_geme.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_geme
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

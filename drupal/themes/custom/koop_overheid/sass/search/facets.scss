@@ -1,0 +1,103 @@
+.facet-title {
+  margin: 27px 0 24px 0;
+}
+
+#facets {
+  padding: 5px 20px;
+  border: 1px solid $c-gray-300;
+
+  .facet--label {
+    position: relative;
+    margin: 0;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: .5s;
+    background: url('/themes/custom/koop_overheid/images/icon-plus.svg') right center no-repeat;
+    background-size: 10px;
+
+    &:hover, &:focus, &:active {
+      color: $c-blue-600;
+    }
+  }
+
+  .list--facet {
+    overflow: hidden;
+    max-height: 0;
+    margin: 0 0 5px 0;
+    padding: 0;
+    transition: max-height 0.10s ease-out;
+    border-bottom: 1px solid $c-gray-200;
+
+    &.show {
+      max-height: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      display: flex;
+      max-width: 300px;
+
+      span {
+        max-width: none;
+      }
+
+      span:last-child {
+        flex-shrink: 0;
+        margin-left: 3px;
+      }
+    }
+  }
+
+  .facet--search-wrapper {
+    display: none;
+  }
+
+  .active {
+    .facet--label {
+      background-image: url('/themes/custom/koop_overheid/images/icon-minus.svg');
+    }
+
+    .list--facet {
+      display: block;
+      max-height: 3000px;
+      padding-bottom: 15px;
+      transition: max-height 0.3s ease-in;
+    }
+
+    .facet--search-wrapper {
+      display: block;
+
+      .facet--search {
+        width: 90%;
+        position: relative;
+
+        input {
+          width: 100%;
+          padding: 3px 6px;
+        }
+
+        img {
+          position: absolute;
+          border-radius: 0 5px 5px 0;
+          top: 0;
+          right: 0;
+          height: 28px;
+          width: 28px;
+          padding: 4px;
+          background: #154273;
+        }
+      }
+    }
+  }
+
+  :last-child {
+    margin-bottom: 0;
+
+    .list--facet {
+      border: 0;
+    }
+  }
+}

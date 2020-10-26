@@ -1,0 +1,23 @@
+uuid: 45403b92-de7a-43cb-872e-66e5bcb47011
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.menu
+    - node.type.community
+  module:
+    - link
+id: node.community.menu
+field_name: menu
+entity_type: node
+bundle: community
+label: Menu
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

@@ -1,0 +1,18 @@
+uuid: c8096946-ad42-4c1d-8a9d-c24b841f9ff1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.title
+field_name: title
+entity_type: node
+bundle: landingpage
+label: Titel
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

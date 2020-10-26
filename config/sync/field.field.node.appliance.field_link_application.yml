@@ -1,0 +1,23 @@
+uuid: ee527e1f-5239-4307-a262-672ebc7b5818
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_application
+    - node.type.appliance
+  module:
+    - link
+id: node.appliance.field_link_application
+field_name: field_link_application
+entity_type: node
+bundle: appliance
+label: 'Link naar toepassing'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

@@ -1,0 +1,18 @@
+uuid: 5d441acf-7b29-42a0-a81e-b319a5ad9737
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_openbaarheid
+id: taxonomy_term.dcatapdonl_overheid_openbaarheid.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_openbaarheid
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

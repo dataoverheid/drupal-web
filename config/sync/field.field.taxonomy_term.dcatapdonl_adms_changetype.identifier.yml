@@ -1,0 +1,19 @@
+uuid: 6e1fda7c-a98e-4f53-826e-1482532614b9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: Identifier
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

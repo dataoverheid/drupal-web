@@ -1,0 +1,20 @@
+uuid: 58848ee4-2d60-42d1-b057-dafa48592486
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.menu_link
+field_name: menu_link
+entity_type: node
+bundle: datarequest
+label: Menulink
+description: 'Berekende menulink van de node (alleen beschikbaar tijdens het opslaan).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,18 @@
+uuid: 2685671e-70fb-44ba-a9a8-459ef26e70cc
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node.feedback_dataset.created
+field_name: created
+entity_type: node
+bundle: feedback_dataset
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

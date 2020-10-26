@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "@object not found"
+msgstr "@object niet gevonden"
+
+msgid "The @object you were looking for was not found. Sorry for the inconvenience."
+msgstr "De @object die u zocht, is niet gevonden. Excuses voor het ongemak."
+
+msgid "There are a number of ways in which you can still access the desired information:"
+msgstr "Er zijn een aantal manieren waarop u alsnog bij de gewenste informatie kunt komen:"
+
+msgid "Visit the homepage on <a href=\"/\">data.overheid.nl</a>"
+msgstr "Bezoek de homepage op <a href=\"/\">data.overheid.nl</a>"
+
+msgid "Try to find your item via the <a href=\"/sitemap\">Sitemap</a>"
+msgstr "Probeer uw item te vinden via de <a href=\"/sitemap\">Sitemap</a>"
+
+msgid "If you cannot find the information you seek, you can use our <a href=\"/contact\">contactform</a> to ask your question directly."
+msgstr "Mocht u de gewenste informatie niet kunnen vinden, dan kunt u gebruik maken van ons <a href=\"/contact\">contactformulier</a> om uw vraag rechtstreeks te stellen."
+
+msgid "Search for datasets"
+msgstr "Zoeken naar datasets"
+
+msgid "page"
+msgstr "pagina"

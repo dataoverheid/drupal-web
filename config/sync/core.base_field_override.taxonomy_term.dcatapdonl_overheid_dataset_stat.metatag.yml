@@ -1,0 +1,18 @@
+uuid: 3e0d4105-b198-4ed3-906d-d2dad6d173ee
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

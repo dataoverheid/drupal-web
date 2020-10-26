@@ -1,0 +1,18 @@
+uuid: ba3c5f52-064b-4bee-88bd-67f674235a96
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat
+target_entity_type_id: taxonomy_term
+target_bundle: dcatapdonl_overheid_dataset_stat
+default_langcode: site_default
+language_alterable: false

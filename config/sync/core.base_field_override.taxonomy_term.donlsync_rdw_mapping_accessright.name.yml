@@ -1,0 +1,18 @@
+uuid: b83d023f-75d0-45c9-a36f-635be2229e56
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_mapping_accessright
+id: taxonomy_term.donlsync_rdw_mapping_accessright.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_rdw_mapping_accessright
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

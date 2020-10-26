@@ -1,0 +1,97 @@
+uuid: ed5edb6b-10d3-4262-b6e6-bb07e1c91763
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.paragraph_block
+    - field.storage.block_content.field_block_paragraphs
+    - paragraphs.paragraphs_type.highlights_list
+    - paragraphs.paragraphs_type.homepage_block
+    - paragraphs.paragraphs_type.linklist_block
+    - paragraphs.paragraphs_type.relation_lists
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.webform
+    - paragraphs.paragraphs_type.well_linklists
+  module:
+    - entity_reference_revisions
+id: block_content.paragraph_block.field_block_paragraphs
+field_name: field_block_paragraphs
+entity_type: block_content
+bundle: paragraph_block
+label: Paragraphs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      homepage_block: homepage_block
+      linklist_block: linklist_block
+      highlights_list: highlights_list
+      relation_lists: relation_lists
+      text: text
+      well_linklists: well_linklists
+      webform: webform
+    target_bundles_drag_drop:
+      homepage_block:
+        enabled: true
+        weight: 11
+      homepage_blocks:
+        weight: 12
+        enabled: false
+      linklist_block:
+        enabled: true
+        weight: 13
+      linklist_blocks:
+        weight: 14
+        enabled: false
+      links:
+        weight: 15
+        enabled: false
+      nested_links:
+        weight: 16
+        enabled: false
+      highlights_list:
+        enabled: true
+        weight: 16
+      block_paragraph:
+        weight: 17
+        enabled: false
+      highlight:
+        weight: 18
+        enabled: false
+      relation_list_item:
+        weight: 18
+        enabled: false
+      relation_lists:
+        enabled: true
+        weight: 19
+      text:
+        enabled: true
+        weight: 19
+      well_linklists:
+        enabled: true
+        weight: 20
+      webform:
+        enabled: true
+        weight: 20
+      treeview:
+        weight: 26
+        enabled: false
+      treeview_child:
+        weight: 27
+        enabled: false
+      relation_list:
+        weight: 28
+        enabled: false
+      voetnoot:
+        weight: 28
+        enabled: false
+      voetnoten:
+        weight: 29
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,20 @@
+uuid: 3e6d9815-d288-43f3-a21f-96616642429a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+  module:
+    - path
+id: node.feedback_dataset.path
+field_name: path
+entity_type: node
+bundle: feedback_dataset
+label: URL-alias
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

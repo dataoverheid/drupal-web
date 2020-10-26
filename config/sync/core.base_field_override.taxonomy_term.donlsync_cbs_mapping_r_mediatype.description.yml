@@ -1,0 +1,20 @@
+uuid: 172451cf-d9e5-4572-9fea-cfc4e4e5e3a9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_r_mediatype
+  module:
+    - text
+id: taxonomy_term.donlsync_cbs_mapping_r_mediatype.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_r_mediatype
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

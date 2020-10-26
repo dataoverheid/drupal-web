@@ -1,0 +1,18 @@
+uuid: be42a142-63fa-46bd-9022-ca6991f6e576
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.meta_header_links
+id: block_content.meta_header_links.changed
+field_name: changed
+entity_type: block_content
+bundle: meta_header_links
+label: Gewijzigd
+description: 'Het tijdstip waarop het aangepaste blok voor het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

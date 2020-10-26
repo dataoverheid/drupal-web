@@ -1,0 +1,20 @@
+uuid: fd1dd640-9738-4118-be20-957643b46b43
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.uid
+field_name: uid
+entity_type: node
+bundle: datarequest
+label: 'Geschreven door'
+description: 'De gebruikersnaam van de auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

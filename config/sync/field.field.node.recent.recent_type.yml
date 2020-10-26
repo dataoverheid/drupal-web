@@ -1,0 +1,21 @@
+uuid: d14d45e6-aa80-4b61-a45e-407759ba8cc7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.recent_type
+    - node.type.recent
+  module:
+    - options
+id: node.recent.recent_type
+field_name: recent_type
+entity_type: node
+bundle: recent
+label: 'Actueel type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

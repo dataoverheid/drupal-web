@@ -1,0 +1,22 @@
+uuid: 08601632-367b-48b1-9132-351073741aa5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.block_paragraph.field_block
+    - paragraphs.paragraphs_type.block_paragraph
+id: paragraph.block_paragraph.default
+targetEntityType: paragraph
+bundle: block_paragraph
+mode: default
+content:
+  field_block:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

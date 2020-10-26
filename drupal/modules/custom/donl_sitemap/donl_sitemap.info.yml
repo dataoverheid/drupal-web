@@ -1,0 +1,10 @@
+name: DONL sitemap
+description: Module which handles some additional functionality for the sitemap
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - donl_search:donl_search
+  - drupal:simple_sitemap

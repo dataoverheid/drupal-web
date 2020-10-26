@@ -1,0 +1,19 @@
+uuid: 636f7144-a1b3-4c1a-a8bb-cf644cbaa89b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.explanation_state
+    - node.type.datarequest
+id: node.datarequest.explanation_state
+field_name: explanation_state
+entity_type: node
+bundle: datarequest
+label: 'Toelichting status'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

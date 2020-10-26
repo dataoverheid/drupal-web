@@ -1,0 +1,20 @@
+uuid: e5129d57-249c-4d17-a919-ec012be054c0
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_sche
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

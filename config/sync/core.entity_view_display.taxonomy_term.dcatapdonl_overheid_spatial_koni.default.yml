@@ -1,0 +1,41 @@
+uuid: 433d637f-47c7-4dda-86e6-99616f3558ea
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_overheid_spatial_koni.identifier
+    - field.field.taxonomy_term.dcatapdonl_overheid_spatial_koni.label_en
+    - field.field.taxonomy_term.dcatapdonl_overheid_spatial_koni.label_nl
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+mode: default
+content:
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

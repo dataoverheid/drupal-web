@@ -1,0 +1,29 @@
+uuid: bd124999-7d2d-4563-927e-ac6def45d1c1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.group.datasets
+    - field.field.node.group.group_description
+    - field.field.node.group.group_image
+    - field.field.node.group.machine_name
+    - node.type.group
+  module:
+    - user
+id: node.group.teaser
+targetEntityType: node
+bundle: group
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  datasets: true
+  group_description: true
+  group_image: true
+  langcode: true
+  machine_name: true

@@ -1,0 +1,23 @@
+uuid: 60e5a3a7-a955-4067-9bb0-c2ef7b3f3f46
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.want_to_use_it_for
+field_name: want_to_use_it_for
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

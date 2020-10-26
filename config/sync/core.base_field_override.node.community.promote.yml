@@ -1,0 +1,22 @@
+uuid: 61b04627-c4d8-4dfa-b9d6-093817d378a6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.promote
+field_name: promote
+entity_type: node
+bundle: community
+label: 'Aangeraden op de voorpagina'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

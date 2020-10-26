@@ -1,0 +1,19 @@
+uuid: de1434c9-4032-4bc1-b13e-f54c8f79e5e3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.target_value
+    - taxonomy.vocabulary.donlsync_cbs_mapping_frequency
+id: taxonomy_term.donlsync_cbs_mapping_frequency.target_value
+field_name: target_value
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_frequency
+label: 'Target value'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

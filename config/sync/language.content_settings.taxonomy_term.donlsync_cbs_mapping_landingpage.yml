@@ -1,0 +1,18 @@
+uuid: 16393d8a-2e0d-4487-b432-da87d2177aa8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_landingpage
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.donlsync_cbs_mapping_landingpage
+target_entity_type_id: taxonomy_term
+target_bundle: donlsync_cbs_mapping_landingpage
+default_langcode: site_default
+language_alterable: false

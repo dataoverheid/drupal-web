@@ -1,0 +1,20 @@
+uuid: 807a512b-1db5-4b97-b108-04a3ebf71511
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_ckan_id
+  module:
+    - user
+id: user.user.field_ckan_id
+field_name: field_ckan_id
+entity_type: user
+bundle: user
+label: 'CKAN id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

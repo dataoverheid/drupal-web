@@ -1,0 +1,18 @@
+uuid: 0e3841fa-659d-4785-9be8-4bbbf6644d04
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+id: taxonomy_term.dcatapdonl_mdr_filetype.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

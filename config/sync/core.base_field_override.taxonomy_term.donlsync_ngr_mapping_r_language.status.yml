@@ -1,0 +1,22 @@
+uuid: 8938cb1c-4f1a-4c08-acb7-0592f9347e4a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_language
+id: taxonomy_term.donlsync_ngr_mapping_r_language.status
+field_name: status
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_language
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

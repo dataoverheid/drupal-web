@@ -1,0 +1,46 @@
+uuid: 425eff32-04d0-46a8-aafe-ce8b4c01dfc0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_list.field_heading
+    - field.field.paragraph.relation_list.paragraph_highlights
+    - paragraphs.paragraphs_type.relation_list
+  module:
+    - paragraphs
+    - text
+id: paragraph.relation_list.default
+targetEntityType: paragraph
+bundle: relation_list
+mode: default
+content:
+  field_heading:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+    region: content
+  paragraph_highlights:
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: relation_list_item
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: '0'
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

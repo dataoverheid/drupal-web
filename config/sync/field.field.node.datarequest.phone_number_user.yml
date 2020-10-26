@@ -1,0 +1,19 @@
+uuid: 3ecb282c-73f1-481b-b4d6-3d1014fb4b2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.phone_number_user
+    - node.type.datarequest
+id: node.datarequest.phone_number_user
+field_name: phone_number_user
+entity_type: node
+bundle: datarequest
+label: 'Uw telefoonnummer'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

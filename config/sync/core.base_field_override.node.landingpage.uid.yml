@@ -1,0 +1,20 @@
+uuid: 05de4dc5-afe5-4a43-9c43-9b660416d2b4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.uid
+field_name: uid
+entity_type: node
+bundle: landingpage
+label: 'Geschreven door'
+description: 'De gebruikersnaam van de auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

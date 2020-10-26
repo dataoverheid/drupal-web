@@ -1,0 +1,22 @@
+uuid: 10ba9b98-999d-45d4-bffc-d9a5a6416900
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.status
+field_name: status
+entity_type: node
+bundle: landingpage
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

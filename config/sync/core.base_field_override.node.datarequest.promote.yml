@@ -1,0 +1,22 @@
+uuid: 4632ca93-b545-4f01-b912-da6284431e4e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.promote
+field_name: promote
+entity_type: node
+bundle: datarequest
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

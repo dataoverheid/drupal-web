@@ -1,0 +1,79 @@
+uuid: 1f2d9cd1-7e33-4ade-a612-75ee542ed98c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.paragraph_highlights
+    - paragraphs.paragraphs_type.relation_list
+    - paragraphs.paragraphs_type.relation_list_item
+  module:
+    - entity_reference_revisions
+id: paragraph.relation_list.paragraph_highlights
+field_name: paragraph_highlights
+entity_type: paragraph
+bundle: relation_list
+label: 'list items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      relation_list_item: relation_list_item
+    target_bundles_drag_drop:
+      relation_list_item:
+        enabled: true
+        weight: 18
+      block_paragraph:
+        weight: 19
+        enabled: false
+      highlight:
+        weight: 20
+        enabled: false
+      highlights_list:
+        weight: 21
+        enabled: false
+      homepage_block:
+        weight: 22
+        enabled: false
+      homepage_blocks:
+        weight: 23
+        enabled: false
+      linklist_block:
+        weight: 24
+        enabled: false
+      linklist_blocks:
+        weight: 25
+        enabled: false
+      links:
+        weight: 26
+        enabled: false
+      nested_links:
+        weight: 27
+        enabled: false
+      relation_list:
+        weight: 28
+        enabled: false
+      text:
+        weight: 29
+        enabled: false
+      treeview:
+        weight: 30
+        enabled: false
+      treeview_child:
+        weight: 31
+        enabled: false
+      voetnoot:
+        weight: 32
+        enabled: false
+      voetnoten:
+        weight: 33
+        enabled: false
+      webform:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

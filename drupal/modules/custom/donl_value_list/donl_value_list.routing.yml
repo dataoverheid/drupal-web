@@ -1,0 +1,21 @@
+donl_value_list.value_lists:
+  path: '/service/waardelijsten'
+  defaults:
+    _controller: '\Drupal\donl_value_list\Controller\ValueListApiController::overview'
+  requirements:
+    _permission: 'access content'
+
+donl_value_list.value_list:
+  path: '/service/waardelijsten/{vid}'
+  defaults:
+    _controller: '\Drupal\donl_value_list\Controller\ValueListApiController::taxonomyList'
+  requirements:
+    _permission: 'access content'
+
+donl_value_list.settings:
+  path: '/admin/config/system/ckan/donl-value-list'
+  defaults:
+    _form: '\Drupal\donl_value_list\Form\ValueListSettingsForm'
+    _title: 'Value list settings'
+  requirements:
+    _permission: 'configure donl value list settings'

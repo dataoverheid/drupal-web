@@ -1,0 +1,19 @@
+uuid: b08b31cc-e094-41eb-bfeb-fc726346e887
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.email
+    - node.type.feedback_dataset
+id: node.feedback_dataset.email
+field_name: email
+entity_type: node
+bundle: feedback_dataset
+label: Email
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Builds the allowed values of the current types.
+ */
+function donl_recent_type_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
+  return [
+    'nieuws' => t('News'),
+    'evenementen' => t('Events'),
+    'bijeenkomsten' => t('Meetings'),
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_page_alter().
+ */
+function donl_recent_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $routeMatch = \Drupal::routeMatch();
+  if (($param = $routeMatch->getParameter('view_id')) && $param === 'recent_type_pagina') {
+    $suggestions[] = 'page__recent_type';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function donl_recent_theme($existing, $type, $theme, $path) {
+  return [
+    'recent_index' => [
+      'variables' => [
+        'title' => '',
+        'menu_items' => [],
+      ],
+    ],
+    'recent_overview' => [
+      'variables' => [
+        'title' => '',
+        'menu_items' => [],
+        'items' => [],
+      ],
+    ],
+    'recent_menu_block' => [
+      'variables' => [
+        'menu_items' => [],
+      ],
+    ],
+    'home_recent_menu_block' => [
+      'variables' => [
+        'items' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function donl_recent_node_presave(EntityInterface $entity) {
+  if ($entity->bundle() === 'recent') {
+    Cache::invalidateTags(['node_type:recent']);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function donl_recent_node_delete(EntityInterface $entity) {
+  if ($entity->bundle() === 'recent') {
+    Cache::invalidateTags(['node_type:recent']);
+  }
+}

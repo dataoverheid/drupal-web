@@ -1,0 +1,18 @@
+uuid: b06f35bf-240e-4c48-9e5f-6e11579c1174
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_language
+id: taxonomy_term.donlsync_cbs_mapping_language.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_language
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

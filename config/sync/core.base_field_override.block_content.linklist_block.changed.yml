@@ -1,0 +1,18 @@
+uuid: 2174840b-b88a-481a-90ce-40c1494a0a76
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block
+id: block_content.linklist_block.changed
+field_name: changed
+entity_type: block_content
+bundle: linklist_block
+label: Gewijzigd
+description: 'Het tijdstip waarop het aangepaste blok voor het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

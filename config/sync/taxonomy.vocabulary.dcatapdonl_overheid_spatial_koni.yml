@@ -1,0 +1,8 @@
+uuid: dc2e85ff-860c-4189-97bf-37cec4264b78
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:SpatialKoninkrijksdeel'
+vid: dcatapdonl_overheid_spatial_koni
+description: ''
+weight: 0

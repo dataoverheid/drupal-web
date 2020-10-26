@@ -1,0 +1,27 @@
+<div>
+  <div class="tags">
+    {% for tag in tags %}
+      <span>{{ tag }}</span>
+    {% endfor %}
+  </div>
+
+  <p>{{ node.field_description.value|nl2br }}</p>
+
+  {% if(datasets_links) %}
+    <h2>{{ 'Datasets' }}</h2>
+    {% for link in datasets_links %}
+      {{ link }}<br />
+    {% endfor %}
+  {% endif %}
+</div>
+<div id="sidebar">
+  {% if logo.url %}
+    <img src="{{ logo.url }}" alt="{{ logo.alt }}">
+  {% endif %}
+  <p>
+    <strong>{{ node.field_contactperson_organization.value }}</strong><br />
+    {{ node.field_contactperson_name.value }}<br>
+    <a href="mailto:{{ node.field_contactperson_email.value }}">{{ node.field_contactperson_email.value }}</a><br />
+    {{ node.field_contactperson_phone.value }}
+  </p>
+</div>

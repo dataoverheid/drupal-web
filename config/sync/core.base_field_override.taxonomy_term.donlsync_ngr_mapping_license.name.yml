@@ -1,0 +1,18 @@
+uuid: b0c8e067-a236-4b8f-bf2a-c021075cef4e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_license
+id: taxonomy_term.donlsync_ngr_mapping_license.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_license
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

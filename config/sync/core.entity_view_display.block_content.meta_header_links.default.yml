@@ -1,0 +1,28 @@
+uuid: d2534bb2-d952-4757-ad19-0a249a9ff3d7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.meta_header_links
+    - field.field.block_content.meta_header_links.field_link
+  module:
+    - link
+id: block_content.meta_header_links.default
+targetEntityType: block_content
+bundle: meta_header_links
+mode: default
+content:
+  field_link:
+    type: link
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

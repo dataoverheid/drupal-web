@@ -1,0 +1,82 @@
+uuid: c6f2efc5-bd9a-4725-8472-e42bc9209143
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.relation_lists
+    - paragraphs.paragraphs_type.relation_list
+    - paragraphs.paragraphs_type.relation_lists
+  module:
+    - entity_reference_revisions
+id: paragraph.relation_lists.relation_lists
+field_name: relation_lists
+entity_type: paragraph
+bundle: relation_lists
+label: 'Relation lists'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      relation_list: relation_list
+    target_bundles_drag_drop:
+      relation_lists:
+        weight: 19
+        enabled: false
+      block_paragraph:
+        weight: 20
+        enabled: false
+      highlight:
+        weight: 21
+        enabled: false
+      highlights_list:
+        weight: 22
+        enabled: false
+      homepage_block:
+        weight: 23
+        enabled: false
+      homepage_blocks:
+        weight: 24
+        enabled: false
+      linklist_block:
+        weight: 25
+        enabled: false
+      linklist_blocks:
+        weight: 26
+        enabled: false
+      links:
+        weight: 27
+        enabled: false
+      nested_links:
+        weight: 28
+        enabled: false
+      relation_list:
+        enabled: true
+        weight: 29
+      relation_list_item:
+        weight: 30
+        enabled: false
+      text:
+        weight: 31
+        enabled: false
+      treeview:
+        weight: 32
+        enabled: false
+      treeview_child:
+        weight: 33
+        enabled: false
+      voetnoot:
+        weight: 34
+        enabled: false
+      voetnoten:
+        weight: 35
+        enabled: false
+      webform:
+        weight: 36
+        enabled: false
+field_type: entity_reference_revisions

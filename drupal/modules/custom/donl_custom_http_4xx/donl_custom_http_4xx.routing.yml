@@ -1,0 +1,8 @@
+donl_custom_http_4xx:
+  path: '/custom/404/{type}'
+  defaults:
+    _controller: '\Drupal\donl_custom_http_4xx\Controller\CustomHttp4xxController:on404'
+    _title_callback: '\Drupal\donl_custom_http_4xx\Controller\CustomHttp4xxController:title'
+  requirements:
+    # No need for access control.
+    _access: 'TRUE'

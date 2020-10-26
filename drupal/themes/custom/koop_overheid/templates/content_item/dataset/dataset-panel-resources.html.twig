@@ -1,0 +1,62 @@
+{% macro resource_download_link(url) %}
+  <div>
+    <i>Download:</i> <a href="{{ url }}" class="download-link" target="_blank">{{ url }}</a>
+  </div>
+{% endmacro %}
+
+{% macro resource_copy_link(url) %}
+  <div class="copydata" data-decorator="init-copydata"
+       data-config='{ "triggerLabel": "{{ 'Copy link'|t }}", "triggerCopiedlabel": "{{ 'Copied'|t }}", "triggerClass": "copydata__trigger" }'>
+    <p class="copydata__datafield js-copydata__datafield">
+      {{ url }}
+    </p>
+  </div>
+{% endmacro %}
+
+<h2 class="visible-xs">{{ alias|capitalize|replace('-', ' ')|t }}</h2>
+{% if text %}
+  <div class="panel-description">
+    {{ text }}
+  </div>
+{% endif %}
+
+{% for key, resource in resources %}
+  <div class="resource">
+    <div class="resource-header">
+      <h3>{{ resource.name }}</h3>
+      <span class="label">{{ ckan_mapping_get_file_format_name(resource.format) }}</span>
+      <span class="label label-licence">{{ ckan_mapping_get_license_name(resource.license_id) }}</span>
+    </div>
+
+    {% if(alias == 'webservice') %}
+      {% if resource.download_url %}
+        {# If we have a webservice and the download_url is set we'll need to show
+           the download link in a copy link box and the resource link as clickable. #}
+        {% for url in resource.download_url %}
+          {{ _self.resource_copy_link(url) }}
+        {% endfor %}
+        {{ _self.resource_download_link(resource.url) }}
+      {% else %}
+        {# If we have a webservice and no download_url we'll show the link in a copy link box. #}
+        {{ _self.resource_copy_link(resource.url) }}
+      {% endif %}
+    {% else %}
+      {# For all other resource types we'll always use clickable links. #}
+      {{ _self.resource_download_link(resource.url) }}
+      {% if resource.download_url %}
+        {% for url in resource.download_url %}
+          {{ _self.resource_download_link(url) }}
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+    <p>{{ resource.description }}</p>
+
+    {% if resource.previewUrl %}
+        <div class="preview-action button button--primary" data-preview-id="{{ key }}"
+             data-preview-url="{{ resource.previewUrl }}">{{ 'Preview'|t }}</div>
+        <table id="preview-{{ key }}" class="preview-table"></table>
+        <p>{{ 'This is a preview it does not contain all the data. Download the resource to access all the records.' }}</p>
+    {% endif %}
+  </div>
+{% endfor %}

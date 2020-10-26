@@ -1,0 +1,11 @@
+uuid: c7c0452d-5024-4b4f-a6fc-9f88115f928b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node_type_community
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301

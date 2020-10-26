@@ -1,0 +1,20 @@
+uuid: 409b1680-94c4-4058-b3bd-9e3b3cdb2575
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+id: node.recent.uid
+field_name: uid
+entity_type: node
+bundle: recent
+label: 'Geschreven door'
+description: 'De gebruikersnaam van de auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

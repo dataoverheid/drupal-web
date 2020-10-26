@@ -1,0 +1,44 @@
+{% extends '@koop_overheid/content_item/search/donl-searchrecord.html.twig' %}
+
+{% block type_name %}{{ 'Dataset'|t }}{% endblock type_name %}
+
+{% block search_content %}
+  {% set description = ckan_markdown(record.description, false) %}
+  <p>{{ description|length > 200 ? description|slice(0, 200) ~ '...' : description }}</p>
+  <table class="main-data minimal-table">
+    <tbody>
+    {% if record.metadata_modified %}
+      <tr>
+        <th>{{ 'Updated'|t }}:</th>
+        <td>{{ ckan_format_date(record.metadata_modified) }}</td>
+      </tr>
+    {% endif %}
+    {% if record.theme %}
+      <tr>
+        <th>{{ 'Theme'|t }}:</th>
+        <td>{{ ckan_mapping_get_theme_name(record.theme[0]) }}</td>
+      </tr>
+    {% endif %}
+    {% if record.status %}
+      <tr>
+        <th>{{ 'State'|t }}:</th>
+        <td>{{ ckan_mapping_get_status_name(record.status) }}</td>
+      </tr>
+    {% endif %}
+    {% if record.authority %}
+      <tr>
+        <th>{{ 'Data owner'|t }}:</th>
+        <td>{{ ckan_mapping_get_organization_name(record.authority[0]) }}</td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+  <div class="short-links">
+    <a href="{{ record.url }}#description">{{ 'Description'|t }}</a>
+    {% for distributionType in record.distributionTypes %}
+      {% set type = ckan_mapping_get_distribution_type_name(distributionType) %}
+      <a href="{{ record.url }}#{{ type|replace(' ', '-')|lower }}">{{ type|t }}</a>
+    {% endfor %}
+    <a href="{{ record.url }}#metadata">{{ 'Metadata'|t }}</a>
+  </div>
+{% endblock search_content %}

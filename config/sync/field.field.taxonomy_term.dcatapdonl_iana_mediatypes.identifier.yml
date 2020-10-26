@@ -1,0 +1,19 @@
+uuid: 6357e47d-b86e-482c-8344-12d430189744
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+id: taxonomy_term.dcatapdonl_iana_mediatypes.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Identifier
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

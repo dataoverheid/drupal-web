@@ -1,0 +1,24 @@
+<div style="background-image: url('{{ community.backgroundImage }}');" class="community-banner">
+  <div class="container container--centered">
+    <div class="container--centered container-landing-page" style="">
+      {% if community %}
+        <div class="community well well--pageblock {{ community.colour }}">
+          <div class="content-item-title">
+            <span class="type-icon">
+              <img src="/{{ base_path ~ directory }}/images/icon-community.svg" alt="type-icon">
+              {% set themeClass = ckan_mapping_get_theme_class(community.themes[0]) %}
+              {% if themeClass %}
+                <dd class="icon icon--{{ themeClass }}"></dd>
+              {% endif %}
+            </span>
+            <div>
+              <p class="type">{{ 'Community'|t }}</p>
+              <h1>{{ community.title }}</h1>
+            </div>
+          </div>
+          {{ form }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

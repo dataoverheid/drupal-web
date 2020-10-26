@@ -1,0 +1,18 @@
+uuid: 9fddba3a-5403-4307-b692-8678eac50628
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.catalog
+id: node.catalog.created
+field_name: created
+entity_type: node
+bundle: catalog
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

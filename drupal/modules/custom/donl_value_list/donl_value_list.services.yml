@@ -1,0 +1,9 @@
+services:
+  donl.value_list:
+    class: Drupal\donl_value_list\ValueList
+    arguments:
+    - '@http_client'
+    - '@cache.default'
+    - '@config.factory'
+    - '@logger.factory'
+    - '@language_manager'

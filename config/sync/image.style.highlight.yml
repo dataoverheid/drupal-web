@@ -1,0 +1,17 @@
+uuid: 516fdfcf-68e5-4a93-9b4d-5a1feae300ad
+langcode: nl
+status: true
+dependencies:
+  config:
+    - crop.type.highlight
+  module:
+    - crop
+name: highlight
+label: 'Highlight (800x600)'
+effects:
+  8f3cbd8b-42e6-445a-9ad7-aad3d3175bc8:
+    uuid: 8f3cbd8b-42e6-445a-9ad7-aad3d3175bc8
+    id: crop_crop
+    weight: 2
+    data:
+      crop_type: highlight

@@ -1,0 +1,18 @@
+uuid: 483fc4bd-df8e-48d1-b4b1-6d8e98b501f2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_metadata_la
+id: taxonomy_term.donlsync_ngr_mapping_metadata_la.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_metadata_la
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

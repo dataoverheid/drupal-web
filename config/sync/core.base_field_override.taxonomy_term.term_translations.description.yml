@@ -1,0 +1,20 @@
+uuid: f9cd63d7-8f1a-4cd4-a349-67a06b9e194a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.term_translations
+  module:
+    - text
+id: taxonomy_term.term_translations.description
+field_name: description
+entity_type: taxonomy_term
+bundle: term_translations
+label: Beschrijving
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

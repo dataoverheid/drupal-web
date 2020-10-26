@@ -1,0 +1,27 @@
+{# This file works as both the default fallback and template for a search record. #}
+
+<li class="search-result">
+  <div class="content-item-title">
+      <span class="type-icon">
+        <img src="/{{ base_path ~ directory }}/images/{{ record.icon }}" alt="type-icon">
+        {% if record.theme %}
+          {% set themeClass = ckan_mapping_get_theme_class(record.theme[0]) %}
+          {% if themeClass %}
+            <dd class="icon icon--{{ themeClass }}"></dd>
+          {% endif %}
+        {% endif %}
+      </span>
+    <div>
+      <p class="type">{% block type_name %}{{ record.type }}{% endblock type_name %}</p>
+      <a href="{{ record.url }}" class="result--title"><h2>{{ record.title }}</h2></a>
+    </div>
+  </div>
+  <div class="search-content">
+    {% block search_content %}
+      {% block search_content_prefix %}{% endblock search_content_prefix %}
+      {% set description = record.description|striptags %}
+      <p>{{ description|length > 200 ? description|slice(0, 200) ~ '...' : description }}</p>
+      {% block search_content_suffix %}{% endblock search_content_suffix %}
+    {% endblock search_content %}
+  </div>
+</li>

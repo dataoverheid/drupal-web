@@ -1,0 +1,25 @@
+uuid: 1ff8dda0-cafe-4dfe-bc4a-567372406669
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - options
+    - user
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+id: user.field_catalog
+field_name: field_catalog
+entity_type: user
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: ckan_catalog_allowed_values
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

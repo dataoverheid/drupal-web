@@ -1,0 +1,29 @@
+uuid: f2457534-fe83-4d62-b9fe-a3147a33516e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.catalog.catalog_description
+    - field.field.node.catalog.ckan_organization_mapping
+    - field.field.node.catalog.identifier
+    - field.field.node.catalog.machine_name
+    - node.type.catalog
+  module:
+    - user
+id: node.catalog.teaser
+targetEntityType: node
+bundle: catalog
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  catalog_description: true
+  ckan_organization_mapping: true
+  identifier: true
+  langcode: true
+  machine_name: true

@@ -1,0 +1,22 @@
+uuid: a834329c-b1f2-434d-8aff-0b847a45e2a8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node.feedback_dataset.status
+field_name: status
+entity_type: node
+bundle: feedback_dataset
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

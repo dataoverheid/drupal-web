@@ -1,0 +1,18 @@
+uuid: da7d8b88-44d5-4a59-b376-7dd0972825bb
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.treeview_child
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.treeview_child
+target_entity_type_id: paragraph
+target_bundle: treeview_child
+default_langcode: site_default
+language_alterable: false

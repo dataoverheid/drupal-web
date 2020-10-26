@@ -1,0 +1,25 @@
+uuid: 37d1ce57-64cc-4965-b5f4-6fcb4c75e768
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block
+    - field.field.block_content.linklist_block.field_linklist_block
+  module:
+    - entity_reference_revisions
+id: block_content.linklist_block.default
+targetEntityType: block_content
+bundle: linklist_block
+mode: default
+content:
+  field_linklist_block:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

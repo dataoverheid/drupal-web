@@ -1,0 +1,20 @@
+uuid: 8e320d56-80ce-464c-aec6-acb2095c24bd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_distributiontype
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_donl_distributiontype.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_distributiontype
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

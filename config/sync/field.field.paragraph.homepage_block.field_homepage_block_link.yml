@@ -1,0 +1,23 @@
+uuid: 028126e2-27de-48f1-8c1c-a9c3bd3a2bcd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_block_link
+    - paragraphs.paragraphs_type.homepage_block
+  module:
+    - link
+id: paragraph.homepage_block.field_homepage_block_link
+field_name: field_homepage_block_link
+entity_type: paragraph
+bundle: homepage_block
+label: 'Header link'
+description: 'The main link for this block'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

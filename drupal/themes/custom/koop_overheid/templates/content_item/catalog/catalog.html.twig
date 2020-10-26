@@ -1,0 +1,24 @@
+{% extends '@koop_overheid/content_item/content-item.html.twig' %}
+{% import '@koop_overheid/content_item/content-item.html.twig' as content_item %}
+
+{% block content_item %}
+  {% set content_item_type = 'catalog' %}
+  {% set content_item_background_color = 'green' %}
+  {{ parent() }}
+{% endblock content_item %}
+
+{% block content_item_title %}
+  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-community.svg') }}
+  <div>
+    <p class="type">{{ 'Catalog'|t }}</p>
+    <h1>{{ node.title.value }}</h1>
+    {{ content_item.permalink(url('donl_search.catalog.view', {'catalog': node.machine_name.0.value})) }}
+  </div>
+{% endblock content_item_title%}
+
+{% block content_item_description %}
+  {% if node.catalog_description.value %}
+    <p>{{ node.catalog_description.value|nl2br }}</p>
+  {% endif %}
+  <a href="{{ node.identifier.value }}" target="_blank">{{ 'Visit the catalog'|t }}</a>
+{% endblock content_item_description %}

@@ -1,0 +1,18 @@
+uuid: 591c4e9f-a2ab-4991-b409-78bd89e2366f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.title
+field_name: title
+entity_type: node
+bundle: community
+label: Titel
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,19 @@
+uuid: a436a3b9-dc8a-4a34-b16b-8d707078c551
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_nl
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.label_nl
+field_name: label_nl
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: 'Label NL'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

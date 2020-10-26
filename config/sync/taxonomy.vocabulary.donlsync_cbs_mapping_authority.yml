@@ -1,0 +1,8 @@
+uuid: 83ce2d0a-1e6c-44ae-964f-9f0e148b1073
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync CBS Mapping Authority'
+vid: donlsync_cbs_mapping_authority
+description: ''
+weight: 0

@@ -1,0 +1,19 @@
+uuid: 8d71a40e-7eb7-4e0b-8087-859fabaacd5d
+langcode: nl
+status: true
+dependencies: {  }
+id: administrator
+label: administrator
+description: ''
+conf:
+  extensions: '*'
+  maxsize: null
+  quota: null
+  maxwidth: null
+  maxheight: null
+  replace: 0
+  folders:
+    -
+      path: uploaded_files
+      permissions:
+        all: true

@@ -1,0 +1,19 @@
+uuid: cd515e94-eb6f-402d-ad17-6db95a80d607
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.description_nl
+    - taxonomy.vocabulary.dcatapdonl_donl_catalogs
+id: taxonomy_term.dcatapdonl_donl_catalogs.description_nl
+field_name: description_nl
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_catalogs
+label: 'Description (NL)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

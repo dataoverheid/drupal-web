@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "The field %field may contain only lowercase letters, numbers, underscores and hyphens."
+msgstr "Het veld %field mag alleen kleine letters, cijfers, onderstrepingstekens en koppeltekens bevatten."
+
+msgid "The field %field must be unique, but the given value %value is already in use."
+msgstr "Het veld %field moet uniek zijn, maar de opgegeven waarde %value is al in gebruik."
+
+msgid "Profile"
+msgstr "Profiel"
+
+msgid "Profile page"
+msgstr "Profielpagina"
+
+msgid "My datasets (@total)"
+msgstr "Mijn datasets (@total)"
+
+msgid "My applications (@total)"
+msgstr "Mijn toepassingen (@total)"
+
+msgid "Statement of agreement"
+msgstr "Akkoordverklaring"
+
+msgid "I have read and understood what is being done with my personal data."
+msgstr "Ik heb gelezen en begrepen wat er met mijn persoonsgegevens wordt gedaan."
+
+msgid "Information about the processing of your personal data"
+msgstr "Informatie over de verwerking van uw persoonsgegevens"
+
+msgid "KOOP (onderdeel van het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties) will processes the personal data that you provide to us when asking your question. We use your data solely to answer your questions."
+msgstr "KOOP (onderdeel van het Ministerie van Binnenlandse Zaken en Koninkrijksrelaties) verwerkt de persoonsgegevens, die u ons verstrekt bij het stellen van uw vraag, om uw vragen te beantwoorden en u te kunnen bereiken. Wij gebruiken uw gegevens uitsluitend ter beantwoording van uw vragen."
+
+msgid "Extra information about the processing of your personal data."
+msgstr "Extra informatie over de verwerking van uw persoonsgegevens."
+
+msgid "Why is this information requested?"
+msgstr "Waarom worden deze gegevens gevraagd?"
+
+msgid "The information requested in the contact form is necessary to be able to handle your response adequately, on time and completely."
+msgstr "De gegevens, die in het contactformulier worden gevraagd, zijn noodzakelijk om uw reactie adequaat, tijdig en compleet te kunnen behandelen."
+
+msgid "How is your data processed?"
+msgstr "Op welke manier worden uw gegevens verwerkt?"
+
+msgid "After submitting the form your data is registered in the KOOP notification information system. The report is then handled by service desk staff and/or other specialists. First you will receive confirmation of the receipt of your report. Afterwards you will receive further information about the handling of your report. Your data will not be used for purposes other than the handling of your response."
+msgstr "Uw gegevens van het contactformulier worden geregistreerd in het meldingen-informatiesysteem van KOOP. De melding wordt vervolgens behandeld door servicedeskmedewerkers en/of verdere specialisten. Als eerste krijgt u een bevestiging van de ontvangst van uw melding. Nadien zal u verder bericht krijgen over de behandeling van uw melding. Uw gegevens worden niet voor andere doeleinden gebruikt dan de behandeling van uw reactie."
+
+msgid "How long do we keep your data?"
+msgstr "Hoe lang bewaren wij uw gegevens?"
+
+msgid "KOOP does not store your personal data for longer than necessary for the purpose for which you left it. In addition, data is used for knowledge building, improving the operation of our websites, keeping statistics and the functioning of the Service Desk. If there is a motive to keep the government's actions transparent, for example when requesting and providing accounts, data is permanently stored."
+msgstr "KOOP bewaart uw persoonsgegevens niet langer dan nodig is voor het doel waarvoor u ze heeft achtergelaten. Daarnaast worden gegevens gebruikt voor kennisopbouw, het verbeteren van de werking van websites, het bijhouden van statistieken en het functioneren van de Servicedesk. Indien er een motief is om het handelen van de overheid inzichtelijk te houden, bijvoorbeeld bij het aanvragen en verstrekken van accounts, worden gegevens permanent bewaard."
+
+msgid "What are your rights?"
+msgstr "Wat zijn uw rechten?"
+
+msgid "For your rights with regard to the processing of your data, please refer to the privacy statement of this website. You can also contact the Service Desk of KOOP:"
+msgstr "Voor uw rechten m.b.t. de verwerking van uw gegevens verwijzen wij u naar de privacyverklaring van deze website. U kunt ook contact opnemen met de Servicedesk van KOOP:"
+
+msgid "What data are you looking for?"
+msgstr "Welke data zoekt u?"
+
+msgid "Do you know the possible source of the data?"
+msgstr "Weet u de mogelijke bron van de data?"
+
+msgid "What do you want to use the data for?"
+msgstr "Waar wilt u de data voor gebruiken?"
+
+msgid "Your data (this data will NOT be publicly visible)"
+msgstr "Uw gegevens (deze gegevens worden NIET publiek zichtbaar)"
+
+msgid "Only for administrators: status and explanation"
+msgstr "Alleen voor beheerders: status en toelichting"
+
+msgid "Comparable data requests"
+msgstr "Vergelijkbare dataverzoeken"
+
+msgid "Make a new data request"
+msgstr "Dataverzoek indienen"
+
+msgid "Edit data request"
+msgstr "Bewerken dataverzoek"
+
+msgid "DONL theme"
+msgstr "DONL thema"
+
+msgid "DONL theme."
+msgstr "DONL thema."
+
+msgid "DONL data owner"
+msgstr "DONL data eigenaar"
+
+msgid "DONL data owner."
+msgstr "DONL data eigenaar."
+
+msgid "Back to all data requests"
+msgstr "Terug naar alle dataverzoeken"
+
+msgid "Back to all organizations"
+msgstr "Terug naar alle organisaties"
+
+msgid "Back to all groups"
+msgstr "Terug naar alle groepen"
+
+msgid "ago"
+msgstr "geleden"
+
+msgid "till"
+msgstr "tot"
+
+msgid "Request"
+msgstr "Aanvraag"
+
+msgid "Requested data"
+msgstr "Aangevraagde data"
+
+msgid "Request date"
+msgstr "Aanvraag datum"
+
+msgid "Requested dataformat"
+msgstr "Aangevraagd dataformaat"
+
+msgid "Requested start and enddate"
+msgstr "Aangevraagde start en eind datum data"
+
+msgid "Possible dataowner"
+msgstr "Mogelijke data eigenaar"
+
+msgid "Problems with the search"
+msgstr "Problemen met zoeken"
+
+msgid "Search attemts"
+msgstr "Zoekpogingen"
+
+msgid "Want to use it for"
+msgstr "Usecase"
+
+msgid "Commercial use"
+msgstr "Commercieel gebruik"
+
+msgid "Target audience"
+msgstr "Doelgroep"
+
+msgid "Reply dataoverheid"
+msgstr "Antwoord dataoverheid"
+
+msgid "Data request number"
+msgstr "Dataverzoek nummer"
+
+msgid "Datarequest source"
+msgstr "Dataverzoek bron"
+
+msgid "Dataowner"
+msgstr "Data eigenaar"
+
+msgid "Url of dataset"
+msgstr "Url van de dataset"
+
+msgid "Latest status of open datarequest"
+msgstr "Laatste status"
+
+msgid "Explanation state"
+msgstr "Toelichting status"
+
+msgid "Made by"
+msgstr "Gemaakt door"
+
+msgid "Link to application"
+msgstr "Link naar applicatie"
+
+msgid "Possible owner"
+msgstr "Mogelijke eigenaar"
+
+msgid "Usecase"
+msgstr "Doel"
+
+msgid "State"
+msgstr "Status"
+
+msgid "Your feedback with title %title has been saved and will be forwarded to the relevant data owner."
+msgstr "Uw feedback met titel %title is opgeslagen en wordt doorgestuurd naar de betreffende data eigenaar."
+
+msgid "No data found"
+msgstr "Geen data gevonden"
+
+msgid "No applications found"
+msgstr "Geen toepassingen gevonden"
+
+msgid "No datasets found"
+msgstr "Geen datasets gevonden"
+
+msgid "Profile data"
+msgstr "Profielgegevens"
+
+msgid "Register new dataset"
+msgstr "Nieuwe dataset aanmelden"
+
+msgid "Create new application"
+msgstr "Nieuwe toepassing aanmaken"
+
+msgid "Back to all catalogs"
+msgstr "Terug naar alle catalogi"
+
+msgid "Datarequests"
+msgstr "Dataverzoeken"

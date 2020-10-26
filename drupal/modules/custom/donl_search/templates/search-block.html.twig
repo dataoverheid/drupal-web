@@ -1,0 +1,15 @@
+<div class="search-block {{ bg_color }}">
+  <div class="container">
+    <div class="search-row  {% if icon %} type-icon-active {% endif %}">
+      {% if icon %}
+        <div class="content-item-title">
+        <span class="type-icon">
+          <img src="/{{ base_path ~ directory }}/images/{{ icon }}.svg" alt="type-icon">
+        </span>
+          <h2 class="type-title"> {{ title | t }}</h2>
+        </div>
+      {% endif %}
+      {{ form }}
+    </div>
+  </div>
+</div>

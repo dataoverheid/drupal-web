@@ -1,0 +1,18 @@
+uuid: b902c3c1-bcc2-4a3f-92bd-4c432cedb2b1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_metadata_la
+id: taxonomy_term.donlsync_ngr_mapping_metadata_la.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_metadata_la
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

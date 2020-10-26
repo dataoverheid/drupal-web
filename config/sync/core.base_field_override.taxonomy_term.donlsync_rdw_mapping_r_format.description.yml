@@ -1,0 +1,20 @@
+uuid: 23b51e74-8647-478e-89b1-42973e5b40d5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_mapping_r_format
+  module:
+    - text
+id: taxonomy_term.donlsync_rdw_mapping_r_format.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_rdw_mapping_r_format
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,189 @@
+uuid: c00987d5-3a1a-4ddf-952a-62551a790319
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.feedback_dataset.data_eigenaar
+    - field.field.node.feedback_dataset.email
+    - field.field.node.feedback_dataset.feedback_bericht
+    - field.field.node.feedback_dataset.feedback_doorgestuurd_aan_data_e
+    - field.field.node.feedback_dataset.link_dataset
+    - field.field.node.feedback_dataset.naam
+    - field.field.node.feedback_dataset.telefoon
+    - field.field.node.feedback_dataset.titel_dataset
+    - node.type.feedback_dataset
+  module:
+    - field_group
+    - link
+third_party_settings:
+  field_group:
+    group_dataset_gegevens:
+      children:
+        - titel_dataset
+        - link_dataset
+        - data_eigenaar
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: 'Dataset gegevens (niet aanpasbaar)'
+      region: content
+    group_uw_opmerking:
+      children:
+        - title
+        - feedback_bericht
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: 'Uw opmerking'
+      region: content
+    group_uw_gegevens:
+      children:
+        - naam
+        - email
+        - telefoon
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: 'Uw gegevens (deze zijn niet publiek zichtbaar)'
+      region: content
+    group_alleen_voor_beheerders:
+      children:
+        - feedback_doorgestuurd_aan_data_e
+      parent_name: ''
+      weight: 3
+      format_type: html_element
+      format_settings:
+        element: div
+        show_label: true
+        label_element: h2
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: well
+      label: 'Only for administrators'
+      region: content
+id: node.feedback_dataset.default
+targetEntityType: node
+bundle: feedback_dataset
+mode: default
+content:
+  data_eigenaar:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  email:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  feedback_bericht:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  feedback_doorgestuurd_aan_data_e:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  link_dataset:
+    weight: 10
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  naam:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  telefoon:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  titel_dataset:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

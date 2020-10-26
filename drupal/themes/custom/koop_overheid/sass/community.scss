@@ -1,0 +1,117 @@
+.community {
+  margin: 0;
+  padding: 40px 80px;
+  @include breakpoint(mobileonly) {
+    padding: 20px 15px;
+  }
+
+  .content-item-title {
+    margin-bottom: 10px;
+  }
+
+  .donl-community-search-form {
+    .searchbar {
+      margin-bottom: 15px;
+    }
+  }
+
+  .description {
+    margin-bottom: 15px;
+  }
+}
+
+.community-payoff {
+  display: flex;
+  align-items: center;
+
+  .payoff-icon {
+    position: relative;
+    top: -1px;
+    margin-right: 8px;
+    padding: 11px;
+    border: 3px solid $c-blue-600;
+    border-radius: 30px;
+    background-position: center center;
+  }
+}
+
+.community-banner {
+  padding: 60px 0;
+  background-position: center;
+}
+
+.header-cta {
+  padding: 14px 0;
+
+  a {
+    transition: .5s;
+
+    &:hover, &:focus, &:active {
+      margin-left: -10px;
+      padding-right: 10px;
+      text-decoration: none;
+      color: $c-blue-600;
+    }
+  }
+}
+
+.community-menu-wrapper {
+  background: $c-blue-100;
+
+  .community-menu {
+    margin: 0 -15px;
+    padding: 15px 0;
+
+    a {
+      margin: 0 15px;
+    }
+  }
+}
+
+#body .community-related {
+  display: grid;
+  padding-top: 60px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 30px;
+
+  h2 {
+    font-size: 1.5em;
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
+
+  .col {
+    margin: 0;
+
+    > h3 {
+      font-size: 1.25em;
+    }
+
+    .search-result {
+      margin-bottom: 20px;
+      padding: 0;
+      border: 0;
+
+      .type-icon {
+        width: 40px;
+        margin-right: 10px;
+      }
+
+      a {
+        h3 {
+          transition: .5s;
+        }
+
+        &:hover, &:focus, &:active {
+          h3 {
+            color: $c-blue-400;
+          }
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+uuid: 3e47774d-4c91-44d9-88fb-e09a18b38ff7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_frequency
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_frequency.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_frequency
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

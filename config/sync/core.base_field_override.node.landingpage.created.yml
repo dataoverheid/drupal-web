@@ -1,0 +1,18 @@
+uuid: d25fab72-c721-4e8a-833d-8683b5dc3618
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.created
+field_name: created
+entity_type: node
+bundle: landingpage
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

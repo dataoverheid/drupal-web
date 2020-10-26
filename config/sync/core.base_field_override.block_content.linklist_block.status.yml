@@ -1,0 +1,22 @@
+uuid: 713c96b2-6d07-43eb-8c65-a56f4d320f55
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block
+id: block_content.linklist_block.status
+field_name: status
+entity_type: block_content
+bundle: linklist_block
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

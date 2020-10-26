@@ -1,0 +1,34 @@
+<div class="container columns row actueel-content">
+  <div>
+    <h1>{{ title }}</h1>
+  </div>
+</div>
+<div id="content-second" class="container actueel-content">
+  <div>
+    {% for menu_item in menu_items %}
+      <div class="views-element-container">
+        <a class="img-block-16by9" href="{{ menu_item.link.url }}"
+           style="background-image: url('/themes/custom/koop_overheid/images/actueel/{{ menu_item.img }}');"></a>
+        <div class="recent-block-wrapper">
+          <a href="{{ menu_item.link.url }}" class="block-header"><h2>{{ menu_item.link.text }}</h2></a>
+          {% if menu_item.sub_items|length %}
+            <div class="recent-block transitional-size">
+              {% for sub_item in menu_item.sub_items %}
+                <div class="views-row">
+                  <div class="views-field views-field-title">
+                    <span class="field-content">
+                      {{ sub_item.link }}
+                    </span>
+                  </div>
+                </div>
+              {% endfor %}
+              <div class="more-link">
+                {{ menu_item.more_link }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

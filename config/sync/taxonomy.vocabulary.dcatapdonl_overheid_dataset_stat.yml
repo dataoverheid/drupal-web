@@ -1,0 +1,8 @@
+uuid: 6df78a95-f002-4530-be90-99c81c582eb0
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:DatasetStatus'
+vid: dcatapdonl_overheid_dataset_stat
+description: ''
+weight: 0

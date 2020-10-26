@@ -1,0 +1,8 @@
+uuid: 8da6f16c-704f-4571-a96b-50c55c21b1eb
+langcode: en
+status: true
+dependencies: {  }
+id: linklist_block
+label: 'Linklist block'
+revision: 0
+description: 'A linklist block'

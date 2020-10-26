@@ -1,0 +1,32 @@
+<div class="columns columns--sidebar-left">
+  <div>
+    {% if total_results %}
+      <h1 class="search-header">{{ total_results }}</h1>
+    {% endif %}
+
+    {% if spellcheck %}
+      <div class="search--spellcheck">
+        {{ spellcheck }}
+      </div>
+    {% endif %}
+
+    {{ pagination }}
+    <div class="result--list">
+      {% if rows %}
+        <ul>
+          {% for row in rows %}
+            {{ row }}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>{{ 'No results were found based on your search query.'|t }}</p>
+      {% endif %}
+    </div>
+    {{ pagination }}
+  </div>
+  <div>
+    <h2 class="facet-title">{{ 'Filter your results'|t }}</h2>
+    {{ above_facets }}
+    {{ facets }}
+  </div>
+</div>

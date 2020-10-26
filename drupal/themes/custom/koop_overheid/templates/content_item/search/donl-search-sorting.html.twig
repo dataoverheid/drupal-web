@@ -1,0 +1,12 @@
+<div class="sort">
+  {{ 'Sort by'|t }}:
+  <ul class="sort__options">
+    {% for link in links %}
+      {% if link['#attributes'].class[0]=='sort--descending'%}
+        <li title="{{ 'Descending'|t }}">{{ link }}</li>
+      {% else %}
+        <li title="{{ 'Ascending'|t }}">{{ link }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

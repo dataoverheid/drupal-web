@@ -1,0 +1,18 @@
+uuid: 5d55033b-44c8-40b6-bf24-4df8743904cf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.linklist_blocks
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.linklist_blocks
+target_entity_type_id: paragraph
+target_bundle: linklist_blocks
+default_langcode: site_default
+language_alterable: false

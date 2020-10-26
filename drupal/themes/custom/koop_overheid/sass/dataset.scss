@@ -1,0 +1,151 @@
+.buttonswitch {
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 40px;
+  padding: 1px;
+  border: 2px solid $c-blue-600;
+  border-radius: 0.35em;
+  background: white;
+
+  &__button {
+    display: inline-block;
+    padding: .5em .75em;
+    text-decoration: none;
+
+    &.is-active {
+      color: white;
+      background-color: $c-blue-600;
+    }
+  }
+}
+
+.dataset-sidebar {
+  min-width: 30%;
+  max-width: 40%;
+  margin-left: 30px;
+  @include breakpoint(mobileonly) {
+    max-width: none;
+  }
+}
+
+.panel-description-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .dataset-links {
+    flex-shrink: 0;
+    padding: 20px 30px;
+    border-radius: 0;
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    a {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include breakpoint(mobileonly) {
+    display: block;
+    .dataset-sidebar {
+      width: 100%;
+      margin-left: 0;
+
+    }
+  }
+}
+
+.sample {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.resource {
+  margin-bottom: 30px;
+
+
+  .resource-header {
+    display: flex;
+    align-items: baseline;
+    padding-top: 30px;
+    border-top: 1px solid $c-gray-200;
+
+    @include breakpoint(mobileonly) {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    h3 {
+      margin: 0 15px 0 0;
+      text-transform: capitalize;
+      @include breakpoint(mobileonly) {
+        margin: 0 15px 5px 0;
+      }
+    }
+
+    .label {
+      margin-right: 10px;
+      border: 1px solid $c-gray-100;
+    }
+
+    .label-licence {
+      border-color: $c-orange-400;
+      background: $c-orange-200;
+    }
+  }
+
+  &:first-of-type {
+    .resource-header {
+      border: 0;
+    }
+  }
+}
+
+.group-links {
+  margin-bottom: 30px;
+}
+
+.comparable-links li {
+  margin: 5px 0;
+}
+
+@include breakpoint(notmobile) {
+  .comparable-links {
+    column-count: 2;
+    column-gap: 30px;
+  }
+}
+
+.icon-info-img {
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: -10px;
+}
+
+.preview-table {
+  margin: 0;
+
+  .error {
+    padding-top: 20px;
+    color: $c-red-400;
+  }
+}
+
+.dataTables_wrapper {
+  min-width: 290px;
+  max-width: 90em;
+  margin: 0 auto;
+}
+
+.dataTables_filter input {
+  padding: 5px;
+  border: 1px solid $c-gray-200;
+  border-radius: 3px;
+  background: none;
+}

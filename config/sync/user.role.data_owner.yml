@@ -1,0 +1,9 @@
+uuid: 99b37596-fa87-4fc8-9495-8a4a715b838a
+langcode: nl
+status: true
+dependencies: {  }
+id: data_owner
+label: 'Data eigenaar'
+weight: 3
+is_admin: null
+permissions: {  }

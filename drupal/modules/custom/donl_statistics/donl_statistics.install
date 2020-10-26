@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function donl_statistics_schema() {
+  $schema = [];
+
+  // DONL Statistics.
+  $schema['donl_statistics'] = [
+    'fields' => [
+      'serial' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+      ],
+      'topic' => [
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => TRUE,
+      ],
+      'key' => [
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => TRUE,
+      ],
+      'value' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'default' => 0,
+      ],
+      'source' => [
+        'type' => 'varchar',
+        'length' => 256,
+        'not null' => TRUE,
+      ],
+      'date' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => [
+      'serial',
+    ],
+    'indexes' => [
+      'idx_topic_key_source' => [
+        'topic',
+        'key',
+        'source',
+      ],
+    ],
+  ];
+
+  return $schema;
+}

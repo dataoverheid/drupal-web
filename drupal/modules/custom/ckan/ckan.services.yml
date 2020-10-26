@@ -1,0 +1,70 @@
+services:
+  ckan.request:
+    class: Drupal\ckan\CkanRequest
+    arguments:
+      - '@http_client'
+      - '@config.factory'
+      - '@logger.factory'
+      - '@cache.default'
+      - '@entity_type.manager'
+      - '@request_stack'
+
+  ckan.mapping:
+    class: Drupal\ckan\MappingService
+    arguments:
+      - '@donl.value_list'
+      - '@string_translation'
+
+  ckan.languageCheck:
+    class: Drupal\ckan\LanguageCheckService
+    arguments:
+      - '@language_manager'
+      - '@donl.value_list'
+      - '@string_translation'
+
+  ckan.sort_dataset_resources:
+    class: Drupal\ckan\SortDatasetResourcesService
+    arguments:
+      - '@donl.value_list'
+      - '@string_translation'
+
+  ckan.breadcrumb:
+    class: Drupal\ckan\BreadcrumbBuilder
+    arguments:
+      - '@string_translation'
+      - '@request_stack'
+    tags:
+      - { name: breadcrumb_builder, priority: 9999 }
+
+  ckan.paramConverter.dataset:
+    class: Drupal\ckan\Routing\ParamConverterDataset
+    arguments: ['@ckan.request']
+    tags:
+      - { name: paramconverter }
+
+  ckan.paramConverter.resource:
+    class: Drupal\ckan\Routing\ParamConverterResource
+    arguments: ['@ckan.request']
+    tags:
+      - { name: paramconverter }
+
+  ckan.dataset.access_check:
+    class: Drupal\ckan\Access\DatasetAccessCheck
+    arguments:
+      - '@current_user'
+      - '@current_route_match'
+    tags:
+      - { name: access_check, applies_to: '_dataset_access_check' }
+
+  ckan.twig_extension:
+    class: Drupal\ckan\CkanTwigExtension
+    arguments:
+      - '@ckan.mapping'
+      - '@language_manager'
+      - '@entity_type.manager'
+      - '@donl_search.search_url'
+      - '@ckan.request'
+      - '@ckan.sort_dataset_resources'
+      - '@date.formatter'
+    tags:
+      - { name: twig.extension }

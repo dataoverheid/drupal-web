@@ -1,0 +1,8 @@
+uuid: 9a8022d6-0f38-48c8-a755-94f21217420d
+langcode: nl
+status: true
+dependencies: {  }
+id: linklist_block_uitgevuld
+label: 'Linklist block uitgevuld'
+revision: 0
+description: 'Linklist block zonder container en column'

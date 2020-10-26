@@ -1,0 +1,20 @@
+uuid: 083b68ef-110f-438c-acdb-5a70bacd7a9c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_frequency
+  module:
+    - text
+id: taxonomy_term.donlsync_cbs_mapping_frequency.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_frequency
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

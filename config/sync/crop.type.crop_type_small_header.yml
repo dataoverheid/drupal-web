@@ -1,0 +1,12 @@
+uuid: dc220585-15b9-437d-881b-81f903cee7a2
+langcode: en
+status: true
+dependencies: {  }
+label: 'Small header (855x511)'
+id: crop_type_small_header
+description: ''
+aspect_ratio: '855:511'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

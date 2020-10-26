@@ -1,0 +1,22 @@
+uuid: 6af7413d-fac6-40fd-a010-8d155642e0c1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node.feedback_dataset.sticky
+field_name: sticky
+entity_type: node
+bundle: feedback_dataset
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

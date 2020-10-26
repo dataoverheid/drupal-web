@@ -1,0 +1,21 @@
+uuid: 29635770-e62b-49e1-aa46-e0367e8d1671
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_publisher
+  module:
+    - options
+    - user
+id: user.user.field_publisher
+field_name: field_publisher
+entity_type: user
+bundle: user
+label: Publisher
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

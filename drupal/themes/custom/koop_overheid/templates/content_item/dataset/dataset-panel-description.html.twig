@@ -1,0 +1,122 @@
+{% macro characteristics(id, class, title, description) %}
+  <div class="characteristic{% if class %} characteristic--{{ class }}{% endif %}">
+    <a href="#question-explanation-{{ id }}"
+       id="question-explanation-link-{{ id }}"
+       data-explanation-opener="question-explanation-{{ id }}"
+       data-handler="toggle-explanation">{{ title }}</a>
+    <div class="question-explanation__content"
+         id="question-explanation-{{ id }}" data-decorator="hide-self">
+      <p>{{ description|raw }}</p>
+      <a href="#question-explanation-link-{{ id }}"
+         class="question-explanation__close"
+         data-handler="close-explanation">{{ 'Close'|t }}</a>
+    </div>
+  </div>
+{% endmacro %}
+
+<div>
+  <h2 class="visible-xs">{{ 'Description'|t }}</h2>
+  <div class="characteristics">
+    {% if dataset.dataset_quality == 1 %}
+      {{ _self.characteristics(1, 'ok', 'Ok'|t, 'The link(s) with this dataset have been checked and lead to data.'|t ) }}
+    {% endif %}
+
+    {% if dataset.high_value %}
+      {{ _self.characteristics(2, 'ok', 'High value'|t, 'A high value dataset has a high value for society.'|t ) }}
+    {% endif %}
+
+    {% if dataset.reference_data %}
+      {{ _self.characteristics(3, '', 'Reference dataset'|t, 'Reference datasets are essential for promoting the use of government data. This data is valuable when used with other government data.'|t ) }}
+    {% endif %}
+
+    {% if dataset.base_register %}
+      {{ _self.characteristics(4, '', 'Basic register'|t, 'A basic registration is a registration officially designated by the government with data that is mandatory for all government institutions in the performance of public-law duties.'|t ) }}
+    {% endif %}
+
+    {% if dataset.conforms_to %}
+      {{ _self.characteristics(5, 'international', 'Standard'|t, 'This data set has been published in accordance with a recognized standard.'|t ) }}
+    {% endif %}
+
+    {% if dataset.legal_foundation_uri %}
+      {{ _self.characteristics(6, 'basis', 'Grondslag bekend', 'Bij deze dataset is een wettelijke grondslag opgenomen d.m.v. een verwijzing naar de wettelijke bepaling op <a href="https://wetten.overheid.nl">wetten.overheid.nl</a>.' ) }}
+    {% endif %}
+
+    {% if dataset.national_coverage %}
+      {{ _self.characteristics(7, '', 'National coverage'|t, 'This is a dataset that is nationwide. The data covers the entire Netherlands.'|t ) }}
+    {% endif %}
+  </div>
+  {% if text %}
+    <div class="panel-description">
+      {{ text }}
+    </div>
+  {% endif %}
+  <p>{{ ckan_markdown(dataset.notes) }}</p>
+  {% if dataset.url %}
+    <p>{{ 'Landing page' | t }}: {{ ckan_link(dataset.url) }}</p>
+  {% endif %}
+  {% if dataset.tags %}
+    <div class="tags">
+      {% for tag in dataset.tags %}
+        {{ ckan_link_tag(tag) }}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+<div class="dataset-sidebar">
+  <div class="well dataset-links gray">
+    <h2><img src="/themes/custom/koop_overheid/images/icon-info.svg" class="icon-info-img" alt="">{{ 'Not the dataset that you are looking for?'|t }}</h2>
+    {% if links %}
+      <p>{{ 'You can do a datarequest to request a specific dataset.' | t }}</p>
+      {{ links.datarequest }}
+      <p>{{ 'Would you like to respond to the contents of this dataset?' | t }}</p>
+      {{ links.feedback }}
+    {% endif %}
+    <br>
+  </div>
+  {% if dataset.contact_point_title or dataset.contact_point_name %}
+    <strong>Contactinformatie</strong>
+    {% set contactpoint %}
+      <table class="minimal-table">
+        <tbody>
+        {% if dataset.contact_point_title %}
+          <tr>
+            <th>{{ 'Title'|t }}</th>
+            <td>{{ dataset.contact_point_title }}</td>
+          </tr>
+        {% endif %}
+        {% if dataset.contact_point_name %}
+          <tr>
+            <th>{{ 'Name'|t }}:</th>
+            <td>{{ dataset.contact_point_name }}</td>
+          </tr>
+        {% endif %}
+        {% if dataset.contact_point_email %}
+          <tr>
+            <th>{{ 'Email'|t }}:</th>
+            <td><a href="mailto:{{ dataset.contact_point_email }}">{{ dataset.contact_point_email }}</a></td>
+          </tr>
+        {% endif %}
+        {% if dataset.contact_point_website %}
+          <tr>
+            <th>{{ 'Website'|t }}:</th>
+            <td>{{ ckan_link(dataset.contact_point_website) }}</td>
+          </tr>
+        {% endif %}
+        {% if dataset.contact_point_phone %}
+          <tr>
+            <th>{{ 'Phonenumber'|t }}:</th>
+            <td>{{ dataset.contact_point_phone }}</td>
+          </tr>
+        {% endif %}
+        {% if dataset.contact_point_address %}
+          <tr>
+            <th>{{ 'Address'|t }}:</th>
+            <td> {{ dataset.contact_point_address }}</td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    {% endset %}
+    {{ contactpoint }}
+  {% endif %}
+</div>

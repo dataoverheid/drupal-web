@@ -1,0 +1,21 @@
+uuid: fd82e45f-bc5e-4f78-ae17-adb1d72aaae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.problems_with_search
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.problems_with_search
+field_name: problems_with_search
+entity_type: node
+bundle: datarequest
+label: 'Heeft u problemen gehad met het zoeken naar de data?'
+description: 'Kies hier uit de lijst of u problemen heeft gehad met het zoeken of niet.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

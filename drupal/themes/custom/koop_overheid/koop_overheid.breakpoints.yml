@@ -1,0 +1,6 @@
+koop_overheid.narrow:
+  label: narrow
+  mediaQuery: 'all and (max-width: 50em)'
+  weight: 1
+  multipliers:
+    - 1x

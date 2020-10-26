@@ -1,0 +1,18 @@
+uuid: 41055f59-c123-4dae-9e87-1a820c32fb02
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.group
+id: node.group.metatag
+field_name: metatag
+entity_type: node
+bundle: group
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

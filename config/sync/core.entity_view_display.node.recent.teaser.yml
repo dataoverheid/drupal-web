@@ -1,0 +1,37 @@
+uuid: cb99aa43-c466-44b9-ada5-f1bde550515d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.recent.body
+    - field.field.node.recent.field_left_sidebar
+    - field.field.node.recent.field_paragraphs
+    - field.field.node.recent.field_right_sidebar
+    - field.field.node.recent.recent_image
+    - field.field.node.recent.recent_type
+    - node.type.recent
+  module:
+    - text
+    - user
+id: node.recent.teaser
+targetEntityType: node
+bundle: recent
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_left_sidebar: true
+  field_paragraphs: true
+  field_right_sidebar: true
+  langcode: true
+  links: true
+  recent_image: true
+  recent_type: true

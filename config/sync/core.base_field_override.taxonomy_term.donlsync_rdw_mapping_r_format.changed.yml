@@ -1,0 +1,18 @@
+uuid: 3ed1f704-543e-4f25-9b7e-c59cac238b00
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_rdw_mapping_r_format
+id: taxonomy_term.donlsync_rdw_mapping_r_format.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: donlsync_rdw_mapping_r_format
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

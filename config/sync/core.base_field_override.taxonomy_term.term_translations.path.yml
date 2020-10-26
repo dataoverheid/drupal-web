@@ -1,0 +1,20 @@
+uuid: f8dc3166-1bd8-40ca-b1a3-c28fd53de009
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.term_translations
+  module:
+    - path
+id: taxonomy_term.term_translations.path
+field_name: path
+entity_type: taxonomy_term
+bundle: term_translations
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

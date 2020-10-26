@@ -1,0 +1,6 @@
+name: DONL search backlink
+description: Module which handles the generation of the correct backlink on search pages.
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9

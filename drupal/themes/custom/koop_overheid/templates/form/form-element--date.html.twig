@@ -1,0 +1,14 @@
+{% extends 'form-element.html.twig' %}
+
+{% set date_classes = [
+  'js-form-item',
+  'form-item',
+  'js-form-type-' ~ type|clean_class,
+  'form-item-' ~ name|clean_class,
+  'js-form-item-' ~ name|clean_class,
+  disabled == 'disabled' ? 'form-disabled',
+] %}
+
+{% block wrapper %}
+  <div{{ attributes.addClass(date_classes) }}>
+{% endblock wrapper %}

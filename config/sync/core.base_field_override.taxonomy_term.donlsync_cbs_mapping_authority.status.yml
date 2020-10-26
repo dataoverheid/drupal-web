@@ -1,0 +1,22 @@
+uuid: 2226e426-73b2-44cc-b18b-b5f34e401f20
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_authority
+id: taxonomy_term.donlsync_cbs_mapping_authority.status
+field_name: status
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_authority
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

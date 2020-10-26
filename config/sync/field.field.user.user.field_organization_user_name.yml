@@ -1,0 +1,20 @@
+uuid: 49dd29d7-2c8e-47dd-aed8-6c9dc567f676
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_user_name
+  module:
+    - user
+id: user.user.field_organization_user_name
+field_name: field_organization_user_name
+entity_type: user
+bundle: user
+label: 'Uw naam'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

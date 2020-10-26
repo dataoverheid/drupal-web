@@ -1,0 +1,20 @@
+uuid: 117c5b5d-0506-410e-8e8b-ffab5b777bdb
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.uid
+field_name: uid
+entity_type: node
+bundle: community
+label: 'Geschreven door'
+description: 'De gebruikersnaam van de auteur.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

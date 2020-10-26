@@ -1,0 +1,18 @@
+uuid: 51daf8d2-0950-41b5-b388-bc4ff39d1fb4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_geme
+id: taxonomy_term.dcatapdonl_overheid_spatial_geme.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_geme
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

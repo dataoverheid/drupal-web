@@ -1,0 +1,18 @@
+uuid: 603723d4-1039-4fec-9c34-79295463f359
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.appliance_tags
+id: taxonomy_term.appliance_tags.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: appliance_tags
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,20 @@
+uuid: 26cfd622-ae0f-4094-b152-2a93d1ad702b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_donl_language.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

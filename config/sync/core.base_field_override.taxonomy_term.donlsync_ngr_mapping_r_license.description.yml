@@ -1,0 +1,20 @@
+uuid: c3237148-785a-42ae-b8e6-6f470959b03b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_license
+  module:
+    - text
+id: taxonomy_term.donlsync_ngr_mapping_r_license.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_license
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

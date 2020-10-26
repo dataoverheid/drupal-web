@@ -1,0 +1,15 @@
+name: Ckan integration module
+description: Module which integrates drupal with ckan
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:datetime
+  - donl_search:donl_search
+  - donl_search_backlink:donl_search_backlink
+  - donl_value_list:donl_value_list
+
+interface translation project: ckan
+interface translation server pattern: modules/custom/ckan/translations/ckan.%language.po

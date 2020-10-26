@@ -1,0 +1,11 @@
+uuid: 8adca23b-31ac-43db-95be-9f8bb0f22d1a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - crop.type.highlight
+id: crop.highlight
+target_entity_type_id: crop
+target_bundle: highlight
+default_langcode: site_default
+language_alterable: false

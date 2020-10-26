@@ -1,0 +1,26 @@
+{% if items %}
+  <div class="col applications">
+    <h3>{{ 'Connected Applications'|t }}</h3>
+    {% for item in items |slice(0, 8) %}
+      <div class="search-result">
+        <div class="content-item-title">
+          <span class="type-icon"> <img src="/{{ base_path ~ directory }}/images/icon-data.svg" alt="type-icon"></span>
+          <div>
+            <p class="type">{{ 'Application'|t }}</p>
+
+            {% if community_machine_name %}
+              <a href="{{ path('donl_community.application.view', {'community': community_machine_name, 'application': item.content['#options'].entity.nid.value}) }}" class="result--title">
+                <h3>{{ item.content['#title'] }}</h3>
+              </a>
+            {% else %}
+              <a href="{{ item.content['#url'] }}" class="result--title">
+                <h3>{{ item.content['#title'] }}</h3>
+              </a>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

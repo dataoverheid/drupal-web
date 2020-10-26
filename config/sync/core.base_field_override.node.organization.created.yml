@@ -1,0 +1,18 @@
+uuid: fb6b9a26-204e-46ba-9bb3-c26f65f48a3f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.organization
+id: node.organization.created
+field_name: created
+entity_type: node
+bundle: organization
+label: 'Aangemaakt op'
+description: 'Het tijdstip waarop de node is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

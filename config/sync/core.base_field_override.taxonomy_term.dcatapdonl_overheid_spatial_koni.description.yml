@@ -1,0 +1,20 @@
+uuid: 88355e4e-44f4-40f1-b745-09365e7ed2f0
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_koni
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_spatial_koni.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_koni
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

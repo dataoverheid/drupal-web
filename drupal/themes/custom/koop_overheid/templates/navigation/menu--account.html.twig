@@ -1,0 +1,13 @@
+<div class="profile" data-decorator="init-profile-toggle">
+    <p data-toggler><span class="user-icon"></span></p>
+    <div class="profile__options" data-toggled id="profile-options-1">
+        <h3 class="visually-hidden">Opties:</h3>
+        <ul class="list list--unstyled profile__option-list">
+            {% for item in items %}
+                <li>
+                    {{ link(item.title, item.url) }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+uuid: 20d61a56-7579-4a50-959c-a160429014cb
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_frequency
+id: taxonomy_term.dcatapdonl_overheid_frequency.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_frequency
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

@@ -1,0 +1,5 @@
+{% if title_display == 'invisible' %}
+    <label{{ attributes.addClass(classes).addClass('visually-hidden') }}>{{ title }}</label>
+{% elseif title is not empty or required %}
+    <label{{ attributes.addClass(classes) }}>{{ title }}</label>
+{% endif %}

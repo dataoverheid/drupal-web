@@ -1,0 +1,43 @@
+uuid: 156062a6-ebe6-46b4-a328-c444f0271df2
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+    - options
+third_party_settings:
+  field_permissions:
+    permission_type: custom
+id: node.state_datarequest
+field_name: state_datarequest
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: n.v.t.
+      label: n.v.t.
+    -
+      value: 'Doorverwijzing naar data-eigenaar'
+      label: 'Doorverwijzing naar data-eigenaar'
+    -
+      value: 'Toevoegen dataset aan data.overheid.nl'
+      label: 'Toevoegen dataset aan data.overheid.nl'
+    -
+      value: 'Data-eigenaar onderzoekt dataverzoek'
+      label: 'Data-eigenaar onderzoekt dataverzoek'
+    -
+      value: 'Actie data.overheid.nl'
+      label: 'Actie data.overheid.nl'
+    -
+      value: 'Actie bij data-eigenaar'
+      label: 'Actie bij data-eigenaar'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

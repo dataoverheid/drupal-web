@@ -1,0 +1,18 @@
+uuid: b16ff5b5-4826-42fd-8257-e304277bd948
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.metatag
+field_name: metatag
+entity_type: node
+bundle: datarequest
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

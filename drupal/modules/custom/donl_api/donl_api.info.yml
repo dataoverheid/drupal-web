@@ -1,0 +1,11 @@
+name: DONL API
+description: Create a public JSON API for DONL.
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - donl:donl
+  - donl_search:donl_search
+  - drupal:datetime_range

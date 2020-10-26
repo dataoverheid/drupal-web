@@ -1,0 +1,33 @@
+{% if backLink %}
+  <div class="container row">{{ backLink }}</div>
+{% endif %}
+
+<div id="data-sources" class="container row container--centered">
+  <h1>{{ 'Data sources'|t }}</h1>
+  {% set sortedResources = ckan_dataset_get_sorted_resources(dataset) %}
+  {% if sortedResources %}
+    {% for key, resourceType in sortedResources %}
+      <div class="row">
+        <h2>{{ key|capitalize|replace('-', ' ')|t }}</h2>
+        <ul class="list--sources">
+          {% for resource in resourceType %}
+            <li>
+              <div class="list--source__information">
+                {{ resource.name }}
+                <span class="label label--{{ ckan_mapping_get_file_format_name(resource.format)|lower }}">{{ ckan_mapping_get_file_format_name(resource.format) }}</span>
+              </div>
+              {% if canEdit %}
+                <div class="crud-links">
+                  {{ resource.editUrl }} | {{ resource.removeUrl }}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Geen Databronnen Beschikbaar</p>
+  {% endif %}
+  {{ addLink }}
+</div>

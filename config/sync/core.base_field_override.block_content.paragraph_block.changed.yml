@@ -1,0 +1,18 @@
+uuid: afcfcd74-447d-4c4b-a8a8-8a3d1ca7caa6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.paragraph_block
+id: block_content.paragraph_block.changed
+field_name: changed
+entity_type: block_content
+bundle: paragraph_block
+label: Gewijzigd
+description: 'Het tijdstip waarop het aangepaste blok voor het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

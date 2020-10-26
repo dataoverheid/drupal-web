@@ -1,0 +1,24 @@
+uuid: 6532d816-231c-4316-90a1-4c497cc7973f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_lists.relation_lists
+    - paragraphs.paragraphs_type.relation_lists
+  module:
+    - entity_reference_revisions
+id: paragraph.relation_lists.default
+targetEntityType: paragraph
+bundle: relation_lists
+mode: default
+content:
+  relation_lists:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

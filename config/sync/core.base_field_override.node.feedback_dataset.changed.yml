@@ -1,0 +1,18 @@
+uuid: c2cea5e8-247d-40ab-a271-022a56e77e52
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node.feedback_dataset.changed
+field_name: changed
+entity_type: node
+bundle: feedback_dataset
+label: Gewijzigd
+description: 'Het tijdstip waarop de node voor het laatst werd bewerkt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,18 @@
+uuid: 57e4ff63-e106-4acd-8692-59de66331b9e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.landingpage
+id: node.landingpage.metatag
+field_name: metatag
+entity_type: node
+bundle: landingpage
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

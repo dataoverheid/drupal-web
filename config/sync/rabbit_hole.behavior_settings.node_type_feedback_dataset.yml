@@ -1,0 +1,11 @@
+uuid: 19b608dc-a371-4131-b74c-04f5f9f6bea1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+id: node_type_feedback_dataset
+action: display_page
+allow_override: 0
+redirect: ''
+redirect_code: 301

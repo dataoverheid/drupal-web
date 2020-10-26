@@ -1,0 +1,390 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\ckan\Entity\User;
+use Drupal\ckan\User\CkanUser;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Implements hook_theme().
+ */
+function ckan_theme($existing, $type, $theme, $path) {
+  return [
+    'panel' => [
+      'variables' => [
+        'id' => '',
+        'content' => '',
+        'container' => TRUE,
+        'title' => NULL,
+      ],
+    ],
+    'dataset' => [
+      'variables' => [
+        'dataset' => NULL,
+        'panels' => [],
+        'communities' => [],
+        'editLinks' => [],
+        'backLink' => NULL,
+        'warnings' => [],
+        'tabs' => [],
+        'comparableLinks' => [],
+        'groupLinks' => [],
+        'schema' => [],
+        'search' => NULL,
+      ],
+    ],
+    'dataset-schema' => [
+      'variables' => [
+        'dataset' => NULL,
+      ],
+    ],
+    'dataset_edit_datasources' => [
+      'variables' => [
+        'dataset' => NULL,
+        'backLink' => NULL,
+        'addLink' => NULL,
+        'canEdit' => FALSE,
+      ],
+    ],
+    'dataset-panel-description' => [
+      'variables' => [
+        'dataset' => NULL,
+        'text' => NULL,
+        'links' => [],
+      ],
+    ],
+    'dataset-panel-documentation' => [
+      'variables' => [
+        'resources' => [],
+        'documentation' => [],
+        'confirmsTo' => [],
+        'text' => NULL,
+      ],
+    ],
+    'dataset-panel-metadata' => [
+      'variables' => [
+        'dataset' => NULL,
+        'permanent_link' => '',
+        'text' => NULL,
+      ],
+    ],
+    'dataset-panel-resources' => [
+      'variables' => [
+        'alias' => NULL,
+        'resources' => [],
+        'text' => NULL,
+      ],
+    ],
+    'dataset-panel-visualisations' => [
+      'variables' => [
+        'text' => NULL,
+      ],
+    ],
+    'dataset-panel-relations' => [
+      'variables' => [
+        'comparableLinks' => NULL,
+        'groupLinks' => NULL,
+        'relatedResourceLinks' => NULL,
+        'sourceLinks' => NULL,
+        'texts' => NULL,
+      ],
+    ],
+    'homepage' => [
+      'variables' => [
+        'themes' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function ckan_element_info_alter(array &$types) {
+  // Attach our extra CSS for toolbar icons.
+  if (isset($types['toolbar'])) {
+    $types['toolbar']['#attached']['library'][] = 'ckan/toolbar';
+  }
+}
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function ckan_entity_type_build(array &$entity_types) {
+  if (isset($entity_types['user'])) {
+    $entity_types['user']->setClass(CkanUser::class);
+  }
+}
+
+/**
+ * Implements hook_user_presave().
+ */
+function ckan_user_presave(EntityInterface $entity) {
+  $logger = \Drupal::logger('ckan');
+
+  /* @var \Drupal\ckan\CkanRequest $ckanRequest */
+  if (!$ckanRequest = \Drupal::service('ckan.request')) {
+    $logger->notice('CKAN Request could not be loaded. Ignoring CKAN user functions.');
+    return;
+  }
+
+  try {
+    /* @var \Drupal\user\UserStorage $userStorage */
+    $userStorage = \Drupal::service('entity_type.manager')->getStorage('user');
+    $user = $userStorage->load(\Drupal::currentUser()->id());
+    $ckanRequest->setCkanUser($user);
+  }
+  catch (\Exception $exception) {
+    $logger->notice('Error loading current user for the CKAN request.');
+  }
+
+  // If required fields are missing, skip all.
+  if (!$entity->hasField('field_role') || !$entity->hasField('field_ckan_id') || !$entity->hasField('field_catalog')) {
+    return;
+  }
+
+  // Get role.
+  $role = $entity->get('field_role')->getValue()[0]['value'] ?? NULL;
+
+  // Get CKAN user.
+  $ckanUser = FALSE;
+  if ($ckanId = $entity->get('field_ckan_id')->getValue()[0]['value'] ?? NULL) {
+    if ($ckanUser = $ckanRequest->getUser($ckanId)) {
+      $ckanUser->setEmail($entity->getEmail());
+    }
+  }
+
+  // If the user has the role user, it doesn't need to be on CKAN. So block any
+  // existing user from CKAN.
+  if ($role === 'user') {
+    if ($ckanUser) {
+      if ($ckanUser->state === 'active') {
+        $ckanRequest->blockUser($ckanUser);
+      }
+    }
+    return;
+  }
+
+  // Check if the user is activated or blocked.
+  if ($entity->isActive()) {
+    $catalog = $entity->get('field_catalog')->getValue()[0]['value'] ?? NULL;
+
+    // If there is a CKAN user, active it on CKAN.
+    if ($ckanUser) {
+      // If the user is not active, activate them.
+      if ($ckanUser->state !== 'active') {
+        $ckanRequest->activateUser($ckanUser, $catalog);
+        // Save CKAN id and API key.
+        $entity->set('field_ckan_id', $ckanUser->id);
+        $entity->set('field_ckan_api_key', $ckanUser->apikey);
+      }
+      // Else, create a new CKAN user.
+    }
+    else {
+      // Create CKAN user.
+      $user = new User();
+      $user->setName('user_d' . $entity->id());
+      $user->setFullName($entity->getAccountName());
+      $user->setEmail($entity->getEmail());
+
+      // Try to create a CKAN user.
+      if ($ckanUser = $ckanRequest->createUser($user)) {
+        $ckanRequest->activateUser($ckanUser, $catalog);
+        // Save CKAN id and API key.
+        $entity->set('field_ckan_id', $ckanUser->id);
+        $entity->set('field_ckan_api_key', $ckanUser->apikey);
+        // If it fails there is probably a existing user in CKAN, so update and
+        // active it.
+      }
+      else {
+        if ($ckanRequest->isErrorUserAlreadyExists()) {
+          if ($ckanUser = $ckanRequest->getUser('user_d' . $entity->id())) {
+            $ckanUser->setEmail($entity->getEmail());
+            $ckanRequest->activateUser($ckanUser, $catalog);
+            $entity->set('field_ckan_id', $ckanUser->id);
+            $entity->set('field_ckan_api_key', $ckanUser->apikey);
+          }
+          // Something else failed, block user again.
+        }
+        else {
+          if ((int) $entity->id() !== 1) {
+            $entity->set('status', FALSE);
+          }
+        }
+      }
+    }
+  }
+  else {
+    // If there is a CKAN user.
+    if ($ckanUser) {
+      // And the user is already blocked (deleted), do nothing.
+      if ($ckanUser->state !== 'deleted') {
+        $ckanRequest->blockUser($ckanUser);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function ckan_user_delete(EntityInterface $account) {
+  if (!$ckanRequest = \Drupal::service('ckan.request')) {
+    \Drupal::logger('ckan')
+      ->notice('CKAN Request could not be loaded. Ignoring CKAN user functions.');
+    return;
+  }
+
+  try {
+    /* @var \Drupal\user\UserStorage $userStorage */
+    $userStorage = \Drupal::service('entity_type.manager')->getStorage('user');
+    $user = $userStorage->load(\Drupal::currentUser()->id());
+    $ckanRequest->setCkanUser($user);
+  }
+  catch (\Exception $exception) {
+    \Drupal::logger('ckan')
+      ->notice('Error loading current user for the CKAN request.');
+  }
+
+  // If required fields are missing, skip all.
+  if (!$account->hasField('field_ckan_id')) {
+    return;
+  }
+
+  // Get CKAN user.
+  $ckanUser = FALSE;
+  if ($ckanId = $account->get('field_ckan_id')->getValue()[0]['value'] ?? NULL) {
+    if ($ckanUser = $ckanRequest->getUser($ckanId)) {
+      $ckanUser->setEmail($account->getEmail());
+    }
+  }
+
+  // If there is a CKAN user, delete it (soft delete).
+  if ($ckanUser) {
+    $ckanRequest->deleteUser($ckanUser);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ckan_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+  // Only show role selector at first.
+  $form['account']['#access'] = FALSE;
+  $form['field_catalog']['#access'] = FALSE;
+  $form['field_authority']['#access'] = FALSE;
+  $form['field_publisher']['#access'] = FALSE;
+
+  $currentUser = \Drupal::currentUser();
+  if ($currentUser->id() !== 1 && !\in_array('administrator', $currentUser->getRoles())) {
+    unset($form['field_role']['widget']['#options']['admin']);
+  }
+
+  // If we are in step 2 of the form.
+  if ($form_state->getValue('step') === 2) {
+    // Show account fields.
+    $form['account']['#access'] = TRUE;
+
+    // Hide role and set value.
+    $role = $form_state->getValue('field_role');
+    $form['field_role']['widget']['#type'] = 'hidden';
+    $form['field_role']['widget']['#value'] = $role;
+
+    // If role is user, disabled catalog etc.
+    if ($role === NULL || $role === 'user') {
+      $form['field_catalog']['#access'] = FALSE;
+      $form['field_authority']['#access'] = FALSE;
+      $form['field_publisher']['#access'] = FALSE;
+    }
+    // Else show catalog etc.
+    else {
+      $form['field_catalog']['#access'] = TRUE;
+      $form['field_authority']['#access'] = TRUE;
+      $form['field_publisher']['#access'] = TRUE;
+    }
+  }
+
+  // If we are at step 1, show next button and unset the original submit button.
+  if ($form_state->getValue('step') !== 2) {
+    unset($form['actions']['submit'], $form['#validate'], $form['#submit']);
+    $form['actions']['next'] = [
+      '#type' => 'submit',
+      '#value' => t('Next'),
+      '#submit' => ['ckan_form_user_register_form_next'],
+      '#limit_validation_errors' => [],
+    ];
+  }
+}
+
+/**
+ * Go to the next step in the multistep register form.
+ */
+function ckan_form_user_register_form_next($form, &$form_state) {
+  // Step 2.
+  $form_state->setValue('step', 2);
+
+  // Get the selected role.
+  $userInput = $form_state->getUserInput();
+  $form_state->setValue('field_role', $userInput['field_role'] ?? NULL);
+
+  // Rebuild form.
+  $form_state->setRebuild();
+}
+
+/**
+ * Get allowed values for authority.
+ */
+function ckan_authority_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
+  /* @var \Drupal\donl_value_list\ValueList $valueList */
+  $valueList = \Drupal::service('donl.value_list');
+
+  return $valueList->getList('donl:organization');
+}
+
+/**
+ * Get allowed values for publisher.
+ */
+function ckan_publisher_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
+  /* @var \Drupal\donl_value_list\ValueList $valueList */
+  $valueList = \Drupal::service('donl.value_list');
+
+  return $valueList->getList('donl:organization');
+}
+
+/**
+ * Get allowed values for catalog.
+ */
+function ckan_catalog_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
+  /* @var \Drupal\donl_value_list\ValueList $valueList */
+  $valueList = \Drupal::service('donl.value_list');
+
+  return $valueList->getList('donl:catalogs');
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function ckan_page_attachments(array &$page) {
+  $routeName = \Drupal::routeMatch()->getRouteName();
+
+  // Add a canonical to the dataset page.
+  if ($routeName === 'ckan.dataset.view') {
+    $dataset = \Drupal::routeMatch()->getParameter('dataset');
+    $canonical = [
+      '#tag' => 'link',
+      '#attributes' => [
+        'rel' => 'canonical',
+        'href' => Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getName()])
+          ->toString(),
+      ],
+    ];
+    $page['#attached']['html_head'][] = [$canonical, 'ckan_dataset_canonical'];
+  }
+}

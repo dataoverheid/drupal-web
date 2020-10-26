@@ -1,0 +1,18 @@
+uuid: f15621bb-121e-4352-87bf-13b2f8c6b82c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_sche
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.dcatapdonl_overheid_spatial_sche
+target_entity_type_id: taxonomy_term
+target_bundle: dcatapdonl_overheid_spatial_sche
+default_langcode: site_default
+language_alterable: false

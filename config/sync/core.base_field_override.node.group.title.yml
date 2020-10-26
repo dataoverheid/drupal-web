@@ -1,0 +1,18 @@
+uuid: 2237fa02-5637-402e-b0a5-94839d6260f5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.group
+id: node.group.title
+field_name: title
+entity_type: node
+bundle: group
+label: Titel
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

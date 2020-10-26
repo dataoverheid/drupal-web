@@ -1,0 +1,18 @@
+uuid: 311851a8-223a-43c4-8fdd-e30f4a297138
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.relation_list
+id: paragraph.relation_list.created
+field_name: created
+entity_type: paragraph
+bundle: relation_list
+label: 'Aangemaakt op'
+description: 'Tijdstip waarop de paragraaf is aangemaakt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

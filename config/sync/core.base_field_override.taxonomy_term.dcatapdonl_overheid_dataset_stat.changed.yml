@@ -1,0 +1,18 @@
+uuid: 1addd290-486d-4e79-a9f9-a117c4a1bf73
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

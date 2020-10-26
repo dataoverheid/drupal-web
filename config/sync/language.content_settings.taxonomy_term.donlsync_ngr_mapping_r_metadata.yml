@@ -1,0 +1,18 @@
+uuid: 8ba31459-000a-43aa-8178-49144f50b960
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_metadata
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.donlsync_ngr_mapping_r_metadata
+target_entity_type_id: taxonomy_term
+target_bundle: donlsync_ngr_mapping_r_metadata
+default_langcode: site_default
+language_alterable: false

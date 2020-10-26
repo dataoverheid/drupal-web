@@ -1,0 +1,44 @@
+services:
+  donl_search.request:
+    class: Drupal\donl_search\SolrRequest
+    arguments:
+      - '@http_client'
+      - '@config.factory'
+      - '@logger.factory'
+      - '@language_manager'
+      - '@donl.value_list'
+      - '@request_stack'
+      - '@path_alias.manager'
+      - '@entity_type.manager'
+      - '@datetime.time'
+
+  donl_search.search.facets:
+    class: Drupal\donl_search\SearchFacets
+    arguments:
+      - '@donl_search.search.facetRename'
+      - '@language_manager'
+      - '@config.factory'
+      - '@donl_search.search_url'
+
+  donl_search.search.facetRename:
+    class: Drupal\donl_search\FacetRenameService
+    arguments:
+      - '@donl.value_list'
+      - '@cache.default'
+      - '@string_translation'
+      - '@entity_type.manager'
+      - '@language_manager'
+
+  donl_search.search.pagination:
+    class: Drupal\donl_search\SearchPagination
+    arguments:
+      - '@form_builder'
+      - '@donl_search.search_url'
+
+  donl_search.search.sorting:
+    class: Drupal\donl_search\SearchSorting
+    arguments:
+      - '@donl_search.search_url'
+
+  donl_search.search_url:
+    class: Drupal\donl_search\SearchUrlService

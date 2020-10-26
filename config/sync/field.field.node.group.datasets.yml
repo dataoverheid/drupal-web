@@ -1,0 +1,21 @@
+uuid: 03154237-bb75-4093-86a9-e09b5f959629
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.datasets
+    - node.type.group
+  module:
+    - ckan
+id: node.group.datasets
+field_name: datasets
+entity_type: node
+bundle: group
+label: Datasets
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

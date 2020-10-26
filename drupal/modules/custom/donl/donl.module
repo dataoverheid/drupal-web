@@ -1,0 +1,296 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+/**
+ * Implements hook_theme().
+ */
+function donl_theme($existing, $type, $theme, $path) {
+  return [
+    'donl_privacy_statement' => [
+      'variables' => [],
+    ],
+    'application' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'link' => '',
+        'tabs' => '',
+        'panels' => '',
+      ],
+    ],
+    'application-panel-description' => [
+      'variables' => [
+        'tags' => [],
+        'node' => NULL,
+        'datasets_links' => [],
+        '#logo' => NULL,
+      ],
+    ],
+    'datarequest' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'tabs' => '',
+        'panels' => '',
+        'extraInfo' => '',
+      ],
+    ],
+    'datarequest-panel-request' => [
+      'variables' => [
+        'datarequest' => NULL,
+      ],
+    ],
+    'datarequest-panel-reply' => [
+      'variables' => [
+        'datarequest' => NULL,
+      ],
+    ],
+    'datarequest-panel-relations' => [
+      'variables' => [
+        'datarequest' => NULL,
+      ],
+    ],
+    'donl_user_profile' => [
+      'variables' => [
+        'editLinks' => [],
+        'search' => NULL,
+        'user' => NULL,
+        'user_registered_since' => '',
+        'tabs' => [],
+        'panels' => [],
+      ],
+    ],
+    'donl_user_profile-metadata' => [
+      'variables' => [
+        'user' => NULL,
+        'user_registered_since' => '',
+      ],
+    ],
+    'manage-content-table' => [
+      'variables' => [
+        'links' => [],
+        'rows' => [],
+        'empty_text' => t('No data found'),
+        'pagination' => NULL,
+      ],
+    ],
+    'donl_tag_cloud_block' => [
+      'variables' => [
+        'tags' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function donl_preprocess_html(&$variables) {
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    $script = file_get_contents(__DIR__ . '/templates/schema.json');
+
+    $variables['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#attributes' => ['type' => 'application/ld+json'],
+        '#value' => Markup::create($script),
+        '#weight' => -1,
+      ],
+      'scheme-org',
+    ];
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function donl_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $valueList = \Drupal::service('donl.value_list');
+
+  if (isset($form['theme']) && $form_id !== 'block_form') {
+    $form['theme']['widget'][0]['value']['#type'] = 'select';
+    $form['theme']['widget'][0]['value']['#options'] = $valueList->getPreparedHierarchicalThemeList(TRUE);
+    $form['theme']['widget'][0]['value']['#empty_option'] = t('- Select item -');
+    $form['theme']['widget'][0]['value']['#size'] = 1;
+  }
+
+  if (in_array($form_id, ['node_datarequest_form', 'node_datarequest_edit_form'])) {
+    $form['#title'] = t('Make a new data request');
+    if ($form_id === 'node_datarequest_edit_form') {
+      $form['#title'] = t('Edit data request');
+    }
+
+    $request = \Drupal::request();
+    $possibleOwner = html_entity_decode($request->query->get('data_eigenaar', ''), ENT_QUOTES, 'UTF-8');
+    $requestedData = html_entity_decode($request->query->get('gevraagde_data', ''), ENT_QUOTES, 'UTF-8');
+
+    $form['data_owner']['widget'][0]['value']['#type'] = 'select';
+    $form['data_owner']['widget'][0]['value']['#options'] = $valueList->getList('donl:organization');
+    $form['data_owner']['widget'][0]['value']['#size'] = 1;
+
+    $form['requested_dataformat']['widget'][0]['value']['#type'] = 'select';
+    $form['requested_dataformat']['widget'][0]['value']['#options'] = $valueList->getList('mdr:filetype_nal');
+    $form['requested_dataformat']['widget'][0]['value']['#size'] = 1;
+
+    $form['possible_owner']['widget'][0]['value']['#type'] = 'select';
+    $form['possible_owner']['widget'][0]['value']['#options'] = $valueList->getList('donl:organization');
+    $form['possible_owner']['widget'][0]['value']['#size'] = 1;
+    if (!empty($possibleOwner)) {
+      $form['possible_owner']['widget'][0]['value']['#default_value'] = $possibleOwner;
+    }
+
+    if (!empty($requestedData)) {
+      $form['requested_data']['widget'][0]['value']['#default_value'] = $requestedData;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function donl_form_node_feedback_dataset_form_alter(&$form, FormStateInterface $form_state) {
+  $datasetId = \Drupal::request()->query->get('dataset', '');
+  if (!$datasetId) {
+    throw new NotFoundHttpException();
+  }
+
+  /* @var \Drupal\ckan\Entity\Dataset $dataset */
+  $dataset = \Drupal::service('ckan.request')->getDataset($datasetId);
+  if (!$dataset) {
+    throw new NotFoundHttpException();
+  }
+
+  $form['data_eigenaar']['widget'][0]['value']['#default_value'] = $dataset->getAuthority();
+  $form['data_eigenaar']['widget'][0]['value']['#value'] = $dataset->getAuthority();
+  $form['data_eigenaar']['widget'][0]['value']['#disabled'] = TRUE;
+
+  $form['titel_dataset']['widget'][0]['value']['#default_value'] = $dataset->getTitle();
+  $form['titel_dataset']['widget'][0]['value']['#value'] = $dataset->getTitle();
+  $form['titel_dataset']['widget'][0]['value']['#disabled'] = TRUE;
+
+  $datasetLink = Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getName()], ['absolute' => TRUE])->toString();
+  $form['link_dataset']['widget'][0]['uri']['#default_value'] = $datasetLink;
+  $form['link_dataset']['widget'][0]['uri']['#value'] = $datasetLink;
+  $form['link_dataset']['widget'][0]['uri']['#disabled'] = TRUE;
+
+  $form['#submit'][] = 'donl_form_node_feedback_dataset_form_alter_submit';
+  $form['actions']['submit']['#submit'][] = 'donl_form_node_feedback_dataset_form_alter_submit';
+}
+
+/**
+ * Custom sumbit handler for node_feedback_dataset_form.
+ */
+function donl_form_node_feedback_dataset_form_alter_submit(&$form, FormStateInterface $form_state) {
+  $messenger = \Drupal::messenger();
+  if ($messenger->messagesByType('status')) {
+    $messenger->deleteByType('status');
+    $messenger->addStatus(t('Your feedback with title %title has been saved and will be forwarded to the relevant data owner.', ['%title' => $form_state->getValue('title')[0]['value']]));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function donl_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  if ($form['#form_id'] === 'node_appliance_form' || $form['#form_id'] === 'node_datarequest_form') {
+    donl_add_privacy_fields($form);
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function donl_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('step') === 2) {
+    donl_add_privacy_fields($form);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function donl_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#submit'][] = 'donl_form_user_login_form_alter_submit';
+}
+
+/**
+ * Custom sumbit handler for user_login_form.
+ */
+function donl_form_user_login_form_alter_submit($form, FormStateInterface $form_state) {
+  $form_state->setRedirect('donl.profile.view');
+}
+
+/**
+ * Helper function to add the privacy fields to existing forms.
+ *
+ * @param array $form
+ */
+function donl_add_privacy_fields(array &$form) {
+  $form['privacy_info'] = [
+    '#theme' => 'donl_privacy_statement',
+    '#weight' => 49,
+  ];
+  $form['privacy_accept'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Statement of agreement') . ' <small>' . t('Required field') . '</small>',
+    '#weight' => 50,
+    '#attributes' => [
+      'class' => 'privacy-accept',
+    ],
+  ];
+  $form['privacy_accept'][] = [
+    '#type' => 'checkbox',
+    '#title' => t('I have read and understood what is being done with my personal data.'),
+    '#required' => TRUE,
+    '#value' => 'accept',
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function donl_node_presave(NodeInterface $node) {
+  if ($node->getType() === 'datarequest') {
+    if ($node->id() === NULL && !$node->get('datarequest_id')->getValue()) {
+      $query = \Drupal::database()->select('node__datarequest_id', 'n');
+      $query->addExpression('MAX(datarequest_id_value)', 'max');
+      $query->range(0, 1);
+      $max = (int) $query->execute()->fetchField();
+      $node->set('datarequest_id', $max + 1);
+    }
+  }
+}
+
+/**
+ * Implements hook_value_list_service_alter().
+ */
+function donl_value_list_service_alter(&$links) {
+  $links[] = Link::createFromRoute('DCAT-AP-DONL - DONL:Organization', 'donl.value_list.organizations')->toString();
+  $links[] = Link::createFromRoute('DCAT-AP-DONL - DONL:Catalogs', 'donl.value_list.catalog')->toString();
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function donl_menu_local_tasks_alter(&$data, $route_name) {
+  // Remove the user view local task, because we replaced it with the profile
+  // local task.
+  if (in_array($route_name, ['donl.profile.view', 'entity.user.canonical'])) {
+    unset($data['tabs']);
+  }
+}

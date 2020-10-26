@@ -1,0 +1,8 @@
+uuid: 0f738109-e67c-4561-996f-01e0a7c97443
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - ADMS:Changetype'
+vid: dcatapdonl_adms_changetype
+description: ''
+weight: 0

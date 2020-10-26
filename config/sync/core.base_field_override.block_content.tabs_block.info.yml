@@ -1,0 +1,18 @@
+uuid: 0fd31279-b515-4916-a2b1-a72a4714664a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs_block
+id: block_content.tabs_block.info
+field_name: info
+entity_type: block_content
+bundle: tabs_block
+label: Blokbeschrijving
+description: 'Een korte beschrijving van het blok.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

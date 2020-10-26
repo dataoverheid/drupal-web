@@ -1,0 +1,75 @@
+uuid: 4a002882-3b2b-4081-a7be-2109c548775c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.description_en
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.description_nl
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.identifier
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.label_en
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.label_nl
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.name_slug
+    - field.field.taxonomy_term.dcatapdonl_donl_catalogs.thumbnail
+    - taxonomy.vocabulary.dcatapdonl_donl_catalogs
+id: taxonomy_term.dcatapdonl_donl_catalogs.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_donl_catalogs
+mode: default
+content:
+  description_en:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  description_nl:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  name_slug:
+    weight: 4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  thumbnail:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

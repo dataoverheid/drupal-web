@@ -1,0 +1,18 @@
+uuid: 865e0987-d34b-496e-ab92-a89efd912ed4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.paragraph_block
+id: block_content.paragraph_block.metatag
+field_name: metatag
+entity_type: block_content
+bundle: paragraph_block
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

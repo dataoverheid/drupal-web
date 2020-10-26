@@ -1,0 +1,45 @@
+{% set classes = [
+  'radiogroup',
+  'inline-group',
+  'js-form-item',
+  'form-item',
+  'js-form-wrapper',
+  'form-wrapper',
+  'form__element',
+] %}
+<fieldset{{ attributes.addClass(classes) }}>
+  {% set legend_span_classes = [
+    'fieldset-legend',
+    required ? 'js-form-required',
+    required ? 'form-required',
+  ] %}
+  {#  Always wrap fieldset legends in a SPAN for CSS positioning. #}
+  <legend{{ legend.attributes }}>
+    <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
+    {% if description %}
+      {% include '@koop_overheid/form/form-element-description.html.twig' with
+        {
+          'element_id':attributes.id|replace({'--wrapper':''}),
+          'content': description.content
+        } %}
+    {% endif %}
+    {% if required %}
+      <small>Verplicht veld</small>
+    {% endif %}
+  </legend>
+
+  <div class="fieldset-wrapper">
+    {% if errors %}
+      <div>
+        {{ errors }}
+      </div>
+    {% endif %}
+    {% if prefix %}
+      <span class="field-prefix">{{ prefix }}</span>
+    {% endif %}
+    {{ children }}
+    {% if suffix %}
+      <span class="field-suffix">{{ suffix }}</span>
+    {% endif %}
+  </div>
+</fieldset>

@@ -1,0 +1,18 @@
+uuid: 92e7a5ff-b922-4ca3-a27f-19eccb8d3421
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.voetnoot
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.voetnoot
+target_entity_type_id: paragraph
+target_bundle: voetnoot
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,20 @@
+uuid: 2611f68c-b3b5-45ce-81ba-486c1f7fdbac
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.menu_link
+field_name: menu_link
+entity_type: node
+bundle: community
+label: Menulink
+description: 'Berekende menulink van de node (alleen beschikbaar tijdens het opslaan).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

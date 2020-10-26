@@ -1,0 +1,22 @@
+uuid: 62e8128b-d97e-4bed-b206-afa3b6186996
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+id: node.recent.sticky
+field_name: sticky
+entity_type: node
+bundle: recent
+label: 'Vastgeplakt bovenaan de lijst'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

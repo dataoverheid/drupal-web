@@ -1,0 +1,12 @@
+services:
+  donl_custom_http_404.exception.custom_page_html:
+    class: Drupal\donl_custom_http_4xx\EventSubscriber\CustomHttp4xxExceptionHtmlSubscriber
+    tags:
+      - { name: event_subscriber }
+    arguments:
+      - '@config.factory'
+      - '@http_kernel'
+      - '@logger.channel.php'
+      - '@redirect.destination'
+      - '@router.no_access_checks'
+      - '@access_manager'

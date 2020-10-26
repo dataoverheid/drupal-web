@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Set default config.
+ */
+function donl_value_list_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('donl_value_list.settings');
+  $config->set('locations', ['https://waardelijsten.dcat-ap-donl.nl/']);
+  $config->save(TRUE);
+}

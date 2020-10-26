@@ -1,0 +1,22 @@
+uuid: 3aa596ae-7670-4b4f-bcc7-4846b4cfad8f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.appliance_tags
+id: taxonomy_term.appliance_tags.status
+field_name: status
+entity_type: taxonomy_term
+bundle: appliance_tags
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

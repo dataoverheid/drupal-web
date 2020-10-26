@@ -1,0 +1,18 @@
+uuid: a6cee90d-9dd0-4b2a-8690-dd4bd4905e70
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.appliance_tags
+id: taxonomy_term.appliance_tags.name
+field_name: name
+entity_type: taxonomy_term
+bundle: appliance_tags
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

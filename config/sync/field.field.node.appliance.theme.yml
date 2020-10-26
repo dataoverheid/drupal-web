@@ -1,0 +1,19 @@
+uuid: 50c51d16-225c-4952-905d-73677b8a6159
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.theme
+    - node.type.appliance
+id: node.appliance.theme
+field_name: theme
+entity_type: node
+bundle: appliance
+label: 'Thema toepassing'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

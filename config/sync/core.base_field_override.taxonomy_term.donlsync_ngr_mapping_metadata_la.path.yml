@@ -1,0 +1,20 @@
+uuid: baca4ec7-a841-4d56-9d82-179fa72d8f38
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_metadata_la
+  module:
+    - path
+id: taxonomy_term.donlsync_ngr_mapping_metadata_la.path
+field_name: path
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_metadata_la
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -1,0 +1,22 @@
+uuid: c1b92e39-c245-45a6-9735-000a03f8230c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.nested_links
+id: paragraph.nested_links.status
+field_name: status
+entity_type: paragraph
+bundle: nested_links
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

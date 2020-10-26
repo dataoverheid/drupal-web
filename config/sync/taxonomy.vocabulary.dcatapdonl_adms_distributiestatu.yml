@@ -1,0 +1,8 @@
+uuid: c82e9177-78b7-4f14-ae05-79c36e7c3e3b
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - ADMS:Distributiestatus'
+vid: dcatapdonl_adms_distributiestatu
+description: ''
+weight: 0

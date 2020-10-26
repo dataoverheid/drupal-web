@@ -1,0 +1,19 @@
+uuid: 781e30f7-a2d5-4b52-87dc-99b1970d51cf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_voetnoot_tekst
+    - paragraphs.paragraphs_type.voetnoot
+id: paragraph.voetnoot.field_voetnoot_tekst
+field_name: field_voetnoot_tekst
+entity_type: paragraph
+bundle: voetnoot
+label: 'Voetnoot tekst'
+description: 'De tekst van de voetnoot'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

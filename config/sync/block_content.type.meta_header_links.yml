@@ -1,0 +1,8 @@
+uuid: a150421e-caee-42ea-a1c9-0d95069fa0ed
+langcode: en
+status: true
+dependencies: {  }
+id: meta_header_links
+label: 'Meta header links'
+revision: 0
+description: 'Links in the meta header region, for example MijnOverheid'

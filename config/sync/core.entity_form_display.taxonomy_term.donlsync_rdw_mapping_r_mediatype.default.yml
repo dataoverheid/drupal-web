@@ -1,0 +1,32 @@
+uuid: 38b854e2-0f06-4b67-90e3-c3de9982c7a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_rdw_mapping_r_mediatype.target_value
+    - taxonomy.vocabulary.donlsync_rdw_mapping_r_mediatype
+id: taxonomy_term.donlsync_rdw_mapping_r_mediatype.default
+targetEntityType: taxonomy_term
+bundle: donlsync_rdw_mapping_r_mediatype
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  target_value:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  description: true
+  langcode: true
+  path: true

@@ -1,0 +1,18 @@
+uuid: 7e86a4d1-12d3-411d-8662-f44f27075fe6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.catalog
+id: node.catalog.metatag
+field_name: metatag
+entity_type: node
+bundle: catalog
+label: Metatags
+description: 'The meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

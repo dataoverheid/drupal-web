@@ -1,0 +1,19 @@
+uuid: 12be32d9-7b5f-41a6-ab48-6b1ae73262dd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_treeview_beschrijving
+    - paragraphs.paragraphs_type.treeview_child
+id: paragraph.treeview_child.field_treeview_beschrijving
+field_name: field_treeview_beschrijving
+entity_type: paragraph
+bundle: treeview_child
+label: Beschrijving
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

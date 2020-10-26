@@ -1,0 +1,9 @@
+uuid: 01b8d9c9-f3bc-41f6-9b25-85857e05a8e3
+langcode: en
+status: true
+dependencies: {  }
+id: linklist_block
+label: 'Linklist block'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

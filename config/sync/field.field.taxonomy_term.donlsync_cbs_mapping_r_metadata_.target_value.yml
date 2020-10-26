@@ -1,0 +1,19 @@
+uuid: e9d50895-25a7-4ac0-91e9-b28b88f5a750
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.target_value
+    - taxonomy.vocabulary.donlsync_cbs_mapping_r_metadata_
+id: taxonomy_term.donlsync_cbs_mapping_r_metadata_.target_value
+field_name: target_value
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_r_metadata_
+label: 'Target value'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

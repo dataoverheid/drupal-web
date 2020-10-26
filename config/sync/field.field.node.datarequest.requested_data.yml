@@ -1,0 +1,19 @@
+uuid: 058cf2ae-f621-48a8-a4af-b08ea3d73383
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.requested_data
+    - node.type.datarequest
+id: node.datarequest.requested_data
+field_name: requested_data
+entity_type: node
+bundle: datarequest
+label: 'Gevraagde data'
+description: 'Geef hier kort en bondig een omschrijving aan naar welke data u op zoek bent. Een heldere omschrijving vergemakkelijkt het helpen vinden waar u naar op zoek bent.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

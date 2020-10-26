@@ -1,0 +1,22 @@
+uuid: 732c8d34-cf98-49ab-9714-4769fa0c4fe1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_prov
+id: taxonomy_term.dcatapdonl_overheid_spatial_prov.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_prov
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

@@ -1,0 +1,21 @@
+uuid: 9538bef9-6666-4b48-9328-c6bb1d5fc8a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_made_by
+    - node.type.appliance
+  module:
+    - options
+id: node.appliance.field_made_by
+field_name: field_made_by
+entity_type: node
+bundle: appliance
+label: 'Toepassing gemaakt door'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

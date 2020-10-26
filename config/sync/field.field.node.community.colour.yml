@@ -1,0 +1,23 @@
+uuid: 2c92cccb-545a-46b8-a2a7-cd74a37f55c1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.colour
+    - node.type.community
+  module:
+    - options
+id: node.community.colour
+field_name: colour
+entity_type: node
+bundle: community
+label: Kleur
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: green
+default_value_callback: ''
+settings: {  }
+field_type: list_string

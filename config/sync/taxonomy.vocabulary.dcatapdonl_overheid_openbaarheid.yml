@@ -1,0 +1,8 @@
+uuid: 92ed3e16-09ab-4982-b6ea-23987aad3eff
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:Openbaarheidsniveau'
+vid: dcatapdonl_overheid_openbaarheid
+description: ''
+weight: 0

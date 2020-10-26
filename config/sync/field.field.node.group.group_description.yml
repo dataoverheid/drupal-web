@@ -1,0 +1,19 @@
+uuid: 053646a7-1478-4e58-ba5c-dec10332381e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.group_description
+    - node.type.group
+id: node.group.group_description
+field_name: group_description
+entity_type: node
+bundle: group
+label: Omschrijving
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

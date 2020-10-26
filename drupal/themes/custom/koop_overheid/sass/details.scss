@@ -1,0 +1,39 @@
+details {
+  margin: 0 1em;
+
+  summary {
+    display: inline-block;
+    margin: 0 -1em;
+    font-size: 100%;
+    color: #000000;
+    font-weight: 400;
+    outline: 2px solid transparent;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+      outline: 0;
+    }
+
+    &:focus {
+      outline-color: #ffb612;
+    }
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:before {
+    content: " ";
+    background-image: url(../images/icon-plus.svg);
+    background-size: 10px;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    padding: 0 0 0 1em;
+  }
+
+  &[open] summary:before {
+    background-image: url(../images/icon-minus.svg);
+  }
+}

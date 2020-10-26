@@ -1,0 +1,8 @@
+uuid: 1ce33e15-d58b-4a84-9b8f-ee71e1af43e9
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync NGR Mapping Resource.MetadataLanguage'
+vid: donlsync_ngr_mapping_r_metadata
+description: ''
+weight: 0

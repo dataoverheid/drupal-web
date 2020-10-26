@@ -1,0 +1,9 @@
+uuid: a59f3dd2-7186-46d5-9acb-3c6457d66265
+langcode: nl
+status: true
+dependencies: {  }
+id: community_owner
+label: 'Community eigenaar'
+weight: 4
+is_admin: null
+permissions: {  }

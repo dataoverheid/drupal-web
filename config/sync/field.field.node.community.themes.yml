@@ -1,0 +1,19 @@
+uuid: 9fe512c4-ce0a-4354-b699-95d39aa29b36
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.themes
+    - node.type.community
+id: node.community.themes
+field_name: themes
+entity_type: node
+bundle: community
+label: 'Thema''s'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

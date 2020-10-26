@@ -1,0 +1,8 @@
+uuid: 852d20d5-dc29-41b9-b266-499d4d1ea6ba
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:Taxonomiebeleidsagenda'
+vid: dcatapdonl_overheid_taxonomiebel
+description: ''
+weight: 0

@@ -1,0 +1,18 @@
+uuid: ceec3bb7-4eb1-428d-a50a-1484260dcfb7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs_block
+id: block_content.tabs_block.metatag
+field_name: metatag
+entity_type: block_content
+bundle: tabs_block
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

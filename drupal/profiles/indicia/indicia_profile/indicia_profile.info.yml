@@ -1,0 +1,12 @@
+name: Indicia profile
+type: profile
+description: 'Indicia Drupal profile'
+version: 1.12
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:system (>= 8.8.0)
+
+distribution:
+  name: Indicia

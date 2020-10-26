@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "Statistics"
+msgstr "Statistieken"
+
+msgid "Amount of datasets"
+msgstr "Aantal datasets"
+
+msgid "Total number of datasets"
+msgstr "Totaal aantal datasets"
+
+msgid "High value datasets"
+msgstr "High value datasets"
+
+msgid "Datasets per catalog"
+msgstr "Datasets per catalogus"
+
+msgid "Dataset owners"
+msgstr "Dataset eigenaren"
+
+msgid "Dataset statuses"
+msgstr "Status van de datasets"
+
+msgid "Most recent datasets"
+msgstr "Meest recente datasets"
+
+msgid "Dataset quality"
+msgstr "Kwaliteit van de datasets"
+
+msgid "Quality"
+msgstr "Kwaliteit"
+
+msgid "Rest of owners"
+msgstr "Overige dataset eigenaren"
+
+msgid "Owners in chart"
+msgstr "Dataset eigenaren in grafiek"
+
+msgid "Monthly datasets"
+msgstr "Datasets per maand"
+
+msgid "Dataset Sources"
+msgstr "Datasets per catalogus"
+
+msgid "Monthly Dataset Status"
+msgstr "Dataset status per maand"
+
+msgid "Available"
+msgstr "Beschikbaar"
+
+msgid "Not available"
+msgstr "Niet beschikbaar"
+
+msgid "In research"
+msgstr "In onderzoek"

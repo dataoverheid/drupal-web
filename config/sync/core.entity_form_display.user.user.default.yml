@@ -1,0 +1,205 @@
+uuid: 1c67587a-fc8d-4ae7-90e0-6355747adfa6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_access_ckan_storage
+    - field.field.user.user.field_authority
+    - field.field.user.user.field_catalog
+    - field.field.user.user.field_ckan_api_key
+    - field.field.user.user.field_ckan_id
+    - field.field.user.user.field_organization_address
+    - field.field.user.user.field_organization_department
+    - field.field.user.user.field_organization_email
+    - field.field.user.user.field_organization_name
+    - field.field.user.user.field_organization_phone
+    - field.field.user.user.field_organization_user_email
+    - field.field.user.user.field_organization_user_name
+    - field.field.user.user.field_organization_user_position
+    - field.field.user.user.field_publisher
+    - field.field.user.user.field_role
+  module:
+    - field_group
+    - user
+third_party_settings:
+  field_group:
+    group_data_owner:
+      children:
+        - field_catalog
+        - field_authority
+        - field_publisher
+      parent_name: ''
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Data owner'
+      region: content
+    group_organization:
+      children:
+        - field_organization_name
+        - field_organization_address
+        - field_organization_department
+        - field_organization_email
+        - field_organization_phone
+        - field_organization_user_position
+        - field_organization_user_name
+        - field_organization_user_email
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: Organisatie
+      region: content
+    group_ckan:
+      children:
+        - field_ckan_id
+        - field_ckan_api_key
+        - field_access_ckan_storage
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: CKAN
+      region: content
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_access_ckan_storage:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_authority:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_catalog:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_ckan_api_key:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_ckan_id:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_address:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_department:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_email:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_name:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_phone:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_user_email:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_user_name:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_organization_user_position:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_publisher:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_role:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  language:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  path: true
+  timezone: true

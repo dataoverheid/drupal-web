@@ -1,0 +1,12 @@
+uuid: e0390f88-e5e8-47b5-85f4-89e230ba0238
+langcode: en
+status: true
+dependencies: {  }
+label: 'Large header (1440x354)'
+id: crop_type_large_header
+description: ''
+aspect_ratio: '240:59'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

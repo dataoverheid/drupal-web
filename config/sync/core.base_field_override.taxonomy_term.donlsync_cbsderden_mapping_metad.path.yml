@@ -1,0 +1,20 @@
+uuid: 3dcb6500-7c33-4d5e-963e-ec97361eb905
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_metad
+  module:
+    - path
+id: taxonomy_term.donlsync_cbsderden_mapping_metad.path
+field_name: path
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_metad
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

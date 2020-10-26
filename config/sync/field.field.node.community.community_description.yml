@@ -1,0 +1,19 @@
+uuid: a1e0987d-9ef0-4e0d-ba0c-88ca130bce0e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.community_description
+    - node.type.community
+id: node.community.community_description
+field_name: community_description
+entity_type: node
+bundle: community
+label: Omschrijving
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

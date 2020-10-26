@@ -1,0 +1,73 @@
+uuid: 7caf0abf-e9e1-461d-be41-fed760d7cb9d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.linklist_block_uitgevuld
+    - field.storage.block_content.field_linklist_block
+    - paragraphs.paragraphs_type.linklist_block
+  module:
+    - entity_reference_revisions
+id: block_content.linklist_block_uitgevuld.field_linklist_block
+field_name: field_linklist_block
+entity_type: block_content
+bundle: linklist_block_uitgevuld
+label: 'Linklist block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      linklist_block: linklist_block
+    target_bundles_drag_drop:
+      block_paragraph:
+        weight: 16
+        enabled: false
+      homepage_block:
+        weight: 17
+        enabled: false
+      homepage_blocks:
+        weight: 18
+        enabled: false
+      linklist_block:
+        enabled: true
+        weight: 19
+      linklist_blocks:
+        weight: 20
+        enabled: false
+      links:
+        weight: 21
+        enabled: false
+      nested_links:
+        weight: 22
+        enabled: false
+      search:
+        weight: 23
+        enabled: false
+      sru_field_paragraph:
+        weight: 24
+        enabled: false
+      text:
+        weight: 25
+        enabled: false
+      treeview:
+        weight: 26
+        enabled: false
+      treeview_child:
+        weight: 27
+        enabled: false
+      voetnoot:
+        weight: 28
+        enabled: false
+      voetnoten:
+        weight: 29
+        enabled: false
+      webform:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

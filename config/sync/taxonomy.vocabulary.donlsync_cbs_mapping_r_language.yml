@@ -1,0 +1,8 @@
+uuid: 18512d9c-3221-4b47-bc9d-10620616d898
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync CBS Mapping Resource.Language'
+vid: donlsync_cbs_mapping_r_language
+description: ''
+weight: 0

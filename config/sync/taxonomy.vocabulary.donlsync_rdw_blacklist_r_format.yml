@@ -1,0 +1,8 @@
+uuid: ed182563-6c49-4fea-b968-6e35a2855f14
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DonlSync RDW Blacklist Resource.Format'
+vid: donlsync_rdw_blacklist_r_format
+description: ''
+weight: 0

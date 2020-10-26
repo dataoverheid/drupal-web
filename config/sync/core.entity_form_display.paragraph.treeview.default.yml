@@ -1,0 +1,32 @@
+uuid: e9343e6f-decd-4ebe-bb2e-caf00e05caa5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.treeview.field_treeview_children
+    - paragraphs.paragraphs_type.treeview
+  module:
+    - paragraphs
+id: paragraph.treeview.default
+targetEntityType: paragraph
+bundle: treeview
+mode: default
+content:
+  field_treeview_children:
+    type: paragraphs
+    weight: 0
+    settings:
+      title: Paragraaf
+      title_plural: Paragrafen
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: all
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: treeview_child
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

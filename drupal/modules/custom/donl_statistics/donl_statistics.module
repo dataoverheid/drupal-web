@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function donl_statistics_theme($existing, $type, $theme, $path) {
+  return [
+    'IWDashboard' => [
+      'variables' => [
+        'dataset_owners' => NULL,
+        'status_table' => NULL,
+        'dataset_quality' => NULL,
+        'most_recent' => NULL,
+      ],
+    ],
+    'lineGraph' => [
+      'variables' => [],
+    ],
+    'pieChart' => [
+      'variables' => [],
+    ],
+    'stackedBarChart' => [
+      'variables' => [],
+    ],
+  ];
+}

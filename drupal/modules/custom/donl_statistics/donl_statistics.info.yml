@@ -1,0 +1,14 @@
+name: DONL Statistics
+description: Module which handles the statistics for the DONL site
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - ckan:ckan
+  - donl_search:donl_search
+  - drupal:taxonomy
+
+interface translation project: donl_statistics
+interface translation server pattern: modules/custom/donl_statistics/translations/donl_statistics.%language.po

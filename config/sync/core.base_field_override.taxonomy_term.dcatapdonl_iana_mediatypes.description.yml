@@ -1,0 +1,20 @@
+uuid: 6a03eea6-4d05-4d57-bac6-6e3f76a56046
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_iana_mediatypes.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

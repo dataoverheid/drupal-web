@@ -1,0 +1,8 @@
+uuid: 223dbffa-66da-4963-9f08-d5a59ec76172
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:SpatialProvincie'
+vid: dcatapdonl_overheid_spatial_prov
+description: ''
+weight: 0

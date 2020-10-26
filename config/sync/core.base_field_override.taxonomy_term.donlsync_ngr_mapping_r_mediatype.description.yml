@@ -1,0 +1,20 @@
+uuid: 1036c6af-90cf-41a3-9d3a-327270afd3ac
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_mediatype
+  module:
+    - text
+id: taxonomy_term.donlsync_ngr_mapping_r_mediatype.description
+field_name: description
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_mediatype
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

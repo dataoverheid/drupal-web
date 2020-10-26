@@ -1,0 +1,72 @@
+.button {
+  padding: 10px 20px;
+  line-height: 20px;
+  border: 0;
+}
+
+.form__element input[type="date"],
+.form__element input[type="email"],
+.form__element input[type="number"],
+.form__element input[type="password"],
+.form__element input[type="tel"],
+.form__element input[type="text"],
+.form__element input[type="time"],
+.form__element input[type="url"],
+.form__element select,
+.form__element textarea,
+input[type="date"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+select,
+textarea {
+  padding: 10px 15px;
+  line-height: 20px;
+  height: auto;
+  border: 1px solid #b4b4b4;
+  border-radius: .5em;
+  font-size: .85em;
+  margin: 0 0 .5em;
+  display: block;
+}
+
+.characteristics .characteristic::before {
+  background-size: 1.5em;
+  background-color: transparent;
+}
+
+.icon--governance,
+.icon--infrastructure {
+  display: inline-block;
+  padding: 0 1.5em 0 0;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: right 50%
+}
+
+.icon--governance {
+  background-image: url(../images/theme-icons/governance.svg);
+}
+
+.icon--infrastructure {
+  background-image: url(../images/theme-icons/infrastructure.svg);
+}
+
+input[type="date"]:disabled, input[type="date"][disabled], input[type="date"][read-only], input[type="email"]:disabled, input[type="email"][disabled], input[type="email"][read-only], input[type="password"]:disabled, input[type="password"][disabled], input[type="password"][read-only], input[type="tel"]:disabled, input[type="tel"][disabled], input[type="tel"][read-only], input[type="text"]:disabled, input[type="text"][disabled], input[type="text"][read-only], input[type="url"]:disabled, input[type="url"][disabled], input[type="url"][read-only], select:disabled, select[disabled], select[read-only], textarea:disabled, textarea[disabled], textarea[read-only] {
+  background: $c-gray-100;
+  color: $c-gray-600;
+}
+
+.has-js .question-explanation__content {
+  padding-bottom: 2.5em;
+}
+
+.no-filters {
+  .pagination__index {
+    margin: 0;
+  }
+}

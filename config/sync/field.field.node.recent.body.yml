@@ -1,0 +1,23 @@
+uuid: fc4ec30f-bc14-4666-aeae-d3550e083855
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.recent
+  module:
+    - text
+id: node.recent.body
+field_name: body
+entity_type: node
+bundle: recent
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

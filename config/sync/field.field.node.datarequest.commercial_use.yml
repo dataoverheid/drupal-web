@@ -1,0 +1,21 @@
+uuid: 379f8e76-ac4a-4116-9b6c-4516a4cabad1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.commercial_use
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.commercial_use
+field_name: commercial_use
+entity_type: node
+bundle: datarequest
+label: 'Commercieel doel'
+description: 'Kies hier uit de lijst of u een commercieel doel heeft met de data of niet.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

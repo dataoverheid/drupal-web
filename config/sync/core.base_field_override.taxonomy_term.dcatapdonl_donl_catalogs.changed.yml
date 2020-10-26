@@ -1,0 +1,18 @@
+uuid: 96d619b0-ff8d-4eb3-8623-43f368e4782d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_catalogs
+id: taxonomy_term.dcatapdonl_donl_catalogs.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_catalogs
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,18 @@
+uuid: 5c698d9c-7232-4afc-bdc2-60f3eee04527
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_changetype
+id: taxonomy_term.dcatapdonl_adms_changetype.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_changetype
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

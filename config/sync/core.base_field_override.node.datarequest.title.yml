@@ -1,0 +1,18 @@
+uuid: 83a80421-3104-4705-a4d4-c25dc7a58ebf
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node.datarequest.title
+field_name: title
+entity_type: node
+bundle: datarequest
+label: 'Titel dataverzoek'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

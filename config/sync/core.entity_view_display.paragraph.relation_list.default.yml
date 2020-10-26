@@ -1,0 +1,33 @@
+uuid: 1fc29398-2bbf-479b-b6f3-18a329a06fb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.relation_list.field_heading
+    - field.field.paragraph.relation_list.paragraph_highlights
+    - paragraphs.paragraphs_type.relation_list
+  module:
+    - entity_reference_revisions
+    - text
+id: paragraph.relation_list.default
+targetEntityType: paragraph
+bundle: relation_list
+mode: default
+content:
+  field_heading:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  paragraph_highlights:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden: {  }

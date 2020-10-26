@@ -1,0 +1,4 @@
+{% block paragraph %}
+{{ content|without('field_treeview_beschrijving') }}
+  <div class="small">{{ content.field_treeview_beschrijving }}</div>
+{% endblock paragraph %}

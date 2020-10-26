@@ -1,0 +1,73 @@
+uuid: 5f960d76-438a-4a62-9c4b-b10bac656209
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_treeview_child
+    - paragraphs.paragraphs_type.treeview
+    - paragraphs.paragraphs_type.treeview_child
+  module:
+    - entity_reference_revisions
+id: paragraph.treeview_child.field_treeview_child
+field_name: field_treeview_child
+entity_type: paragraph
+bundle: treeview_child
+label: Treeview
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      treeview: treeview
+    target_bundles_drag_drop:
+      treeview_child:
+        weight: 16
+        enabled: false
+      block_paragraph:
+        weight: 17
+        enabled: false
+      homepage_block:
+        weight: 18
+        enabled: false
+      homepage_blocks:
+        weight: 19
+        enabled: false
+      linklist_block:
+        weight: 20
+        enabled: false
+      linklist_blocks:
+        weight: 21
+        enabled: false
+      links:
+        weight: 22
+        enabled: false
+      nested_links:
+        weight: 23
+        enabled: false
+      search:
+        weight: 24
+        enabled: false
+      sru_field_paragraph:
+        weight: 25
+        enabled: false
+      text:
+        weight: 26
+        enabled: false
+      treeview:
+        enabled: true
+        weight: 27
+      voetnoot:
+        weight: 28
+        enabled: false
+      voetnoten:
+        weight: 29
+        enabled: false
+      webform:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

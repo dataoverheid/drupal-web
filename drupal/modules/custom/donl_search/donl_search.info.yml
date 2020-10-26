@@ -1,0 +1,15 @@
+name: DONL search
+description: Module handeling the search requests
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - ckan:ckan
+  - donl_search_backlink:donl_search_backlink
+  - donl_value_list:donl_value_list
+  - drupal:taxonomy
+
+interface translation project: donl_search
+interface translation server pattern: modules/custom/donl_search/translations/donl_search.%language.po

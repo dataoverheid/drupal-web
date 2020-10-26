@@ -1,0 +1,20 @@
+uuid: d35d8dfa-0c14-4623-a5d0-56faa1060398
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_distributiestatu
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_adms_distributiestatu.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_adms_distributiestatu
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

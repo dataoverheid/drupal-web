@@ -1,0 +1,9 @@
+uuid: e6dc2c65-2100-4404-a397-2903ff848406
+langcode: en
+status: true
+dependencies: {  }
+id: relation_list_item
+label: 'Relation list item'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

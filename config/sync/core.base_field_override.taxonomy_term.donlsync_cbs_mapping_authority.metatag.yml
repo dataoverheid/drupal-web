@@ -1,0 +1,18 @@
+uuid: 71ea3419-a79c-474f-83ff-2a40e176ea11
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbs_mapping_authority
+id: taxonomy_term.donlsync_cbs_mapping_authority.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: donlsync_cbs_mapping_authority
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

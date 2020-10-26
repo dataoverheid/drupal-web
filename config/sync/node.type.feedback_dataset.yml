@@ -1,0 +1,18 @@
+uuid: 3f8b9331-760b-448c-bdfd-056d0fabd46c
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Feedback dataset'
+type: feedback_dataset
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true

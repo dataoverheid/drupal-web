@@ -1,0 +1,53 @@
+donl.profile.view:
+  path: '/profiel'
+  defaults:
+    _controller: '\Drupal\donl\Controller\ProfileController::content'
+    _title: 'Profile'
+  requirements:
+    _role: 'authenticated'
+
+donl.application:
+  path: '/community/application/{application}'
+  defaults:
+    _controller: '\Drupal\donl\Controller\ApplicationController:content'
+    _title_callback: '\Drupal\donl\Controller\ApplicationController:getTitle'
+  options:
+    parameters:
+      application:
+        type: 'donl-application'
+  requirements:
+    _permission: 'access content'
+
+donl.datarequest:
+  path: '/community/datarequest/{datarequest}'
+  defaults:
+    _controller: '\Drupal\donl\Controller\DatarequestController:content'
+    _title_callback: '\Drupal\donl\Controller\DatarequestController:getTitle'
+  options:
+    parameters:
+      datarequest:
+        type: 'donl-datarequest'
+  requirements:
+    _permission: 'access content'
+
+donl.value_list.organizations:
+  path: '/service/waardelijsten/dcatapdonl_donl_organization'
+  defaults:
+    _controller: '\Drupal\donl\Controller\ValueListApiController::organizations'
+  requirements:
+    _permission: 'access content'
+
+donl.value_list.catalog:
+  path: '/service/waardelijsten/dcatapdonl_donl_catalogs'
+  defaults:
+    _controller: '\Drupal\donl\Controller\ValueListApiController::catalogs'
+  requirements:
+    _permission: 'access content'
+
+donl.settings:
+  path: '/admin/config/system/ckan/settings'
+  defaults:
+    _form: '\Drupal\donl\Form\DonlSettingsForm'
+    _title: 'DONL settings'
+  requirements:
+    _permission: 'configure ckan request settings'

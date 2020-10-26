@@ -1,0 +1,22 @@
+uuid: 255a1b2a-80f0-4ce5-845b-01e69b0daf6a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+id: taxonomy_term.dcatapdonl_mdr_filetype.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

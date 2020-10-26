@@ -1,0 +1,19 @@
+uuid: b533c374-a843-433a-bf49-69861e77cef8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.theme
+    - node.type.datarequest
+id: node.datarequest.theme
+field_name: theme
+entity_type: node
+bundle: datarequest
+label: 'Thema dataverzoek'
+description: 'Klik met uw muis op het veld en kies een thema dat past bij de dataset.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,51 @@
+uuid: e6c3ef89-f2af-482b-8dd4-a307dac47303
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.treeview_child.field_treeview_beschrijving
+    - field.field.paragraph.treeview_child.field_treeview_child
+    - field.field.paragraph.treeview_child.field_treeview_link
+    - paragraphs.paragraphs_type.treeview_child
+  module:
+    - link
+    - paragraphs
+id: paragraph.treeview_child.default
+targetEntityType: paragraph
+bundle: treeview_child
+mode: default
+content:
+  field_treeview_beschrijving:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_treeview_child:
+    type: paragraphs
+    weight: 2
+    settings:
+      title: Paragraaf
+      title_plural: Paragrafen
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_treeview_link:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

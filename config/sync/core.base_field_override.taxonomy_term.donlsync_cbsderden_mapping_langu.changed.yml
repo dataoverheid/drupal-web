@@ -1,0 +1,18 @@
+uuid: ba0fa6b0-4e8f-4a3d-ba08-d84f48b30f91
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_langu
+id: taxonomy_term.donlsync_cbsderden_mapping_langu.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_langu
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

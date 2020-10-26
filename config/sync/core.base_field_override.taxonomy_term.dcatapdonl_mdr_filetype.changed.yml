@@ -1,0 +1,18 @@
+uuid: 4c14c3bc-b4ff-49ff-906f-e855528d3220
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+id: taxonomy_term.dcatapdonl_mdr_filetype.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+label: Gewijzigd
+description: 'Het tijdstip waarop de term het laatst is aangepast.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

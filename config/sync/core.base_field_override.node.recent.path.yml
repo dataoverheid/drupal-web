@@ -1,0 +1,20 @@
+uuid: a9675d28-87a1-4f46-861e-56b4ed2a849c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.recent
+  module:
+    - path
+id: node.recent.path
+field_name: path
+entity_type: node
+bundle: recent
+label: URL-alias
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

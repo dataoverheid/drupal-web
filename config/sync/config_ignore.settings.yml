@@ -1,0 +1,19 @@
+ignored_config_entities:
+  0: 'block.block.*'
+  2: ckan.request.settings
+  4: ckan.resourcetype.settings
+  6: donl.settings
+  8: donl_statistics.piwik.settings
+  10: donl_search.sorl_request.settings
+  12: donl_value_list.settings
+  14: indicia_portals.settings
+  16: koop_overheid.settings
+  18: system.logging
+  20: 'system.menu.*'
+  22: system.performance
+  24: system.site
+  26: 'ultimate_cron.*'
+  28: 'webform.webform.*'
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
+langcode: nl

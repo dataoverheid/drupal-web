@@ -1,0 +1,21 @@
+uuid: 34bcfaf0-060b-4726-9112-8d158be16b1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.request_date
+    - node.type.datarequest
+  module:
+    - datetime
+id: node.datarequest.request_date
+field_name: request_date
+entity_type: node
+bundle: datarequest
+label: 'Aanvraag datum'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

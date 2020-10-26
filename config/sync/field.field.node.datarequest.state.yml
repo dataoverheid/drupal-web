@@ -1,0 +1,21 @@
+uuid: ff331db3-3706-49cc-b424-161af3af9151
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.state
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.state
+field_name: state
+entity_type: node
+bundle: datarequest
+label: Status
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

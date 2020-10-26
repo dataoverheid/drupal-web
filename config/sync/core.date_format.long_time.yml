@@ -1,0 +1,8 @@
+uuid: 98297e41-4a03-4a23-a432-33be5b35017d
+langcode: nl
+status: true
+dependencies: {  }
+id: long_time
+label: 'Default date - long with time'
+locked: false
+pattern: 'l, j F Y - H:i'

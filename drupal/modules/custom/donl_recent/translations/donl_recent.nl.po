@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgctxt "donl_recent"
+
+msgid "Recent"
+msgstr "Actueel"
+
+msgid "News"
+msgstr "Nieuws"
+
+msgid "Event"
+msgstr "Evenement"
+
+msgid "Meeting"
+msgstr "Bijeenkomst"
+
+msgid "Events"
+msgstr "Evenementen"
+
+msgid "Meetings"
+msgstr "Bijeenkomsten"
+
+msgid "Display all"
+msgstr "Alles weergeven"
+
+msgid "Current events"
+msgstr "Actualiteiten"
+
+msgid "Show all events"
+msgstr "Alle evenementen tonen"
+
+msgid "Show all news items"
+msgstr "Alle nieuwsitems tonen"
+
+msgid "Show all meetings"
+msgstr "Alle bijeenkomsten tonen"

@@ -1,0 +1,22 @@
+uuid: 032afca9-8490-4240-ae33-be378786493a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_dataset_stat
+id: taxonomy_term.dcatapdonl_overheid_dataset_stat.status
+field_name: status
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_dataset_stat
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

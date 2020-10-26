@@ -1,0 +1,18 @@
+uuid: 24006f91-0c59-4936-a80c-5f9b2cb1754e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.feedback_dataset
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.feedback_dataset
+target_entity_type_id: node
+target_bundle: feedback_dataset
+default_langcode: site_default
+language_alterable: false

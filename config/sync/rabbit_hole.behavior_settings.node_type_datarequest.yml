@@ -1,0 +1,11 @@
+uuid: e27fe8b8-3eb7-4f6f-86a8-792df431293a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+id: node_type_datarequest
+action: page_redirect
+allow_override: 0
+redirect: '/community/datarequest/[node:nid]'
+redirect_code: 307

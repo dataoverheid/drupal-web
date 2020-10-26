@@ -1,0 +1,9 @@
+uuid: feb20380-0e27-4e4e-8a2a-2c1775af5704
+langcode: en
+status: true
+dependencies: {  }
+id: well_linklists
+label: 'Well linklists'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

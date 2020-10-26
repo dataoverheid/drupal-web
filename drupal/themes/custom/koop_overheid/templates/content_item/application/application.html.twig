@@ -1,0 +1,47 @@
+{% extends '@koop_overheid/content_item/content-item.html.twig' %}
+{% import '@koop_overheid/content_item/content-item.html.twig' as content_item %}
+
+{% block content_item %}
+  {% set content_item_type = 'appliance' %}
+  {% set content_item_background_color = 'blue' %}
+  {{ parent() }}
+{% endblock content_item %}
+
+{% block content_item_title %}
+  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-data.svg', node.theme.value) }}
+  <div>
+    <h1>{{ node.title.value }}</h1>
+    {{ content_item.permalink(url('donl.application', {'application': node.id})) }}
+  </div>
+{% endblock content_item_title%}
+
+{% block content_item_description %}
+  <table class="minimal-table">
+    <tbody>
+    <tr>
+      <th>{{ 'Theme'|t }}</th>
+      <td>{{ ckan_mapping_get_theme_name(node.theme.value) }}</td>
+    </tr>
+    <tr>
+      <th>{{ 'Type'|t }}</th>
+      <td>
+        {{ node.field_appliance_type.value|t }}
+      </td>
+    </tr>
+    <tr>
+      <th>{{ 'Made by'|t }}</th>
+      <td>
+        {{ node.field_made_by.value }}
+      </td>
+    </tr>
+    {% if(link) %}
+      <tr>
+        <th>{{ 'Link to application'|t }}</th>
+        <td>
+          {{ ckan_link(link) }}
+        </td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+{% endblock content_item_description %}

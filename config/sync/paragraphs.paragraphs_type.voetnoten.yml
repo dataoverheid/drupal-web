@@ -1,0 +1,9 @@
+uuid: a87f68ad-1ee0-4160-b22a-bd35206dd381
+langcode: nl
+status: true
+dependencies: {  }
+id: voetnoten
+label: Voetnoten
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

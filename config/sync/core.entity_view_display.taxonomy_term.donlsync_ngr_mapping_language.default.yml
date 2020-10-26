@@ -1,0 +1,23 @@
+uuid: c3671f54-85ad-4698-89f5-f137650c272a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_ngr_mapping_language.target_value
+    - taxonomy.vocabulary.donlsync_ngr_mapping_language
+id: taxonomy_term.donlsync_ngr_mapping_language.default
+targetEntityType: taxonomy_term
+bundle: donlsync_ngr_mapping_language
+mode: default
+content:
+  target_value:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

@@ -1,0 +1,41 @@
+uuid: acbe65b9-1be7-460b-9448-6976b8584a3a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_overheid_frequency.identifier
+    - field.field.taxonomy_term.dcatapdonl_overheid_frequency.label_en
+    - field.field.taxonomy_term.dcatapdonl_overheid_frequency.label_nl
+    - taxonomy.vocabulary.dcatapdonl_overheid_frequency
+id: taxonomy_term.dcatapdonl_overheid_frequency.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_overheid_frequency
+mode: default
+content:
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

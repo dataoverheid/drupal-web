@@ -1,0 +1,18 @@
+uuid: f0ba9710-0833-4ccd-935d-d804c924b5c6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+id: taxonomy_term.dcatapdonl_mdr_filetype.name
+field_name: name
+entity_type: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

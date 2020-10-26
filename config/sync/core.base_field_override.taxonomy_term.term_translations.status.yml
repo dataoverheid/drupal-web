@@ -1,0 +1,22 @@
+uuid: 30ec8680-51fe-4ad7-b209-0274cf3400a2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.term_translations
+id: taxonomy_term.term_translations.status
+field_name: status
+entity_type: taxonomy_term
+bundle: term_translations
+label: Gepubliceerd
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

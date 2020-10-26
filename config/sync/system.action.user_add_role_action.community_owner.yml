@@ -1,0 +1,14 @@
+uuid: 48c608de-701e-4eee-a085-76e6d926a6ae
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.community_owner
+  module:
+    - user
+id: user_add_role_action.community_owner
+label: 'De rol Community eigenaar toewijzen aan de geselecteerde gebruiker(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: community_owner

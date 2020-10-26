@@ -1,0 +1,54 @@
+uuid: 28851a70-968c-455e-832b-cea9b8d027dd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.term_translations.translation
+    - taxonomy.vocabulary.term_translations
+  module:
+    - text
+id: taxonomy_term.term_translations.default
+targetEntityType: taxonomy_term
+bundle: term_translations
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 255
+      placeholder: 'The machine name'
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  translation:
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+hidden:
+  path: true

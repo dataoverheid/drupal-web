@@ -1,0 +1,18 @@
+uuid: 97f26c1a-6c70-4a05-b449-d0f4767d6b0a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.community
+id: node.community.changed
+field_name: changed
+entity_type: node
+bundle: community
+label: Gewijzigd
+description: 'Het tijdstip waarop de node voor het laatst werd bewerkt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

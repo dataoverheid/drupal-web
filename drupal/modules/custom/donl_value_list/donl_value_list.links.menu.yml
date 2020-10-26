@@ -1,0 +1,6 @@
+donl_value_list.settings:
+  title: 'Value list'
+  parent: ckan.settings
+  route_name: donl_value_list.settings
+  description: 'Manage the locations of the value lists.'
+  weight: 1

@@ -1,0 +1,20 @@
+uuid: 8214b776-d8b4-4ce8-a432-34e5812cb269
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_address
+  module:
+    - user
+id: user.user.field_organization_address
+field_name: field_organization_address
+entity_type: user
+bundle: user
+label: Adres
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

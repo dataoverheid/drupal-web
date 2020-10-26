@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "Suggestions"
+msgstr "Suggesties"
+
+msgid "Search data"
+msgstr "Zoek data"
+
+msgid "Back to community :community"
+msgstr "Terug naar community :community"
+
+msgid "Back to all @type in community :community"
+msgstr "Terug naar alle @type in community :community"
+
+msgid "There are @count results within @type of:"
+msgstr "Er zijn @count resultaten binnen de @type van:"
+
+msgid "Outside of this register are"
+msgstr "Buiten dit register zijn er"
+
+msgid "@count results at data.overheid.nl."
+msgstr "@count resultaten op dataoverheid.nl."

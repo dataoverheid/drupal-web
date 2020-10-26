@@ -1,0 +1,40 @@
+{% block header_top %}
+  <header class="header">
+    <div class="header__start">
+      <div class="container">
+        <button type="button" class="hidden-desktop button button--icon-hamburger" data-handler="toggle-nav" aria-controls="nav" aria-expanded="false">Menu</button>
+        <div class="logo ">
+          {% block logo %}
+            {{ page.logo }}
+            {{ page.payoff }}
+          {% endblock logo %}
+        </div>
+        <div class="skiplinks">
+          <a href="#content">Direct naar content</a>
+          <a href="#search">Direct zoeken</a>
+        </div>
+        {{ page.header_meta }}
+      </div>
+    </div>
+    <nav class="header__nav header__nav--closed" id="nav">
+      <h2 class="visually-hidden">Primaire navigatie</h2>
+      <div class="container">
+        {{ page.header_primary_nav }}
+        {{ page.header_search }}
+        <a href="#other-sites" class="hidden-desktop" data-handler="toggle-other-sites"
+           data-decorator="init-toggle-other-sites"><span
+            class="visually-hidden">Andere sites binnen </span>Overheid.nl</a>
+      </div>
+    </nav>
+  </header>
+{% endblock header_top %}
+
+{% block header_more %}
+  <div class="header__more" id="other-sites">
+    {{ page.header_more }}
+  </div>
+{% endblock header_more %}
+
+{% block tabs %}
+  {{ page.tabs }}
+{% endblock tabs %}

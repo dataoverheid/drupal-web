@@ -1,0 +1,19 @@
+uuid: 882204f6-dd93-40e2-b1c3-7eb96d6ec17c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_nl
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_prov
+id: taxonomy_term.dcatapdonl_overheid_spatial_prov.label_nl
+field_name: label_nl
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_prov
+label: 'Label NL'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

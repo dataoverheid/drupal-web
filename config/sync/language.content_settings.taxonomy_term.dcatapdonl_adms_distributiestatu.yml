@@ -1,0 +1,18 @@
+uuid: f55c8944-33d2-4a07-a05b-132d60f40e09
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_adms_distributiestatu
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: taxonomy_term.dcatapdonl_adms_distributiestatu
+target_entity_type_id: taxonomy_term
+target_bundle: dcatapdonl_adms_distributiestatu
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,28 @@
+uuid: 6251ed1e-6900-409a-999c-32413c09ce2d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.community_applications
+    - node.type.appliance
+    - node.type.community
+id: node.community.community_applications
+field_name: community_applications
+entity_type: node
+bundle: community
+label: Toepassingen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      appliance: appliance
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

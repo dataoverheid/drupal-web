@@ -1,0 +1,20 @@
+uuid: 55c199b5-7ecc-4242-96d6-2d27c811c30c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_mdr_filetype
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_mdr_filetype.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_mdr_filetype
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

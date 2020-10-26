@@ -1,0 +1,23 @@
+uuid: b4f9183a-4e67-4470-868f-318e0fefd7cd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donlsync_cbsderden_mapping_autho.target_value
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_autho
+id: taxonomy_term.donlsync_cbsderden_mapping_autho.default
+targetEntityType: taxonomy_term
+bundle: donlsync_cbsderden_mapping_autho
+mode: default
+content:
+  target_value:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

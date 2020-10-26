@@ -1,0 +1,19 @@
+uuid: 6fc57c77-e673-485f-94f2-584b02546386
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_en
+    - taxonomy.vocabulary.dcatapdonl_overheid_frequency
+id: taxonomy_term.dcatapdonl_overheid_frequency.label_en
+field_name: label_en
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_frequency
+label: 'Label EN'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

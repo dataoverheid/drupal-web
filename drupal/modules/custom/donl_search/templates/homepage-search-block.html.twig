@@ -1,0 +1,9 @@
+<div class="container container--centered">
+  <div class="well well--pageblock">
+    {{ form }}
+  </div>
+  <ul class="list list--inline">
+    <li><a href="{{ path('node.add', {'node_type': 'datarequest'}) }}" class="cta">{{ 'Get help with finding datasets'|t }}</a></li>
+    <li><a href="{{ path('ckan.dataset.create') }}" class="cta">{{ 'I want to register a dataset'|t }}</a></li>
+  </ul>
+</div>

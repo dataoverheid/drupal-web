@@ -1,0 +1,20 @@
+uuid: 13541373-546d-4c82-a46c-4cf3bfa3fa16
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.appliance_tags
+  module:
+    - text
+id: taxonomy_term.appliance_tags.description
+field_name: description
+entity_type: taxonomy_term
+bundle: appliance_tags
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

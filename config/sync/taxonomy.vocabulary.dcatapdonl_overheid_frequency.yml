@@ -1,0 +1,8 @@
+uuid: bd744195-edc7-4447-a362-1b40130ad2d5
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:Frequency'
+vid: dcatapdonl_overheid_frequency
+description: ''
+weight: 0

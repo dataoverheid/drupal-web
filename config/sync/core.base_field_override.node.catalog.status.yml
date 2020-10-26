@@ -1,0 +1,22 @@
+uuid: 3aa3ec4d-2b47-4e60-a62a-9a779e2f0502
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.catalog
+id: node.catalog.status
+field_name: status
+entity_type: node
+bundle: catalog
+label: Gepubliceerd
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

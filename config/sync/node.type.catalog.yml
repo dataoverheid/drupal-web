@@ -1,0 +1,17 @@
+uuid: 034fda17-1f37-4c9c-b466-c68a45fcac48
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Catalog
+type: catalog
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

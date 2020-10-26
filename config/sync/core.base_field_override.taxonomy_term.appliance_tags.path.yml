@@ -1,0 +1,20 @@
+uuid: ac495920-1610-4988-b316-1f7b4a4289ac
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.appliance_tags
+  module:
+    - path
+id: taxonomy_term.appliance_tags.path
+field_name: path
+entity_type: taxonomy_term
+bundle: appliance_tags
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

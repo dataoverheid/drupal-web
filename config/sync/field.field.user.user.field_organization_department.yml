@@ -1,0 +1,20 @@
+uuid: 1d03cc00-8159-40fc-8513-f6a7cb995c94
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_organization_department
+  module:
+    - user
+id: user.user.field_organization_department
+field_name: field_organization_department
+entity_type: user
+bundle: user
+label: Afdeling
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

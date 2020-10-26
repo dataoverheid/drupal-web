@@ -1,0 +1,18 @@
+uuid: 45dbbef2-c1ad-4003-b20b-3fdd685ae4d8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_iana_mediatypes
+id: taxonomy_term.dcatapdonl_iana_mediatypes.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_iana_mediatypes
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

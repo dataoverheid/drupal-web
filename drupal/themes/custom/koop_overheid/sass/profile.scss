@@ -1,0 +1,59 @@
+.profile {
+  .profile__options {
+    position: relative;
+
+    ul {
+      position: absolute;
+      right: 0;
+
+      li {
+        display: block;
+
+        a {
+          padding: 10px 15px;
+          white-space: nowrap;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .user-icon,
+  .languageswitch-icon {
+    margin-top: 5px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+  }
+
+  .user-icon {
+    background-color: $c-blue-600;
+    -webkit-mask-image: url('/core/themes/stable/images/core/icons/bebebe/person.svg');
+    mask-image: url('/core/themes/stable/images/core/icons/bebebe/person.svg');
+  }
+
+  .languageswitch-icon {
+    background-image: url(../images/theme-icons/international.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 20px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@include breakpoint(mobileonly) {
+  .profile {
+    margin-top: 3px;
+
+    .profile__options {
+      ul {
+        right: auto;
+        left: 0;
+      }
+    }
+  }
+
+}

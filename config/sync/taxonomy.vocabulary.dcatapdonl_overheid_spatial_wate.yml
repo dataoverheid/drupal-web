@@ -1,0 +1,8 @@
+uuid: 1c47aade-fd9e-4c52-8701-29895786b1c5
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - Overheid:SpatialWaterschap'
+vid: dcatapdonl_overheid_spatial_wate
+description: ''
+weight: 0

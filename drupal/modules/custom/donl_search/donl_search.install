@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_install().
+ */
+function donl_search_install() {
+  /* @var \Drupal\Core\Config\Config $ckanConfig */
+  $ckanConfig = \Drupal::service('config.factory')->getEditable('ckan.request.settings');
+  /* @var \Drupal\Core\Config\Config $solrConfig */
+  $solrConfig = \Drupal::service('config.factory')->getEditable('donl_search.sorl_request.settings');
+
+  $solrConfig->set('solr_url', $ckanConfig->get('solr_url'));
+  $solrConfig->set('solr_search_dataset_core', $ckanConfig->get('solr_search_core'));
+  $solrConfig->set('solr_suggest_core', $ckanConfig->get('solr_suggest_core'));
+  $solrConfig->save();
+
+  $ckanConfig->clear('solr_url');
+  $ckanConfig->clear('solr_search_core');
+  $ckanConfig->clear('solr_suggest_core');
+  $ckanConfig->save();
+}
+
+/**
+ * Transfer SOLR settings to donl_search config.
+ */
+function donl_search_update_8002() {
+  /* @var \Drupal\Core\Config\Config $ckanConfig */
+  $ckanConfig = \Drupal::service('config.factory')->getEditable('ckan.request.settings');
+  /* @var \Drupal\Core\Config\Config $solrConfig */
+  $solrConfig = \Drupal::service('config.factory')->getEditable('donl_search.sorl_request.settings');
+
+  $solrConfig->set('solr_url', $ckanConfig->get('solr_url'));
+  $solrConfig->set('solr_search_dataset_core', $ckanConfig->get('solr_search_core'));
+  $solrConfig->set('solr_suggest_core', $ckanConfig->get('solr_suggest_core'));
+  $solrConfig->save();
+
+  $ckanConfig->clear('solr_url');
+  $ckanConfig->clear('solr_search_core');
+  $ckanConfig->clear('solr_suggest_core');
+  $ckanConfig->save();
+}

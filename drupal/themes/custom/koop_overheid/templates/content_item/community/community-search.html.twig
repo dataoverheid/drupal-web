@@ -1,0 +1,31 @@
+<div class="content-item">
+  <div class="content-header">
+    <div class="container columns">
+      <div>
+        <a href="{{ path('entity.node.canonical',{'node' : node.id}) }}" class="link cta__backwards">
+          {{ 'Back to community :community'|t({':community' : node.title.value}) }}
+        </a>
+      </div>
+      {{ search }}
+    </div>
+  </div>
+  <div class="background green">
+    <div class="container">
+      <div class="content-item-title">
+        <span class="type-icon">
+          <img src="/{{ base_path ~ directory }}/images/icon-community.svg" alt="type-icon">
+        </span>
+        <div>
+          <p class="type">{{ 'Community'|t }}</p>
+          <h1>{{ node.title.value }}</h1>
+        </div>
+      </div>
+      {% if(node.community_description.value) %}
+        <div class="content-item-description">{{ node.community_description.value }}</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="container">
+    {{ body }}
+  </div>
+</div>

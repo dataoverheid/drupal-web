@@ -1,0 +1,6 @@
+{% for item in items %}
+  <div class="teaser-item">
+    <a href="{{ path('entity.node.canonical', {'node': item.id}) }}">{{ item.title }}</a>
+    <div>{{ item.body }}</div>
+  </div>
+{% endfor %}

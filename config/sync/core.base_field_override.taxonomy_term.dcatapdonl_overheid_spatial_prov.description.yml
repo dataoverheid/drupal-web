@@ -1,0 +1,20 @@
+uuid: 525ac226-0b82-4dda-b542-f515f02f406c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_spatial_prov
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_overheid_spatial_prov.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_spatial_prov
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

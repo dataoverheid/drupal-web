@@ -1,0 +1,2 @@
+label: 'Standaarddatum - kort met tijd'
+pattern: 'd-m-Y - H:i'

@@ -1,0 +1,18 @@
+uuid: d507991b-0358-4a73-96e0-dc6a9177fb3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.datarequest
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.datarequest
+target_entity_type_id: node
+target_bundle: datarequest
+default_langcode: site_default
+language_alterable: false

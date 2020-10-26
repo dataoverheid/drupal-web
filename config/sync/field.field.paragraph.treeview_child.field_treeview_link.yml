@@ -1,0 +1,28 @@
+uuid: 136dff4c-cd50-4a59-b5ad-eacd41b3a143
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_treeview_link
+    - paragraphs.paragraphs_type.treeview_child
+  module:
+    - link
+id: paragraph.treeview_child.field_treeview_link
+field_name: field_treeview_link
+entity_type: paragraph
+bundle: treeview_child
+label: Link
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    attributes: {  }
+    uri: 'internal:#'
+    title: ''
+    options: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

@@ -1,0 +1,53 @@
+links:
+  -
+    path: /
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /actueel
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /community/catalogs
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /community/organizations
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /community/dataverzoeken
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /community/groepen
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /community/toepassingen
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /datasets
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /search/communities
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /statistieken
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /zoek
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /zoek/nieuws
+    priority: '0.5'
+    changefreq: daily
+  -
+    path: /zoek/support
+    priority: '0.5'
+    changefreq: daily

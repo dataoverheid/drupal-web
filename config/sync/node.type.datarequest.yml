@@ -1,0 +1,17 @@
+uuid: 6b8ba4a0-e3ed-492f-adca-b63057f4bdef
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Data request'
+type: datarequest
+description: ''
+help: 'Geef een duidelijke titel aan uw dataverzoek, zodat het verzoek makkelijk vindbaar is voor andere hergebruikers. De titel bestaat bij voorkeur uit één of enkele woorden en indien mogelijk een jaartal.'
+new_revision: false
+preview_mode: 0
+display_submitted: false

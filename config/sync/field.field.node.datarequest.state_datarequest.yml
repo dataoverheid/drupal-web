@@ -1,0 +1,21 @@
+uuid: f2989c0b-8605-450d-9254-e75413f99dfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.state_datarequest
+    - node.type.datarequest
+  module:
+    - options
+id: node.datarequest.state_datarequest
+field_name: state_datarequest
+entity_type: node
+bundle: datarequest
+label: 'Laatste status open dataverzoek'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

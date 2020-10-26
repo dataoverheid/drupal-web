@@ -1,0 +1,18 @@
+uuid: 859d15ea-a968-4af6-91a5-896517b92ad3
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Pagina
+type: landingpage
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

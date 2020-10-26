@@ -1,0 +1,21 @@
+uuid: e6f60f52-2c12-48e6-b768-351e21d86fc1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.machine_name
+    - node.type.community
+  module:
+    - donl
+id: node.community.machine_name
+field_name: machine_name
+entity_type: node
+bundle: community
+label: 'Machine name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

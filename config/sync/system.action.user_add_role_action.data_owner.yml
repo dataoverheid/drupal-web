@@ -1,0 +1,14 @@
+uuid: 4bb18bb0-43e5-4fc5-afd9-1f200494c245
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.data_owner
+  module:
+    - user
+id: user_add_role_action.data_owner
+label: 'Add the Data eigenaar role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: data_owner

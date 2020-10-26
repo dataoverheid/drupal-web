@@ -1,0 +1,23 @@
+uuid: feb490df-8d8e-4a1f-88ae-75b3d42a99d3
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.group_description
+field_name: group_description
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

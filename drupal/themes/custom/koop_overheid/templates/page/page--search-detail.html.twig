@@ -1,0 +1,10 @@
+{% extends '@koop_overheid/page/page.html.twig' %}
+
+{% block content_before %}
+  {# by leaving this empty we automatically hide the search block that's located
+  in this region. #}
+{% endblock content_before %}
+
+{% block content %}
+  {{ page.content }}
+{% endblock content %}

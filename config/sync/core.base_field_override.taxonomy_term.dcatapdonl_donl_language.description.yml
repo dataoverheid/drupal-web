@@ -1,0 +1,20 @@
+uuid: 59feb913-0ad5-487f-821e-c83768bd2e21
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_language
+  module:
+    - text
+id: taxonomy_term.dcatapdonl_donl_language.description
+field_name: description
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_language
+label: Beschrijving
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

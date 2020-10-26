@@ -1,0 +1,44 @@
+$c-blue-100: #E5F1F9;
+$c-blue-200: #B2D7EE;
+$c-blue-400: #007BC7;
+$c-blue-600: #154273;
+
+$c-orange-100: #FCF0E5;
+$c-orange-200: #FFE9B7;
+$c-orange-400: #FFB612;
+
+$c-gray-100: #F5F5F5;
+$c-gray-200: #E2E2E2;
+$c-gray-300: #CCCCCC;
+$c-gray-600: #626262;
+
+$c-green-100: #F0F8E8;
+$c-green-400: #39870C;
+
+$c-purple-100: #F6E5EF;
+$c-purple-400: #A90061;
+
+// TODO:: set red color
+$c-red-400: #C40011;
+$c-red-100: lighten($c-red-400, 60%);
+
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: 70em) {
+      @content ;
+    }
+  } @else if $point == mobileonly {
+    @media (max-width: 700px) {
+      @content ;
+    }
+  } @else if $point == tablet {
+    @media (max-width: 1100px) {
+      @content ;
+    }
+  } @else if $point == notmobile {
+    @media (min-width: 800px) {
+      @content ;
+    }
+  }
+}

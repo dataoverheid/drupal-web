@@ -1,0 +1,79 @@
+donl_api:
+  path: '/json/api/1'
+  defaults:
+    _title: 'API'
+    _controller: '\Drupal\donl_api\Controller\SwaggerController::view'
+  options:
+    no_cache: 'TRUE'
+  requirements:
+    _permission: 'access content'
+
+donl_api.datarequest.search:
+  path: '/json/api/1/action/datarequest_search'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\DatarequestApiController:search'
+  requirements:
+    _permission: 'access content'
+
+donl_api.datarequest.show:
+  path: '/json/api/1/action/datarequest_show'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\DatarequestApiController:getEntity'
+  requirements:
+    _permission: 'access content'
+
+donl_api.application.search:
+  path: '/json/api/1/action/application_search'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\ApplicationApiController:search'
+  requirements:
+    _permission: 'access content'
+
+donl_api.application.show:
+  path: '/json/api/1/action/application_show'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\ApplicationApiController:getEntity'
+  requirements:
+    _permission: 'access content'
+
+donl_api.group.search:
+  path: '/json/api/1/action/group_search'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\GroupApiController:search'
+  requirements:
+    _permission: 'access content'
+
+donl_api.group.show:
+  path: '/json/api/1/action/group_show'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\GroupApiController:getEntity'
+  requirements:
+    _permission: 'access content'
+
+donl_api.organization.search:
+  path: '/json/api/1/action/organization_search'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\OrganizationApiController:search'
+  requirements:
+    _permission: 'access content'
+
+donl_api.organization.show:
+  path: '/json/api/1/action/organization_show'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\OrganizationApiController:getEntity'
+  requirements:
+    _permission: 'access content'
+
+donl_api.community.search:
+  path: '/json/api/1/action/community_search'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\CommunityApiController:search'
+  requirements:
+    _permission: 'access content'
+
+donl_api.community.show:
+  path: '/json/api/1/action/community_show'
+  defaults:
+    _controller: '\Drupal\donl_api\Controller\CommunityApiController:getEntity'
+  requirements:
+    _permission: 'access content'

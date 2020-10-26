@@ -1,0 +1,27 @@
+{
+    "name": "indicia-drupal/indicia_profile",
+    "description": "Indicia Drupal profile",
+    "type": "indicia-drupal-profile",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Kevin Brocatus",
+            "email": "kevin.brocatus@indicia.nl"
+        },
+        {
+            "name": "Mitch Portier",
+            "email": "Mitch.Portier@indicia.nl"
+        }
+    ],
+    "require": {
+        "php": ">= 7.3",
+        "composer/installers": "~1.0"
+    },
+    "conflict": {
+        "drupal/core": "<8.8"
+    },
+    "suggest": {
+        "drupal/config_split": "The use of config split is highly recommended to split config between different environments.",
+        "drupal/config_ignore": "This tool will provide the option to ignore configuration on import."
+    }
+}

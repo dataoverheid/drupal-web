@@ -1,0 +1,160 @@
+uuid: 8006cb1e-c297-4c0c-8046-8659d787c055
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_access_ckan_storage
+    - field.field.user.user.field_authority
+    - field.field.user.user.field_catalog
+    - field.field.user.user.field_ckan_api_key
+    - field.field.user.user.field_ckan_id
+    - field.field.user.user.field_organization_address
+    - field.field.user.user.field_organization_department
+    - field.field.user.user.field_organization_email
+    - field.field.user.user.field_organization_name
+    - field.field.user.user.field_organization_phone
+    - field.field.user.user.field_organization_user_email
+    - field.field.user.user.field_organization_user_name
+    - field.field.user.user.field_organization_user_position
+    - field.field.user.user.field_publisher
+    - field.field.user.user.field_role
+  module:
+    - field_group
+    - options
+    - user
+third_party_settings:
+  field_group:
+    group_organization:
+      children:
+        - field_organization_name
+        - field_organization_address
+        - field_organization_department
+        - field_organization_email
+        - field_organization_phone
+        - field_organization_user_name
+        - field_organization_user_position
+        - field_organization_user_email
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+      label: Organisatie
+      region: content
+    group_data_owner:
+      children:
+        - field_catalog
+        - field_authority
+        - field_publisher
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+      label: 'Data eigenaar'
+      region: content
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_authority:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_catalog:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_organization_address:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_department:
+    weight: 10
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_email:
+    weight: 11
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_name:
+    weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_phone:
+    weight: 12
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_user_email:
+    weight: 15
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_user_name:
+    weight: 13
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_organization_user_position:
+    weight: 14
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_publisher:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  member_for:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_access_ckan_storage: true
+  field_ckan_api_key: true
+  field_ckan_id: true
+  field_role: true
+  langcode: true

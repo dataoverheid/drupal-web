@@ -1,0 +1,18 @@
+uuid: 45666271-af2d-4732-bb3a-d994195dbae1
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.organization
+id: node.organization.changed
+field_name: changed
+entity_type: node
+bundle: organization
+label: Gewijzigd
+description: 'Het tijdstip waarop de node voor het laatst werd bewerkt.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

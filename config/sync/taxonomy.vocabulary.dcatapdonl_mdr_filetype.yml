@@ -1,0 +1,8 @@
+uuid: f54727e1-affb-4282-a174-2d5ab1f601a3
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - MDR:Filetype'
+vid: dcatapdonl_mdr_filetype
+description: ''
+weight: 0

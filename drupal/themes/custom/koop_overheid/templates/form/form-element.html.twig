@@ -1,0 +1,52 @@
+{% set classes = [
+  'form__element',
+  'js-form-item',
+  'form-item',
+  'js-form-type-' ~ type|clean_class,
+  'form-item-' ~ name|clean_class,
+  'js-form-item-' ~ name|clean_class,
+  disabled == 'disabled' ? 'form-disabled',
+] %}
+
+{% set id = attribute(element, '#id') %}
+
+{% block wrapper %}
+  <div{{ attributes.addClass(classes) }}>
+{% endblock wrapper %}
+
+  {% if label_wrapper %}
+    {{ label_open }}
+  {% else %}
+    {{ label }}
+  {% endif %}
+
+  {% block label_suffix %}{% endblock %}
+
+  {% if prefix is not empty %}
+    <span class="field-prefix">{{ prefix }}</span>
+  {% endif %}
+
+  {% if description %}
+    {{ description }}
+  {% endif %}
+
+  {{ children }}
+
+  {% if suffix is not empty %}
+    <span class="field-suffix">{{ suffix }}</span>
+  {% endif %}
+
+  {% if label_wrapper %}
+    </label>
+  {% endif %}
+
+  {% if errors %}
+    <p id="error__{{ id }}" class="form__error">
+      <strong>{{ 'Let op:'|t }}</strong>
+      {{ errors }}
+    </p>
+  {% endif %}
+
+{% block closing_wrapper %}
+  </div>
+{% endblock closing_wrapper %}

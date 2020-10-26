@@ -1,0 +1,22 @@
+uuid: ac34f349-91bd-4268-861f-fccaf57b9315
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.payoff_block
+    - field.field.block_content.payoff_block.field_payoff_span
+id: block_content.payoff_block.default
+targetEntityType: block_content
+bundle: payoff_block
+mode: default
+content:
+  field_payoff_span:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  langcode: true

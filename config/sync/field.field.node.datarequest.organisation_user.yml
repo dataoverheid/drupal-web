@@ -1,0 +1,19 @@
+uuid: bcc5267d-d3da-49f2-9a2a-c27d48d53b94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.organisation_user
+    - node.type.datarequest
+id: node.datarequest.organisation_user
+field_name: organisation_user
+entity_type: node
+bundle: datarequest
+label: 'Uw organisatie'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,60 @@
+<table class="minimal-table table--striped">
+  <tbody>
+  <tr>
+    <th>{{ 'Requested data'|t }}</th>
+    <td>{{ datarequest.requested_data.value|nl2br }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Request date'|t }}</th>
+    {% if datarequest.request_date.value %}
+      <td>{{ datarequest.request_date.value|date("d-m-Y") }}</td>
+    {% endif %}
+  </tr>
+  <tr>
+    <th>{{ 'Theme'|t }}</th>
+    <td>{{ ckan_mapping_get_theme_name(datarequest.theme.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Requested dataformat'|t }}</th>
+    <td>{{ ckan_mapping_get_file_format_name(datarequest.requested_dataformat.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Requested start and enddate'|t }}</th>
+    <td>
+      {% if datarequest.requested_start_and_end_date.value %}
+        {{ datarequest.requested_start_and_end_date.value|date("d-m-Y") }} {{ 'till'|t }} {{ datarequest.requested_start_and_end_date.end_value|date("d-m-Y") }}
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><h2>{{ 'Do you know the possible source of the data?'|t }}</h2></td>
+  </tr>
+  <tr>
+    <th>{{ 'Possible owner'|t }}</th>
+    <td>{{ ckan_mapping_get_organization_name(datarequest.possible_owner.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Problems with the search'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'problems_with_search', datarequest.problems_with_search.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Search attemts'|t }}</th>
+    <td>{{ datarequest.search_attempts.value|nl2br }}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><h2>{{ 'What do you want to use the data for?'|t }}</h2></td>
+  </tr>
+  <tr>
+    <th>{{ 'Want to use it for'|t }}</th>
+    <td>{{ datarequest.want_to_use_it_for.value|nl2br }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Commercial use'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'commercial_use', datarequest.commercial_use.value) }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Target audience'|t }}</th>
+    <td>{{ ckan_get_select_key('datarequest', 'target_audience', datarequest.target_audience.value) }}</td>
+  </tr>
+  </tbody>
+</table>

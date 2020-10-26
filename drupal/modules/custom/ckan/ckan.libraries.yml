@@ -1,0 +1,45 @@
+toolbar:
+  version: 1.0.0
+  css:
+    theme:
+      css/toolbar.icons.theme.css: {}
+      css/form-addition.css: {}
+  dependencies:
+    - toolbar/toolbar
+
+chosen:
+  version: 1.8.7
+  css:
+    theme:
+      /libraries/chosen-js/chosen.min.css: {minified: true}
+  js:
+    /libraries/chosen-js/chosen.jquery.min.js: {minified: true}
+
+chosen_init:
+  version: 1.0.0
+  js:
+    js/chosen-init.js: {}
+  dependencies:
+    - ckan/chosen
+
+papaparse:
+  version: 5.0.2
+  js:
+    /modules/custom/ckan/libs/papaparse.min.js: {minified: true}
+
+datatables:
+  version: 1.10.20
+  js:
+    /libraries/datatables/media/js/jquery.dataTables.min.js: {minified: true}
+  css:
+    theme:
+      /libraries/datatables/media/css/jquery.dataTables.min.css: {minified: true}
+
+preview:
+  version: 0.0.1
+  js:
+    js/preview.js: {}
+  dependencies:
+    - ckan/papaparse
+    - ckan/datatables
+    - core/drupal.message

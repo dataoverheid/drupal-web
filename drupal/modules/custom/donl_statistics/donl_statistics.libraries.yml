@@ -1,0 +1,35 @@
+amcharts4:
+  version: 4.2.6
+  js:
+    js/amcharts4/core.js: { minified: true }
+    js/amcharts4/themes/dataviz.js: { minified: true }
+    js/amcharts4/themes/animated.js: { minified: true }
+    js/amcharts4/charts.js: { minified: true }
+
+statistics:
+  version: 1.0.0
+  js:
+    js/shadeColor.js: {}
+  dependencies:
+    - donl_statistics/amcharts4
+
+pieChart:
+  version: 1.0.0
+  js:
+    js/pieChart.js: {}
+  dependencies:
+    - donl_statistics/statistics
+
+monthgraph:
+  version: 1.0.0
+  js:
+    js/monthGraph.js: {}
+  dependencies:
+    - donl_statistics/statistics
+
+stackedBarChart:
+  version: 1.0.0
+  js:
+    js/stackedBarChart.js: {}
+  dependencies:
+    - donl_statistics/statistics

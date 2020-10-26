@@ -1,0 +1,18 @@
+uuid: 6aeb3bbd-0180-438d-8fc6-ecfbe14515f8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_license
+id: taxonomy_term.dcatapdonl_overheid_license.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_license
+label: Metatags
+description: 'Metatags voor de entiteit.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

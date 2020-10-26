@@ -1,0 +1,18 @@
+uuid: 53a2bfc6-3c94-4f54-bd7a-1e3756d56a13
+langcode: nl
+status: true
+dependencies:
+  config:
+    - block_content.type.meta_header_links
+id: block_content.meta_header_links.info
+field_name: info
+entity_type: block_content
+bundle: meta_header_links
+label: Blokbeschrijving
+description: 'Een korte beschrijving van het blok.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

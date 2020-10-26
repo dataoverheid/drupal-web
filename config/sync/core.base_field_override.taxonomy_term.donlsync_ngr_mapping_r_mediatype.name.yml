@@ -1,0 +1,18 @@
+uuid: bb714fa8-a9e6-4234-b06c-7fa68c491b15
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donlsync_ngr_mapping_r_mediatype
+id: taxonomy_term.donlsync_ngr_mapping_r_mediatype.name
+field_name: name
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_r_mediatype
+label: Naam
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

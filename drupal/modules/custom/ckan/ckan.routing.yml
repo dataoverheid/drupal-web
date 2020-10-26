@@ -1,0 +1,194 @@
+ckan.home:
+  path: '/home'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\HomeController::content'
+    _title: 'Data register of the Dutch government'
+  requirements:
+    _permission: 'access content'
+
+# Dataset paths.
+ckan.dataset.view:
+  path: '/dataset/{dataset}'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\DatasetController::content'
+    _title_callback: '\Drupal\ckan\Controller\DatasetController::title'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _dataset_access_check: 'TRUE'
+
+ckan.dataset.rdf:
+  path: '/dataset/{dataset}/rdf'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\DatasetRdfController::content'
+    _title_callback: '\Drupal\ckan\Controller\DatasetRdfController::title'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _dataset_access_check: 'TRUE'
+
+# Same route as ckan.dataset.view, but this route has a group context.
+ckan.group.dataset.view:
+  path: '/group/{group}/dataset/{dataset}'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\DatasetGroupController::content'
+    _title_callback: '\Drupal\ckan\Controller\DatasetGroupController::title'
+  options:
+    parameters:
+      group:
+        type: 'donl-group'
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _dataset_access_check: 'TRUE'
+
+ckan.dataset.create:
+  path: '/dataset/dataset-publiceren'
+  defaults:
+    _form: '\Drupal\ckan\Form\DatasetCreateForm'
+    _title: 'Create dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+ckan.dataset.edit:
+  path: '/dataset/{dataset}/bewerken'
+  defaults:
+    _form: '\Drupal\ckan\Form\DatasetEditForm'
+    _title: 'Edit dataset'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+ckan.dataset.delete:
+  path: '/dataset/{dataset}/verwijderen'
+  defaults:
+    _form: '\Drupal\ckan\Form\DatasetDeleteForm'
+    _title: 'Delete dataset'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+# Dataset resource paths.
+ckan.dataset.datasources:
+  path: '/dataset/{dataset}/bronnen'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\DatasetSourcesController::content'
+    _title: 'Edit dataset sources'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _permission: 'access content'
+
+ckan.dataset.order:
+  path: '/dataset/{dataset}/bronnen/herordenen'
+  defaults:
+    _form: '\Drupal\ckan\Form\ResourceOrderForm'
+    _title: 'Rearrange resources'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+ckan.resource.create:
+  path: '/dataset/{dataset}/bronnen/bron-toevoegen'
+  defaults:
+    _form: '\Drupal\ckan\Form\ResourceCreateForm'
+    _title: 'Create resource'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+ckan.resource.edit:
+  path: '/dataset/{dataset}/bronnen/{resource}/bewerken'
+  defaults:
+    _form: '\Drupal\ckan\Form\ResourceEditForm'
+    _title: 'Edit resource'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+      resource:
+        type: 'ckan-resource'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+ckan.resource.delete:
+  path: '/dataset/{dataset}/bronnen/{resource}/verwijderen'
+  defaults:
+    _form: '\Drupal\ckan\Form\ResourceDeleteForm'
+    _title: 'Delete resource'
+  options:
+    parameters:
+      dataset:
+        type: 'ckan-dataset'
+      resource:
+        type: 'ckan-resource'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _dataset_access_check: 'TRUE'
+
+# Admin paths.
+ckan.settings:
+  path: '/admin/config/system/ckan'
+  defaults:
+    _title: 'Ckan'
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+  requirements:
+    _permission: 'manage ckan settings'
+
+ckan.settings.request:
+  path: '/admin/config/system/ckan/ckan-request'
+  defaults:
+    _form: '\Drupal\ckan\Form\CkanRequestSettingsForm'
+    _title: 'CKAN Web services'
+  requirements:
+    _permission: 'configure ckan request settings'
+
+ckan.settings.resourcetype:
+  path: '/admin/config/system/ckan/resource-type'
+  defaults:
+    _form: '\Drupal\ckan\Form\CkanResourceTypeSettingsForm'
+    _title: 'CKAN Resource types'
+  requirements:
+    _permission: 'configure ckan resource type settings'
+
+ckan.settings.datasettext:
+  path: '/admin/config/system/ckan/dataset-texts'
+  defaults:
+    _form: '\Drupal\ckan\Form\DatasetTextSettingsForm'
+    _title: 'Dataset Text Settings'
+  requirements:
+    _permission: 'administer metadata configuration'
+
+# JSON endpoints
+ckan.dataset_relations:
+  path: '/json/dataset/relations'
+  defaults:
+    _controller: '\Drupal\ckan\Controller\JsonEndpointController::datasetRelations'
+    _format: json
+  requirements:
+    _permission: 'access content'

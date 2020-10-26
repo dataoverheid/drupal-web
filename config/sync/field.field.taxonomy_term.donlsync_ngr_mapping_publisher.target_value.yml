@@ -1,0 +1,19 @@
+uuid: 669fedf2-c6f4-436c-9b39-4e243b9fc77e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.target_value
+    - taxonomy.vocabulary.donlsync_ngr_mapping_publisher
+id: taxonomy_term.donlsync_ngr_mapping_publisher.target_value
+field_name: target_value
+entity_type: taxonomy_term
+bundle: donlsync_ngr_mapping_publisher
+label: 'Target value'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

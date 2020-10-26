@@ -1,0 +1,20 @@
+uuid: bb1adb41-75c5-47cb-9f6b-595df0534c8b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_overheid_openbaarheid
+  module:
+    - path
+id: taxonomy_term.dcatapdonl_overheid_openbaarheid.path
+field_name: path
+entity_type: taxonomy_term
+bundle: dcatapdonl_overheid_openbaarheid
+label: URL-alias
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

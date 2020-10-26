@@ -1,0 +1,19 @@
+uuid: 82c0f7b4-dfa1-4246-ba6e-edbdd0eb508e
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.target_value
+    - taxonomy.vocabulary.donlsync_cbsderden_mapping_metad
+id: taxonomy_term.donlsync_cbsderden_mapping_metad.target_value
+field_name: target_value
+entity_type: taxonomy_term
+bundle: donlsync_cbsderden_mapping_metad
+label: 'Target value'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

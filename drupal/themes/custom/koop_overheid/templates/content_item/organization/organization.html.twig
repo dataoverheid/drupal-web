@@ -1,0 +1,23 @@
+{% extends '@koop_overheid/content_item/content-item.html.twig' %}
+{% import '@koop_overheid/content_item/content-item.html.twig' as content_item %}
+
+{% block content_item %}
+  {% set content_item_type = 'organization' %}
+  {% set content_item_background_color = 'green' %}
+  {{ parent() }}
+{% endblock content_item %}
+
+{% block content_item_title %}
+  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-community.svg') }}
+  <div>
+    <p class="type">{{ 'Organization'|t }}</p>
+    <h1>{{ node.title.value }}</h1>
+    {{ content_item.permalink(url('donl_search.organization.view', {'organization': node.machine_name.0.value})) }}
+  </div>
+{% endblock content_item_title%}
+
+{% block content_item_description %}
+  {% if node.organization_description.value %}
+    {{ node.organization_description.value|nl2br }}
+  {% endif %}
+{% endblock content_item_description %}

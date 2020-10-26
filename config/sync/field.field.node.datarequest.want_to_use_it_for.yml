@@ -1,0 +1,19 @@
+uuid: 9e396fe2-052f-4e83-82fe-47906fdd2537
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.want_to_use_it_for
+    - node.type.datarequest
+id: node.datarequest.want_to_use_it_for
+field_name: want_to_use_it_for
+entity_type: node
+bundle: datarequest
+label: 'Doelstelling dataverzoek'
+description: 'Om u goed van dienst te kunnen zijn, kunt u hier aangeven wat de doelstelling van uw dataverzoek is. Wat gaat u doen met de data?'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
