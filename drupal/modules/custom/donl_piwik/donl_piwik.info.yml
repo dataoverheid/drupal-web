@@ -1,0 +1,7 @@
+name: DONL Piwik
+description: Module for all donl piwik related functionality
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+configure: donl_piwik.piwik.settings

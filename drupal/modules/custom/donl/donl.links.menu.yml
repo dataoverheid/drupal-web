@@ -1,6 +1,13 @@
 donl.settings:
   title: 'DONL settings'
-  parent: ckan.settings
+  parent: system.admin
   route_name: donl.settings
-  description: 'Manage the global DONL settings.'
-  weight: 1
+  description: 'Manage donl settings.'
+  weight: 30
+
+donl.settings.search:
+  title: 'Search engine'
+  parent: donl.settings
+  route_name: donl.settings.search
+  description: 'Manage the settings for the donl search engine.'
+  weight: 4

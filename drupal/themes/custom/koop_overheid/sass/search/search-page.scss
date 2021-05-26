@@ -1,0 +1,70 @@
+// @todo Find a better way to do this. Maybe render the facets wrapper inside the different search page headers?
+#body.path-zoek,
+#body.path-community {
+  .search-block {
+    @include breakpoint($laptop) {
+      padding-bottom: 83px;
+    }
+  }
+}
+
+.route-donl-searchorganizationview {
+  .facets-wrapper {
+    @include breakpoint($laptop) {
+      margin-top: 0;
+    }
+  }
+
+  #facets {
+    @include breakpoint($laptop) {
+      border-bottom: 1px solid $c-gray-300;
+    }
+  }
+}
+
+#body.route-donl-searchgroupview {
+  .group-info {
+    @include breakpoint($laptop) {
+      padding-bottom: 70px;
+    }
+  }
+
+  .facets-wrapper {
+    @include breakpoint($laptop) {
+      margin-top: -86px;
+    }
+  }
+
+  .content-item {
+    .content-characteristics-background {
+      padding-top: 0;
+    }
+  }
+}
+
+.community-search-page {
+  .facets-wrapper {
+    @include breakpoint($laptop) {
+      margin-top: 0;
+    }
+  }
+
+  .search-page {
+    margin-top: 1em;
+  }
+}
+
+.search-page {
+  .columns {
+    @include breakpoint($laptop) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .results {
+      @include breakpoint($laptop) {
+        margin-top: 1em;
+      }
+    }
+  }
+}

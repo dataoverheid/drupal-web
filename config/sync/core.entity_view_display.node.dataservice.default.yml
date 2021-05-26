@@ -1,0 +1,317 @@
+uuid: 42ea4f85-9b5f-4289-a16c-825efe901c03
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.dataservice.dataserivce_base_register
+    - field.field.node.dataservice.dataserivce_state
+    - field.field.node.dataservice.dataservice_acceptance_url
+    - field.field.node.dataservice.dataservice_api_authentication
+    - field.field.node.dataservice.dataservice_api_format
+    - field.field.node.dataservice.dataservice_api_output
+    - field.field.node.dataservice.dataservice_contact_email
+    - field.field.node.dataservice.dataservice_contact_name
+    - field.field.node.dataservice.dataservice_costs_for_use
+    - field.field.node.dataservice.dataservice_demo_url
+    - field.field.node.dataservice.dataservice_description
+    - field.field.node.dataservice.dataservice_documentation_url
+    - field.field.node.dataservice.dataservice_explanation_costs
+    - field.field.node.dataservice.dataservice_high_value
+    - field.field.node.dataservice.dataservice_license
+    - field.field.node.dataservice.dataservice_location_datasets
+    - field.field.node.dataservice.dataservice_national_coverage
+    - field.field.node.dataservice.dataservice_open_standards
+    - field.field.node.dataservice.dataservice_owner
+    - field.field.node.dataservice.dataservice_production_url
+    - field.field.node.dataservice.dataservice_programming_language
+    - field.field.node.dataservice.dataservice_reference_data
+    - field.field.node.dataservice.dataservice_sector_registrations
+    - field.field.node.dataservice.dataservice_source_code_url
+    - field.field.node.dataservice.dataservice_specification_url
+    - field.field.node.dataservice.dataservice_supplier
+    - field.field.node.dataservice.dataservice_type
+    - field.field.node.dataservice.dataservice_uptime
+    - field.field.node.dataservice.forum_link
+    - field.field.node.dataservice.machine_name
+    - field.field.node.dataservice.relation_dataservice_dataset
+    - field.field.node.dataservice.theme
+    - node.type.dataservice
+  module:
+    - ckan
+    - donl
+    - options
+    - user
+id: node.dataservice.default
+targetEntityType: node
+bundle: dataservice
+mode: default
+content:
+  dataserivce_base_register:
+    weight: 106
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  dataserivce_state:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_acceptance_url:
+    weight: 124
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_api_authentication:
+    weight: 134
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  dataservice_api_format:
+    weight: 135
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  dataservice_api_output:
+    weight: 131
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_contact_email:
+    weight: 119
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  dataservice_contact_name:
+    weight: 118
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_costs_for_use:
+    weight: 137
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  dataservice_demo_url:
+    weight: 125
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_description:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  dataservice_documentation_url:
+    weight: 126
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_explanation_costs:
+    weight: 138
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  dataservice_high_value:
+    weight: 108
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  dataservice_license:
+    weight: 121
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_location_datasets:
+    weight: 141
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  dataservice_national_coverage:
+    weight: 109
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  dataservice_open_standards:
+    weight: 139
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  dataservice_owner:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_production_url:
+    weight: 127
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_programming_language:
+    weight: 132
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  dataservice_reference_data:
+    weight: 110
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  dataservice_sector_registrations:
+    weight: 107
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  dataservice_source_code_url:
+    weight: 128
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_specification_url:
+    weight: 129
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_supplier:
+    weight: 117
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  dataservice_type:
+    weight: 133
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  dataservice_uptime:
+    weight: 122
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  forum_link:
+    weight: 123
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  machine_name:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+  relation_dataservice_dataset:
+    weight: 140
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_dataset_text
+    region: content
+  theme:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

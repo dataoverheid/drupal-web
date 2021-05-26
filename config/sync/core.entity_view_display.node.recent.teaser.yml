@@ -5,11 +5,20 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.recent.body
-    - field.field.node.recent.field_left_sidebar
     - field.field.node.recent.field_paragraphs
-    - field.field.node.recent.field_right_sidebar
+    - field.field.node.recent.header
+    - field.field.node.recent.linked_community
     - field.field.node.recent.recent_image
     - field.field.node.recent.recent_type
+    - field.field.node.recent.relation_recent_application
+    - field.field.node.recent.relation_recent_catalog
+    - field.field.node.recent.relation_recent_community
+    - field.field.node.recent.relation_recent_datarequest
+    - field.field.node.recent.relation_recent_dataservice
+    - field.field.node.recent.relation_recent_dataset
+    - field.field.node.recent.relation_recent_group
+    - field.field.node.recent.relation_recent_organization
+    - field.field.node.recent.sidebar
     - node.type.recent
   module:
     - text
@@ -28,10 +37,19 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
-  field_left_sidebar: true
   field_paragraphs: true
-  field_right_sidebar: true
+  header: true
   langcode: true
+  linked_community: true
   links: true
   recent_image: true
   recent_type: true
+  relation_recent_application: true
+  relation_recent_catalog: true
+  relation_recent_community: true
+  relation_recent_datarequest: true
+  relation_recent_dataservice: true
+  relation_recent_dataset: true
+  relation_recent_group: true
+  relation_recent_organization: true
+  sidebar: true

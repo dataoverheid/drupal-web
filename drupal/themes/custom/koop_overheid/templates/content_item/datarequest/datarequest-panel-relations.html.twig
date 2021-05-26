@@ -2,11 +2,11 @@
   <tbody>
   <tr>
     <th>{{ 'Possible dataowner'|t }}</th>
-    <td>{{ ckan_mapping_get_organization_name(datarequest.possible_owner.value) }}</td>
+    <td>{{ ckan_link_data_owner(datarequest.possible_owner.value, ckan_mapping_get_organization_name(datarequest.possible_owner.value), 'link') }}</td>
   </tr>
   <tr>
     <th>{{ 'Data owner'|t }}</th>
-    <td>{{ ckan_mapping_get_organization_name(datarequest.data_owner.value) }}</td>
+    <td>{{ ckan_link_data_owner(datarequest.data_owner.value, ckan_mapping_get_organization_name(datarequest.data_owner.value), 'link') }}</td>
   </tr>
   </tbody>
 </table>

@@ -30,7 +30,7 @@ class LanguageCheckService implements LanguageCheckServiceInterface {
    */
   public function __construct(LanguageManagerInterface $languageManager, ValueListInterface $valueList, TranslationInterface $stringTranslation) {
     $this->language = $languageManager->getCurrentLanguage();
-    $this->languageValueList = $valueList->getList('donl:language');
+    $this->languageValueList = $valueList->getList('donl:language', TRUE);
     $this->stringTranslation = $stringTranslation;
   }
 

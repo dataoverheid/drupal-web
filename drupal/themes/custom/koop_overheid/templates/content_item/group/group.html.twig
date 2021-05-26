@@ -3,45 +3,43 @@
 
 {% block content_item %}
   {% set content_item_type = 'group' %}
-  {% set content_item_background_color = 'green' %}
   {{ parent() }}
 {% endblock content_item %}
 
 {% block content_item_container %}
-  <div class="columns">
-    <div class="column column-d-8">
-      <div class="content-item-title">
-        {% block content_item_title %}
-          {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-community.svg') }}
-          <div>
-            <p class="type">{{ 'Group'|t }}</p>
-            <h1>{{ node.title.value }}</h1>
-            {{ content_item.permalink(url('donl_search.group.view', {'group': node.machine_name.0.value})) }}
-          </div>
-        {% endblock content_item_title%}
+  <div class="group-header-wrapper">
+    <div class="columns">
+      <div class="column column-d-10 group-info">
+        <div class="content-item-title">
+          {% block content_item_title %}
+            {{ content_item.theme_icon() }}
+            <div>
+              <p class="type">{{ 'Group'|t }}</p>
+              <h1>{{ node.title.value }}</h1>
+              {{ content_item.permalink(url('donl_search.group.view', {'group': node.machine_name.0.value})) }}
+            </div>
+          {% endblock content_item_title %}
+        </div>
+        <div class="content-item-description">
+          {% block content_item_description %}
+            {% if node.group_description.value %}
+              <p class="read-more-link" data-decorator="read-more-text" data-read-more-text="{{ 'More information'|t }}"
+                 data-read-less-text="{{ 'Less information'|t }}" data-text-limit="600">
+                {{ node.group_description.value|nl2br }}
+              </p>
+            {% endif %}
+          {% endblock content_item_description %}
+        </div>
+        {% block content_item_tabs %}
+          {{ parent() }}
+        {% endblock content_item_tabs %}
       </div>
-      <div class="content-item-description">
-        {% block content_item_description %}
-          {% if node.group_description.value %}
-            {{ node.group_description.value|nl2br }}
-          {% endif %}
-        {% endblock content_item_description %}
+      <div class="column column-d-2 group-image">
+        {% if node.group_image.entity.uri %}
+          <span class="background-image"
+                style="background-image: url('{{ file_url(node.group_image.entity.uri.value) }}')"></span>
+        {% endif %}
       </div>
-    </div>
-    <div class="column column-d-4 group-image">
-      {% if node.group_image.entity.uri %}
-        {% set imagestyle = {
-          '#theme':      'image_style',
-          '#style_name': 'medium',
-          '#uri':        node.group_image.entity.uri.value,
-          '#alt':        node.group_image.alt,
-          '#attributes': { class: 'swiper-image' },
-        } %}
-        {{ imagestyle }}
-      {% endif %}
     </div>
   </div>
-  {% block content_item_tabs %}
-    {{ parent() }}
-  {% endblock content_item_tabs %}
 {% endblock content_item_container %}

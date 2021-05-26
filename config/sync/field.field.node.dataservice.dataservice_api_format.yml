@@ -1,0 +1,29 @@
+uuid: 59fdd042-c8d1-4042-9274-d6edf8b1da75
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_api_format
+    - node.type.dataservice
+    - taxonomy.vocabulary.donl_api_format
+id: node.dataservice.dataservice_api_format
+field_name: dataservice_api_format
+entity_type: node
+bundle: dataservice
+label: 'Soort API of service'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      donl_api_format: donl_api_format
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

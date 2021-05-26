@@ -1,8 +1,0 @@
-uuid: 54e2e991-d76f-4745-95f8-09752e94e82e
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync CBS Mapping MetadataLanguage'
-vid: donlsync_cbs_mapping_metadata_la
-description: ''
-weight: 0

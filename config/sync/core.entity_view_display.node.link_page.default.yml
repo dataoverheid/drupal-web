@@ -1,0 +1,55 @@
+uuid: 937d50d6-2373-44b1-bb67-07b4d627eca4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.node.link_page.body
+    - field.field.node.link_page.field_header_image
+    - field.field.node.link_page.field_header_links
+    - field.field.node.link_page.field_left_sidebar
+    - field.field.node.link_page.field_paragraphs
+    - field.field.node.link_page.field_right_sidebar
+    - field.field.node.link_page.field_type
+    - node.type.link_page
+  module:
+    - entity_reference_revisions
+    - user
+id: node.link_page.default
+targetEntityType: node
+bundle: link_page
+mode: default
+content:
+  field_left_sidebar:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_paragraphs:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_right_sidebar:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+hidden:
+  body: true
+  field_header_image: true
+  field_header_links: true
+  field_type: true
+  langcode: true
+  links: true

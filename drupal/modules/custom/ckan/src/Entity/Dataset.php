@@ -94,6 +94,11 @@ class Dataset {
   /**
    * @var string|null
    */
+  public $access_rights_reason;
+
+  /**
+   * @var string|null
+   */
   public $url;
 
   /**
@@ -293,6 +298,16 @@ class Dataset {
   public $national_coverage;
 
   /**
+   * @var bool
+   */
+  public $sector_registrations;
+
+  /**
+   * @var bool
+   */
+  public $local_registrations;
+
+  /**
    * @var string|null
    */
   public $dataset_quality;
@@ -306,6 +321,11 @@ class Dataset {
    * @var string|null
    */
   public $restrictions_statement;
+
+  /**
+   * @var string|null
+   */
+  public $org_logo_url;
 
   /**
    * @return string|null
@@ -529,6 +549,20 @@ class Dataset {
    */
   public function setAccessRights(string $access_rights = NULL): void {
     $this->access_rights = $access_rights;
+  }
+
+  /**
+   * @return string|null
+   */
+  public function getAccessRightsReason(): ?string {
+    return $this->access_rights_reason;
+  }
+
+  /**
+   * @param string|null $access_rights_reason
+   */
+  public function setAccessRightsReason(string $access_rights_reason = NULL): void {
+    $this->access_rights_reason = $access_rights_reason;
   }
 
   /**
@@ -1078,6 +1112,34 @@ class Dataset {
   }
 
   /**
+   * @param bool $sector_registrations
+   */
+  public function setSectorRegistrations(bool $sector_registrations): void {
+    $this->sector_registrations = $sector_registrations;
+  }
+
+  /**
+   * @return bool
+   */
+  public function getSectorRegistrations(): bool {
+    return $this->sector_registrations;
+  }
+
+  /**
+   * @param bool $local_registrations
+   */
+  public function setLocalRegistrations(bool $local_registrations): void {
+    $this->local_registrations = $local_registrations;
+  }
+
+  /**
+   * @return bool
+   */
+  public function getLocalRegistrations(): bool {
+    return $this->local_registrations;
+  }
+
+  /**
    * @return string|null
    */
   public function getDatasetQuality(): ?string {
@@ -1151,6 +1213,20 @@ class Dataset {
     }
 
     return NULL;
+  }
+
+  /**
+   * @return string|null
+   */
+  public function getOrgLogoUrl(): ?string {
+    return $this->org_logo_url;
+  }
+
+  /**
+   * @param string|null $org_logo_url
+   */
+  public function setOrgLogoUrl(?string $org_logo_url): void {
+    $this->org_logo_url = $org_logo_url;
   }
 
 }

@@ -1,0 +1,47 @@
+uuid: 1bc613aa-88ae-48b0-a630-67273082d98a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donl_programming_languages.identifier
+    - field.field.taxonomy_term.donl_programming_languages.machine_name
+    - taxonomy.vocabulary.donl_programming_languages
+  module:
+    - donl
+id: taxonomy_term.donl_programming_languages.default
+targetEntityType: taxonomy_term
+bundle: donl_programming_languages
+mode: default
+content:
+  identifier:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: 'Laat dit veld leeg om Drupal zelf een passende identifier aan te laten maken'
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  machine_name:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  status: true

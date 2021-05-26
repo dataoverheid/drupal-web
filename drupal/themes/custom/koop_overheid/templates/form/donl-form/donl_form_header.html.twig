@@ -1,0 +1,12 @@
+<div class="donl-form-header content-characteristics content-characteristics-{{ type }}">
+  <div class="content-characteristics-background">
+    <div class="container row">
+      <div class="summary column">{{ summary }}</div>
+      <div class="steps column">
+        {% for step in steps %}
+          {{ step }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

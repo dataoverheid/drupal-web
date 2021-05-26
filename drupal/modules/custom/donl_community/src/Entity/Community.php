@@ -8,6 +8,11 @@ namespace Drupal\donl_community\Entity;
 class Community {
 
   /**
+   * @var int
+   */
+  protected $nid;
+
+  /**
    * @var string
    */
   protected $title;
@@ -46,6 +51,20 @@ class Community {
    * @var array
    */
   protected $themes;
+
+  /**
+   * @return int
+   */
+  public function getNid(): int {
+    return $this->nid;
+  }
+
+  /**
+   * @param int $nid
+   */
+  public function setNid(int $nid): void {
+    $this->nid = $nid;
+  }
 
   /**
    * @return string
@@ -132,16 +151,16 @@ class Community {
   }
 
   /**
-   * @return string
+   * @return string|\Drupal\Component\Render\MarkupInterface
    */
-  public function getDescription(): string {
+  public function getDescription() {
     return $this->description ?? '';
   }
 
   /**
-   * @param string $description
+   * @param string|\Drupal\Component\Render\MarkupInterface $htmlDescription
    */
-  public function setDescription(string $description) {
+  public function setDescription($description) {
     $this->description = $description;
   }
 

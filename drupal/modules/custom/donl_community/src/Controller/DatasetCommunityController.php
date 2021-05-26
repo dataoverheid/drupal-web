@@ -9,6 +9,7 @@ use Drupal\ckan\SortDatasetResourcesServiceInterface;
 use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\donl_community\CommunityResolverInterface;
+use Drupal\donl_community\Form\CommunitySearchForm;
 use Drupal\donl_search\SolrRequestInterface;
 use Drupal\donl_search_backlink\BackLinkService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -72,6 +73,8 @@ class DatasetCommunityController extends DatasetController {
     ]);
     $routeParams = ['community' => $community->getMachineName()];
     $build['#backLink'] = $this->backLinkService->createBackLink($title, 'donl_community.search.dataset', $routeParams);
+
+    $build['#search'] = $this->formBuilder()->getForm(CommunitySearchForm::class, $community);
 
     return $build;
   }

@@ -27,21 +27,10 @@ class CommunitySearchForm extends SearchForm {
       return NULL;
     }
 
-    // Add parent fields and remove the ones we don't need.
-    $form = array_merge($form, parent::buildForm($form, $form_state));
-    unset($form['suggestions_ajax_wrapper']);
+    $form = parent::buildForm($form, $form_state);
 
     // For now we override the values as a community can't search on everything.
-    $form['searchbar']['type_select']['#options'] = [
-      'dataset' => $this->t('Dataset'),
-      'datarequest' => $this->t('Data requests'),
-      'group' => $this->t('Groups'),
-      'organization' => $this->t('Organizations'),
-      'application' => $this->t('Applications'),
-    ];
-    if (empty($form['searchbar']['type_select']['#default_value'])) {
-      $form['searchbar']['type_select']['#default_value'] = 'dataset';
-    }
+    $form['searchbar']['type_select']['#options'] = $this->donlEntitiesService->getEntitiesAsOptionsList('community_search');
 
     // Get tag cloud.
     if ($showTags && $tagCloud = $this->solrRequest->getTagCloud($community->getIdentifier())) {
@@ -66,8 +55,9 @@ class CommunitySearchForm extends SearchForm {
       }
     }
 
-    $form['submit']['#value'] = $this->t('Search data');
-
+    $form['searchbar']['submit-wrapper']['submit']['#value'] = $this->t('Find');
+    $form['#attached']['drupalSettings']['donl_search']['community_sys_name'] = $community->getMachineName();
+    $form['#attached']['drupalSettings']['donl_search']['suggestor_url'] = '/suggest/community/';
     return $form;
   }
 

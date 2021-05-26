@@ -2,7 +2,7 @@ donl_statistics.charts.view:
   path: '/statistieken/monitor'
   defaults:
     _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::content'
-    _title_callback: '\Drupal\donl_statistics\Controller\IWDashboardController::title'
+    _title_callback: '\Drupal\donl_statistics\Controller\IWDashboardController::getTitle'
   requirements:
     _permission: 'access content'
 
@@ -10,7 +10,7 @@ donl_statistics.charts.community.view:
   path: '/communities/{community}/monitor'
   defaults:
     _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::content'
-    _title_callback: '\Drupal\donl_statistics\Controller\IWDashboardController::title'
+    _title_callback: '\Drupal\donl_statistics\Controller\IWDashboardController::getTitle'
   options:
     parameters:
       community:
@@ -18,26 +18,26 @@ donl_statistics.charts.community.view:
   requirements:
     _permission: 'access content'
 
-donl_statistics.charts.monthly.datasets:
+donl_statistics.charts.datasets_per_month:
   path: '/statistieken/datasets-per-maand'
   defaults:
-    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::monthlyDatasetsGraph'
+    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::chartDatasetsPerMonth'
     _title: 'Monthly datasets'
   requirements:
     _permission: 'access content'
 
-donl_statistics.charts.sources:
+donl_statistics.charts.datasets_per_catalog:
   path: '/statistieken/datasets-per-catalogus'
   defaults:
-    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::datasetSourcesGraph'
+    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::chartDatasetsPerCatalog'
     _title: 'Dataset Sources'
   requirements:
     _permission: 'access content'
 
-donl_statistics.charts.monthly.datasets.status:
+donl_statistics.charts.datasets_state:
   path: '/statistieken/status-van-de-datasets'
   defaults:
-    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::monthlyDatasetStatusChart'
+    _controller: '\Drupal\donl_statistics\Controller\IWDashboardController::chartDatasetsState'
     _title: 'Monthly Dataset Status'
   requirements:
     _permission: 'access content'

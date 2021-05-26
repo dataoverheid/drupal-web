@@ -1,0 +1,6 @@
+services:
+  donl_dcat_validation.validation_service:
+    class: Drupal\donl_dcat_validation\DcatValidationService
+    arguments:
+      - '@logger.factory'
+      - '@entity_type.manager'

@@ -7,6 +7,18 @@
   <p>{{ description|length > 200 ? description|slice(0, 200) ~ '...' : description }}</p>
   <table class="main-data minimal-table">
     <tbody>
+    {% if record.status %}
+      <tr>
+        <th>{{ 'Status'|t }}:</th>
+        <td>{{ ckan_mapping_get_status_name(record.state) }}</td>
+      </tr>
+    {% endif %}
+    {% if record.authority %}
+      <tr>
+        <th>{{ 'Data owner'|t }}:</th>
+        <td>{{ ckan_mapping_get_organization_name(record.authority[0]) }}</td>
+      </tr>
+    {% endif %}
     {% if record.metadata_modified %}
       <tr>
         <th>{{ 'Updated'|t }}:</th>
@@ -16,19 +28,7 @@
     {% if record.theme %}
       <tr>
         <th>{{ 'Theme'|t }}:</th>
-        <td>{{ ckan_mapping_get_theme_name(record.theme[0]) }}</td>
-      </tr>
-    {% endif %}
-    {% if record.status %}
-      <tr>
-        <th>{{ 'State'|t }}:</th>
-        <td>{{ ckan_mapping_get_status_name(record.status) }}</td>
-      </tr>
-    {% endif %}
-    {% if record.authority %}
-      <tr>
-        <th>{{ 'Data owner'|t }}:</th>
-        <td>{{ ckan_mapping_get_organization_name(record.authority[0]) }}</td>
+        <td>{{ ckan_mapping_get_theme_name(record.theme) }}</td>
       </tr>
     {% endif %}
     </tbody>
@@ -37,7 +37,7 @@
     <a href="{{ record.url }}#description">{{ 'Description'|t }}</a>
     {% for distributionType in record.distributionTypes %}
       {% set type = ckan_mapping_get_distribution_type_name(distributionType) %}
-      <a href="{{ record.url }}#{{ type|replace(' ', '-')|lower }}">{{ type|t }}</a>
+      <a href="{{ record.url }}#{{ type|replace({' ': '-'})|lower }}">{{ type|t }}</a>
     {% endfor %}
     <a href="{{ record.url }}#metadata">{{ 'Metadata'|t }}</a>
   </div>

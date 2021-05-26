@@ -18,6 +18,11 @@ msgstr "Terug naar community :community"
 msgid "Back to all @type in community :community"
 msgstr "Terug naar alle @type in community :community"
 
+msgid "There is 1 result within @type of:"
+msgid_plural "There are @count results within @type of:"
+msgstr[0] "Er is 1 resultaat binnen de @type van:"
+msgstr[1] "Er zijn @count resultaten binnen de @type van:"
+
 msgid "There are @count results within @type of:"
 msgstr "Er zijn @count resultaten binnen de @type van:"
 
@@ -26,3 +31,22 @@ msgstr "Buiten dit register zijn er"
 
 msgid "@count results at data.overheid.nl."
 msgstr "@count resultaten op dataoverheid.nl."
+
+msgid "View more groups"
+msgstr "Meer groepen bekijken"
+
+msgid "Find"
+msgstr "Zoek"
+
+msgid "Related content"
+msgstr "Gerelateerde inhoud"
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+

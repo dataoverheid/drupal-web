@@ -7,7 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\Core\Url;
+use Drupal\donl_identifier\ResolveIdentifierServiceInterface;
 use Drupal\donl_value_list\ValueListInterface;
 
 /**
@@ -32,6 +32,11 @@ class FacetRenameService implements FacetRenameServiceInterface {
   private $termStorage;
 
   /**
+   * @var \Drupal\donl_identifier\ResolveIdentifierServiceInterface
+   */
+  protected $resolveIdentifierService;
+
+  /**
    * @var array
    */
   private $lists;
@@ -42,31 +47,41 @@ class FacetRenameService implements FacetRenameServiceInterface {
   private $languageCode;
 
   /**
+   * FacetRenameService constructor.
    *
+   * @param \Drupal\donl_value_list\ValueListInterface $valueList
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cacheBackend
+   * @param \Drupal\Core\StringTranslation\TranslationInterface $stringTranslation
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   * @param \Drupal\donl_identifier\ResolveIdentifierServiceInterface $resolveIdentifierService
    */
-  public function __construct(ValueListInterface $valueList, CacheBackendInterface $cacheBackend, TranslationInterface $stringTranslation, EntityTypeManagerInterface $entityTypeManager, LanguageManagerInterface $languageManager) {
+  public function __construct(ValueListInterface $valueList, CacheBackendInterface $cacheBackend, TranslationInterface $stringTranslation, EntityTypeManagerInterface $entityTypeManager, LanguageManagerInterface $languageManager, ResolveIdentifierServiceInterface $resolveIdentifierService) {
     $this->cacheBackend = $cacheBackend;
     $this->nodeStorage = $entityTypeManager->getStorage('node');
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
+    $this->resolveIdentifierService = $resolveIdentifierService;
     $this->stringTranslation = $stringTranslation;
     $this->languageCode = $languageManager->getCurrentLanguage()->getId();
 
-    $terms = $this->getTerms();
+    $terms = $this->getTermTranslations();
     $this->lists = [
       'facet_sys_type' => $terms,
       'facet_related_to' => $terms,
-      'facet_access_rights' => $valueList->getList('overheid:openbaarheidsniveau', FALSE),
-      'facet_authority' => $valueList->getList('donl:organization', FALSE),
-      'facet_theme' => $valueList->getList('overheid:taxonomiebeleidsagenda', FALSE),
-      'facet_license' => $valueList->getList('overheid:license', FALSE),
-      'facet_sys_language' => $valueList->getList('donl:language', FALSE),
-      'facet_format' => $valueList->getList('mdr:filetype_nal', FALSE),
-      'facet_catalog' => $valueList->getList('donl:catalogs', FALSE),
+      'facet_access_rights' => $valueList->getList('overheid:openbaarheidsniveau'),
+      'facet_authority' => $valueList->getList('donl:organization'),
+      'facet_authority_kind' => $this->getOrganizationTypes(),
+      'facet_theme' => $valueList->getList('overheid:taxonomiebeleidsagenda'),
+      'facet_license' => $valueList->getList('overheid:license'),
+      'facet_sys_language' => $valueList->getList('donl:language'),
+      'facet_format' => $valueList->getList('mdr:filetype_nal'),
+      'facet_catalog' => $valueList->getList('donl:catalogs'),
       'facet_classification' => $terms,
-      'facet_status' => $valueList->getList('overheid:datasetStatus', FALSE),
-      'facet_community' => $this->getCommunities(),
-      'facet_group' => $this->getGroups(),
+      'facet_status' => $valueList->getList('overheid:datasetStatus'),
+      'facet_community' => $this->getNodes('community'),
+      'facet_group' => $this->getNodes('group'),
       'facet_recent' => $this->getRecentOptions(),
+      'facet_kind' => $this->getOrganizationTypes(),
     ];
   }
 
@@ -83,29 +98,42 @@ class FacetRenameService implements FacetRenameServiceInterface {
       return (string) $title;
     }
 
-    if ($type === 'facet_community') {
-      foreach ($this->lists[$type] as $key => $community) {
-        $explodedKey = explode('/', $key);
-        $toMatchKey = array_pop($explodedKey);
-        $explodedTitle = explode('/', $title);
-        $toMatchTitle = array_pop($explodedTitle);
-
-        if ($toMatchKey === $toMatchTitle) {
-          return $community;
-        }
-      }
-    }
-
     return $this->lists[$type][$title] ?? $title;
   }
 
   /**
-   * Get a list with all available terms.
+   * Get a list with all available organization types.
    *
    * @return array
+   *   An array with the readable names.
    */
-  private function getTerms(): array {
-    $cid = 'facet_rename:terms:' . $this->languageCode;
+  private function getOrganizationTypes(): array {
+    $cid = 'facet_rename:donl_organization_types:' . $this->languageCode;
+    $cache = $this->cacheBackend->get($cid);
+    if ($cache && $cache->valid) {
+      return $cache->data;
+    }
+
+    $values = [];
+    /** @var \Drupal\taxonomy\Entity\Term $term */
+    foreach ($this->termStorage->loadTree('donl_organization_types', 0, NULL, TRUE) as $term) {
+      if ($term->hasTranslation($this->languageCode)) {
+        $term = $term->getTranslation($this->languageCode);
+      }
+      $values[$term->get('identifier')->getString()] = $term->get('name')->getString();
+    }
+    $this->cacheBackend->set($cid, $values, CacheBackendInterface::CACHE_PERMANENT);
+    return $values;
+  }
+
+  /**
+   * Get a list with all available term translations.
+   *
+   * @return array
+   *   An array with the readable names.
+   */
+  private function getTermTranslations(): array {
+    $cid = 'facet_rename:term_translations:' . $this->languageCode;
     $cache = $this->cacheBackend->get($cid);
     if ($cache && $cache->valid) {
       return $cache->data;
@@ -124,68 +152,46 @@ class FacetRenameService implements FacetRenameServiceInterface {
   }
 
   /**
+   * Rename node related facets.
+   *
+   * @param string $type
+   *   The entity type.
+   *
+   * @return array
+   *   An array with the readable names.
+   */
+  private function getNodes(string $type): array {
+    $cid = 'facet_rename:' . $type . ':' . $this->languageCode;
+    $cache = $this->cacheBackend->get($cid);
+    if ($cache && $cache->valid) {
+      return $cache->data;
+    }
+
+    $values = [];
+    /** @var \Drupal\node\Entity\Node $node */
+    foreach ($this->nodeStorage->loadByProperties(['type' => $type]) as $node) {
+      $identifier = $this->resolveIdentifierService->resolve($node);
+      if ($node->hasTranslation($this->languageCode)) {
+        $node = $node->getTranslation($this->languageCode);
+      }
+      $values[$identifier] = $node->getTitle();
+    }
+    $this->cacheBackend->set($cid, $values, CacheBackendInterface::CACHE_PERMANENT);
+    return $values;
+  }
+
+  /**
    * Rename the facet_recent options to a readable name.
    *
    * @return array
+   *   An array with the readable names.
    */
-  private function getRecentOptions() {
+  private function getRecentOptions(): array {
     return [
       '* TO NOW-1YEAR' => $this->t('More than a year ago'),
       'NOW-1YEAR TO NOW-1MONTH' => $this->t('Last year'),
       'NOW-1MONTH TO NOW+1DAY' => $this->t('Last month'),
     ];
-  }
-
-  /**
-   * Rename the facet_community to a readable name.
-   *
-   * @return array
-   *   An array with the readable names.
-   */
-  private function getCommunities(): array {
-    $cid = 'facet_rename:community:' . $this->languageCode;
-    $cache = $this->cacheBackend->get($cid);
-    if ($cache && $cache->valid) {
-      return $cache->data;
-    }
-
-    $values = [];
-    /** @var \Drupal\node\Entity\Node $node */
-    foreach ($this->nodeStorage->loadByProperties(['type' => 'community']) as $node) {
-      $identifier = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
-      if ($node->hasTranslation($this->languageCode)) {
-        $node = $node->getTranslation($this->languageCode);
-      }
-      $values[$identifier] = $node->getTitle();
-    }
-    $this->cacheBackend->set($cid, $values, CacheBackendInterface::CACHE_PERMANENT);
-    return $values;
-  }
-
-  /**
-   * Rename the facet_group to a readable name.
-   *
-   * @return array
-   *   An array with the readable names.
-   */
-  private function getGroups(): array {
-    $cid = 'facet_rename:group:' . $this->languageCode;
-    $cache = $this->cacheBackend->get($cid);
-    if ($cache && $cache->valid) {
-      return $cache->data;
-    }
-
-    $values = [];
-    /** @var \Drupal\node\Entity\Node $node */
-    foreach ($this->nodeStorage->loadByProperties(['type' => 'group']) as $node) {
-      $identifier = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
-      if ($node->hasTranslation($this->languageCode)) {
-        $node = $node->getTranslation($this->languageCode);
-      }
-      $values[$identifier] = $node->getTitle();
-    }
-    $this->cacheBackend->set($cid, $values, CacheBackendInterface::CACHE_PERMANENT);
-    return $values;
   }
 
 }

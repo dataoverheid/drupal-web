@@ -1,0 +1,16 @@
+uuid: 38145cc5-44f8-404e-9042-6e10f9eed7a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donl_api_format
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.donl_api_format
+target_entity_type_id: taxonomy_term
+target_bundle: donl_api_format
+default_langcode: site_default
+language_alterable: false

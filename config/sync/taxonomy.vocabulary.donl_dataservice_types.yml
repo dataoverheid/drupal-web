@@ -1,0 +1,8 @@
+uuid: c24ef1f3-1bc7-4277-84bb-9e42047df7be
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DONL type dataservice'
+vid: donl_dataservice_types
+description: ''
+weight: 0

@@ -1,0 +1,49 @@
+body:not(#body) {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+
+  .site-branding__logo {
+    text-decoration: none;
+
+    img {
+      width: 200px;
+      max-width: 200px;
+      margin: 0;
+    }
+  }
+
+  > .container {
+    width: 100%;
+  }
+
+  // Header.
+  > .container:first-child {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    height: 117px;
+
+    &:after {
+      top: 117px;
+      position: absolute;
+      height: .5em;
+      left: 0;
+      content: '';
+      background-color: #b2d7ee;
+      width: 100%;
+    }
+  }
+
+  // Body.
+  > .container:nth-child(3) {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+
+  // Footer.
+  footer {
+    margin-top: auto;
+  }
+}

@@ -1,0 +1,23 @@
+masonry:
+  version: 4.2.2
+  js:
+    /libraries/masonry-layout/dist/masonry.pkgd.min.js: { minified: true }
+
+recent:
+  version: 1.0.0
+  js:
+    js/recent.js: { }
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery
+    - donl_recent/masonry
+
+recent_content:
+  version: 1.0.0
+  js:
+    js/recent-content.js: { }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - donl_recent/masonry

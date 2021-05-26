@@ -1,0 +1,19 @@
+uuid: 5ec3a48e-8b5b-4249-bf5f-bc9ef7c618b8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_contact_email
+    - node.type.dataservice
+id: node.dataservice.dataservice_contact_email
+field_name: dataservice_contact_email
+entity_type: node
+bundle: dataservice
+label: 'Contact email'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

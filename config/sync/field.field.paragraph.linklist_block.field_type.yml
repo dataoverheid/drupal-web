@@ -1,0 +1,21 @@
+uuid: a66330c1-7740-48a5-9139-3c654d782a5c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_type
+    - paragraphs.paragraphs_type.linklist_block
+  module:
+    - options
+id: paragraph.linklist_block.field_type
+field_name: field_type
+entity_type: paragraph
+bundle: linklist_block
+label: Type
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

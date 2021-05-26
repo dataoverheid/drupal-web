@@ -1,0 +1,19 @@
+uuid: 754b9835-ce55-4ed5-8c3e-f1b0812e16a0
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_documentation_url
+    - node.type.dataservice
+id: node.dataservice.dataservice_documentation_url
+field_name: dataservice_documentation_url
+entity_type: node
+bundle: dataservice
+label: 'Documentatie URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

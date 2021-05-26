@@ -1,8 +1,0 @@
-uuid: 241c04ad-aa89-40fa-9930-8f164f636352
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping Publisher'
-vid: donlsync_ngr_mapping_publisher
-description: ''
-weight: 0

@@ -7,36 +7,19 @@ use Drupal\ckan\Entity\Dataset;
 use Drupal\ckan\MappingServiceInterface;
 use Drupal\ckan\SortDatasetResourcesServiceInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\donl_dcat_validation\DcatValidationServiceInterface;
+use Drupal\donl_value_list\ValueListInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Resource order form.
  */
-class ResourceOrderForm extends FormBase {
-
-  /**
-   * The ckan request.
-   *
-   * @var \Drupal\ckan\CkanRequestInterface
-   */
-  protected $ckanRequest;
-
-  /**
-   * The mapping service.
-   *
-   * @var \Drupal\ckan\MappingServiceInterface
-   */
-  protected $mappingService;
-
-  /**
-   * The user storage.
-   *
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected $userStorage;
+class ResourceOrderForm extends BaseForm {
 
   /**
    * The sort dataset resource service.
@@ -49,18 +32,16 @@ class ResourceOrderForm extends FormBase {
    * ResourceOrderForm constructor.
    *
    * @param \Drupal\ckan\CkanRequestInterface $ckanRequest
-   *   The ckan request.
+   * @param \Drupal\donl_value_list\ValueListInterface $valueList
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity type manager.
-   * @param \Drupal\ckan\MappingServiceInterface $mappingService
-   *   The mapping service.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request
+   * @param \Drupal\donl_dcat_validation\DcatValidationServiceInterface $dcatValidationService
    * @param \Drupal\ckan\SortDatasetResourcesServiceInterface $sortDatasetResourcesService
    *   The sort dataset resource service.
    */
-  public function __construct(CkanRequestInterface $ckanRequest, EntityTypeManagerInterface $entityTypeManager, MappingServiceInterface $mappingService, SortDatasetResourcesServiceInterface $sortDatasetResourcesService) {
-    $this->ckanRequest = $ckanRequest;
-    $this->mappingService = $mappingService;
-    $this->userStorage = $entityTypeManager->getStorage('user');
+  public function __construct(CkanRequestInterface $ckanRequest, ValueListInterface $valueList, MessengerInterface $messenger, EntityTypeManagerInterface $entityTypeManager, RequestStack $request, DcatValidationServiceInterface $dcatValidationService, MappingServiceInterface $mappingService, SortDatasetResourcesServiceInterface $sortDatasetResourcesService) {
+    parent::__construct($ckanRequest, $valueList, $messenger, $entityTypeManager, $request, $dcatValidationService, $mappingService);
     $this->sortDatasetResourcesService = $sortDatasetResourcesService;
   }
 
@@ -70,9 +51,13 @@ class ResourceOrderForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('ckan.request'),
-      $container->get('entity.manager'),
+      $container->get('donl.value_list'),
+      $container->get('messenger'),
+      $container->get('entity_type.manager'),
+      $container->get('request_stack'),
+      $container->get('donl_dcat_validation.validation_service'),
       $container->get('ckan.mapping'),
-      $container->get('ckan.sort_dataset_resources')
+      $container->get('ckan.sort_dataset_resources'),
     );
   }
 
@@ -92,16 +77,145 @@ class ResourceOrderForm extends FormBase {
     }
     $form_state->set('dataset', $dataset);
 
+    $form['full_form_wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => ['full-form-wrapper']],
+    ];
+
+    $form['full_form_wrapper']['wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'main-wrapper',
+        ],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'main',
+        ],
+      ],
+    ];
+
+    $subSteps = $this->getSubSteps($form, 'basic');
+    $subSteps[] = $this->getSubSteps($form, 'advanced', count($subSteps));
+    $form['#attributes']['class'] = ['donl-form', 'step-form'];
+    $form['full_form_wrapper']['header'] = [
+      '#weight' => -45,
+      '#theme' => 'donl_form_header',
+      '#type' => 'dataset',
+      '#summary' => [
+        '#theme' => 'donl_form_summary',
+        '#title' => $this->t('Dataset'),
+        '#step_title' => $this->t('Manage data sources'),
+        '#fields' => [
+          'title' => [
+            'field' => 'title',
+            'title' => $this->t('Title'),
+            'value' => $dataset->getTitle(),
+          ],
+          'owner' => [
+            'field' => 'owner',
+            'title' => $this->t('Owner'),
+            'value' => $this->mappingService->getOrganizationName($dataset->getAuthority()),
+          ],
+          'licence' => [
+            'field' => 'licence',
+            'title' => $this->t('Licence'),
+            'value' => $this->mappingService->getLicenseName($dataset->getLicenseId()),
+          ],
+          'changed' => [
+            'field' => 'changed',
+            'title' => $this->t('Changed'),
+            'value' => $dataset->getModified()->format('d-m-Y H:i'),
+          ],
+          'status' => [
+            'field' => 'status',
+            'title' => $this->t('Status'),
+            'value' => $this->mappingService->getStatusName($dataset->getDatasetStatus()),
+          ],
+        ],
+      ],
+      '#steps' => [
+        'dataset' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Register dataset'),
+          '#short_title' => $this->t('Dataset'),
+          '#completed' => TRUE,
+        ],
+        'resource' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Manage data sources'),
+          '#short_title' => $this->t('Data source'),
+          '#icon' => 'icon-databron',
+          '#active' => TRUE,
+          '#sub_steps' => $subSteps,
+        ],
+        'finish' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Wrap up'),
+          '#short_title' => $this->t('Wrap up'),
+          '#icon' => 'icon-connected-globe',
+        ],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['donl-form-sidebar']],
+      '#weight' => -10,
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'sidebar-nav',
+          $form_state->getValue('advanced') ? 'advanced' : '',
+        ],
+      ],
+    ];
+
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['explanation'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#attributes' => ['class' => ['sidebar-text']],
+      '#value' => $this->t('Use drag and drop to change the order of the items. Then press store to save your changes.'),
+    ];
+
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['sidebar-nav-actions']],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions']['cancel'] =
+      Link::createFromRoute($this->t('Cancel'), 'ckan.dataset.datasources', ['dataset' => $dataset->id])
+        ->toRenderable();
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Save'),
+      '#attributes' => [
+        'class' => ['button', 'button--primary'],
+        'id' => 'donl-form-submit-button',
+      ],
+    ];
+
     $i = 0;
-    $form['resources']['#tree'] = TRUE;
+    $form['full_form_wrapper']['wrapper']['main']['resources']['#tree'] = TRUE;
     foreach ($this->sortDatasetResourcesService->getSortedResources($dataset) as $group => $resources) {
-      $form['resources'][$i] = [
+      $form['full_form_wrapper']['wrapper']['main']['resources'][$i] = [
         '#type' => 'table',
         '#caption' => $this->t($group),
         '#header' => [
           $this->t('Name'),
           $this->t('File type'),
-          $this->t('Created'),
+          $this->t('Creation date'),
           $this->t('Weight'),
         ],
         '#empty' => $this->t('No resources found.'),
@@ -113,11 +227,12 @@ class ResourceOrderForm extends FormBase {
             'group' => 'resources-order-weight',
           ],
         ],
+        '#attributes' => ['class' => ['resource-order-table']],
       ];
 
       /** @var \Drupal\ckan\Entity\Resource $resource */
       foreach ($resources as $resource) {
-        $form['resources'][$i][$resource->getId()] = [
+        $form['full_form_wrapper']['wrapper']['main']['resources'][$i][$resource->getId()] = [
           'name' => [
             '#plain_text' => $resource->getName(),
           ],
@@ -133,7 +248,7 @@ class ResourceOrderForm extends FormBase {
             '#title_display' => 'invisible',
             '#default_value' => $resource->getPosition() ?? 0,
             '#attributes' => [
-              'class' => ['resources-order-weight']
+              'class' => ['hidden', 'resources-order-weight'],
             ],
           ],
           '#weight' => $resource->getPosition() ?? 0,
@@ -144,14 +259,6 @@ class ResourceOrderForm extends FormBase {
       }
       $i++;
     }
-
-    $form['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
-      '#attributes' => [
-        'class' => ['button', 'button--primary'],
-      ],
-    ];
 
     return $form;
   }
@@ -180,6 +287,7 @@ class ResourceOrderForm extends FormBase {
     $dataset->setResources($resources);
     $this->ckanRequest->setCkanUser($this->userStorage->load($this->currentUser()->id()));
     $this->ckanRequest->updateDataset($dataset);
+    $form_state->setRedirect('ckan.dataset.datasources', ['dataset' => $dataset->id]);
   }
 
 }

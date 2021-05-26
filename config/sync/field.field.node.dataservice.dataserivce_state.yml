@@ -1,0 +1,19 @@
+uuid: 1e2d3345-c8bb-4daf-b883-2962512095e8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataserivce_state
+    - node.type.dataservice
+id: node.dataservice.dataserivce_state
+field_name: dataserivce_state
+entity_type: node
+bundle: dataservice
+label: Status
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -40,3 +40,12 @@ msgstr "Alle nieuwsitems tonen"
 
 msgid "Show all meetings"
 msgstr "Alle bijeenkomsten tonen"
+
+msgid "Current on this site"
+msgstr "Actueel op deze site"
+
+msgid "Show messages of"
+msgstr "Toon berichten van"
+
+msgid "Current content"
+msgstr "Actuele inhoud"

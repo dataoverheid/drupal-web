@@ -1,4 +1,5 @@
-$c-blue-100: #E5F1F9;
+$c-blue-100: #e5f1f9;
+$c-blue-150: lighten(#B2D7EE, 7);
 $c-blue-200: #B2D7EE;
 $c-blue-400: #007BC7;
 $c-blue-600: #154273;
@@ -8,37 +9,65 @@ $c-orange-200: #FFE9B7;
 $c-orange-400: #FFB612;
 
 $c-gray-100: #F5F5F5;
+$c-gray-150: #F6F7FA;
 $c-gray-200: #E2E2E2;
 $c-gray-300: #CCCCCC;
+$c-gray-400: #B4B4B4;
 $c-gray-600: #626262;
 
 $c-green-100: #F0F8E8;
+$c-green-200: #72BE19;
 $c-green-400: #39870C;
 
 $c-purple-100: #F6E5EF;
+$c-purple-150: darken(#F6E5EF, 7%);
 $c-purple-400: #A90061;
 
 // TODO:: set red color
 $c-red-400: #C40011;
 $c-red-100: lighten($c-red-400, 60%);
 
+$c-white: #ffffff;
+$c-black: #000;
+
+$desktop: 'desktop';
+$laptop-and-up: 'laptop-and-up';
+$laptop: 'laptop';
+$mobileonly: 'mobileonly';
+$tablet: 'tablet';
+$notmobile: 'notmobile';
+$smallmobileonly: 'smallmobileonly';
 
 @mixin breakpoint($point) {
   @if $point == desktop {
     @media (min-width: 70em) {
-      @content ;
+      @content;
+    }
+  } @else if $point == laptop-and-up {
+    @media (min-width: 50em) {
+      @content;
+    }
+  } @else if $point == laptop {
+    @media (max-width: 50em) {
+      @content;
     }
   } @else if $point == mobileonly {
     @media (max-width: 700px) {
       @content ;
     }
   } @else if $point == tablet {
-    @media (max-width: 1100px) {
-      @content ;
+    @media (max-width: 1000px) {
+      @content;
+    }
+  } @else if $point == smallmobileonly {
+    @media (max-width: 450px) {
+      @content;
     }
   } @else if $point == notmobile {
-    @media (min-width: 800px) {
-      @content ;
+    @media (min-width: 701px) {
+      @content;
     }
   }
 }
+
+$gutter: 15px;

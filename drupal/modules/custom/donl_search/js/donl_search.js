@@ -1,10 +1,11 @@
-(function ($, Drupal) {
+(function ($, Drupal, drupalSettings) {
   'use strict';
   Drupal.behaviors.donl_search = {
     attach: function (context, settings) {
-      const resultContainer = $('.suggester-result-container');
-      const typeSelect = $('#edit-type-select');
-      const doc = $(document);
+      const resultContainer = $('.suggester-result-container'),
+        typeSelect = $('#edit-type-select'),
+        suggestInput = $('.donl-suggester-form .suggester-input'),
+        doc = $(document);
 
       function processResult(data) {
         resultContainer.empty().append(data);
@@ -13,7 +14,6 @@
       let req;
 
       function getUrl(url) {
-        // Abort a running ajax request.
         if (req) {
           req.abort();
         }
@@ -22,16 +22,24 @@
         });
       }
 
-      doc.on('keyup focus', '.donl-search-form .suggester-input', function () {
-        if (typeSelect.val() === 'dataset') {
-          const term = $(this).val();
-          if (term.length === 0) {
-            resultContainer.empty();
-          } else if (term.length > 2) {
-            getUrl('/suggest/' + encodeURI(term));
+      const suggest = function () {
+        const type = typeSelect.val() || 'suggestions';
+        const term = suggestInput.val();
+        if (term.length === 0) {
+          resultContainer.empty();
+        } else if (term.length > 2) {
+          let suffix = '';
+          if (drupalSettings.donl_search.community_sys_name) {
+            suffix = '?communitySysName=' + drupalSettings.donl_search.community_sys_name;
           }
+
+          getUrl(drupalSettings.donl_search.suggestor_url + encodeURI(term) + '/' + type + suffix);
         }
-      });
+      }
+
+      // Events
+      doc.on('keyup focus', suggestInput, suggest);
+      doc.on('change', typeSelect, suggest);
 
       doc.mouseup(function (e) {
         if (!resultContainer.is(e.target) && resultContainer.has(e.target).length === 0) {
@@ -39,7 +47,10 @@
         }
       });
 
-      $('.chosen').chosen({'disable_search_threshold': 10});
+      doc.on('click', '.search-replace', function () {
+        jQuery('#edit-search').val($(this).html());
+        suggest();
+      });
     }
   };
-}(jQuery, Drupal));
+}(jQuery, Drupal, drupalSettings));

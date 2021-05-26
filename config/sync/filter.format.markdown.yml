@@ -1,0 +1,31 @@
+uuid: 8ac8383f-f712-48f2-9c1b-ba88d62a235c
+langcode: nl
+status: true
+dependencies:
+  module:
+    - donl_markdown
+name: Markdown
+format: markdown
+weight: 0
+filters:
+  filter_markdown:
+    id: filter_markdown
+    provider: donl_markdown
+    status: true
+    weight: 0
+    settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<b> <br> <div> <hr> <p class="text-align-left text-align-center text-align-right text-align-justify"> <pre> <span> <em> <strong> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <img src alt data-entity-type data-entity-uuid data-align data-caption> <a href hreflang class="button button-primary button--primary">'
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }

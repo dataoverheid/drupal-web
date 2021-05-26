@@ -35,7 +35,7 @@ class SearchPagination implements SearchPaginationInterface {
     $links = [];
 
     // Don't show paging if the results fit on a single page.
-    if ($numberOfRecords > $recordsPerPage) {
+    if ($numberOfRecords > 0 && $recordsPerPage > 0 && ($numberOfRecords > $recordsPerPage)) {
       $last = ceil($numberOfRecords / $recordsPerPage);
       $start = (($page - 1) > 0) ? $page - 1 : 1;
       $end = (($page + 1) < $last) ? $page + 1 : $last;
@@ -106,7 +106,7 @@ class SearchPagination implements SearchPaginationInterface {
     return [
       '#theme' => 'donl_search_pagination',
       '#pagination' => $links,
-      //'#filters' => $this->formBuilder->getForm(\Drupal\donl_search\Form\PaginationFiltersForm::class, $recordsPerPage, $routeName, $routeParams),
+      // '#filters' => $this->formBuilder->getForm(\Drupal\donl_search\Form\PaginationFiltersForm::class, $recordsPerPage, $routeName, $routeParams),
     ];
   }
 

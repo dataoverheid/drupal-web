@@ -1,0 +1,16 @@
+uuid: f09180c8-ea96-4ec0-8c4d-9b83c3ce10c4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donl_dataservice_types
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.donl_dataservice_types
+target_entity_type_id: taxonomy_term
+target_bundle: donl_dataservice_types
+default_langcode: site_default
+language_alterable: false

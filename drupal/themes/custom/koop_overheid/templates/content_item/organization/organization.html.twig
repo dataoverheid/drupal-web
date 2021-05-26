@@ -3,21 +3,29 @@
 
 {% block content_item %}
   {% set content_item_type = 'organization' %}
-  {% set content_item_background_color = 'green' %}
   {{ parent() }}
 {% endblock content_item %}
 
 {% block content_item_title %}
-  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-community.svg') }}
+  {{ content_item.theme_icon() }}
   <div>
     <p class="type">{{ 'Organization'|t }}</p>
-    <h1>{{ node.title.value }}</h1>
+    <h1>
+      {{ node.title.value }}
+      {% if node.organization_type_term.entity.name.value %}({{ node.organization_type_term.entity.name.value }}){% endif %}
+    </h1>
     {{ content_item.permalink(url('donl_search.organization.view', {'organization': node.machine_name.0.value})) }}
   </div>
-{% endblock content_item_title%}
+{% endblock content_item_title %}
 
 {% block content_item_description %}
   {% if node.organization_description.value %}
     {{ node.organization_description.value|nl2br }}
   {% endif %}
 {% endblock content_item_description %}
+
+{% block content_item_image %}
+  {% if node.organisation_logo.entity.fileuri %}
+    <img src="{{ file_url(node.organisation_logo.entity.fileuri) }}" alt="Logo {{ node.title.value }}">
+  {% endif %}
+{% endblock content_item_image %}

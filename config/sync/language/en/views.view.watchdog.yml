@@ -1,0 +1,42 @@
+description: 'Recente logberichten'
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Items per page'
+            items_per_page_options_all_label: '- All -'
+            offset_label: Offset
+      fields:
+        nothing:
+          admin_label: Pictogram
+        wid:
+          label: Watchdog-ID
+        severity:
+          label: Ernst
+        timestamp:
+          label: Datum
+        message:
+          label: Bericht
+        name:
+          label: User
+        link:
+          label: Bewerkingen
+      filters:
+        severity:
+          expose:
+            label: Ernst
+      title: 'Recente logberichten'
+      empty:
+        area:
+          admin_label: 'Geen logberichten beschikbaar.'
+          content: 'Geen logberichten beschikbaar.'
+  page:
+    display_title: Page

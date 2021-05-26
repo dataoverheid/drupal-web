@@ -1,0 +1,177 @@
+.support-container {
+  margin: 30px auto 60px;
+  max-width: 900px;
+  padding: 0 15px;
+
+  .row-1 {
+    display: flex;
+    justify-content: stretch;
+  }
+
+  .data-titel {
+    display: inline-block;
+    background: $c-blue-400;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 20px;
+    flex-shrink: 0;
+    margin-bottom: 16px
+
+  }
+
+  .left, .right {
+    margin-top: 80px;
+    width: 300px;
+  }
+
+  .right {
+    margin-left: 15px;
+  }
+
+  .line {
+    margin-top: 100px;
+    position: relative;
+    border: 0;
+    background-color: $c-blue-400;
+    height: 10px;
+    flex-grow: 1;
+    min-width: 75px;
+  }
+
+  .arrow {
+    position: absolute;
+    margin-top: -7px;
+    right: -2px;
+    width: 25px;
+    height: 25px;
+    border-top: 8px solid $c-blue-400;
+    border-right: 8px solid $c-blue-400;
+    transform: rotate(45deg);
+  }
+
+
+  .links {
+    a {
+      background-position: 0 .5em;
+      background-repeat: no-repeat;
+      background-image: url('/themes/custom/koop_overheid/images/icon-dart-right-blue.svg');
+      background-size: 6px 9px;
+      padding-left: 1em;
+      display: block;
+      text-decoration: none;
+      color: $c-blue-600;
+      max-width: 250px;
+
+      & + a {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .left .links {
+    position: absolute;
+    a {
+
+    }
+  }
+
+  .center {
+    .globe {
+      flex: 0;
+      border-radius: 50%;
+      border: 10px solid $c-blue-400;
+      padding: 30px;
+      margin: 0 15px;
+
+      .globe-icon {
+        background-image: url("../images/globe.png");
+        background-size: contain;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+      }
+    }
+
+    .content {
+      margin-top: -30px;
+      border-top: 8px solid white;
+      display: flex;
+      justify-content: center;
+
+      .link-wrapper {
+        height: 28px;
+      }
+
+      a {
+        position: absolute;
+        white-space: nowrap;
+      }
+
+      .data-titel {
+        text-align: center;
+        min-width: 140px;
+      }
+    }
+  }
+
+
+}
+
+@include breakpoint($mobileonly) {
+  .support-container {
+    .row-1 {
+      display: block;
+      padding: 15px;
+
+      .line {
+        transform: rotate(90deg);
+        width: 150px;
+        margin: 50px 0 70px -45px;
+        min-width: 50px;
+      }
+
+      .links {
+        margin-left: 15px;
+      }
+
+      .left {
+        .links {
+          margin-left: 60px;
+        }
+
+      }
+
+      .center {
+        .globe {
+          display: inline-block;
+          padding: 20px;
+          border: 6px solid $c-blue-400;
+          margin: 15px 0;
+
+          .globe-icon {
+            width: 70px;
+            height: 70px;
+          }
+        }
+
+        .content {
+          display: block;
+          margin: -120px 0 0 105px;
+
+          .data-titel {
+            border: 5px solid white;
+          }
+
+          .links {
+            margin-left: 30px;
+          }
+        }
+
+        & + .line {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}

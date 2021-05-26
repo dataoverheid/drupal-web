@@ -14,14 +14,27 @@ class ThemeNegotiator implements ThemeNegotiatorInterface {
    * {@inheritdoc}
    */
   public function applies(RouteMatchInterface $route_match) {
-    return $route_match->getRouteName() == 'node.add' && $route_match->getParameter('node_type')->get('type') == 'datarequest';
+    $routeName = $route_match->getRouteName();
+
+    if ($routeName === 'node.add' && ($nodeType = $route_match->getParameter('node_type'))) {
+      if (in_array($nodeType->get('type'), ['appliance', 'datarequest', 'dataservice'])) {
+        return TRUE;
+      }
+    }
+
+    if ($routeName === 'entity.node.edit_form' && ($node = $route_match->getParameter('node'))) {
+      if (in_array($node->getType(), ['appliance', 'dataservice'])) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
   public function determineActiveTheme(RouteMatchInterface $route_match) {
-    // Here you return the actual theme name.
     return 'koop_overheid';
   }
 

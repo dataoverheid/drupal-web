@@ -1,48 +1,81 @@
 {% if facets %}
   {% set showError = 1 %}
   <div id="facets">
-    {% if facets['available']|length > 0 %}
-      {% for label, facets in facets['available'] %}
-        {% if(facets|length) > 0 %}
-          {% set showError = 0 %}
-          {% if label == 'Thema' %}
-            <div class="facet--group {% if facets|length <= show_facets_with_less_than %}active{% endif %}">
-              <h4 class="facet--label">{{ label }} ({{ facets|length }})</h4>
-              <ul class="list--facet facet-{{ label|clean_class }}">
-                {% set show_more_link = false %}
-                {% for facet in facets %}
-                  <li>
-                    {{ facet.theme }}
-                    {% if facet.subThemes %}
-                      {% set show_more_link = true %}
-                      <ul class="list" hidden>
-                        {% for facet in facet.subThemes %}
-                          <li>{{ facet }}</li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-                {% if show_more_link %}
-                  <li class="link link--down theme-show-more">{{ 'Show sub themes'|t }}</li>
-                {% endif %}
-              </ul>
+    <div class="facet-header">
+      <h2 class="facet-title">{{ title }}</h2>
+      <button class="facet-toggle" title="{{ 'Toggle'|t }}"><span class="icon-plus-shape"></span></button>
+    </div>
+    <div class="facet-list">
+      {% if facets['active'] %}
+        <div class="facet--group facet--group--active-facets active">
+          <div class="facet--label" tabindex="0" role="button" aria-pressed="true">{{ facets['active']['label'] }}</div>
+          <div class="facet--content">
+            <div class="facet-wrapper">
+              {% for link in facets['active']['links'] %}
+                {{ link }}
+              {% endfor %}
             </div>
-          {% else %}
-            <div class="facet--group {% if facets|length <= show_facets_with_less_than %}active{% endif %}">
-              <h4 class="facet--label">{{ label }} ({{ facets|length }})</h4>
-              <ul class="list--facet facet-{{ label|clean_class }}">
-                {% for facet in facets %}
-                  <li>{{ facet }}</li>
-                {% endfor %}
-              </ul>
-            </div>
+            {{ facets['active']['reset'] }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if facets['available']|length > 0 %}
+        {% for label, facets in facets['available'] %}
+
+          {% set collapsed = false %}
+          {% if facets|length > show_facets_with_less_than %}
+            {% set collapsed = true %}
           {% endif %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    {% if showError %}
-      {{ 'No further refinement available.'|t }}
-    {% endif %}
+
+          {% if (facets|length) > 0 %}
+            {% set showError = 0 %}
+
+            {% if label == 'Thema' %}
+              <div class="facet--group {% if not collapsed %}active{% endif %}">
+                <div class="facet--label" tabindex="0" role="button"
+                     aria-pressed="{% if collapsed %}false{% else %}true{% endif %}">{{ label }} ({{ facets|length }})
+                </div>
+                <ul class="list--facet facet-{{ label|clean_class }}">
+                  {% set show_more_link = false %}
+                  {% for facet in facets %}
+                    <li>
+                      {{ facet.theme }}
+                      {% if facet.subThemes %}
+                        {% set show_more_link = true %}
+                        <ul class="list" hidden>
+                          {% for facet in facet.subThemes %}
+                            <li>{{ facet }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                  {% if show_more_link %}
+                    <li class="link link--down theme-show-more">{{ 'Show sub-themes'|t }}</li>
+                  {% endif %}
+                </ul>
+              </div>
+            {% else %}
+              <div class="facet--group {% if not collapsed %}active{% endif %}">
+                <div class="facet--label" tabindex="0" role="button"
+                     aria-pressed="{% if collapsed %}false{% else %}true{% endif %}">{{ label }} ({{ facets|length }})
+                </div>
+                <ul class="list--facet facet-{{ label|clean_class }}">
+                  {% for facet in facets %}
+                    <li>{{ facet }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if showError %}
+        {{ 'No further refinement available.'|t }}
+      {% endif %}
+    </div>
   </div>
 {% endif %}

@@ -1,15 +1,26 @@
 donl_recent.index:
-  path: '/actueel'
+  path: '/actueel/{filter}'
   defaults:
-    _controller: '\Drupal\donl_recent\Controller\RecentController::index'
-    _title_callback: '\Drupal\donl_recent\Controller\RecentController::title'
+    _controller: '\Drupal\donl_recent\Controller\RecentController::main'
+    _title: 'Recent'
+    filter: ''
   requirements:
     _permission: 'access content'
 
-donl_recent.type_overview:
-  path: '/actueel/{type}'
+donl_recent.rest:
+  path: '/rest/actueel/{filter}/{start}/{end}'
   defaults:
-    _controller: '\Drupal\donl_recent\Controller\RecentController::overview'
-    _title_callback: '\Drupal\donl_recent\Controller\RecentController::title'
+    _controller: '\Drupal\donl_recent\Controller\RecentController::index'
+    _title: 'Recent'
+    filter: 'all'
+    start: 0
   requirements:
     _permission: 'access content'
+
+donl_recent.recent_content_settings:
+  path: '/admin/donl/recent-content'
+  defaults:
+    _form: '\Drupal\donl_recent\Form\DonlRecentContentSettingsForm'
+    _title: 'Current content'
+  requirements:
+    _permission: 'configure donl recent content settings'

@@ -1,0 +1,48 @@
+.more-information {
+  position: relative;
+
+  .more-information-click {
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 17px;
+    height: 16px;
+    width: 16px;
+    color: white;
+    text-align: center;
+    background: $c-blue-600;
+    cursor: pointer;
+    user-select: none;
+    transition: .5s;
+    font-size: 14px;
+    vertical-align: 1px;
+    margin-left: 5px;
+
+    &:hover, &:focus, &:active {
+      background: $c-blue-400;
+    }
+  }
+
+  .more-information-content {
+    display: none;
+    position: absolute;
+    background: white;
+    padding: 15px 20px;
+    width: 20vw;
+    max-width: 320px;
+    z-index: 100;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+    left: 0;
+  }
+
+  .more-information-close {
+    color: $c-blue-600;
+    text-decoration: underline;
+    text-align: right;
+    cursor: pointer;
+
+    &:hover, &:focus, &:active {
+      color: $c-blue-400;
+    }
+  }
+}

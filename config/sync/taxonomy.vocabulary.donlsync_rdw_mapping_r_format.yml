@@ -1,8 +1,0 @@
-uuid: 63c98372-701c-4436-aa23-7606f5970d7a
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync RDW Mapping Resource.Format'
-vid: donlsync_rdw_mapping_r_format
-description: ''
-weight: 0

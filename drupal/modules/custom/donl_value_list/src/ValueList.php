@@ -74,7 +74,7 @@ class ValueList implements ValueListInterface {
   /**
    * {@inheritdoc}
    */
-  public function getList($list, $addEmptyElement = TRUE) {
+  public function getList($list, $addEmptyElement = FALSE) {
     $cid = 'donl_value_list:' . $this->languageCode . ':' . $list;
 
     $values = $this->lists[$cid] ?? [];
@@ -97,10 +97,7 @@ class ValueList implements ValueListInterface {
               break;
 
             case 'donl:distributiontype':
-              $values = $this->buildTranslatableKeyValueList($this->getValueList('donl_distributiontype.json'), 'en');
-              if (isset($values['https://data.overheid.nl/distributiontype/download'])) {
-                $values['https://data.overheid.nl/distributiontype/download'] = 'Downloadable files';
-              }
+              $values = $this->buildTranslatableKeyValueList($this->getValueList('donl_distributiontype.json'));
               break;
 
             case 'donl:language':
@@ -109,6 +106,10 @@ class ValueList implements ValueListInterface {
 
             case 'donl:organization':
               $values = $this->buildTranslatableKeyValueList($this->getValueList('donl_organization.json'));
+              break;
+
+            case 'donl:wobuitzondering':
+              $values = $this->buildTranslatableKeyValueList($this->getValueList('donl_wobuitzondering.json'));
               break;
 
             case 'iana:mediatypes':
@@ -250,10 +251,10 @@ class ValueList implements ValueListInterface {
   /**
    * Helper function to build the correct value list.
    */
-  private function buildTranslatableKeyValueList($content, $languageCode = NULL) {
+  private function buildTranslatableKeyValueList($content) {
     $array = [];
     foreach ((array) $content as $k => $v) {
-      $array[$k] = $this->getLabel($v, $languageCode);
+      $array[$k] = $this->getLabel($v);
     }
 
     return $array;
@@ -336,12 +337,11 @@ class ValueList implements ValueListInterface {
    * Helper function to retrieve the correct label.
    *
    * @param object $element
-   * @param null|string $languageCode
    *
    * @return string
    */
-  private function getLabel($element, $languageCode = NULL) {
-    if ($languageCode === 'en' || $this->languageCode === 'en') {
+  private function getLabel($element) {
+    if ($this->languageCode === 'en') {
       return (string) $element->labels->{'en-US'};
     }
     return (string) $element->labels->{'nl-NL'};

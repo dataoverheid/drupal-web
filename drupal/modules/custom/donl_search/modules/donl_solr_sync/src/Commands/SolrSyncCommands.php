@@ -4,6 +4,7 @@ namespace Drupal\donl_solr_sync\Commands;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drush\Commands\DrushCommands;
+use Drush\Drush;
 
 /**
  *
@@ -16,7 +17,12 @@ class SolrSyncCommands extends DrushCommands {
   protected $nodeStorage;
 
   /**
+   * SolrSyncCommands constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct();
@@ -49,6 +55,10 @@ class SolrSyncCommands extends DrushCommands {
         $nids = $this->nodeStorage->getQuery()->condition('type', 'community')->execute();
         break;
 
+      case 'dataservice':
+        $nids = $this->nodeStorage->getQuery()->condition('type', 'dataservice')->execute();
+        break;
+
       case 'datarequest':
         $nids = $this->nodeStorage->getQuery()->condition('type', 'datarequest')->execute();
         break;
@@ -72,7 +82,7 @@ class SolrSyncCommands extends DrushCommands {
 
     foreach ($this->nodeStorage->loadMultiple($nids) as $node) {
       $node->save();
-      drush_print(ucfirst($type) . ' ' . $node->id() . ' send to solr index.');
+      Drush::output()->writeln(dt(ucfirst($type) . ' ' . $node->id() . ' send to solr index.'));
     }
   }
 

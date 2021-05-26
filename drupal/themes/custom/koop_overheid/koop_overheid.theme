@@ -6,9 +6,13 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\ParagraphInterface;
 
 /**
  * Implements hook_theme().
@@ -22,44 +26,6 @@ function koop_overheid_theme($existing, $type, $theme, $path) {
         'content' => '',
       ],
     ],
-  ];
-}
-
-/**
- * Implements hook_form_system_theme_settings_alter().
- */
-function koop_overheid_form_system_theme_settings_alter(&$form, FormStateInterface $form_state, $form_id = NULL) {
-  // Work-around for a core bug affecting admin themes. See issue #943212.
-  if (isset($form_id)) {
-    return;
-  }
-
-  $form['piwik'] = [
-    '#type' => 'details',
-    '#title' => 'Piwik',
-  ];
-
-  $form['piwik']['piwik_header'] = [
-    '#type' => 'textarea',
-    '#title' => t('Piwik header code'),
-    '#default_value' => theme_get_setting('piwik_header'),
-  ];
-
-  $form['piwik']['piwik_body'] = [
-    '#type' => 'textarea',
-    '#title' => t('Piwik body code'),
-    '#default_value' => theme_get_setting('piwik_body'),
-  ];
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function koop_overheid_preprocess_html(array &$variables) {
-  // Piwik settings.
-  $variables['piwik'] = [
-    'header' => theme_get_setting('piwik_header'),
-    'body' => theme_get_setting('piwik_body'),
   ];
 }
 
@@ -80,12 +46,12 @@ function koop_overheid_theme_suggestions_page_alter(array &$suggestions, array $
     $suggestions[] = 'page__4xx';
   }
 
-  elseif ($routeName === 'donl_community.dataset.view') {
-    $suggestions[] = 'page__community__dataset';
-  }
-
   elseif ($routeName === 'ckan.dataset.datasources') {
     $suggestions[] = 'page__dataset__sources';
+  }
+
+  elseif ($routeName === 'ckan.dataset.order') {
+    $suggestions[] = 'page__dataset__bronnen__herordenen';
   }
 
   elseif (strpos($routeName, 'donl_search.search') === 0) {
@@ -100,21 +66,32 @@ function koop_overheid_theme_suggestions_page_alter(array &$suggestions, array $
   }
 
   elseif (in_array($routeName, [
-    'entity.node.canonical',
-    'entity.node.edit_form',
+    'ckan.dataset.create',
+    'ckan.dataset.edit',
+    'ckan.dataset.delete',
+    'ckan.dataset.datasources',
+    'ckan.dataset.publish',
+    'ckan.resource.create',
+    'ckan.resource.edit',
+    'ckan.resource.delete',
+    'donl_form.node.publish',
   ])) {
-    $suggestions[] = 'page';
+    $suggestions[] = 'page__wizard';
+  }
+
+  elseif (($routeName === 'node.add' && ($nodeType = $routeMatch->getParameter('node_type')) && ($type = $nodeType->get('type'))) || (in_array($routeName, ['entity.node.edit_form', 'entity.node.delete_form']) && $node && ($type = $node->getType()))) {
+    if (in_array($type, ['appliance', 'dataservice'])) {
+      $suggestions[] = 'page__wizard';
+    }
   }
 
   elseif (in_array($routeName, [
-    'ckan.dataset.view',
-    'donl.application',
-    'donl_community.search.dataset',
-    'donl.datarequest',
-    'donl_search.catalog.view',
-    'donl_search.group.view',
-    'donl_search.organization.view',
-  ])) {
+      'ckan.dataset.view',
+      'donl.application',
+      'donl.datarequest',
+      'donl.dataservice',
+      'donl_community.search',
+    ]) || strpos($routeName, 'donl_community.search.') === 0 || preg_match('/^donl_community.[a-zA-Z0-9]*.view$/', $routeName) || preg_match('/^donl_search.(organization|group|catalog)[.a-zA-Z0-9]*.view$/', $routeName)) {
     $suggestions[] = 'page__search_detail';
   }
 
@@ -124,6 +101,13 @@ function koop_overheid_theme_suggestions_page_alter(array &$suggestions, array $
     'user.page',
   ])) {
     $suggestions[] = 'page__profiel';
+  }
+
+  elseif (in_array($routeName, [
+    'entity.node.canonical',
+    'entity.node.edit_form',
+  ])) {
+    $suggestions[] = 'page';
   }
 
   if ($node) {
@@ -140,7 +124,7 @@ function koop_overheid_theme_suggestions_page_alter(array &$suggestions, array $
 }
 
 /**
- *
+ * Implements hook_preprocess_page().
  */
 function koop_overheid_preprocess_page(&$variables, $hook) {
   if (isset($variables['node']) && $variables['node']->getType() === 'community' && $menuList = $variables['node']->get('menu')) {
@@ -148,7 +132,10 @@ function koop_overheid_preprocess_page(&$variables, $hook) {
     /** @var Drupal\link\Plugin\Field\FieldType\LinkItem $item */
     foreach ($menuList as $item) {
       /** @var Drupal\Core\Url $url */
-      $variables['page']['menu'][] = ['title' => $item->getValue()['title'], 'url' => $item->getUrl()->toString()];
+      $variables['page']['menu'][] = [
+        'title' => $item->getValue()['title'],
+        'url' => $item->getUrl()->toString(),
+      ];
     }
   }
 }
@@ -159,16 +146,6 @@ function koop_overheid_preprocess_page(&$variables, $hook) {
 function koop_overheid_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
   if (!empty($variables['element']['#type'])) {
     $suggestions[] = 'form_element__' . $variables['element']['#type'];
-  }
-}
-
-/**
- * Implements hook_theme_suggestions_form_element_alter().
- */
-function koop_overheid_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-  // @todo is this necessary? Maybe hardcode these suggestions.
-  if (!empty($variables['element']['#form_id'])) {
-    $suggestions[] = 'form__' . $variables['element']['#form_id'];
   }
 }
 
@@ -205,50 +182,25 @@ function koop_overheid_theme_suggestions_fieldset_alter(array &$suggestions, arr
  * Implements hook_preprocess_node__NODETYPE().
  */
 function koop_overheid_preprocess_node__landingpage(array &$variables) {
-  // Inject blocks from the following regions into the node:
-  $regions = ['sidebar_left', 'sidebar_right'];
-  foreach ($regions as $region) {
-    $blocks = Drupal::entityTypeManager()
-      ->getStorage('block')
-      ->loadByProperties([
-        'theme' => 'koop_overheid',
-        'region' => $region,
-      ]);
-    // Sort them.
-    uasort($blocks, 'Drupal\block\Entity\Block::sort');
-
-    // Capture viewable blocks and their settings to $build.
-    $build = [];
-    foreach ($blocks as $key => $block) {
-      if ($block->access('view')) {
-        $build[$key] = Drupal::entityTypeManager()
-          ->getViewBuilder('block')
-          ->view($block);
-      }
-    }
-    $variables[$region] = $build;
-  }
+  koop_overheid_inject_sidebar_content($variables);
 
   // Preprocess the image field.
   if ($variables['node']->field_landingpage_image->entity) {
     $variables['image_url'] = file_url_transform_relative(file_create_url($variables['node']->get('field_landingpage_image')->entity->uri->value));
   }
-  // Determine if there is sidebar content.
-  $sidebar_content = FALSE;
-  $variables['left_sidebar_filled'] = FALSE;
-  $variables['right_sidebar_filled'] = FALSE;
-  if (!empty($variables['sidebar_left']) || !empty($variables['content']['field_left_sidebar']['#items'])) {
-    $variables['left_sidebar_filled'] = TRUE;
-    $sidebar_content = TRUE;
-  }
-  if (!empty($variables['sidebar_right']) || !empty($variables['content']['field_right_sidebar']['#items'])) {
-    $variables['right_sidebar_filled'] = TRUE;
-    $sidebar_content = TRUE;
-  }
-  if ($sidebar_content) {
-    // Add a variable to the paragraph fields, so they can alter their paragraph
-    // children's viewmode.
-    koop_overheid_paragraphs_view_mode_sidebar($variables);
+}
+
+function createRelation(&$variables, $fieldName) {
+  $relations = $variables['node']->get($fieldName)
+    ->getValue();
+  if ($relations) {
+    $variables['relations'][$fieldName] = [];
+    $variables['hasRelations'] = TRUE;
+    foreach ($relations as $relation) {
+      $node = Node::load($relation['target_id']);
+      $node->label();
+      $variables['relations'][$fieldName][] = $node->toLink();
+    }
   }
 }
 
@@ -256,24 +208,61 @@ function koop_overheid_preprocess_node__landingpage(array &$variables) {
  * Implements hook_preprocess_node__NODETYPE().
  */
 function koop_overheid_preprocess_node__recent(array &$variables) {
-  // Inject blocks from the following regions into the node:
-  $regions = ['sidebar_left', 'sidebar_right'];
+  if ($variables['node']) {
+    if (($image = $variables['node']->get('header')->entity) && $style = ImageStyle::load('header_1920x480')) {
+      $variables['header'] = $style->buildUrl($image->get('uri')
+        ->getString());
+    }
+    $variables['relations_name_map'] = [
+      'relation_recent_community' => t('Communities'),
+      'relation_recent_catalog' => t('Catalogs'),
+      'relation_recent_dataservice' => t('Dataservices'),
+      'relation_recent_dataset' => t('Datasets'),
+      'relation_recent_datarequest' => t('Datarequests'),
+      'relation_recent_group' => t('Groups'),
+    ];
+    foreach ($variables['relations_name_map'] as $fieldName => $name) {
+      if ($fieldName === 'relation_recent_dataset') {
+        $relations = $variables['node']->get($fieldName)->getValue();
 
-  foreach ($regions as $region) {
-    $blocks = Drupal::entityTypeManager()
+        if ($relations) {
+          $variables['relations'][$fieldName] = [];
+          $variables['hasRelations'] = TRUE;
+          foreach ($relations as $relation) {
+            if ($result = Drupal::service('donl_search.request')->getDatasetResultByIdentifier($relation['value'])) {
+              $variables['relations'][$fieldName][] = Link::fromTextAndUrl($result->title, $result->url);
+            }
+          }
+        }
+      }
+      else {
+        createRelation($variables, $fieldName);
+      }
+    }
+  }
+}
+
+/**
+ * Inject blocks from the sidebar regions into the node itself.
+ *
+ * @param array $variables
+ */
+function koop_overheid_inject_sidebar_content(array &$variables) {
+  $entityTypeManager = Drupal::entityTypeManager();
+  foreach (['sidebar_left', 'sidebar_right'] as $region) {
+    $blocks = $entityTypeManager
       ->getStorage('block')
       ->loadByProperties([
         'theme' => 'koop_overheid',
         'region' => $region,
       ]);
-
     uasort($blocks, 'Drupal\block\Entity\Block::sort');
 
     // Capture viewable blocks and their settings to $build.
     $build = [];
     foreach ($blocks as $key => $block) {
       if ($block->access('view')) {
-        $build[$key] = Drupal::entityTypeManager()
+        $build[$key] = $entityTypeManager
           ->getViewBuilder('block')
           ->view($block);
       }
@@ -282,28 +271,16 @@ function koop_overheid_preprocess_node__recent(array &$variables) {
     $variables[$region] = $build;
   }
 
-  // Preprocess the image field.
-  if ($image = $variables['node']->get('recent_image')->getValue()) {
-    if ($file = File::load($image[0]['target_id'])) {
-      $variables['image_url'] = $file->createFileUrl();
-    }
-  }
   // Determine if there is sidebar content.
-  $sidebar_content = FALSE;
   $variables['left_sidebar_filled'] = FALSE;
   $variables['right_sidebar_filled'] = FALSE;
-
   if (!empty($variables['sidebar_left']) || !empty($variables['content']['field_left_sidebar']['#items'])) {
     $variables['left_sidebar_filled'] = TRUE;
-    $sidebar_content = TRUE;
   }
-
   if (!empty($variables['sidebar_right']) || !empty($variables['content']['field_right_sidebar']['#items'])) {
     $variables['right_sidebar_filled'] = TRUE;
-    $sidebar_content = TRUE;
   }
-
-  if ($sidebar_content) {
+  if ($variables['left_sidebar_filled'] || $variables['right_sidebar_filled']) {
     // Add a variable to the paragraph fields, so they can alter their paragraph
     // children's viewmode.
     koop_overheid_paragraphs_view_mode_sidebar($variables);
@@ -342,10 +319,12 @@ function koop_overheid_preprocess_paragraph__homepage_block(&$variables) {
   template_preprocess_paragraph($var);
   $content = $var['content'];
 
-  /* @var \Drupal\image\Plugin\Field\FieldType\ImageItem $image_item */
-  $image_item = $content['field_homepage_block_image'][0]['#item'];
-  $image_url = file_url_transform_relative(file_create_url(File::load($image_item->getValue()['target_id'])->uri->value));
-  $variables['image_url'] = $image_url;
+  /* @var \Drupal\image\Plugin\Field\FieldType\ImageItem $imageItem */
+  if ($imageItem = $content['field_homepage_block_image'][0]['#item']) {
+    if ($img = File::load($imageItem->getValue()['target_id'])) {
+      $variables['image_url'] = file_url_transform_relative(file_create_url($img->getFileUri()));
+    }
+  }
 }
 
 /**
@@ -358,8 +337,7 @@ function koop_overheid_preprocess_paragraph__voetnoot(&$variables) {
 
   /* @var \Drupal\Core\Field\FieldItemList $itemlist */
   if ($itemlist = $content['field_id']['#items']) {
-    $id = $itemlist->getValue()[0]['value'];
-    $variables['id'] = $id;
+    $variables['id'] = $itemlist->getValue()[0]['value'];
   }
 }
 
@@ -371,10 +349,9 @@ function koop_overheid_preprocess_paragraph__highlight(&$variables) {
   template_preprocess_paragraph($var);
   $content = $var['content'];
 
-  if (isset($content['highlight_image'][0]) && $image_item = $content['highlight_image'][0]['#item']) {
-    $variables['image_alt'] = (!empty($image_item->getValue('alt')['alt'])) ? $image_item->getValue('alt')['alt'] : $variables['link_title'];
-    $img = File::load($image_item->getValue()['target_id']);
-    if ($img) {
+  if (isset($content['highlight_image'][0]) && $imageItem = $content['highlight_image'][0]['#item']) {
+    $variables['image_alt'] = (!empty($imageItem->getValue('alt')['alt'])) ? $imageItem->getValue('alt')['alt'] : $variables['link_title'];
+    if ($img = File::load($imageItem->getValue()['target_id'])) {
       $variables['image_url'] = file_url_transform_relative(file_create_url($img->getFileUri()));
     }
   }
@@ -382,13 +359,12 @@ function koop_overheid_preprocess_paragraph__highlight(&$variables) {
   /* @var \Drupal\Core\Field\FieldItemList $itemlist */
   if ($itemlist = $content['highlight_link']['#items']) {
     $variables['link_title'] = $itemlist->title;
-    $link_url = Url::fromUri($itemlist->uri);
-    if ($link_url->toUriString() == 'route:<none>') {
-      $link_url = '#';
+    $url = Url::fromUri($itemlist->uri);
+    if ($url->toUriString() === 'route:<none>') {
+      $url = '#';
     }
-    $variables['link_url'] = $link_url;
+    $variables['link_url'] = $url;
   }
-
 }
 
 /**
@@ -398,17 +374,31 @@ function koop_overheid_preprocess_paragraph__treeview_child(&$variables) {
   $var = $variables;
   template_preprocess_paragraph($var);
   $content = $var['content'];
+
   /* @var \Drupal\Core\Field\FieldItemList $itemlist */
   if ($itemlist = $content['field_treeview_link']['#items']) {
     $variables['link_title'] = $itemlist->title;
-    $link_url = Url::fromUri($itemlist->uri);
-    if ($link_url->toUriString() == 'route:<none>') {
-      $link_url = '#';
+    $url = Url::fromUri($itemlist->uri);
+    if ($url->toUriString() === 'route:<none>') {
+      $url = '#';
     }
-    $variables['link_url'] = $link_url;
+    $variables['link_url'] = $url;
   }
+
   if (isset($content['field_treeview_child'])) {
     $variables['content']['field_treeview_child'][0]['#view_mode'] = 'nested';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for link list paragraph templates.
+ */
+function koop_overheid_preprocess_paragraph__linklist_block(&$variables) {
+  $paragraph = $variables['paragraph'] ?? NULL;
+  if ($paragraph && $paragraph instanceof ParagraphInterface) {
+    if ($type = $paragraph->get('field_type')->getValue()[0]['value'] ?? NULL) {
+      $variables['type'] = $type;
+    }
   }
 }
 
@@ -421,17 +411,10 @@ function koop_overheid_preprocess_block(array &$variables) {
     $content = $variables['content']['#block_content'];
     /* @var \Drupal\Core\Field\EntityReferenceFieldItemList $type */
     $type = $content->get('type');
-    if (isset($type->getValue()[0]['target_id']) && $type->getValue()[0]['target_id'] == 'tabs_block') {
+    if (isset($type->getValue()[0]['target_id']) && $type->getValue()[0]['target_id'] === 'tabs_block') {
       $variables['#cache']['max-age'] = 0;
     }
   }
-}
-
-/**
- * Implements hook_preprocess_form().
- */
-function koop_overheid_preprocess_form(array &$variables) {
-  $variables['attributes']['class'][] = 'form';
 }
 
 /**
@@ -442,9 +425,9 @@ function koop_overheid_preprocess_form_element(&$variables) {
 
   // Wrap these form elements inside labels.
   if (isset($element['#type']) && in_array($element['#type'], [
-    'radio',
-    'checkbox',
-  ])) {
+      'radio',
+      'checkbox',
+    ])) {
     $variables['label_wrapper'] = TRUE;
     $variables['label_title'] = $variables['label']['#title'];
 
@@ -452,14 +435,7 @@ function koop_overheid_preprocess_form_element(&$variables) {
     $variables['label_open']['#theme'] = 'form_element_label__open';
   }
 
-  // The label for multiselects needs a different markup.
-  if (isset($element['#type']) && $element['#type'] == 'select') {
-    if (isset($element['#multiple']) && $element['#multiple']) {
-      $variables['label']['#theme'] = 'form_element_label__multiselect';
-    }
-  }
-
-  if (isset($element['#id']) && isset($variables['description']['content'])) {
+  if (isset($element['#id'], $variables['description']['content'])) {
     $description = [
       '#theme' => 'form_element_description',
       '#element_id' => $element['#id'],
@@ -491,19 +467,6 @@ function koop_overheid_preprocess_input(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_select().
- */
-function koop_overheid_preprocess_select(array &$variables) {
-  if (isset($variables['element']['#multiple']) && $variables['element']['#multiple']) {
-    $variables['attributes']['class'][] = 'multipleSelect';
-    $variables['attributes']['data-decorator'] = 'init-multiselect';
-    $variables['attributes']['data-decorator-placeholder'] = $variables['options'][0]['label'];
-    unset($variables['options'][0]);
-    $variables['attributes']['data-multiselect-helptext'] = t('Use tabulation (or down) key to access and browse suggestions after input. Confirm your choice with enter key, or esc key.');
-  }
-}
-
-/**
  * Implements hook_preprocess_field().
  */
 function koop_overheid_preprocess_field(array &$variables, $hook) {
@@ -527,11 +490,11 @@ function koop_overheid_preprocess_field(array &$variables, $hook) {
         /* @var \Drupal\Core\Url $url */
         if ($url = $item['content']['#url']) {
           $uri = $url->toString();
-          $current_path = \Drupal::service('path.current')->getPath();
-          $aliased_path = \Drupal::service('path.alias_manager')
-            ->getAliasByPath($current_path);
+          $currentPath = \Drupal::service('path.current')->getPath();
+          $aliasedPath = \Drupal::service('path.alias_manager')
+            ->getAliasByPath($currentPath);
           $variables['items'][$key]['content']['#attributes']['role'] = 'tab';
-          if ($uri == $aliased_path || $uri == $current_path) {
+          if ($uri === $aliasedPath || $uri === $currentPath) {
             $variables['items'][$key]['content']['#attributes']['aria-selected'] = 'true';
             break;
           }
@@ -543,40 +506,47 @@ function koop_overheid_preprocess_field(array &$variables, $hook) {
 }
 
 /**
- * Implements hook_preprocess_menu_local_task().
- */
-function koop_overheid_preprocess_menu_local_task(array &$variables) {
-  if ($variables['element']['#active'] == TRUE) {
-    $variables['element']['#link']['url']->setOption('attributes', ['aria-selected' => 'true']);
-  }
-
-  switch ($variables['element']['#link']['title']) {
-    case 'Weergeven':
-      $variables['description'] = 'De pagina tonen';
-      break;
-
-    case 'Bewerken':
-      $variables['description'] = 'De inhoud van de pagina aanpassen';
-      break;
-
-    case 'Verwijderen':
-      $variables['description'] = 'Deze pagina permanent verwijderen';
-      break;
-
-    case 'Revisies':
-      $variables['description'] = 'De revisie historie van deze pagina bekijken';
-      break;
-  }
-}
-
-/**
  * Implements hook_form_alter().
  */
 function koop_overheid_form_alter(&$form, &$form_state, $form_id) {
-  if (in_array($form_id, ['user_login_form', 'user_pass']) && isset($form['actions']['submit'])) {
+  if (in_array($form_id, [
+      'user_login_form',
+      'user_pass',
+    ]) && isset($form['actions']['submit'])) {
     $form['actions']['submit']['#button_type'] = 'primary';
   }
   elseif ($form_id === 'user_register_form' && isset($form['actions']['next'])) {
     $form['actions']['next']['#button_type'] = 'primary';
   }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function koop_overheid_theme_suggestions_alter(array &$suggestions, array $variables) {
+  $element = &$variables['element'];
+  if (isset($element['#type']) && $element['#type'] === 'form') {
+    if (in_array($element['#form_id'], [
+      'node_dataservice_form',
+      'node_dataservice_edit_form',
+    ])) {
+      $suggestions[] = 'form__node_dataservice';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function koop_overheid_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  unset($form['advanced'], $form['simple_sitemap'], $form['revision_information'], $form['revision'], $form['revision_log'], $form['meta'], $form['author']);
+}
+
+/**
+ * Implements theme_form_user_login_form_alter()
+ *
+ * To add route names as classes.
+ */
+function koop_overheid_preprocess_html(&$variables) {
+  $variables['route_name'] = \Drupal::routeMatch()->getRouteName();
 }

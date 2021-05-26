@@ -1,0 +1,24 @@
+uuid: cf3184f1-3a28-4af1-aa3c-f0e49050746f
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+    - taxonomy
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.dataservice_open_standards
+field_name: dataservice_open_standards
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

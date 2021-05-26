@@ -1,8 +1,0 @@
-uuid: 183d7fe6-2fc0-42d0-9970-c4e4c241c351
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping License'
-vid: donlsync_ngr_mapping_license
-description: ''
-weight: 0

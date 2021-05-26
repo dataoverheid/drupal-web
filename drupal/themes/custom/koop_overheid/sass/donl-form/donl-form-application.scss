@@ -1,0 +1,27 @@
+// @todo find a way cleanly place this within the content-characteristics.
+.donl-form {
+  .donl-form-header.content-characteristics-application {
+    .steps .form-step {
+      &.active {
+        background-color: $c-purple-150;
+
+        .arrow {
+          background-color: $c-purple-400;
+
+          &:after,
+          &:before {
+            border-color: $c-purple-400;
+          }
+        }
+      }
+      &.active-no-substeps {
+        background-color: $c-purple-150;
+      }
+    }
+
+    .sub-steps .form-sub-step .status {
+      color: $c-purple-400;
+      border-color: $c-purple-400;
+    }
+  }
+}

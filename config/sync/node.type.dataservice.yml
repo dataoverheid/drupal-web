@@ -1,0 +1,17 @@
+uuid: 26b7b6d9-018f-48ef-aa44-b88154e7aca2
+langcode: nl
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Dataservice
+type: dataservice
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

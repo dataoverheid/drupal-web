@@ -1,0 +1,21 @@
+uuid: 60dba6d7-60dd-4b1d-a275-3b146c71a7a4
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.machine_name
+    - node.type.appliance
+  module:
+    - donl
+id: node.appliance.machine_name
+field_name: machine_name
+entity_type: node
+bundle: appliance
+label: 'Machine name'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

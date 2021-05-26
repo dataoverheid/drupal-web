@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function donl_support_theme($existing, $type, $theme, $path) {
+
+  return [
+    'donl_support' => [
+      'variables' => [
+        'left_title' => '',
+        'left_links' => '',
+        'center_title' => '',
+        'center_links' => '',
+        'right_title' => '',
+        'right_links' => '',
+      ],
+    ],
+  ];
+}
+
+
+

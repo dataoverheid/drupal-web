@@ -51,3 +51,4 @@ links:
     path: /zoek/support
     priority: '0.5'
     changefreq: daily
+langcode: nl

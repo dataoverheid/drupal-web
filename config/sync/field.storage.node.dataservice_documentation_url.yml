@@ -1,0 +1,25 @@
+uuid: 485e24fc-9192-4203-bb09-99f34a3654ea
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.dataservice_documentation_url
+field_name: dataservice_documentation_url
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

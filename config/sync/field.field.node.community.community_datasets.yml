@@ -1,0 +1,21 @@
+uuid: e8a50767-22b2-4dce-b5ce-d3faad296d3f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.community_datasets
+    - node.type.community
+  module:
+    - ckan
+id: node.community.community_datasets
+field_name: community_datasets
+entity_type: node
+bundle: community
+label: 'Datasets [old]'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

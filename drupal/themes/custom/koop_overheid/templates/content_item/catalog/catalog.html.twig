@@ -3,12 +3,11 @@
 
 {% block content_item %}
   {% set content_item_type = 'catalog' %}
-  {% set content_item_background_color = 'green' %}
   {{ parent() }}
 {% endblock content_item %}
 
 {% block content_item_title %}
-  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-community.svg') }}
+  {{ content_item.theme_icon() }}
   <div>
     <p class="type">{{ 'Catalog'|t }}</p>
     <h1>{{ node.title.value }}</h1>

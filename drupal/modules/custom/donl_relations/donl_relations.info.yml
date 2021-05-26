@@ -1,0 +1,7 @@
+name: DONL Relations
+description: Allows user to create two-way references between entities. Based on the Corresponding Entity References module (https://www.drupal.org/project/cer)
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+configure: entity.corresponding_reference.collection

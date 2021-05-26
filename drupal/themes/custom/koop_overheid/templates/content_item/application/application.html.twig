@@ -3,12 +3,11 @@
 
 {% block content_item %}
   {% set content_item_type = 'appliance' %}
-  {% set content_item_background_color = 'blue' %}
   {{ parent() }}
 {% endblock content_item %}
 
 {% block content_item_title %}
-  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-data.svg', node.theme.value) }}
+  {{ content_item.theme_icon(node.theme.value) }}
   <div>
     <h1>{{ node.title.value }}</h1>
     {{ content_item.permalink(url('donl.application', {'application': node.id})) }}

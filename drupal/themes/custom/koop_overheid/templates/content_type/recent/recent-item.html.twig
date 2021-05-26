@@ -1,0 +1,17 @@
+<div class="masonry-item">
+  <a class="recent-item content-characteristics content-characteristics-{{ group }}" href=" {{ url }}">
+    {% if image_url %}
+      <div class="img" style="background-image: url({{ image_url }})"></div>
+    {% endif %}
+    <div class="text content-characteristics-background">
+      <div class="content-item-title">
+        <span class="content-characteristics-icon"></span>
+        <div>
+          <p class="type">{{ result_type }} | {{ created }}</p>
+          <h2>{{ title }}</h2>
+        </div>
+      </div>
+      <p>{{ teaser }}</p>
+    </div>
+  </a>
+</div>

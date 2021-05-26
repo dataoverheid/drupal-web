@@ -28,7 +28,11 @@ class ParamConverterCommunity implements ParamConverterInterface {
    */
   public function convert($value, $definition, $name, array $defaults) {
     if (!empty($value)) {
-      if ($nodes = $this->nodeStorage->loadByProperties(['machine_name' => $value])) {
+      $properties = [
+        'machine_name' => $value,
+        'type' => 'community',
+      ];
+      if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
         /** @var \Drupal\node\NodeInterface $node */
         $node = reset($nodes);
         if ($node->getType() === 'community') {

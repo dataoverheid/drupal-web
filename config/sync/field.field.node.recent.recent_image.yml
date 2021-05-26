@@ -11,15 +11,15 @@ dependencies:
 third_party_settings:
   content_translation:
     translation_sync:
-      alt: alt
-      title: title
       file: '0'
+      alt: '0'
+      title: '0'
 id: node.recent.recent_image
 field_name: recent_image
 entity_type: node
 bundle: recent
-label: Image
-description: 'Voeg optioneel een header image toe. Indien dit veld gebruikt wordt, worden titel- en bodyveld van de pagina in een boxje op de header image weergegeven.'
+label: 'Teaser image'
+description: 'Deze afbeelding wordt gebruikt op de overzichten. Voor oudere actueel items moet er mogelijk nog een crop ingesteld worden.'
 required: false
 translatable: true
 default_value: {  }
@@ -30,8 +30,8 @@ settings:
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: true
-  alt_field_required: true
+  alt_field: false
+  alt_field_required: false
   title_field: false
   title_field_required: false
   default_image:

@@ -1,27 +1,13 @@
-ckan.settings:
-  title: 'CKAN settings'
-  parent: system.admin
-  route_name: ckan.settings
-  description: 'Manage ckan settings.'
-  weight: 6
+ckan.settings.webservice:
+  title: 'CKAN'
+  parent: donl.settings
+  route_name: ckan.settings.webservice
+  description: 'Manage the CKAN web service connection.'
+  weight: 8
 
-ckan.settings.request:
-  title: 'CKAN request settings'
-  parent: ckan.settings
-  route_name: ckan.settings.request
-  description: 'Manage the CKAN connection settings.'
-  weight: 1
-
-ckan.settings.resourcetype:
-  title: 'Resource types'
-  parent: ckan.settings
-  route_name: ckan.settings.resourcetype
-  description: 'Manage which extensions are considered a webservice or documentation.'
-  weight: 1
-
-ckan.settings.datasettext:
-  title: 'Dataset text settings'
-  parent: ckan.settings
-  route_name: ckan.settings.datasettext
-  description: 'Manage dataset text settings.'
-  weight: 1
+ckan.settings.dataset:
+  title: 'Datasets'
+  parent: donl.settings
+  route_name: ckan.settings.dataset
+  description: 'Manage dataset related settings, like allowed file extensions.'
+  weight: 3

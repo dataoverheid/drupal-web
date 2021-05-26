@@ -10,7 +10,18 @@ use Drupal\Core\Url;
  *
  */
 class SolrResult {
+
   use StringTranslationTrait;
+
+  /**
+   * @var mixed
+   */
+  public $id;
+
+  /**
+   * @var string|null
+   */
+  public $name;
 
   /**
    * @var \Drupal\Core\Url
@@ -23,12 +34,12 @@ class SolrResult {
   public $uri;
 
   /**
-   * @var string
+   * @var string|null
    */
   public $metadata_created;
 
   /**
-   * @var string
+   * @var string|null
    */
   public $metadata_modified;
 
@@ -73,9 +84,9 @@ class SolrResult {
   public $distributionTypes;
 
   /**
-   * @var string
+   * @var mixed|string
    */
-  public $icon;
+  private $org_logo;
 
   /**
    *
@@ -86,10 +97,10 @@ class SolrResult {
     }
 
     if (isset($doc)) {
-      $this->id = explode('|', $doc['sys_id'])[0];;
+      $this->id = explode('|', $doc['sys_id'])[0];
       $this->name = $doc['sys_name'] ?? NULL;
-      $this->metadata_created = $doc['sys_created'];
-      $this->metadata_modified = $doc['sys_modified'];
+      $this->metadata_created = $doc['sys_created'] ?? NULL;
+      $this->metadata_modified = $doc['sys_modified'] ?? NULL;
       $this->type = $doc['sys_type'];
       $this->title = $doc['title'];
       $this->description = !empty($doc['description']) ? html_entity_decode($doc['description']) : '';
@@ -98,8 +109,8 @@ class SolrResult {
       $this->format = $doc['format'] ?? [];
       $this->state = $doc['status'] ?? '';
       $this->url = $this->getUrl($doc);
-      $this->uri = $doc['sys_uri'];
-      $this->icon = $this->getIcon($doc['sys_type'] ?? '');
+      $this->uri = $doc['sys_uri'] ?? '';
+      $this->org_logo = $doc['asset_logo'] ?? '';
 
       $this->distributionTypes = [];
       foreach ($this->format as $format) {
@@ -122,29 +133,6 @@ class SolrResult {
   }
 
   /**
-   * Get the icon for the given type name.
-   *
-   * @param string $type
-   *
-   * @return string
-   */
-  private function getIcon(string $type): string {
-    switch ($type) {
-      case 'news':
-      case 'support':
-        return 'icon-nieuws.svg';
-
-      case 'catalog':
-      case 'community':
-      case 'group':
-      case 'organization':
-        return 'icon-community.svg';
-    }
-
-    return 'icon-data.svg';
-  }
-
-  /**
    * Get the correct URL for the given resource type.
    *
    * @param array $doc
@@ -157,7 +145,7 @@ class SolrResult {
 
     switch ($doc['sys_type']) {
       case 'application':
-        return Url::fromRoute('donl.application', ['application' => $id]);
+        return Url::fromRoute('donl.application', ['application' => $sysName ?? $id]);
 
       case 'catalog':
         return Url::fromRoute('donl_search.catalog.view', ['catalog' => $sysName]);
@@ -166,7 +154,10 @@ class SolrResult {
         return Url::fromRoute('ckan.dataset.view', ['dataset' => $sysName ?? $id]);
 
       case 'datarequest':
-        return Url::fromRoute('donl.datarequest', ['datarequest' => $id]);
+        return Url::fromRoute('donl.datarequest', ['datarequest' => $sysName ?? $id]);
+
+      case 'dataservice':
+        return Url::fromRoute('donl.dataservice', ['dataservice' => $sysName ?? $id]);
 
       case 'group':
         return Url::fromRoute('donl_search.group.view', ['group' => $sysName]);
@@ -181,6 +172,10 @@ class SolrResult {
     }
 
     return Url::fromUserInput('#');
+  }
+
+  public function getOrgLogoUrl(): string {
+    return $this->org_logo;
   }
 
 }

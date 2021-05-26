@@ -1,0 +1,44 @@
+<div class="support-container">
+  <div class="row-1">
+    <div class="left">
+      <div class="data-titel">{{ left_title }}</div>
+      <div class="links">
+        {% for link in left_links %}
+          {{ link }}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="line">
+      <div class="arrow"></div>
+    </div>
+    <div class="center">
+      <div class="globe">
+        <div class="globe-icon"></div>
+      </div>
+      <div class="content">
+        <div>
+          <div class="data-titel">{{ center_title }}</div>
+          <div class="links">
+            {% for link in center_links %}
+              <div class="link-wrapper">
+                {{ link }}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line">
+      <div class="arrow"></div>
+    </div>
+    <div class="right">
+      <div class="data-titel">{{ right_title }}</div>
+      <div class="links">
+        {% for link in right_links %}
+          {{ link }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+

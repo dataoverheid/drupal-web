@@ -1,0 +1,21 @@
+uuid: 8171663c-442e-40ad-a81b-142cab0eccb2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.machine_name
+    - taxonomy.vocabulary.donl_api_authentication
+  module:
+    - donl
+id: taxonomy_term.donl_api_authentication.machine_name
+field_name: machine_name
+entity_type: taxonomy_term
+bundle: donl_api_authentication
+label: machine_name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

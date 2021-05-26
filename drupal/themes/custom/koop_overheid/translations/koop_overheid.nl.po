@@ -8,3 +8,36 @@ msgstr ""
 
 msgid "Back to all datasets"
 msgstr "Terug naar alle datasets"
+
+msgid "Next step"
+msgstr "Naar volgende stap"
+
+msgid "Hide sub-themes"
+msgstr "Verberg subthema's"
+
+msgid "Show sub-themes"
+msgstr "Toon subthema's"
+
+msgid "Back to overview"
+msgstr "Terug naar overzicht"
+
+msgid "Did you mean"
+msgstr "Bedoelde je"
+
+msgid "Suggested"
+msgstr "Suggesties"
+
+msgid "Involved organizations"
+msgstr "Betrokken organisaties"
+
+msgid "Connected applications"
+msgstr "Verbonden toepassingen"
+
+msgid "Open data requests"
+msgstr "Open dataverzoeken"
+
+msgid "Connected news"
+msgstr "Verbonden nieuws"
+
+msgid "Related datasets"
+msgstr "Gerelateerde datasets"

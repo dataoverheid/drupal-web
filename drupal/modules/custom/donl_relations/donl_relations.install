@@ -1,0 +1,201 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Update relations in application content type.
+ */
+function donl_relations_update_8006(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'appliance')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'appliance')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('datasets') && $node->hasField('relation_application_dataset')) {
+      $node->relation_application_dataset = $node->datasets;
+      $node->save();
+    }
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}
+
+/**
+ * Update relations in group content type.
+ */
+function donl_relations_update_8007(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'group')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'group')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('datasets') && $node->hasField('relation_group_dataset')) {
+      $node->relation_group_dataset = $node->datasets;
+      $node->save();
+    }
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}
+
+/**
+ * Update relations in datarequest content type.
+ */
+function donl_relations_update_8008(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'datarequest')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'datarequest')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('datasets') && $node->hasField('relation_datarequest_dataset')) {
+      $node->relation_datarequest_dataset = $node->datasets;
+      $node->save();
+    }
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}
+
+/**
+ * Update relations in recent content type.
+ */
+function donl_relations_update_8009(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'recent')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'recent')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('linked_community') && $node->hasField('relation_recent_community')) {
+      $node->relation_recent_community = $node->linked_community;
+      $node->save();
+    }
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}
+
+/**
+ * Update relations in community content type.
+ */
+function donl_relations_update_8010(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'community')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'community')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('community_datasets') && $node->hasField('relation_community_dataset')) {
+      $node->relation_community_dataset = $node->community_datasets;
+    }
+
+    if ($node->hasField('linked_recent') && $node->hasField('relation_community_recent')) {
+      $node->relation_community_recent = $node->linked_recent;
+    }
+
+    if ($node->hasField('community_datarequests') && $node->hasField('relation_community_datarequest')) {
+      $node->relation_community_datarequest = $node->community_datarequests;
+    }
+
+    if ($node->hasField('groups') && $node->hasField('relation_community_group')) {
+      $node->relation_community_group = $node->groups;
+    }
+
+    if ($node->hasField('community_organisations') && $node->hasField('relation_community_organization')) {
+      $node->relation_community_organization = $node->community_organisations;
+    }
+
+    if ($node->hasField('community_applications') && $node->hasField('relation_community_application')) {
+      $node->relation_community_application = $node->community_applications;
+    }
+
+    $node->save();
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}

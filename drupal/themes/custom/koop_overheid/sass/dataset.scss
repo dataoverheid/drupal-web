@@ -59,6 +59,10 @@
 
     }
   }
+
+  .org-unit-logo {
+    margin-bottom: 1.5em;
+  }
 }
 
 .sample {
@@ -91,12 +95,18 @@
 
     .label {
       margin-right: 10px;
-      border: 1px solid $c-gray-100;
+      border: 1px solid $c-gray-300;
     }
 
     .label-licence {
       border-color: $c-orange-400;
       background: $c-orange-200;
+    }
+
+    .label-distribution-type {
+      border-color: $c-blue-600;
+      color: $c-blue-600;
+      background: $c-blue-200;
     }
   }
 
@@ -126,15 +136,6 @@
   height: 30px;
   margin-right: 10px;
   vertical-align: -10px;
-}
-
-.preview-table {
-  margin: 0;
-
-  .error {
-    padding-top: 20px;
-    color: $c-red-400;
-  }
 }
 
 .dataTables_wrapper {

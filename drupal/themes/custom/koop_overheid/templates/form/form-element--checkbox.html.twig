@@ -1,18 +1,10 @@
-{% set classes = [
-  'form__element',
-  'js-form-item',
-  'form-item',
-  'js-form-type-' ~ type|clean_class,
-  'form-item-' ~ name|clean_class,
-  'js-form-item-' ~ name|clean_class,
-  disabled == 'disabled' ? 'form-disabled',
-] %}
-
 {% set id = attribute(element, '#id') %}
 
-{% block wrapper %}
-<li>
-  {% endblock wrapper %}
+<div class="checkbox-wrapper">
+
+  {% if description %}
+    {{ description }}
+  {% endif %}
 
   {% if label_wrapper %}
     {{ label_open }}
@@ -20,14 +12,8 @@
     {{ label }}
   {% endif %}
 
-  {% block label_suffix %}{% endblock %}
-
   {% if prefix is not empty %}
     <span class="field-prefix">{{ prefix }}</span>
-  {% endif %}
-
-  {% if description %}
-    {{ description }}
   {% endif %}
 
   {{ children }}
@@ -48,6 +34,4 @@
     </p>
   {% endif %}
 
-  {% block closing_wrapper %}
-</li>
-{% endblock closing_wrapper %}
+</div>

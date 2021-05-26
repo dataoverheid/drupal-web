@@ -18,11 +18,8 @@ msgstr "Profiel"
 msgid "Profile page"
 msgstr "Profielpagina"
 
-msgid "My datasets (@total)"
-msgstr "Mijn datasets (@total)"
-
-msgid "My applications (@total)"
-msgstr "Mijn toepassingen (@total)"
+msgid "My @type (@total)"
+msgstr "Mijn @type (@total)"
 
 msgid "Statement of agreement"
 msgstr "Akkoordverklaring"
@@ -84,8 +81,8 @@ msgstr "Vergelijkbare dataverzoeken"
 msgid "Make a new data request"
 msgstr "Dataverzoek indienen"
 
-msgid "Edit data request"
-msgstr "Bewerken dataverzoek"
+msgid "Edit @type"
+msgstr "Bewerken @type"
 
 msgid "DONL theme"
 msgstr "DONL thema"
@@ -99,14 +96,8 @@ msgstr "DONL data eigenaar"
 msgid "DONL data owner."
 msgstr "DONL data eigenaar."
 
-msgid "Back to all data requests"
-msgstr "Terug naar alle dataverzoeken"
-
-msgid "Back to all organizations"
-msgstr "Terug naar alle organisaties"
-
-msgid "Back to all groups"
-msgstr "Terug naar alle groepen"
+msgid "Back to all @type"
+msgstr "Terug naar alle @type"
 
 msgid "ago"
 msgstr "geleden"
@@ -189,11 +180,11 @@ msgstr "Uw feedback met titel %title is opgeslagen en wordt doorgestuurd naar de
 msgid "No data found"
 msgstr "Geen data gevonden"
 
-msgid "No applications found"
-msgstr "Geen toepassingen gevonden"
+msgid "No data found."
+msgstr "Geen data gevonden."
 
-msgid "No datasets found"
-msgstr "Geen datasets gevonden"
+msgid "No @type found"
+msgstr "Geen @type gevonden"
 
 msgid "Profile data"
 msgstr "Profielgegevens"
@@ -201,11 +192,40 @@ msgstr "Profielgegevens"
 msgid "Register new dataset"
 msgstr "Nieuwe dataset aanmelden"
 
-msgid "Create new application"
-msgstr "Nieuwe toepassing aanmaken"
-
-msgid "Back to all catalogs"
-msgstr "Terug naar alle catalogi"
+msgid "Create new @type"
+msgstr "Nieuwe @type aanmaken"
 
 msgid "Datarequests"
 msgstr "Dataverzoeken"
+
+msgid "Licence & conditions"
+msgstr "Licentie en voorwarden"
+
+msgid "Delete"
+msgstr "Verwijderen"
+
+msgid "Which datasets are used"
+msgstr "Welke datasets worden gebruikt"
+
+msgid "The application is being verified and awaiting approval."
+msgstr "De toepassing wordt geverifieerd en wacht op goedkeuring."
+
+msgid "The given identifier %identifier is already in use."
+msgstr "De opgegeven identifier %identifier is al in gebruik."
+
+msgid "Production"
+msgstr "Productie"
+
+msgid "Production URL"
+msgstr "Productie URL"
+
+msgid "Acceptance URL"
+msgstr "Acceptatie URL"
+
+msgid "Join the discussion about this request"
+msgstr "Discusieer mee over dit verzoek"
+
+msgid ""
+msgstr ""
+
+

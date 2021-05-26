@@ -8,8 +8,7 @@
  * Set default config.
  */
 function ckan_update_8002() {
-  $config_factory = \Drupal::configFactory();
-  $config = $config_factory->getEditable('ckan.resourcetype.settings');
+  $config = \Drupal::configFactory()->getEditable('ckan.resourcetype.settings');
   $config->set('webservice', [
     'http://publications.europa.eu/resource/authority/file-type/WMS_SRVC',
     'http://publications.europa.eu/resource/authority/file-type/WFS_SRVC',
@@ -32,5 +31,41 @@ function ckan_update_8002() {
     'http://publications.europa.eu/resource/authority/file-type/PPTX',
     'http://publications.europa.eu/resource/authority/file-type/XHTML',
   ]);
-  $config->save(TRUE);
+  $config->save();
+}
+
+/**
+ * Install donl_identifier.
+ */
+function ckan_update_8003() {
+  \Drupal::service('module_installer')->install(['donl_identifier']);
+}
+
+/**
+ * Update the CKAN configuration.
+ */
+function ckan_update_8004() {
+  $configFactory = \Drupal::configFactory();
+  $config = $configFactory->getEditable('ckan.dataset.settings');
+  $oldConfig = $configFactory->getEditable('ckan.resourcetype.settings');
+
+  $config->set('resource.webservice', $oldConfig->get('webservice'));
+  $config->set('resource.documentation', $oldConfig->get('documentation'));
+  $config->save();
+
+  $oldConfig->delete();
+}
+
+/**
+ * Update the CKAN configuration.
+ */
+function ckan_update_8005() {
+  $configFactory = \Drupal::configFactory();
+  $config = $configFactory->getEditable('ckan.dataset.settings');
+  $oldConfig = $configFactory->getEditable('ckan.request.settings');
+
+  $config->set('resource.allowed_file_extensions', $oldConfig->get('allowed_file_extensions'));
+  $config->save();
+
+  $oldConfig->clear('allowed_file_extensions')->save();
 }

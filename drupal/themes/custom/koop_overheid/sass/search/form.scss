@@ -1,5 +1,12 @@
 .search-block {
-  padding: 50px 0;
+  .wrapper {
+    padding: 30px 0;
+  }
+
+  &.content-characteristics.content-characteristics-icon {
+    width: 75px;
+    height: 75px;
+  }
 }
 
 .donl-search-form {
@@ -8,18 +15,24 @@
   flex-wrap: wrap;
   max-width: 800px;
 
+  @include breakpoint($tablet) {
+    align-items: center;
+  }
+
   h2 {
     width: 100%;
     margin: 0 0 10px 0;
   }
+}
 
+.donl-suggester-form {
   .suggester-result-container {
     position: relative;
     width: 100%;
 
     #suggester {
       position: absolute;
-      z-index: 10;
+      z-index: 200;
       top: -2px;
       width: 100%;
       padding: 17px 15px 15px;
@@ -49,34 +62,6 @@
       }
     }
   }
-
-  .facet-wrapper {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin: 15px 0 -30px 0;
-    padding: 0 0 10px 0;
-
-    .facet-remove {
-      font-style: normal;
-      line-height: 30px;
-      display: inline-block;
-      margin: 0 10px 10px 0;
-      padding: 0 35px 0 10px;
-      transition: .5s;
-      text-decoration: none;
-      color: black;
-      border-radius: 10px;
-      outline: none;
-      background: white url('/themes/custom/koop_overheid/images/icon-close.svg') no-repeat center right 15px;
-      background-size: 10px;
-
-      &:hover, &:focus, &:active {
-        color: black;
-        background-color: $c-gray-100;
-      }
-    }
-  }
 }
 
 .content-header .donl-search-form .facet-wrapper {
@@ -91,9 +76,6 @@
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  @include breakpoint(mobileonly) {
-    flex-wrap: wrap;
-  }
 
   .form__element {
     width: auto;
@@ -102,17 +84,53 @@
 
   .form-item-type-select {
     flex-shrink: 0;
+    height: 100%;
+
     @include breakpoint(mobileonly) {
-      width: 100%;
-      margin-bottom: 15px;
-      .chosen-container {
-        border-radius: 0 !important;
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    .select2-selection__rendered {
+      line-height: 42px;
+    }
+
+    .select2-container .select2-selection--single {
+      height: 42px;
+      border-radius: 5px;
+    }
+
+    .select2-selection__arrow {
+      height: 42px;
+    }
+
+    .select2-container--default {
+      padding: 0 5px;
+      border-radius: 5px 0 0 5px;
+      background: $c-blue-400;
+    }
+
+    .select2-container--default .select2-selection--single {
+      border: 0;
+      border-radius: 5px 0 0 5px;
+      background: $c-blue-400;
+
+      * {
+        color: white;
+      }
+
+      .select2-selection__arrow {
+        right: 10px;
+
+        b {
+          border-color: white transparent transparent transparent;
+        }
       }
     }
-  }
 
-  .chosen-container {
-    min-width: 165px;
+    .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+      border-color: transparent transparent white transparent;
+    }
   }
 
   .form-item-search {
@@ -155,9 +173,16 @@
     }
   }
 
-  @include breakpoint(mobileonly) {
+  @include breakpoint($smallmobileonly) {
+    flex-wrap: wrap;
     input {
       padding-right: 30px;
+    }
+    .form-item-type-select {
+      width: 100%;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 8px;
     }
   }
 }
@@ -167,6 +192,10 @@
   align-items: center;
   justify-content: center;
 
+  @include breakpoint($laptop) {
+    display: block;
+  }
+
   .content-item-title {
     margin: 0;
 
@@ -175,9 +204,20 @@
     }
   }
 
-  &.type-icon-active {
+  &.active-icon {
     justify-content: space-between;
   }
 }
 
+.did-you-mean {
+  margin-bottom: 15px;
 
+  .search-replace {
+    cursor: pointer;
+    color: $c-blue-600;
+
+    &:hover, &:focus, &:active {
+      color: $c-blue-400;
+    }
+  }
+}

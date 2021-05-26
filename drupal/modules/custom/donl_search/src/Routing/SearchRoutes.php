@@ -50,6 +50,12 @@ class SearchRoutes {
         'path_nl' => '/datasets',
         'controller' => 'SearchDatasetController',
       ],
+      'donl_search.search.dataservice' => [
+        'title' => 'Search',
+        'path_en' => '/zoeken/dataservices',
+        'path_nl' => '/search/dataservices',
+        'controller' => 'SearchDataserviceController',
+      ],
       'donl_search.search.group' => [
         'title' => 'Search',
         'path_en' => '/community/groups',
@@ -99,6 +105,8 @@ class SearchRoutes {
       ],
       [
         '_permission' => 'access content',
+        'page' => '^[1-9][0-9]*$',
+        'recordsPerPage' => '^[1-9][0-9]*$',
       ]
     );
   }

@@ -1,0 +1,41 @@
+.donl-form {
+  .main {
+    .resource-header {
+      padding-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .resource-edit-wrapper {
+      padding: 15px 0;
+
+      .copydata {
+        margin-bottom: 10px;
+      }
+
+      .resource {
+        margin-bottom: 0;
+      }
+
+      & + .resource-edit-wrapper {
+        border-top: 1px solid $c-gray-400;
+      }
+    }
+  }
+
+}
+
+.resource-order-table {
+  caption {
+    color: $c-blue-600;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  th {
+    width: 130px;
+
+    &:first-child {
+      width: auto;
+    }
+  }
+}

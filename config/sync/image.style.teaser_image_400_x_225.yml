@@ -1,0 +1,25 @@
+uuid: 6314ebed-0c1e-467e-aa53-3618986b3076
+langcode: nl
+status: true
+dependencies:
+  config:
+    - crop.type.teaser_image_400_x_225
+  module:
+    - crop
+name: teaser_image_400_x_225
+label: 'Teaser Image 400 x 225'
+effects:
+  ab3cea50-02a3-4b03-ad92-801ce68751bd:
+    uuid: ab3cea50-02a3-4b03-ad92-801ce68751bd
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: teaser_image_400_x_225
+  20242e59-04b5-4986-8af5-6470f42d07e6:
+    uuid: 20242e59-04b5-4986-8af5-6470f42d07e6
+    id: image_scale
+    weight: 2
+    data:
+      width: 400
+      height: null
+      upscale: false

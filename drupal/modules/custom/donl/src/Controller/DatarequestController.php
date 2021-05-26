@@ -156,7 +156,7 @@ class DatarequestController extends ControllerBase {
       '#theme' => 'datarequest',
       '#node' => $datarequest,
       '#extraInfo' => $extraInfo,
-      '#backLink' => $this->backLinkService->createBackLink($this->t('Back to all data requests'), 'donl_search.search.datarequest'),
+      '#backLink' => $this->backLinkService->createBackLink($this->t('Back to all @type', ['@type' => $this->t('data requests')]), 'donl_search.search.datarequest'),
       '#editLinks' => $editLinks,
       '#search' => $this->formBuilder()->getForm(SearchForm::class),
       '#panels' => $panels,

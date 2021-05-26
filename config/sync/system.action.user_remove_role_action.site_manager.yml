@@ -1,0 +1,14 @@
+uuid: d5a7a4fc-381a-4709-ba71-60e7cfb0fbaf
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.site_manager
+  module:
+    - user
+id: user_remove_role_action.site_manager
+label: 'De rol Site beheerder verwijderen van de geselecteerde gebruikers(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: site_manager

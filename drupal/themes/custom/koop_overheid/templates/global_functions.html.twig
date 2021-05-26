@@ -1,0 +1,24 @@
+{% macro characteristics(id, class, title, description) %}
+  <div class="characteristic{% if class %} characteristic--{{ class }}{% endif %}">
+    <a href="#question-explanation-{{ id }}"
+       id="question-explanation-link-{{ id }}"
+       data-explanation-opener="question-explanation-{{ id }}"
+       data-handler="toggle-explanation">{{ title }}</a>
+    <div class="question-explanation__content"
+         id="question-explanation-{{ id }}" data-decorator="hide-self">
+      <p>{{ description|raw }}</p>
+      <a href="#question-explanation-link-{{ id }}"
+         class="question-explanation__close"
+         data-handler="close-explanation">{{ 'Close'|t }}</a>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro metadata_field(label, value, class) %}
+  {% if value %}
+    <div>
+      <span>{{ label|t }}</span>
+      <span {% if class %}class="{{ class }}"{% endif %}>{{ value }}</span>
+    </div>
+  {% endif %}
+{% endmacro %}

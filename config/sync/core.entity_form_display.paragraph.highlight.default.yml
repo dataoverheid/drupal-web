@@ -8,31 +8,20 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.highlight
   module:
-    - image_widget_crop
-    - imce
     - link
+    - svg_image
 id: paragraph.highlight.default
 targetEntityType: paragraph
 bundle: highlight
 mode: default
 content:
   highlight_image:
-    weight: 1
+    weight: 11
     settings:
-      show_default_crop: true
-      warn_multiple_usages: true
-      preview_image_style: thumbnail
-      crop_preview_image_style: crop_thumbnail
-      crop_list:
-        - highlight
-      crop_types_required:
-        - highlight
       progress_indicator: throbber
-      show_crop_area: false
-    third_party_settings:
-      imce:
-        enabled: false
-    type: image_widget_crop
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
     region: content
   highlight_link:
     weight: 0
@@ -41,6 +30,11 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  translation:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
     region: content
 hidden:
   created: true

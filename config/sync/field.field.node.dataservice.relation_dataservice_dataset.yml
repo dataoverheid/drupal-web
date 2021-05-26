@@ -1,0 +1,21 @@
+uuid: db5719be-c73b-4f81-a148-90dc1c6b0dd7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_dataservice_dataset
+    - node.type.dataservice
+  module:
+    - ckan
+id: node.dataservice.relation_dataservice_dataset
+field_name: relation_dataservice_dataset
+entity_type: node
+bundle: dataservice
+label: 'Datasets op data.overheid.nl'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

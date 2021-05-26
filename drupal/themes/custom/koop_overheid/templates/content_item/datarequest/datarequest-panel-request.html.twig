@@ -6,9 +6,11 @@
   </tr>
   <tr>
     <th>{{ 'Request date'|t }}</th>
+    <td>
     {% if datarequest.request_date.value %}
-      <td>{{ datarequest.request_date.value|date("d-m-Y") }}</td>
+      {{ datarequest.request_date.value|date("d-m-Y") }}
     {% endif %}
+    </td>
   </tr>
   <tr>
     <th>{{ 'Theme'|t }}</th>
@@ -31,7 +33,7 @@
   </tr>
   <tr>
     <th>{{ 'Possible owner'|t }}</th>
-    <td>{{ ckan_mapping_get_organization_name(datarequest.possible_owner.value) }}</td>
+    <td>{{ ckan_link_data_owner(datarequest.possible_owner.value, ckan_mapping_get_organization_name(datarequest.possible_owner.value), 'link') }}</td>
   </tr>
   <tr>
     <th>{{ 'Problems with the search'|t }}</th>

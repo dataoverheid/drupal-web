@@ -1,0 +1,9 @@
+name: DONL entities
+description: Helper module for organizing functionality around the available donl entities.
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+interface translation project: donl_entities
+interface translation server pattern: modules/custom/donl_entities/translations/donl_entities.%language.po

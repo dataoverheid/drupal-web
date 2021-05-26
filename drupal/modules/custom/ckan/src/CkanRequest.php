@@ -12,9 +12,9 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactory;
+use Drupal\Core\Session\AccountProxyInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  *
@@ -67,19 +67,26 @@ class CkanRequest implements CkanRequestInterface {
   private $previewFunctionality;
 
   /**
-   * @var \Symfony\Component\HttpFoundation\Request
+   * @var \Drupal\Core\Session\AccountProxyInterface
    */
-  private $currentRequest;
+  private $currentUser;
+
+  /**
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  private $userStorage;
 
   /**
    *
    */
-  public function __construct(Client $httpClient, ConfigFactoryInterface $configFactory, LoggerChannelFactory $loggerChannelFactory, CacheBackendInterface $cacheBackend, EntityTypeManagerInterface $entityTypeManager, RequestStack $requestStack) {
+  public function __construct(Client $httpClient, ConfigFactoryInterface $configFactory, LoggerChannelFactory $loggerChannelFactory, CacheBackendInterface $cacheBackend, EntityTypeManagerInterface $entityTypeManager, AccountProxyInterface $currentUser) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
+    $this->userStorage = $entityTypeManager->getStorage('user');
     $this->client = $httpClient;
     $this->logger = $loggerChannelFactory->get('ckan_request');
     $this->cacheBackend = $cacheBackend;
-    $this->currentRequest = $requestStack->getCurrentRequest();
+    $this->currentUser = $currentUser;
+
     // Set base URL (if exists in the config).
     if ($config = $configFactory->get('ckan.request.settings')) {
       $this->previewFunctionality = $config->get('preview_functionality');
@@ -106,8 +113,16 @@ class CkanRequest implements CkanRequestInterface {
    */
   public function getDataset($datasetId): ?Dataset {
     $dataset = &drupal_static('dataset:' . $datasetId);
-    if (!$dataset && ($result = $this->execute('get', 'package_show?id=' . $datasetId))) {
-      $dataset = $this->resultToDataset($result);
+    if (!$dataset) {
+      $options['headers']['Content-Type'] = 'application/json';
+
+      if ($user = $this->userStorage->load($this->currentUser->id())) {
+        $options['headers']['Authorization'] = $user->getApiKey('dataset');
+      }
+
+      if ($result = $this->execute('get', 'package_show?id=' . $datasetId, $options)) {
+        $dataset = $this->resultToDataset($result);
+      }
     }
     return $dataset;
   }
@@ -124,9 +139,18 @@ class CkanRequest implements CkanRequestInterface {
   }
 
   /**
+   * Find a dataset based on the identifier.
    *
+   * Preferably we want to use the SOLR implementation, but in case you'll need
+   * the full dataset you must use this function.
+   *
+   * @param string $identifier
+   *
+   * @return Dataset|null
+   *
+   * @see \Drupal\donl_search\SolrRequestInterface::getDatasetResultByIdentifier
    */
-  public function getDatasetByIdentifier($identifier) {
+  public function getDatasetByIdentifier($identifier): ?Dataset {
     $query = [
       'q' => '* AND identifier:"' . $identifier . '"',
       'rows' => 1,
@@ -317,6 +341,8 @@ class CkanRequest implements CkanRequestInterface {
    */
   public function createDataset(Dataset $dataset) {
     if ($this->ckanUser) {
+      $ownerOrg = NULL;
+
       // The default owner_org is data.overheid itself.
       if ($organizationId = $this->getOrganizationIdFromCatalog('https://data.overheid.nl')) {
         if ($organization = $this->getCatalog($organizationId)) {
@@ -344,7 +370,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => $body,
     ];
@@ -356,13 +382,15 @@ class CkanRequest implements CkanRequestInterface {
    * {@inheritdoc}
    */
   public function updateDataset(Dataset $dataset) {
+    $dataArray = array_filter($dataset->toArray());
+    $dataArray['private'] = $dataset->getPrivate();
     // Remove all NULL values.
-    $body = json_encode(array_filter($dataset->toArray()));
+    $body = json_encode($dataArray);
 
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => $body,
     ];
@@ -376,7 +404,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => json_encode(['id' => $datasetId]),
     ];
@@ -387,11 +415,19 @@ class CkanRequest implements CkanRequestInterface {
    * {@inheritdoc}
    */
   public function getResource($resourceId) {
-    if ($result = $this->execute('get', 'resource_show?id=' . $resourceId)) {
-      return $this->resultToResource($result);
-    }
+    $resource = &drupal_static('resource:' . $resourceId);
+    if (!$resource) {
+      $options['headers']['Content-Type'] = 'application/json';
 
-    return NULL;
+      if ($user = $this->userStorage->load($this->currentUser->id())) {
+        $options['headers']['Authorization'] = $user->getApiKey('dataset');
+      }
+
+      if ($result = $this->execute('get', 'resource_show?id=' . $resourceId, $options)) {
+        $resource = $this->resultToResource($result);
+      }
+    }
+    return $resource;
   }
 
   /**
@@ -404,7 +440,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => $body,
     ];
@@ -421,7 +457,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => $body,
     ];
@@ -435,7 +471,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('dataset'),
       ],
       'body' => json_encode(['id' => $resourceId]),
     ];
@@ -474,7 +510,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('user'),
       ],
       'body' => $body,
     ];
@@ -495,7 +531,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('user'),
       ],
       'body' => json_encode([
         'fullname' => $user->fullName,
@@ -527,7 +563,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('user'),
       ],
       'body' => json_encode([
         'id' => $user->id,
@@ -604,7 +640,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('user'),
       ],
       'body' => json_encode([
         'id' => $organization->id,
@@ -623,7 +659,7 @@ class CkanRequest implements CkanRequestInterface {
     $options = [
       'headers' => [
         'Content-Type' => 'application/json',
-        'Authorization' => $this->getApiKey(),
+        'Authorization' => $this->getApiKey('user'),
       ],
       'body' => json_encode([
         'id' => $organization->id,
@@ -672,6 +708,8 @@ class CkanRequest implements CkanRequestInterface {
     $dataset->setBaseRegister(isset($result->basis_register) && strtolower($result->basis_register) === 'true');
     $dataset->setReferenceData(isset($result->referentie_data) && strtolower($result->referentie_data) === 'true');
     $dataset->setNationalCoverage(isset($result->national_coverage) && strtolower($result->national_coverage) === 'true');
+    $dataset->setSectorRegistrations(isset($result->sector_registrations) && strtolower($result->sector_registrations) === 'true');
+    $dataset->setLocalRegistrations(isset($result->local_registrations) && strtolower($result->local_registrations) === 'true');
 
     // Resources (optional).
     $resources = [];
@@ -708,6 +746,7 @@ class CkanRequest implements CkanRequestInterface {
     $dataset->setContactPointWebsite($result->contact_point_website ?? NULL);
     $dataset->setContactPointTitle($result->contact_point_title ?? NULL);
     $dataset->setAccessRights($result->access_rights ?? NULL);
+    $dataset->setAccessRightsReason($result->access_rights_reason ?? NULL);
     $dataset->setUrl($result->url ?? NULL);
     $dataset->setConformsTo($result->conforms_to ?? []);
     $dataset->setRelatedResource($result->related_resource ?? []);
@@ -897,14 +936,26 @@ class CkanRequest implements CkanRequestInterface {
   /**
    * Return the API key for the current logged in user.
    *
+   * @param string|null $entityType
+   *   The entityType on which we are trying to preform the action.
+   *
    * @return null|string
    */
-  private function getApiKey() {
+  private function getApiKey(?string $entityType = NULL) {
+    if ($this->apiKey && $this->ckanUser) {
+      if ($entityType === 'dataset' && $this->ckanUser->hasPermission('manage all datasets')) {
+        return $this->apiKey;
+      }
+      elseif ($entityType === 'user' && $this->ckanUser->hasPermission('administer users')) {
+        return $this->apiKey;
+      }
+    }
+
     if ($this->ckanUser) {
       return $this->ckanUser->getApiKey();
     }
 
-    return $this->apiKey;
+    return NULL;
   }
 
   /**
@@ -937,9 +988,12 @@ class CkanRequest implements CkanRequestInterface {
     ]);
     /** @var \Drupal\node\Entity\Node $node */
     foreach ($nodes as $node) {
-      if (($identifier = $node->get('identifier')->getValue()[0]['value']) && ($value = $node->get('ckan_organization_mapping')
-        ->getValue()[0]['value'])) {
-        $mapping[$identifier] = $value;
+      if ($node->hasField('identifier') && $node->hasField('ckan_organization_mapping')) {
+        $identifier = $node->get('identifier')->getValue()[0]['value'] ?? NULL;
+        $value = $node->get('ckan_organization_mapping')->getValue()[0]['value'] ?? NULL;
+        if ($identifier && $value) {
+          $mapping[$identifier] = $value;
+        }
       }
     }
 

@@ -1,0 +1,29 @@
+uuid: 302024e3-7143-41f1-ada4-bcc4745625c0
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_api_authentication
+    - node.type.dataservice
+    - taxonomy.vocabulary.donl_api_authentication
+id: node.dataservice.dataservice_api_authentication
+field_name: dataservice_api_authentication
+entity_type: node
+bundle: dataservice
+label: 'Authenticatie API of service'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      donl_api_authentication: donl_api_authentication
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,42 @@
+uuid: a0a3aad4-a078-4248-b877-c7e5cb63e783
+langcode: nl
+status: true
+dependencies:
+  config:
+    - filter.format.markdown
+  module:
+    - donl_markdown
+format: markdown
+editor: editor_md
+settings:
+  height: 440px
+  width: 100%
+  watch: 0
+  theme: default
+  editorTheme: base16-light
+  previewTheme: default
+  toolbar: 1
+  toolbarAutoFixed: 1
+  toolbarIcons:
+    - bold
+    - italic
+    - '|'
+    - h2
+    - h3
+    - h4
+    - '|'
+    - list-ul
+    - list-ol
+    - hr
+    - '|'
+    - link
+    - reference-link
+    - image
+    - '|'
+    - preformatted-text
+    - html-entities
+    - '|'
+    - watch
+    - preview
+    - fullscreen
+image_upload: {  }

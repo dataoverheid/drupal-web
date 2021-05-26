@@ -1,0 +1,39 @@
+entity.corresponding_reference.collection:
+  path: '/admin/config/content/donl_relations'
+  defaults:
+    _entity_list: 'corresponding_reference'
+    _title: 'DONL relations'
+  requirements:
+    _permission: 'administer donl_relations'
+
+entity.corresponding_reference.add_form:
+  path: '/admin/config/content/donl_relations/add'
+  defaults:
+    _entity_form: 'corresponding_reference.add'
+    _title: 'Add DONL relations'
+  requirements:
+    _permission: 'administer donl_relations'
+
+entity.corresponding_reference.edit_form:
+  path: '/admin/config/content/donl_relations/{corresponding_reference}'
+  defaults:
+    _entity_form: 'corresponding_reference.edit'
+    _title: 'Edit DONL relations'
+  requirements:
+    _permission: 'administer donl_relations'
+
+entity.corresponding_reference.delete_form:
+  path: '/admin/config/content/donl_relations/{corresponding_reference}/delete'
+  defaults:
+    _entity_form: 'corresponding_reference.delete'
+    _title: 'Delete DONL relations'
+  requirements:
+    _permission: 'administer donl_relations'
+
+entity.corresponding_reference.sync_form:
+  path: '/admin/config/content/donl_relations/{corresponding_reference}/sync'
+  defaults:
+    _entity_form: 'corresponding_reference.sync'
+    _title: 'Synchronize DONL relations'
+  requirements:
+    _permission: 'administer donl_relations'

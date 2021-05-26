@@ -1,0 +1,5 @@
+donl_recent.settings:
+  title: 'Current content'
+  parent: donl.settings
+  route_name: donl_recent.recent_content_settings
+  description: 'Manage the recent content block.'

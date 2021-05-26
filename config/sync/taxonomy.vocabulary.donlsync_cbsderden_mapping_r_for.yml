@@ -1,8 +1,0 @@
-uuid: edcc9548-78fd-402f-a619-5a7610c3c210
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync CBSDerden Mapping Resource.Format'
-vid: donlsync_cbsderden_mapping_r_for
-description: ''
-weight: 0

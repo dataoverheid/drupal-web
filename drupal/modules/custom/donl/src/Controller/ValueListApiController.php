@@ -50,11 +50,16 @@ class ValueListApiController extends ControllerBase {
         $translation = $node->getTranslation('en');
       }
 
+      $kind = $node->get('organization_type')->getValue()[0]['value'] ?? NULL;
+      if ($terms = $node->get('organization_type_term')->referencedEntities()) {
+        $kind = $terms[0]->get('identifier')->getString();
+      }
+
       $data[] = [
         'name' => $node->getTitle(),
         'description' => $node->get('organization_description')->getValue()[0]['value'] ?? NULL,
         'identifier' => $node->get('identifier')->getValue()[0]['value'],
-        'organization_type' => $node->get('organization_type')->getValue()[0]['value'] ?? NULL,
+        'organization_type' => $kind,
         'label_nl' => $node->getTitle(),
         'label_en' => $translation->getTitle(),
       ];

@@ -38,6 +38,7 @@ function ckan_theme($existing, $type, $theme, $path) {
         'groupLinks' => [],
         'schema' => [],
         'search' => NULL,
+        'showPublished' => FALSE,
       ],
     ],
     'dataset-schema' => [
@@ -45,18 +46,17 @@ function ckan_theme($existing, $type, $theme, $path) {
         'dataset' => NULL,
       ],
     ],
-    'dataset_edit_datasources' => [
+    'dataset_resources_manage' => [
       'variables' => [
         'dataset' => NULL,
-        'backLink' => NULL,
-        'addLink' => NULL,
-        'canEdit' => FALSE,
+        'sortedResources' => [],
+        'editLinks' => [],
+        'header' => NULL,
       ],
     ],
     'dataset-panel-description' => [
       'variables' => [
         'dataset' => NULL,
-        'text' => NULL,
         'links' => [],
       ],
     ],
@@ -65,26 +65,24 @@ function ckan_theme($existing, $type, $theme, $path) {
         'resources' => [],
         'documentation' => [],
         'confirmsTo' => [],
-        'text' => NULL,
       ],
     ],
     'dataset-panel-metadata' => [
       'variables' => [
         'dataset' => NULL,
         'permanent_link' => '',
-        'text' => NULL,
       ],
     ],
     'dataset-panel-resources' => [
       'variables' => [
         'alias' => NULL,
         'resources' => [],
-        'text' => NULL,
       ],
     ],
     'dataset-panel-visualisations' => [
       'variables' => [
-        'text' => NULL,
+        'resources' => NULL,
+        'alias' => NULL,
       ],
     ],
     'dataset-panel-relations' => [
@@ -93,7 +91,6 @@ function ckan_theme($existing, $type, $theme, $path) {
         'groupLinks' => NULL,
         'relatedResourceLinks' => NULL,
         'sourceLinks' => NULL,
-        'texts' => NULL,
       ],
     ],
     'homepage' => [
@@ -101,17 +98,18 @@ function ckan_theme($existing, $type, $theme, $path) {
         'themes' => [],
       ],
     ],
+    'ckan_tag_cloud_block' => [
+      'variables' => [
+        'prefix' => '',
+        'tags' => [],
+      ],
+    ],
+    'dataset_form_advanced_switch' => [
+      'variables' => [
+        'title' => '',
+      ],
+    ],
   ];
-}
-
-/**
- * Implements hook_element_info_alter().
- */
-function ckan_element_info_alter(array &$types) {
-  // Attach our extra CSS for toolbar icons.
-  if (isset($types['toolbar'])) {
-    $types['toolbar']['#attached']['library'][] = 'ckan/toolbar';
-  }
 }
 
 /**
@@ -164,10 +162,8 @@ function ckan_user_presave(EntityInterface $entity) {
   // If the user has the role user, it doesn't need to be on CKAN. So block any
   // existing user from CKAN.
   if ($role === 'user') {
-    if ($ckanUser) {
-      if ($ckanUser->state === 'active') {
-        $ckanRequest->blockUser($ckanUser);
-      }
+    if ($ckanUser && $ckanUser->state === 'active') {
+      $ckanRequest->blockUser($ckanUser);
     }
     return;
   }
@@ -176,19 +172,16 @@ function ckan_user_presave(EntityInterface $entity) {
   if ($entity->isActive()) {
     $catalog = $entity->get('field_catalog')->getValue()[0]['value'] ?? NULL;
 
-    // If there is a CKAN user, active it on CKAN.
-    if ($ckanUser) {
-      // If the user is not active, activate them.
-      if ($ckanUser->state !== 'active') {
-        $ckanRequest->activateUser($ckanUser, $catalog);
-        // Save CKAN id and API key.
-        $entity->set('field_ckan_id', $ckanUser->id);
-        $entity->set('field_ckan_api_key', $ckanUser->apikey);
-      }
-      // Else, create a new CKAN user.
+    // If there is a CKAN user, check if we'll need to active it on CKAN.
+    if ($ckanUser && $ckanUser->state !== 'active') {
+      $ckanRequest->activateUser($ckanUser, $catalog);
+      // Save CKAN id and API key.
+      $entity->set('field_ckan_id', $ckanUser->id);
+      $entity->set('field_ckan_api_key', $ckanUser->apikey);
     }
+
+    // Else, create a new CKAN user.
     else {
-      // Create CKAN user.
       $user = new User();
       $user->setName('user_d' . $entity->id());
       $user->setFullName($entity->getAccountName());
@@ -200,34 +193,29 @@ function ckan_user_presave(EntityInterface $entity) {
         // Save CKAN id and API key.
         $entity->set('field_ckan_id', $ckanUser->id);
         $entity->set('field_ckan_api_key', $ckanUser->apikey);
-        // If it fails there is probably a existing user in CKAN, so update and
-        // active it.
       }
-      else {
-        if ($ckanRequest->isErrorUserAlreadyExists()) {
-          if ($ckanUser = $ckanRequest->getUser('user_d' . $entity->id())) {
-            $ckanUser->setEmail($entity->getEmail());
-            $ckanRequest->activateUser($ckanUser, $catalog);
-            $entity->set('field_ckan_id', $ckanUser->id);
-            $entity->set('field_ckan_api_key', $ckanUser->apikey);
-          }
-          // Something else failed, block user again.
+      // If it fails there is probably a existing user in CKAN, so update and
+      // active it.
+      elseif ($ckanRequest->isErrorUserAlreadyExists()) {
+        if ($ckanUser = $ckanRequest->getUser('user_d' . $entity->id())) {
+          $ckanUser->setEmail($entity->getEmail());
+          $ckanRequest->activateUser($ckanUser, $catalog);
+          $entity->set('field_ckan_id', $ckanUser->id);
+          $entity->set('field_ckan_api_key', $ckanUser->apikey);
         }
-        else {
-          if ((int) $entity->id() !== 1) {
-            $entity->set('status', FALSE);
-          }
+      }
+      // Something else failed, block user again.
+      else {
+        if ((int) $entity->id() !== 1) {
+          $entity->set('status', FALSE);
         }
       }
     }
   }
   else {
-    // If there is a CKAN user.
-    if ($ckanUser) {
-      // And the user is already blocked (deleted), do nothing.
-      if ($ckanUser->state !== 'deleted') {
-        $ckanRequest->blockUser($ckanUser);
-      }
+    // If there is a CKAN user and its already blocked (deleted), do nothing.
+    if ($ckanUser && $ckanUser->state !== 'deleted') {
+      $ckanRequest->blockUser($ckanUser);
     }
   }
 }
@@ -237,8 +225,7 @@ function ckan_user_presave(EntityInterface $entity) {
  */
 function ckan_user_delete(EntityInterface $account) {
   if (!$ckanRequest = \Drupal::service('ckan.request')) {
-    \Drupal::logger('ckan')
-      ->notice('CKAN Request could not be loaded. Ignoring CKAN user functions.');
+    \Drupal::logger('ckan')->notice('CKAN Request could not be loaded. Ignoring CKAN user functions.');
     return;
   }
 
@@ -249,8 +236,7 @@ function ckan_user_delete(EntityInterface $account) {
     $ckanRequest->setCkanUser($user);
   }
   catch (\Exception $exception) {
-    \Drupal::logger('ckan')
-      ->notice('Error loading current user for the CKAN request.');
+    \Drupal::logger('ckan')->notice('Error loading current user for the CKAN request.');
   }
 
   // If required fields are missing, skip all.
@@ -345,7 +331,7 @@ function ckan_authority_allowed_values(FieldStorageConfig $definition, ContentEn
   /* @var \Drupal\donl_value_list\ValueList $valueList */
   $valueList = \Drupal::service('donl.value_list');
 
-  return $valueList->getList('donl:organization');
+  return $valueList->getList('donl:organization', TRUE);
 }
 
 /**
@@ -355,7 +341,7 @@ function ckan_publisher_allowed_values(FieldStorageConfig $definition, ContentEn
   /* @var \Drupal\donl_value_list\ValueList $valueList */
   $valueList = \Drupal::service('donl.value_list');
 
-  return $valueList->getList('donl:organization');
+  return $valueList->getList('donl:organization', TRUE);
 }
 
 /**
@@ -365,7 +351,7 @@ function ckan_catalog_allowed_values(FieldStorageConfig $definition, ContentEnti
   /* @var \Drupal\donl_value_list\ValueList $valueList */
   $valueList = \Drupal::service('donl.value_list');
 
-  return $valueList->getList('donl:catalogs');
+  return $valueList->getList('donl:catalogs', TRUE);
 }
 
 /**

@@ -1,0 +1,10 @@
+configure donl settings:
+  title: 'Manage DONL settings'
+
+configure donl web services:
+  title: 'Configure donl web services'
+  restrict access: true
+
+configure donl search settings:
+  title: 'Configure donl search settings'
+  restrict access: true

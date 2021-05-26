@@ -1,0 +1,22 @@
+<div class="donl-form-sidebar">
+  <div class="sidebar-nav">
+    <div class="advance-swap">
+      {% if toggler_enabled %}
+        <span class="swap-label">{{ 'Form display' |t }}</span>
+        <div class="selects">
+          <span class="option basic"><span class="radio"><span class="checker"></span></span>{{ 'Basic'|t }}</span>
+          <span class="option advanced"><span class="radio"><span class="checker"></span></span>{{ 'Advanced'|t }}</span>
+        </div>
+        <div class="new-loader"></div>
+      {% endif %}
+    </div>
+
+    <div class="sub-steps">
+      {{ sub_steps }}
+    </div>
+
+    <div class="sidebar-nav-actions">
+      {{ actions }}
+    </div>
+  </div>
+</div>

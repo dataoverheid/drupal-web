@@ -1,0 +1,29 @@
+uuid: 0f074434-bc80-4a44-ad23-74a999c66d42
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_datarequest_community
+    - node.type.community
+    - node.type.datarequest
+id: node.datarequest.relation_datarequest_community
+field_name: relation_datarequest_community
+entity_type: node
+bundle: datarequest
+label: Communities
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      community: community
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

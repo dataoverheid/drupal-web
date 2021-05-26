@@ -1,8 +1,10 @@
 {% block paragraph %}
-<li>
+  <li>
     <a href="{{ link_url }}">
+      {% if image_url %}
         <img src="{{ image_url }}" alt="{{ image_alt }}">
-        <h3>{{ link_title }}</h3>
+      {% endif %}
+      <h3>{{ link_title }}</h3>
     </a>
-</li>
+  </li>
 {% endblock paragraph %}

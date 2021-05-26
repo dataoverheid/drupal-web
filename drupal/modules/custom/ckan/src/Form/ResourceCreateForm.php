@@ -3,6 +3,7 @@
 namespace Drupal\ckan\Form;
 
 use Drupal\ckan\Entity\Dataset;
+use Drupal\ckan\Entity\Resource;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -20,12 +21,25 @@ class ResourceCreateForm extends ResourceBaseForm {
   /**
    * {@inheritdoc}
    */
+  public function buildForm(array $form, FormStateInterface $form_state, Dataset $dataset = NULL, Resource $resource = NULL): array {
+    $form = parent::buildForm($form, $form_state, $dataset, $resource);
+    $form['#attributes']['class'][] = 'donl-form-create';
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
     if ($this->requireValidateForm($form_state)) {
-      $response = $this->ckanRequest->setCkanUser($this->getUser())
-        ->createResource($this->getValues($form_state));
-      if (!$response) {
-        $this->setErrors($form, $form_state, $this->ckanRequest->getErrors());
+      if ($errors = $this->dcatValidationService->resource($form_state->cleanValues()->getValues())) {
+        $this->setErrors($form, $form_state, $errors);
+      }
+      else {
+        $response = $this->ckanRequest->setCkanUser($this->getUser())->createResource($this->getValues($form_state));
+        if (!$response) {
+          $this->setErrors($form, $form_state, $this->ckanRequest->getErrors());
+        }
       }
     }
   }

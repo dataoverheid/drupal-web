@@ -1,0 +1,38 @@
+{% extends '@koop_overheid/content_item/content-item.html.twig' %}
+{% import '@koop_overheid/content_item/content-item.html.twig' as content_item %}
+
+{% block content_item %}
+  {% set content_item_type = 'dataservice' %}
+  {{ parent() }}
+{% endblock content_item %}
+
+{% block content_item_title %}
+  {{ content_item.theme_icon(node.theme.value) }}
+  <div>
+    <h1>{{ node.title.value }}</h1>
+    {{ content_item.permalink(url('donl.dataservice', {'dataservice': node.id})) }}
+  </div>
+{% endblock content_item_title%}
+
+{% block content_item_description %}
+  <table class="minimal-table">
+    <tbody>
+      <tr>
+        <th>{{ 'Kind'|t }}</th>
+        <td>{{ node.dataservice_type.entity.name.value }}</td>
+      </tr>
+      <tr>
+        <th>{{ 'Theme'|t }}</th>
+        <td>{{ ckan_mapping_get_theme_name(node.theme.value) }}</td>
+      </tr>
+      <tr>
+        <th>{{ 'State'|t }}</th>
+        <td>{{ ckan_mapping_get_status_name(node.dataserivce_state.value) }}</td>
+      </tr>
+      <tr>
+        <th>{{ 'Production'|t }}</th>
+        <td>{{ ckan_link(node.dataservice_production_url.value) }}</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock content_item_description %}

@@ -50,21 +50,6 @@ class CkanRequestSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('ckan_api_key'),
     ];
 
-    $allowedFileExtensions = $config->get('allowed_file_extensions');
-    $form['allowed_file_extensions'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Allowed file extensions'),
-      '#required' => TRUE,
-      '#description' => $this->t('A list with all allowed file extension for the resource file upload.'),
-      '#default_value' => $allowedFileExtensions ? implode(' ', $allowedFileExtensions) : '',
-    ];
-
-    $form['preview_functionality'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Enable preview functionality'),
-      '#default_value' => $config->get('preview_functionality'),
-    ];
-
     return parent::buildForm($form, $form_state);
   }
 
@@ -75,8 +60,6 @@ class CkanRequestSettingsForm extends ConfigFormBase {
     $config = $this->config('ckan.request.settings');
     $config->set('ckan_url', $form_state->getValue('ckan_url'));
     $config->set('ckan_api_key', $form_state->getValue('ckan_api_key'));
-    $config->set('preview_functionality', $form_state->getValue('preview_functionality'));
-    $config->set('allowed_file_extensions', explode(' ', $form_state->getValue('allowed_file_extensions')));
     $config->save();
 
     parent::submitForm($form, $form_state);

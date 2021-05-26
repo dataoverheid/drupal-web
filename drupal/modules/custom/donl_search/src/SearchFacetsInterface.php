@@ -28,7 +28,7 @@ interface SearchFacetsInterface {
    * @return array
    *   A Drupal render array.
    */
-  public function getFacets($routeName, array $routeParams, array $availableFacets, $recordsPerPage, $search, $sort, array $activeFacets = []);
+  public function getFacets($routeName, array $routeParams, array $availableFacets, $recordsPerPage, $search, $sort, array $activeFacets = []): array;
 
   /**
    * Get the delete link for all the active facets for a search page.
@@ -51,5 +51,12 @@ interface SearchFacetsInterface {
    * @return array
    */
   public function getFacetNamesInOrder(): array;
+
+  /**
+   * Turns the activeFacets array into human readable values.
+   *
+   * @return array
+   */
+  public function activeFacetsToReadable($activeFacets): array;
 
 }

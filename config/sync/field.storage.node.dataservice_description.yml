@@ -1,0 +1,23 @@
+uuid: eac6417a-ea1f-4e77-b47c-8b51476a31b2
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - node
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: node.dataservice_description
+field_name: dataservice_description
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

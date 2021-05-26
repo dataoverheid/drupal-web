@@ -1,0 +1,21 @@
+uuid: 8479b1b1-8bd5-4e8d-8ffb-0b313b95ecd6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_datarequest_dataset
+    - node.type.datarequest
+  module:
+    - ckan
+id: node.datarequest.relation_datarequest_dataset
+field_name: relation_datarequest_dataset
+entity_type: node
+bundle: datarequest
+label: 'Gevraagde datasets op data.overheid.nl'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

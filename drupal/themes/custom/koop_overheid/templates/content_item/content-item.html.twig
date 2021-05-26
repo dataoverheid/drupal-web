@@ -5,9 +5,8 @@
   <div class="permalink-copy hidden">{{ permalink_url }}</div>
 {% endmacro %}
 
-{% macro theme_icon(icon_src, theme_uri = '') %}
-  <span class="type-icon">
-    <img src="{{ icon_src }}" alt="type-icon">
+{% macro theme_icon(theme_uri = '') %}
+  <span class="content-characteristics-icon">
     {% if theme_uri %}
       {% set theme_class = ckan_mapping_get_theme_class(theme_uri) %}
       {% if theme_class %}
@@ -18,7 +17,6 @@
 {% endmacro %}
 
 {% set content_item_type = '' %}
-{% set content_item_background_color = '' %}
 
 {% if editLinks %}
   <div class="container">
@@ -35,7 +33,7 @@
 {% endblock content_item_pre_content %}
 
 {% block content_item %}
-  <div class="content-item {{ content_item_type }}">
+  <div class="content-item content-characteristics content-characteristics-{{ content_item_type }}">
     <div class="content-header">
       <div class="container columns">
         {% if backLink %}
@@ -44,34 +42,52 @@
         {{ search }}
       </div>
     </div>
-    <div class="background {{ content_item_background_color }}">
-      <div class="container">
-        {% block content_item_container %}
-          <div class="content-item-title">
-            {% block content_item_title %}
+    <div class="content-characteristics-background">
+      <div class="container org-header-container">
+        <div>
+          {% block content_item_container %}
+            <div class="content-item-title">
+              {% block content_item_title %}
 
-            {% endblock content_item_title%}
-          </div>
-          <div class="content-item-description">
-            {% block content_item_description %}
+              {% endblock content_item_title %}
+            </div>
+            <div class="content-item-description">
+              {% block content_item_description %}
 
-            {% endblock content_item_description %}
-          </div>
-          {% block content_item_tabs %}
-            {% if tabs %}
-              <ul id="{{ content_item_type }}-tabs" class="tabs">
-                {% for key, tab in tabs %}
-                  <li data-target="{{ key }}" {% if loop.first %}class="active" {% endif %}>{{ tab }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          {% endblock content_item_tabs %}
-        {% endblock content_item_container %}
+              {% endblock content_item_description %}
+            </div>
+
+            {% block content_item_tabs %}
+              {% if tabs %}
+                <ul id="tabs" class="tabs">
+                  {% for key, tab in tabs %}
+
+                    {# This check is used to see if we are sending the old tabs or the new tabs.
+                     Once all tabs have been migrated this check can be removed. #}
+                    {% if tab is iterable %}
+                      {% if tab.type == 'link' %}
+                        <li data-tab-type="{{ tab.type }}"{% if tab.active %} class="active"{% endif %}>{{ tab.title }}</li>
+                      {% elseif tab.type == 'ajax' %}
+                        <li data-target="panel-{{ key }}" data-ajax-callback="{{ tab.ajax }}"{% if tab.active %} class="active"{% endif %}>{{ tab.title }}</li>
+                      {% else %}
+                        <li data-target="panel-{{ key }}" {% if tab.active %} class="active"{% endif %}>{{ tab.title }}</li>
+                      {% endif %}
+                    {% else %}
+                      <li data-target="{{ key }}" {% if loop.first %}class="active" {% endif %}>{{ tab }}</li>
+                    {% endif %}
+
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endblock content_item_tabs %}
+          {% endblock content_item_container %}
+        </div>
+        {% block content_item_image %}{% endblock content_item_image %}
       </div>
     </div>
     {% block content_item_panels %}
       {% if panels %}
-        <div class="panels">
+        <div id="panels" class="panels">
           {{ panels }}
         </div>
       {% endif %}

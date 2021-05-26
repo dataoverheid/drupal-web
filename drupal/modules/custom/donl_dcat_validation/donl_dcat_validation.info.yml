@@ -1,0 +1,6 @@
+name: Donl dcat validation
+description: Module which enables dcat validation
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9

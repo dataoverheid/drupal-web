@@ -1,0 +1,23 @@
+uuid: 5ebe57ba-8cc6-409b-bef2-c407e166dbb7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_costs_for_use
+    - node.type.dataservice
+  module:
+    - options
+id: node.dataservice.dataservice_costs_for_use
+field_name: dataservice_costs_for_use
+entity_type: node
+bundle: dataservice
+label: 'Kosten voor gebruik'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: unknown
+default_value_callback: ''
+settings: {  }
+field_type: list_string

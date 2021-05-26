@@ -1,0 +1,21 @@
+uuid: f7b68e03-8d78-4fa2-b351-74e2ded8c863
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_recent_dataset
+    - node.type.recent
+  module:
+    - ckan
+id: node.recent.relation_recent_dataset
+field_name: relation_recent_dataset
+entity_type: node
+bundle: recent
+label: Datasets
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

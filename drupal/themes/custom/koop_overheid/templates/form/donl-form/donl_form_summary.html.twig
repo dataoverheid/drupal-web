@@ -1,0 +1,22 @@
+<div class="summary-header">
+  <span class="content-characteristics-icon"></span>
+  <div class="summary-title">
+    <h2>{{ title }}</h2>
+    <h1>{{ step_title }}</h1>
+  </div>
+</div>
+<table id="fields" class="main-data minimal-table">
+  {% for key, field in fields %}
+    {% if field.field %}
+      <tr class="dynamic">
+        <th>{{ field.title }}:</th>
+        <td id="donl-header-field-{{ key }}" data-field="{{ field.field }}">{{ field.value }}</td>
+      </tr>
+    {% else %}
+      <tr>
+        <th>{{ field.title }}:</th>
+        <td>{{ field.value }}</td>
+      </tr>
+    {% endif %}
+  {% endfor %}
+</table>

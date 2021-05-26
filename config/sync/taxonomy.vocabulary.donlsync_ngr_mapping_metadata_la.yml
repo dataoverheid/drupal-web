@@ -1,8 +1,0 @@
-uuid: f54cc6aa-2d64-4f9c-8a8f-97440ea676bb
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping MetadataLanguage'
-vid: donlsync_ngr_mapping_metadata_la
-description: ''
-weight: 0

@@ -1,0 +1,6 @@
+/**
+ * Main menu icons.
+ */
+.toolbar-icon-donl-settings:before {
+  background-image: url('../images/toolbar.png');
+}

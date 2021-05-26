@@ -1,0 +1,40 @@
+uuid: 03f58876-6974-4703-8933-080083e18e2f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donl_api_format.identifier
+    - field.field.taxonomy_term.donl_api_format.machine_name
+    - taxonomy.vocabulary.donl_api_format
+  module:
+    - donl
+    - text
+id: taxonomy_term.donl_api_format.default
+targetEntityType: taxonomy_term
+bundle: donl_api_format
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  identifier:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  machine_name:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+hidden:
+  langcode: true

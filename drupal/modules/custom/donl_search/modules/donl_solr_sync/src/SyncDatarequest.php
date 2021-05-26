@@ -2,7 +2,6 @@
 
 namespace Drupal\donl_solr_sync;
 
-use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 
 /**
@@ -14,31 +13,26 @@ class SyncDatarequest extends SyncService {
    * {@inheritdoc}
    */
   protected function update(Node $node) {
-    $datasets = [];
-    if ($node->get('datasets')->getValue()) {
-      foreach ($node->get('datasets')->getValue() as $v) {
-        $datasets[] = $v['value'];
-      }
-    }
-
     $requestStartDate = $this->getNodeValue($node, 'requested_start_and_end_date');
     $requestEndDate = $node->get('requested_start_and_end_date')->getValue()[0]['end_value'] ?? NULL;
 
-    $datarequest = [
+    $this->updateIndex([
       'sys_id' => $this->getSolrId($node),
-      // 'sys_name' => NULL,
+      'sys_name' => $this->getNodeValue($node, 'machine_name'),
       'sys_language' => $this->langidToUri($node->language()->getId()),
       'sys_created' => date('Y-m-d\TH:i:s\Z', $node->getCreatedTime()),
       'sys_modified' => date('Y-m-d\TH:i:s\Z', $node->getChangedTime()),
-      'sys_uri' => Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString(),
+      'sys_uri' => $this->resolveIdentifierService->resolve($node),
       'sys_type' => 'datarequest',
+
+      'relation_dataset' => $this->getDatasetRelations($node, 'relation_datarequest_dataset'),
+      'relation_community' => $this->getRelations($node, 'relation_datarequest_community'),
 
       'title' => $node->getTitle(),
       'description' => $this->getNodeValue($node, 'requested_data'),
       'theme' => $this->getNodeValue($node, 'theme'),
       'authority' => $this->getNodeValue($node, 'data_owner'),
       'phase' => $this->getSelectKey($node, 'phase'),
-      'relation_dataset' => $datasets,
       'format' => $this->getNodeValue($node, 'requested_dataformat'),
       'temporal' => [
         ($requestStartDate ? $requestStartDate . 'T00:00:00Z' : NULL),
@@ -54,9 +48,7 @@ class SyncDatarequest extends SyncService {
         $this->getNodeValue($node, 'possible_owner'),
         $this->getNodeValue($node, 'explanation_state'),
       ],
-    ];
-
-    $this->solrRequest->updateIndex(json_encode($datarequest));
+    ]);
   }
 
 }

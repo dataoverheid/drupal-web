@@ -1,0 +1,8 @@
+uuid: 29fdfa11-51e1-4acc-aa06-b50a2fa6cb6e
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DONL open standaarden'
+vid: donl_open_standards
+description: ''
+weight: 0

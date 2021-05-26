@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.field.paragraph.highlight.highlight_image
     - field.field.paragraph.highlight.highlight_link
-    - image.style.highlight
     - paragraphs.paragraphs_type.highlight
   module:
     - link
@@ -16,18 +15,18 @@ bundle: highlight
 mode: default
 content:
   highlight_image:
+    type: image
     weight: 1
+    region: content
     label: hidden
     settings:
-      image_style: highlight
-      image_link: ''
-      svg_render_as_image: '1'
       svg_attributes:
-        width: ''
-        height: ''
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: image
-    region: content
   highlight_link:
     weight: 0
     label: hidden

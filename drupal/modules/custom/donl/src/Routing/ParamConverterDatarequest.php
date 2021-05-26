@@ -7,7 +7,7 @@ use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- *
+ * Datarequest param converter
  */
 class ParamConverterDatarequest implements ParamConverterInterface {
 
@@ -17,7 +17,9 @@ class ParamConverterDatarequest implements ParamConverterInterface {
   protected $nodeStorage;
 
   /**
+   * Constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
@@ -28,11 +30,20 @@ class ParamConverterDatarequest implements ParamConverterInterface {
    */
   public function convert($value, $definition, $name, array $defaults) {
     if (!empty($value)) {
-      /** @var \Drupal\node\NodeInterface $node */
-      if ($node = $this->nodeStorage->load($value)) {
+      $properties = [
+        'machine_name' => $value,
+        'type' => 'datarequest',
+      ];
+      if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
+        /* @var \Drupal\node\NodeInterface $node */
+        $node = reset($nodes);
         if ($node->getType() === 'datarequest') {
           return $node;
         }
+      }
+
+      if (is_numeric($value) && ($node = $this->nodeStorage->load($value)) && $node->getType() === 'datarequest') {
+        return $node;
       }
     }
     return NULL;

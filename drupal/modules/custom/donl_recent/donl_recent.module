@@ -13,11 +13,7 @@ use Drupal\field\Entity\FieldStorageConfig;
  * Builds the allowed values of the current types.
  */
 function donl_recent_type_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
-  return [
-    'nieuws' => t('News'),
-    'evenementen' => t('Events'),
-    'bijeenkomsten' => t('Meetings'),
-  ];
+  return \Drupal::service('donl_recent.recent_node_service')->getTypes();
 }
 
 /**
@@ -38,19 +34,24 @@ function donl_recent_theme($existing, $type, $theme, $path) {
     'recent_index' => [
       'variables' => [
         'title' => '',
-        'menu_items' => [],
+        'items' => [],
+        'filter' => [],
       ],
     ],
-    'recent_overview' => [
+    'recent_content' => [
       'variables' => [
-        'title' => '',
-        'menu_items' => [],
         'items' => [],
       ],
     ],
-    'recent_menu_block' => [
+    'recent_item' => [
       'variables' => [
-        'menu_items' => [],
+        'title' => '',
+        'url' => '',
+        'teaser' => '',
+        'result_type' => '',
+        'image_url' => '',
+        'created' => '',
+        'group' => '',
       ],
     ],
     'home_recent_menu_block' => [

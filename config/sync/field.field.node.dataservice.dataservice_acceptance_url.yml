@@ -1,0 +1,19 @@
+uuid: eba9438c-f625-4c59-9153-565be0a290a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_acceptance_url
+    - node.type.dataservice
+id: node.dataservice.dataservice_acceptance_url
+field_name: dataservice_acceptance_url
+entity_type: node
+bundle: dataservice
+label: 'Acceptatie URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

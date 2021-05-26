@@ -1,0 +1,38 @@
+<?php
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function donl_relations_node_insert(NodeInterface $node) {
+  donl_relations_sync_corresponding_references($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function donl_relations_node_update(NodeInterface $node) {
+  donl_relations_sync_corresponding_references($node);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function donl_relations_node_delete(NodeInterface $node) {
+  donl_relations_sync_corresponding_references($node);
+}
+
+/**
+ * Synchronize corresponding references for an entity.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ *   The node to synchronize corresponding references for.
+ */
+function donl_relations_sync_corresponding_references(NodeInterface $node) {
+  /** @var \Drupal\donl_relations\CorrespondingReferenceStorageInterface $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage('corresponding_reference');
+  foreach ($storage->loadValid($node) as $reference) {
+    $reference->synchronizeCorrespondingFields($node);
+  }
+}

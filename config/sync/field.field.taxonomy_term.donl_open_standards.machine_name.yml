@@ -1,0 +1,21 @@
+uuid: d04a4ad4-942b-450f-baff-1b67560997fd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.machine_name
+    - taxonomy.vocabulary.donl_open_standards
+  module:
+    - donl
+id: taxonomy_term.donl_open_standards.machine_name
+field_name: machine_name
+entity_type: taxonomy_term
+bundle: donl_open_standards
+label: machine_name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

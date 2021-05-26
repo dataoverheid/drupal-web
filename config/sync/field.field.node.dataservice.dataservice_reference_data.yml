@@ -1,0 +1,23 @@
+uuid: 7e04c332-986e-43a3-a420-c00b0d2dcdc3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_reference_data
+    - node.type.dataservice
+id: node.dataservice.dataservice_reference_data
+field_name: dataservice_reference_data
+entity_type: node
+bundle: dataservice
+label: Referentiedata
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

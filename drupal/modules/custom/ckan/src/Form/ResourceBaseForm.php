@@ -3,17 +3,21 @@
 namespace Drupal\ckan\Form;
 
 use Drupal\ckan\CkanRequestInterface;
+use Drupal\ckan\DataClassificationsInterface;
 use Drupal\ckan\Entity\Dataset;
 use Drupal\ckan\Entity\Resource;
+use Drupal\ckan\MappingServiceInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\donl_dcat_validation\DcatValidationServiceInterface;
 use Drupal\donl_value_list\ValueListInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileUsage\FileUsageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -36,14 +40,21 @@ abstract class ResourceBaseForm extends BaseForm {
   protected $config;
 
   /**
+   * The mapping service.
+   *
+   * @var \Drupal\ckan\MappingServiceInterface
+   */
+  protected $mappingService;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(CkanRequestInterface $ckanRequest, ValueListInterface $valueList, MessengerInterface $messenger, EntityTypeManagerInterface $entityManager, FileUsageInterface $fileUsage, RequestStack $request, ConfigFactoryInterface $configFactory) {
-    parent::__construct($ckanRequest, $valueList, $messenger, $entityManager, $request);
-
+  public function __construct(CkanRequestInterface $ckanRequest, ValueListInterface $valueList, MessengerInterface $messenger, EntityTypeManagerInterface $entityTypeManager, RequestStack $request, DcatValidationServiceInterface $dcatValidationService, FileUsageInterface $fileUsage, ConfigFactoryInterface $configFactory, MappingServiceInterface $mappingService, DataClassificationsInterface $dataClassifications) {
+    parent::__construct($ckanRequest, $valueList, $messenger, $entityTypeManager, $request, $dcatValidationService, $mappingService, $dataClassifications);
     $this->fileUsage = $fileUsage;
-    $this->fileStorage = $entityManager->getStorage('file');
-    $this->config = $configFactory->get('ckan.request.settings');
+    $this->fileStorage = $entityTypeManager->getStorage('file');
+    $this->config = $configFactory->get('ckan.dataset.settings');
+    $this->mappingService = $mappingService;
   }
 
   /**
@@ -54,10 +65,13 @@ abstract class ResourceBaseForm extends BaseForm {
       $container->get('ckan.request'),
       $container->get('donl.value_list'),
       $container->get('messenger'),
-      $container->get('entity.manager'),
-      $container->get('file.usage'),
+      $container->get('entity_type.manager'),
       $container->get('request_stack'),
-      $container->get('config.factory')
+      $container->get('donl_dcat_validation.validation_service'),
+      $container->get('file.usage'),
+      $container->get('config.factory'),
+      $container->get('ckan.mapping'),
+      $container->get('ckan.data_classifications'),
     );
   }
 
@@ -65,38 +79,97 @@ abstract class ResourceBaseForm extends BaseForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, Dataset $dataset = NULL, Resource $resource = NULL): array {
-    if ($resource) {
-      $form['id'] = [
-        '#type' => 'hidden',
-        '#value' => $resource->getId(),
+    if (!$dataset) {
+      throw new NotFoundHttpException();
+    }
+
+    $ckanUser = $this->getUser();
+    if ($ckanUser && ($ckanUser->isAdministrator() || $ckanUser->getCkanId() === $dataset->getCreatorUserId())) {
+      $form['editLinks'] = [
+        '#type' => 'inline_template',
+        '#template' => '<div class="container"><div class="buttonswitch">{% for editLink in editLinks %}{{ editLink }}{% endfor %}</div></div>',
+        '#weight' => -50,
+        '#context' => [
+          'editLinks' => $this->getEditLinks($dataset, $ckanUser, 'data-sources'),
+        ],
       ];
     }
 
     $form['package_id'] = [
       '#type' => 'hidden',
-      '#value' => $dataset !== NULL ? $dataset->getId() : NULL,
+      '#value' => $dataset->getId(),
     ];
 
-    $hasStorageAccess = $this->getUser()->hasStorageAccess();
+    $form['#attributes']['class'] = ['donl-form', 'step-form'];
+    $form['#attached']['library'][] = 'ckan/dataset-form';
+
+    $form['full_form_wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => ['full-form-wrapper'],
+        'class' => [$form_state->getValue('advanced') ? 'advanced' : ''],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'main-wrapper',
+        ],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'main',
+          $form_state->getValue('advanced') ? 'advanced' : '',
+        ],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['basic'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['basic']],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data'] = [
+      '#type' => 'details',
+      '#open' => TRUE,
+      '#title' => $this->t('Data data source'),
+    ];
+
+    $hasStorageAccess = ($ckanUser && $ckanUser->hasStorageAccess());
     $fileId = $this->getFileId($resource);
 
+    $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['distribution_type'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Distribution type'),
+      '#options' => $this->valueList->getList('donl:distributiontype'),
+      '#default_value' => $resource !== NULL ? $resource->getDistributionType() : 'https://data.overheid.nl/distributiontype/download',
+      '#required' => TRUE,
+      '#attributes' => ['class' => ['select2']],
+    ];
+
     if (!$hasStorageAccess || !$fileId) {
-      $form['url'] = [
+      $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['url'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Url'),
         '#default_value' => $resource !== NULL ? $resource->getUrl() : NULL,
-        '#required' => FALSE,
+        '#required' => TRUE,
         '#maxlength' => self::MAXLENGTH_TEXTFIELD_URL,
         '#description' => $this->t('Enter the URL where the data source can be found.'),
       ];
     }
 
     if ($hasStorageAccess) {
-      $extensions = implode(' ', $this->config->get('allowed_file_extensions')) ?? 'doc docx txt pdf xls xlsx csv zip ppsx xml html ods';
-      $form['upload'] = [
+      $extensions = implode(' ', $this->config->get('resource.allowed_file_extensions')) ?? 'doc docx txt pdf xls xlsx csv zip ppsx xml html ods json';
+      $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['upload'] = [
         '#type' => 'managed_file',
         '#title' => $this->t('Upload'),
-        '#upload_location' => 'public://dataset/' . ($dataset !== NULL ? $dataset->getId() . '/resources/' : 'resources/'),
+        '#upload_location' => 'public://dataset/' . $dataset->getId() . '/resources/',
         '#required' => FALSE,
         '#multiple' => FALSE,
         '#upload_validators' => [
@@ -107,14 +180,14 @@ abstract class ResourceBaseForm extends BaseForm {
       ];
 
       // Keep original file id if file is deleted.
-      $form['old_upload'] = [
+      $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['old_upload'] = [
         '#type' => 'hidden',
         '#default_value' => $fileId,
       ];
     }
 
-    $form['download_url'] = $this->buildFormWrapper($this->t('Download url'), 'download-url');
-    $form['download_url']['#description'] = $this->t('If the data source is directly downloadable, you can indicate this in this field. The re-user can then directly download the data source.');
+    $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['download_url'] = $this->buildFormWrapper($this->t('Download url'), 'download-url');
+    $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['download_url']['#description'] = $this->t('If the data source is directly downloadable, you can indicate this in this field. The re-user can then directly download the data source.');
     $downloadUrl = $resource !== NULL ? $resource->getDownloadUrl() : [];
     $downloadUrlCount = $form_state->get('downloadUrlCount');
     if (empty($downloadUrlCount)) {
@@ -122,7 +195,7 @@ abstract class ResourceBaseForm extends BaseForm {
       $form_state->set('downloadUrlCount', $downloadUrlCount);
     }
     for ($i = 0; $i < $downloadUrlCount; $i++) {
-      $form['download_url'][$i] = [
+      $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['download_url'][$i] = [
         '#type' => 'textfield',
         '#title' => $this->t('Download url') . ' ' . $i,
         '#title_display' => 'invisible',
@@ -131,7 +204,7 @@ abstract class ResourceBaseForm extends BaseForm {
       ];
     }
 
-    $form['download_url']['addDownloadUrl'] = [
+    $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['download_url']['addDownloadUrl'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add another @title', ['@title' => $this->t('url')]),
       '#submit' => ['::addOneDownloadUrl'],
@@ -142,7 +215,18 @@ abstract class ResourceBaseForm extends BaseForm {
       '#limit_validation_errors' => [],
     ];
 
-    $form['name'] = [
+    $form['full_form_wrapper']['wrapper']['main']['description'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['description']],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description'] = [
+      '#type' => 'details',
+      '#open' => FALSE,
+      '#title' => $this->t('Description data source'),
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
       '#default_value' => $resource !== NULL ? $resource->getName() : NULL,
@@ -151,43 +235,67 @@ abstract class ResourceBaseForm extends BaseForm {
       '#description' => $this->t('Give a clear title to your data source, so that the data source is easy to find for re-users. The title preferably consists of one or a few words and if possible a year.'),
     ];
 
-    $form['description'] = [
-      '#type' => 'textarea',
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['description'] = [
+      '#type' => 'text_format',
+      '#allowed_formats' => ['markdown'],
+      '#format' => 'markdown',
       '#title' => $this->t('Description'),
-      '#default_value' => $resource !== NULL ? $resource->getDescription() : NULL,
       '#required' => TRUE,
+      '#default_value' => $resource !== NULL ? $resource->getDescription() : NULL,
       '#description' => $this->t('Give a clear explanation of your data source here. Consider, for example, the content of the data source, year (s), the format, possible indications for reusing the data source, the manner in which the data was obtained and the quality of the data source.'),
+      '#after_build' => ['::textFormatAfterBuild'],
     ];
 
-    $form['language'] = [
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['language'] = [
       '#type' => 'select',
       '#title' => $this->t('Language'),
       '#options' => $this->valueList->getList('donl:language'),
       '#multiple' => TRUE,
-      '#default_value' => $resource !== NULL ? $resource->getLanguage() : NULL,
+      '#default_value' => $resource !== NULL ? $resource->getLanguage() : $dataset->getLanguage(),
       '#required' => TRUE,
       '#description' => $this->t('Select from the list of values in which language the data source can be reused.'),
+      '#attributes' => ['class' => ['select2']],
     ];
 
-    $form['metadata_language'] = [
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['metadata_language'] = [
       '#type' => 'select',
       '#title' => $this->t('Metadata language'),
-      '#options' => $this->valueList->getList('donl:language'),
-      '#default_value' => $resource !== NULL ? $resource->getMetadataLanguage() : NULL,
+      '#options' => $this->valueList->getList('donl:language', TRUE),
+      '#default_value' => $resource !== NULL ? $resource->getMetadataLanguage() : $dataset->getMetadataLanguage(),
       '#required' => TRUE,
       '#description' => $this->t('Select from the value list in which language the metadata was entered.'),
     ];
 
-    $form['license'] = [
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['license'] = [
       '#type' => 'select',
       '#title' => $this->t('License'),
-      '#options' => $this->valueList->getList('overheid:license'),
-      '#default_value' => $resource !== NULL ? $resource->getLicenseId() : NULL,
+      '#options' => $this->valueList->getList('overheid:license', TRUE),
+      '#default_value' => $resource !== NULL ? $resource->getLicenseId() : $dataset->getLicenseId(),
       '#required' => TRUE,
       '#description' => $this->t('With a license you indicate what kind of user rights there are on this data source. For example, Public Domain, CC-0, CC-BY or CC-BY-SA. Click here for more information about the different licenses: https://data.overheid.nl/licenties-voor-hergebruik.'),
     ];
 
-    $form['rights'] = [
+    $form['full_form_wrapper']['wrapper']['main']['basic']['description']['format'] = [
+      '#type' => 'select',
+      '#title' => $this->t('File type'),
+      '#options' => $this->valueList->getList('mdr:filetype_nal', TRUE),
+      '#default_value' => $resource !== NULL ? $resource->getFormat() : NULL,
+      '#required' => TRUE,
+      '#description' => $this->t('Select from the list of values which file format the data source consists of. If the format does not appear in the list, choose the nearest format.'),
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['advanced'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['advanced']],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional'] = [
+      '#type' => 'details',
+      '#open' => FALSE,
+      '#title' => $this->buildAdvancedTitle($this->t('Additional information')),
+    ];
+
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['rights'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Explanation of the usage restrictions'),
       '#maxlength' => 256,
@@ -195,36 +303,16 @@ abstract class ResourceBaseForm extends BaseForm {
       '#description' => $this->t('If there is an addition to the license of this dataset you can describe it here, for example how you want to be mentioned if there is a CC-BY license on these dates.'),
     ];
 
-    $form['status'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['status'] = [
       '#type' => 'select',
       '#title' => $this->t('State of the source'),
-      '#options' => $this->valueList->getList('adms:distributiestatus'),
+      '#options' => $this->valueList->getList('adms:distributiestatus', TRUE),
       '#default_value' => $resource !== NULL ? $resource->getStatus() : NULL,
       '#description' => $this->t('Indicate here, if possible, the life phase of the source.'),
     ];
 
-    $form['format'] = [
-      '#type' => 'select',
-      '#title' => $this->t('File type'),
-      '#options' => $this->valueList->getList('mdr:filetype_nal'),
-      '#default_value' => $resource !== NULL ? $resource->getFormat() : NULL,
-      '#required' => TRUE,
-      '#description' => $this->t('Select from the list of values which file format the data source consists of. If the format does not appear in the list, choose the nearest format.'),
-    ];
 
-    $distributiontypes = [];
-    foreach($this->valueList->getList('donl:distributiontype', FALSE) as $k => $v) {
-      $distributiontypes[$k] = $this->t($v);
-    }
-    $form['distribution_type'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Distribution type'),
-      '#options' => $distributiontypes,
-      '#empty_option' => $this->t('- Select item -'),
-      '#default_value' => $resource !== NULL ? $resource->getDistributionType() : NULL,
-    ];
-
-    $form['size'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['size'] = [
       '#type' => 'number',
       '#min' => 0,
       '#step' => 1,
@@ -236,30 +324,30 @@ abstract class ResourceBaseForm extends BaseForm {
       ],
     ];
 
-    $form['mimetype'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['mimetype'] = [
       '#type' => 'select',
       '#title' => $this->t('Mimetype'),
-      '#options' => $this->valueList->getList('iana:mediatypes'),
+      '#options' => $this->valueList->getList('iana:mediatypes', TRUE),
       '#default_value' => $resource !== NULL ? $resource->getMimetype() : NULL,
       '#description' => $this->t('Select from the list of values which media type the data source consists of. If the type does not appear in the list, choose the nearest type. More information can be found here: https://dcat-ap-donl.readthedocs.io/en/latest/'),
     ];
 
-    $form['release_date'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['release_date'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Release date'),
       '#default_value' => $resource !== NULL ? $resource->getReleaseDate() : NULL,
       '#description' => $this->t('Enter the date here when the data source has been prepared for availability'),
     ];
 
-    $form['modification_date'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['modification_date'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Modification date'),
       '#default_value' => $resource !== NULL ? $resource->getModificationDate() : NULL,
       '#description' => $this->t('Specify the last modified date here when the data source is muted.'),
     ];
 
-    $form['linked_schemas'] = $this->buildFormWrapper($this->t('Linked schemas'), 'linked-schemas');
-    $form['linked_schemas']['#description'] = $this->t('To show how useful a dataset is, data.overheid.nl uses Linked schemes and Linked Data stars. Look here for more information: https://data.overheid.nl/linked-data-sterren');
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['linked_schemas'] = $this->buildFormWrapper($this->t('Linked schemas'), 'linked-schemas');
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['linked_schemas']['#description'] = $this->t('To show how useful a dataset is, data.overheid.nl uses Linked schemes and Linked Data stars. Look here for more information: https://data.overheid.nl/linked-data-sterren');
     $linkedSchemas = $resource !== NULL ? $resource->getLinkedSchemas() : [];
     $linkedSchemasCount = $form_state->get('linkedSchemasCount');
     if (empty($linkedSchemasCount)) {
@@ -267,7 +355,7 @@ abstract class ResourceBaseForm extends BaseForm {
       $form_state->set('linkedSchemasCount', $linkedSchemasCount);
     }
     for ($i = 0; $i < $linkedSchemasCount; $i++) {
-      $form['linked_schemas'][$i] = [
+      $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['linked_schemas'][$i] = [
         '#type' => 'textfield',
         '#title' => $this->t('Linked schema') . ' ' . $i,
         '#maxlength' => self::MAXLENGTH_TEXTFIELD_URL,
@@ -276,7 +364,7 @@ abstract class ResourceBaseForm extends BaseForm {
       ];
     }
 
-    $form['linked_schemas']['addLinkedSchemas'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['linked_schemas']['addLinkedSchemas'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add another @title', ['@title' => $this->t('linked schema')]),
       '#submit' => ['::addOneLinkedSchemas'],
@@ -287,8 +375,8 @@ abstract class ResourceBaseForm extends BaseForm {
       '#limit_validation_errors' => [],
     ];
 
-    $form['documentation'] = $this->buildFormWrapper($this->t('Documentation'), 'documentation');
-    $form['documentation']['#description'] = $this->t('If you have specific documentation about the data source available, you can enter the URL to the documentation in this field.');
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['documentation'] = $this->buildFormWrapper($this->t('Documentation'), 'documentation');
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['documentation']['#description'] = $this->t('If you have specific documentation about the data source available, you can enter the URL to the documentation in this field.');
     $documentation = $resource !== NULL ? $resource->getDocumentation() : [];
     $documentationCount = $form_state->get('documentationCount');
     if (empty($documentationCount)) {
@@ -296,7 +384,7 @@ abstract class ResourceBaseForm extends BaseForm {
       $form_state->set('documentationCount', $documentationCount);
     }
     for ($i = 0; $i < $documentationCount; $i++) {
-      $form['documentation'][$i] = [
+      $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['documentation'][$i] = [
         '#type' => 'textfield',
         '#title' => $this->t('Documentation') . ' ' . $i,
         '#maxlength' => self::MAXLENGTH_TEXTFIELD_URL,
@@ -305,7 +393,7 @@ abstract class ResourceBaseForm extends BaseForm {
       ];
     }
 
-    $form['documentation']['addDocumentation'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['documentation']['addDocumentation'] = [
       '#type' => 'submit',
       '#value' => $this->t('Add another documentation'),
       '#submit' => ['::addOneDocumentation'],
@@ -316,7 +404,7 @@ abstract class ResourceBaseForm extends BaseForm {
       '#limit_validation_errors' => [],
     ];
 
-    $form['checksum'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['checksum'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Checksum'),
       '#tree' => FALSE,
@@ -324,7 +412,7 @@ abstract class ResourceBaseForm extends BaseForm {
       '#suffix' => '</div></div>',
     ];
 
-    $form['checksum']['hash_algorithm'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['checksum']['hash_algorithm'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Algorithm'),
       '#maxlength' => 128,
@@ -332,7 +420,7 @@ abstract class ResourceBaseForm extends BaseForm {
       '#description' => $this->t('If you know the algorithm about the data source, you can indicate this here.'),
     ];
 
-    $form['checksum']['hash'] = [
+    $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['checksum']['hash'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Hash'),
       '#maxlength' => 256,
@@ -340,13 +428,136 @@ abstract class ResourceBaseForm extends BaseForm {
       '#description' => $this->t('If you know the hash about the data source, you can indicate this here.'),
     ];
 
-    $form['container_save']['container']['submit'] = [
+    $subSteps = $this->getSubSteps($form, 'basic');
+    $subSteps[] = $this->getSubSteps($form, 'advanced', count($subSteps));
+
+    $form['full_form_wrapper']['header'] = [
+      '#weight' => -45,
+      '#theme' => 'donl_form_header',
+      '#type' => 'dataset',
+      '#summary' => [
+        '#theme' => 'donl_form_summary',
+        '#title' => $this->t('Dataset'),
+        '#step_title' => $this->t('Manage data sources'),
+        '#fields' => [
+          'title' => [
+            'title' => $this->t('Title'),
+            'value' => $dataset->getTitle(),
+          ],
+          'owner' => [
+            'title' => $this->t('Owner'),
+            'value' => $this->mappingService->getOrganizationName($dataset->getAuthority()),
+          ],
+          'licence' => [
+            'title' => $this->t('Licence'),
+            'value' => $this->mappingService->getLicenseName($dataset->getLicenseId()),
+          ],
+          'changed' => [
+            'title' => $this->t('Changed'),
+            'value' => $dataset->getModified()->format('d-m-Y H:i'),
+          ],
+          'status' => [
+            'title' => $this->t('Status'),
+            'value' => $this->mappingService->getStatusName($dataset->getDatasetStatus()),
+          ],
+          'published' => [
+            'title' => $this->t('Published'),
+            'value' => (!$dataset->getPrivate() ? $this->t('Yes') : $this->t('No')),
+          ],
+        ],
+      ],
+      '#steps' => [
+        'dataset' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Register dataset'),
+          '#short_title' => $this->t('Dataset'),
+          '#completed' => TRUE,
+        ],
+        'resource' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Manage data sources'),
+          '#short_title' => $this->t('Data source'),
+          '#icon' => 'icon-databron',
+          '#active' => TRUE,
+          '#sub_steps' => $subSteps,
+        ],
+        'finish' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Wrap up'),
+          '#short_title' => $this->t('Wrap up'),
+          '#icon' => 'icon-connected-globe',
+        ],
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['donl-form-sidebar']],
+      '#weight' => -10,
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => [
+          'sidebar-nav',
+          $form_state->getValue('advanced') ? 'advanced' : '',
+        ],
+      ],
+      'advanced' => [
+        '#type' => 'radios',
+        '#options' => [
+          0 => $this->t('Basic'),
+          1 => $this->t('Advanced'),
+        ],
+        '#default_value' => $form_state->getValue('advanced') ? 1 : 0,
+        '#attributes' => ['class' => ['js-edit-advance', '']],
+        '#ajax' => [
+          'callback' => '::toggleAdvanced',
+          'disable-refocus' => FALSE,
+          'event' => 'change',
+          'wrapper' => 'full-form-wrapper',
+          'progress' => [
+            'type' => 'throbber',
+            'message' => $this->t('Updating'),
+          ],
+        ],
+        '#limit_validation_errors' => [],
+      ],
+      'dataset_form_advanced_switch' => [
+        '#theme' => 'dataset_form_advanced_switch',
+      ],
+      'step' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['sub-steps']],
+        'sub_steps' => $subSteps,
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['sidebar-nav-actions']],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save'),
       '#attributes' => [
-        'class' => ['button', 'button--primary'],
+        'class' => ['hidden', 'js-form-submit'],
+        'id' => 'donl-form-submit-button',
         // Do not change this as it will be used to trigger the submit handler.
         'data-submit' => 'true',
+      ],
+    ];
+
+    $form['full_form_wrapper']['wrapper']['sidebar']['sidebar_nav']['actions']['submit_overlay'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => $this->t('Next step'),
+      '#attributes' => [
+        'class' => ['button', 'button--primary', 'submit-overlay'],
+        'data-in-form-text' => $this->t('Next step'),
+        'data-next-form-text' => $this->t('Save'),
       ],
     ];
 
@@ -372,7 +583,7 @@ abstract class ResourceBaseForm extends BaseForm {
     // Required values.
     $resource->setPackageId($form_state->getValue('package_id'));
     $resource->setName($form_state->getValue('name'));
-    $resource->setDescription($form_state->getValue('description'));
+    $resource->setDescription($form_state->getValue('description')['value']);
     $resource->setMetadataLanguage($form_state->getValue('metadata_language'));
     $resource->setLanguage(array_filter(array_values($form_state->getValue('language'))));
     $resource->setFormat($form_state->getValue('format'));
@@ -466,7 +677,7 @@ abstract class ResourceBaseForm extends BaseForm {
    *
    */
   public function addMoreDocumentationCallback(array &$form, FormStateInterface $form_state) {
-    return $form['documentation'];
+    return $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['documentation'];
   }
 
   /**
@@ -481,7 +692,7 @@ abstract class ResourceBaseForm extends BaseForm {
    *
    */
   public function addMoreLinkedSchemasCallback(array &$form, FormStateInterface $form_state) {
-    return $form['linked_schemas'];
+    return $form['full_form_wrapper']['wrapper']['main']['advanced']['additional']['linked_schemas'];
   }
 
   /**
@@ -496,7 +707,13 @@ abstract class ResourceBaseForm extends BaseForm {
    *
    */
   public function addMoreDownloadUrlCallback(array &$form, FormStateInterface $form_state) {
-    return $form['download_url'];
+    return $form['full_form_wrapper']['wrapper']['main']['basic']['basic_data']['download_url'];
+  }
+
+  public function toggleAdvanced(array &$form, FormStateInterface $form_state) {
+    $form_state->set('advanced', !$form_state->get('advanced'));
+    $form_state->setRebuild();
+    return $form['full_form_wrapper'];
   }
 
 }

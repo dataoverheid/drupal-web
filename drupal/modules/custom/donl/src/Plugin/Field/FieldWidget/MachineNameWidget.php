@@ -47,12 +47,25 @@ class MachineNameWidget extends WidgetBase {
     }
 
     if ($element['#parents'][0] !== 'default_value_input' && ($nodeForm = $form_state->getBuildInfo()['callback_object']) && ($entity = $nodeForm->getEntity())) {
-      $query = \Drupal::entityQuery('node');
-      $query->condition('type', $entity->getType(), '=');
+      $routeMatch = \Drupal::routeMatch();
+      $entityType = $entity->getEntityTypeId();
+
+      $query = \Drupal::entityQuery($entityType);
       $query->condition($element['#parents'][0], $value, '=');
-      if ($node = \Drupal::routeMatch()->getParameter('node')) {
-        $query->condition('nid', $node->id(), '!=');
+
+      if ($entityType === 'node') {
+        $query->condition('type', $entity->getType(), '=');
+        if ($node = $routeMatch->getParameter('node')) {
+          $query->condition('nid', $node->id(), '!=');
+        }
       }
+      elseif ($entityType === 'taxonomy_term') {
+        $query->condition('vid', $entity->bundle(), '=');
+        if ($term = $routeMatch->getParameter('taxonomy_term')) {
+          $query->condition('tid', $term->id(), '!=');
+        }
+      }
+
       if (count($query->execute()) !== 0) {
         $form_state->setError($element, t('The field %field must be unique, but the given value %value is already in use.', ['%field' => $element['#title'], '%value' => $value]));
       }

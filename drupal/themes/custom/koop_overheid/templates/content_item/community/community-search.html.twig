@@ -1,4 +1,4 @@
-<div class="content-item">
+<div class="content-item content-characteristics content-characteristics-community">
   <div class="content-header">
     <div class="container columns">
       <div>
@@ -9,23 +9,21 @@
       {{ search }}
     </div>
   </div>
-  <div class="background green">
+  <div class="content-characteristics-background">
     <div class="container">
       <div class="content-item-title">
-        <span class="type-icon">
-          <img src="/{{ base_path ~ directory }}/images/icon-community.svg" alt="type-icon">
-        </span>
+        <span class="content-characteristics-icon"></span>
         <div>
           <p class="type">{{ 'Community'|t }}</p>
           <h1>{{ node.title.value }}</h1>
         </div>
       </div>
-      {% if(node.community_description.value) %}
-        <div class="content-item-description">{{ node.community_description.value }}</div>
-      {% endif %}
+      <div class="content-item-description">{% if node.html_description.value %}{{ node.html_description.value|raw }}{% endif %}</div>
     </div>
   </div>
   <div class="container">
-    {{ body }}
+    <div class="community-search-page">
+      {{ body }}
+    </div>
   </div>
 </div>

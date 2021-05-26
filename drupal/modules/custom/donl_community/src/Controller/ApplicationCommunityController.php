@@ -5,6 +5,7 @@ namespace Drupal\donl_community\Controller;
 use Drupal\ckan\CkanRequestInterface;
 use Drupal\donl\Controller\ApplicationController;
 use Drupal\donl_community\CommunityResolverInterface;
+use Drupal\donl_community\Form\CommunitySearchForm;
 use Drupal\donl_search_backlink\BackLinkService;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -60,6 +61,8 @@ class ApplicationCommunityController extends ApplicationController {
     ]);
     $routeParams = ['community' => $community->getMachineName()];
     $build['#backLink'] = $this->backLinkService->createBackLink($title, 'donl_community.search.application', $routeParams);
+
+    $build['#search'] = $this->formBuilder()->getForm(CommunitySearchForm::class, $community);
 
     return $build;
   }

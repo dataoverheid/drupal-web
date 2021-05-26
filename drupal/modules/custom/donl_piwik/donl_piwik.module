@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function donl_piwik_preprocess_html(&$variables) {
+  $config = \Drupal::configFactory()->get('donl_piwik.settings');
+
+  $variables['piwik']['header'] = $config->get('header');
+  $variables['piwik']['body'] = $config->get('body');
+
+  if ($config->get('dataLayerEnabled') && ($values = \Drupal::service('donl_piwik.datalayer')->getValues())) {
+    $variables['piwik']['dataLayer'] = json_encode($values);
+  }
+}

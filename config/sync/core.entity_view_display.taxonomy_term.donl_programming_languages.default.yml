@@ -1,0 +1,40 @@
+uuid: 998b91dd-cb84-4f30-8a52-19bcacd2fa3d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donl_programming_languages.identifier
+    - field.field.taxonomy_term.donl_programming_languages.machine_name
+    - taxonomy.vocabulary.donl_programming_languages
+  module:
+    - donl
+    - text
+id: taxonomy_term.donl_programming_languages.default
+targetEntityType: taxonomy_term
+bundle: donl_programming_languages
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  identifier:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  machine_name:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,21 @@
+uuid: cce47798-9db7-4a62-b6ac-5247528f2b3b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.machine_name
+    - taxonomy.vocabulary.donl_dataservice_types
+  module:
+    - donl
+id: taxonomy_term.donl_dataservice_types.machine_name
+field_name: machine_name
+entity_type: taxonomy_term
+bundle: donl_dataservice_types
+label: machine_name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

@@ -1,0 +1,27 @@
+uuid: 51d3aee6-9311-411a-9b0b-daaf5114f22d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.html_description
+    - node.type.community
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    markdown: '0'
+    full_html: full_html
+    plain_text: '0'
+id: node.community.html_description
+field_name: html_description
+entity_type: node
+bundle: community
+label: 'Opgemaakte omschrijving'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

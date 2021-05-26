@@ -1,0 +1,14 @@
+uuid: 96c9473d-134a-466a-912e-5b214026eb25
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.site_manager
+  module:
+    - user
+id: user_add_role_action.site_manager
+label: 'De rol Site beheerder toewijzen aan de geselecteerde gebruiker(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: site_manager

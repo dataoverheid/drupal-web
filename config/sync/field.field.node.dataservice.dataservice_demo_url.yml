@@ -1,0 +1,19 @@
+uuid: 0993d1b7-8014-418a-9422-7f91e0a354e7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_demo_url
+    - node.type.dataservice
+id: node.dataservice.dataservice_demo_url
+field_name: dataservice_demo_url
+entity_type: node
+bundle: dataservice
+label: 'Demo URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

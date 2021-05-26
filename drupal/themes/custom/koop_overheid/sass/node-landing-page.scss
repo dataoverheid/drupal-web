@@ -1,0 +1,24 @@
+.page-node-type-link-page {
+  #content + .container.row {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  article {
+    .columns--fixed > * {
+      @include breakpoint($laptop-and-up) {
+        width: calc((100% - 3em) / 3);
+      }
+    }
+
+    .columns .paragraph--type--linklist-block {
+      @media all and (max-width: 799px) {
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Merge the 'bijeenkomsten' type into the 'evenementen' type
+ */
+function donl_recent_update_8001(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+  $pathautoGenerator = \Drupal::service('pathauto.generator');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'recent')
+      ->condition('recent_type', 'bijeenkomsten', '=')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'recent')
+    ->condition('recent_type', 'bijeenkomsten', '=')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    // Update the category in the node.
+    $node->recent_type = 'evenementen';
+    $node->save();
+
+    // Update the path alias
+    $pathautoGenerator->updateEntityAlias($node, 'update', ['force' => TRUE]);
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}

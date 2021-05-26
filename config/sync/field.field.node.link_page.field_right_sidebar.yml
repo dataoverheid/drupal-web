@@ -1,0 +1,95 @@
+uuid: b31e25fe-cc8a-49b0-9e10-67c702063c09
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_right_sidebar
+    - node.type.link_page
+    - paragraphs.paragraphs_type.block_paragraph
+    - paragraphs.paragraphs_type.homepage_block
+    - paragraphs.paragraphs_type.linklist_blocks
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.treeview
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.link_page.field_right_sidebar
+field_name: field_right_sidebar
+entity_type: node
+bundle: link_page
+label: 'Right sidebar'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      homepage_block: homepage_block
+      block_paragraph: block_paragraph
+      linklist_blocks: linklist_blocks
+      text: text
+      webform: webform
+      treeview: treeview
+    target_bundles_drag_drop:
+      block_paragraph:
+        enabled: true
+        weight: -36
+      highlight:
+        weight: -39
+        enabled: false
+      highlights_list:
+        weight: -38
+        enabled: false
+      homepage_block:
+        enabled: true
+        weight: -37
+      homepage_blocks:
+        weight: -35
+        enabled: false
+      linklist_block:
+        weight: -34
+        enabled: false
+      linklist_blocks:
+        enabled: true
+        weight: -33
+      links:
+        weight: -32
+        enabled: false
+      nested_links:
+        weight: -31
+        enabled: false
+      relation_list:
+        weight: -30
+        enabled: false
+      relation_list_item:
+        weight: -29
+        enabled: false
+      relation_lists:
+        weight: -28
+        enabled: false
+      text:
+        enabled: true
+        weight: -27
+      treeview:
+        enabled: true
+        weight: -22
+      treeview_child:
+        weight: -26
+        enabled: false
+      voetnoot:
+        weight: -25
+        enabled: false
+      voetnoten:
+        weight: -24
+        enabled: false
+      webform:
+        enabled: true
+        weight: -23
+      well_linklists:
+        weight: -21
+        enabled: false
+field_type: entity_reference_revisions

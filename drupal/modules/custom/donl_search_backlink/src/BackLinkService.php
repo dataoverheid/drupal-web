@@ -37,7 +37,7 @@ class BackLinkService {
   public function createBackLink($title, $route, array $routeParams = []): Link {
     $options = ['attributes' => ['class' => ['link', 'cta__backwards']]];
 
-    $url = Url::fromRoute($route, $routeParams, ['absolute' => TRUE])->tostring();
+    $url = Url::fromRoute($route, $routeParams, ['absolute' => TRUE])->toString();
     $referer = $this->tempStore->get('previous_request');
     if (strpos($referer, $url) === 0) {
       $url = Url::fromUri($referer, $options);

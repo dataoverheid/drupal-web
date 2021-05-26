@@ -1,67 +1,47 @@
-{% set container_classes = [
-  'container',
-  'columns',
-  'row',
-] %}
-
-{% set container_attributes = create_attribute().addClass(container_classes) %}
-
-{% if (left_sidebar_filled) %}
-  {% set container_attributes=container_attributes.addClass('columns--sidebar-left') %}
-  {% set sidebar_blocks = sidebar_left %}
-  {% set sidebar_pars = content.field_left_sidebar %}
-{% elseif right_sidebar_filled %}
-  {% set container_attributes=container_attributes.addClass('columns--sidebar-right') %}
-  {% set sidebar_blocks = sidebar_right %}
-  {% set sidebar_pars = content.field_right_sidebar %}
+{% if hasRelations or content.sidebar.0 %}
+  {% set containerClasses = 'has-sidebar-right' %}
+  {% set sidebar = true %}
 {% else %}
-  {% set container_attributes = create_attribute() %}
+  {% set containerClasses = 'container-small' %}
 {% endif %}
 
-{% if (left_sidebar_filled) or (right_sidebar_filled) %}
-  {% set rendered_sidebar_content %}
-    <div>
-      {{ sidebar_pars }}
-      {{ sidebar_blocks }}
-    </div>
-  {% endset %}
-{% endif %}
-
-{% if content.recent_image|render %}
-  {% set rendered_content %}
-    {{ content|without('body', 'recent_image', 'field_left_sidebar', 'field_right_sidebar') }}
-  {% endset %}
-  <div class="row row--image row--landing" style="background-image: url({{ image_url }});">
-    <div class="container">
-      <div class="content--onimage">
-        {{ title_markup }}
-        <strong>Aangemaakt op:</strong> {{ node.created.value|date('d-m-Y') }}, <strong>Aangepast op:</strong> {{ node.changed.value|date('d-m-Y') }}
-      </div>
-    </div>
+{% macro relation(name, relationItems) %}
+  <div class="relation">
+    <strong>{{ name }}:</strong>
+    {% for key, item in relationItems %}
+      {{ item }}<br>
+    {% endfor %}
   </div>
-{% else %}
-  {% if (left_sidebar_filled) or (right_sidebar_filled) %}
-    {% set rendered_content %}
-      <div class="">
-        {{ title_markup }}
-        <strong>Aangemaakt op:</strong> {{ node.created.value|date('d-m-Y') }}, <strong>Aangepast op:</strong> {{ node.changed.value|date('d-m-Y') }}
-      </div>
-      {{ content|without('body', 'recent_image', 'field_left_sidebar', 'field_right_sidebar') }}
-    {% endset %}
-  {% else %}
-    {% set rendered_content %}
-      <div class="row container">
-        {{ title_markup }}
-        <strong>Aangemaakt op:</strong> {{ node.created.value|date('d-m-Y') }}, <strong>Aangepast op:</strong> {{ node.changed.value|date('d-m-Y') }}
-      </div>
-      {{ content|without('body', 'recent_image', 'field_left_sidebar', 'field_right_sidebar') }}
-    {% endset %}
+{% endmacro %}
+
+<div class="recent-detail">
+  {% if header %}
+    <div class="page-banner" style="background-image: url({{ header }})"></div>
   {% endif %}
-{% endif %}
-
-<div{{ container_attributes }}>
-  <div>
-    {{ content.body }}
+  <div class="container {{ containerClasses }}">
+    <div id="main-content">
+      <a class="back arrow-before" href="{{ path('donl_recent.index', {'filter': node.recent_type.value}) }}">{{ 'Back to overview' | t }}</a>
+      <h1>{{ node.title.value }}</h1>
+      <div class="recent-info"><a href="{{ path('donl_recent.index', {'filter': node.recent_type.value}) }}">{{ node.recent_type.value | capitalize }}</a>
+        | {{ "Created"|t }}: {{ node.created.value|date('d-m-Y') }} | {{ "Modified"|t }}: {{ node.edited.value|date('d-m-Y') }}
+      </div>
+      {{ content.body }}
+      {{ content.field_paragraphs }}
+    </div>
+    {% if sidebar %}
+      <div id="sidebar">
+        {% if  content.sidebar.0 %}
+          <div class="action-block">
+            {{ content.sidebar }}
+          </div>
+        {% endif %}
+        {% if relations %}
+          <h2>{{ 'Relations'|t }}</h2>
+          {% for key, relationItems in relations %}
+            {{ _self.relation(relations_name_map[key], relationItems) }}
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
-  {{ rendered_sidebar_content }}
 </div>

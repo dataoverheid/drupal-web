@@ -1,0 +1,45 @@
+.paragraph--type--linklist-block {
+  display: flex;
+
+  .content-characteristics-icon {
+    margin-top: 6px;
+    width: 50px;
+    height: 50px;
+
+    @media all and (min-width: 1080px) {
+      margin-top: 1px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+
+    @include breakpoint($mobileonly) {
+      margin-bottom: 16px;
+    }
+
+    .content-characteristics-icon {
+      display: none;
+
+      @include breakpoint($mobileonly) {
+        display: block;
+        margin-top: 0;
+      }
+    }
+
+    h2 {
+      @include breakpoint($mobileonly) {
+        display: block;
+        margin: 0;
+      }
+    }
+  }
+
+  .list--linked li {
+    margin-bottom: 8px;
+  }
+}

@@ -1,0 +1,23 @@
+uuid: a7050f89-d3d3-4a4a-bd2c-186889127c97
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataserivce_base_register
+    - node.type.dataservice
+id: node.dataservice.dataserivce_base_register
+field_name: dataserivce_base_register
+entity_type: node
+bundle: dataservice
+label: Basisregister
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

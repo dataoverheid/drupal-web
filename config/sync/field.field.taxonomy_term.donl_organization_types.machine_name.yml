@@ -1,0 +1,21 @@
+uuid: 7aec31f7-9f95-4f02-91c3-f6dc351ac652
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.machine_name
+    - taxonomy.vocabulary.donl_organization_types
+  module:
+    - donl
+id: taxonomy_term.donl_organization_types.machine_name
+field_name: machine_name
+entity_type: taxonomy_term
+bundle: donl_organization_types
+label: machine_name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

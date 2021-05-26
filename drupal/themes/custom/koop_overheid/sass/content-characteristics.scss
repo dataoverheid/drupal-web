@@ -1,0 +1,98 @@
+.content-characteristics {
+  .content-characteristics-background {
+    background: $c-blue-100;
+  }
+
+  .content-characteristics-icon {
+    position: relative;
+    margin-right: 20px;
+    flex-shrink: 0;
+    display: block;
+    width: 57px;
+    height: 57px;
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-position: center center;
+      background-color: white;
+      border: 2px solid $c-blue-600;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -2px;
+      right: -10px;
+      z-index: 10;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      background-image: url(../images/icon-data.svg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 100%;
+    }
+
+    @include breakpoint(mobileonly) {
+      display: none;
+    }
+  }
+
+  &.content-characteristics-dataset,
+  &.search-result.content-characteristics-dataset,
+  &.content-characteristics-datarequest,
+  &.content-characteristics-dataservice, {
+    .content-characteristics-background {
+      background: $c-blue-100;
+    }
+
+    .content-characteristics-icon {
+      &::after {
+        background-image: url(../images/icon-data.svg);
+      }
+    }
+  }
+
+  &.content-characteristics-community,
+  &.content-characteristics-organization,
+  &.content-characteristics-catalog,
+  &.content-characteristics-group {
+    .content-characteristics-background {
+      background: $c-green-100;
+    }
+
+    .content-characteristics-icon {
+      &::after {
+        background-image: url(../images/icon-community.svg);
+      }
+    }
+  }
+
+  &.content-characteristics-news,
+  &.content-characteristics-support {
+    .content-characteristics-background {
+      background: $c-orange-100;
+    }
+
+    .content-characteristics-icon {
+      &::after {
+        background-image: url(../images/icon-nieuws.svg);
+      }
+    }
+  }
+
+  &.content-characteristics-application,
+  // Application also goes by the name appliance.
+  &.content-characteristics-appliance {
+    .content-characteristics-background {
+      background: $c-purple-100;
+    }
+
+    .content-characteristics-icon {
+      &::after {
+        background-image: url(../images/icon-informatie.svg);
+      }
+    }
+  }
+}

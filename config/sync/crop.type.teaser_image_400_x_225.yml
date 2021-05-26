@@ -1,0 +1,12 @@
+uuid: 7bc3665b-794b-4dc8-93a0-8c19e332ae66
+langcode: nl
+status: true
+dependencies: {  }
+id: teaser_image_400_x_225
+label: 'Teaser Image 400 x 225'
+description: ''
+aspect_ratio: '16:9'
+soft_limit_width: 400
+soft_limit_height: 225
+hard_limit_width: null
+hard_limit_height: null

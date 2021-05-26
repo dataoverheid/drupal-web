@@ -1,0 +1,19 @@
+uuid: 46e06677-b88d-45bf-badb-ff71b8383c69
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_tooltip_views
+    - taxonomy.vocabulary.data_classifications
+id: taxonomy_term.data_classifications.field_tooltip_views
+field_name: field_tooltip_views
+entity_type: taxonomy_term
+bundle: data_classifications
+label: 'Tooltip weergaven'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

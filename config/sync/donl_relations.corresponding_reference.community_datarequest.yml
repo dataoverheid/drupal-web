@@ -1,0 +1,12 @@
+uuid: cac3345a-2076-431e-b154-a59935e42884
+langcode: nl
+status: true
+dependencies: {  }
+id: community_datarequest
+label: 'Community ↔ Datarequest'
+enabled: true
+first_field: relation_community_datarequest
+second_field: relation_datarequest_community
+bundles:
+  community: community
+  datarequest: datarequest

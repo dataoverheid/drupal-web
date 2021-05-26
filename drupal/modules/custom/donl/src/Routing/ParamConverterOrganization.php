@@ -7,7 +7,7 @@ use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- *
+ * Organization param converter
  */
 class ParamConverterOrganization implements ParamConverterInterface {
 
@@ -17,7 +17,9 @@ class ParamConverterOrganization implements ParamConverterInterface {
   protected $nodeStorage;
 
   /**
+   * Constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
@@ -33,12 +35,13 @@ class ParamConverterOrganization implements ParamConverterInterface {
         'type' => 'organization',
       ];
       if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
-        /** @var \Drupal\node\NodeInterface $node */
+        /* @var \Drupal\node\NodeInterface $node */
         $node = reset($nodes);
         if ($node->getType() === 'organization') {
           return $node;
         }
       }
+
     }
     return NULL;
   }

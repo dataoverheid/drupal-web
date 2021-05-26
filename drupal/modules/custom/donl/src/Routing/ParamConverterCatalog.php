@@ -7,7 +7,7 @@ use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- *
+ * Catalog param converter
  */
 class ParamConverterCatalog implements ParamConverterInterface {
 
@@ -17,7 +17,9 @@ class ParamConverterCatalog implements ParamConverterInterface {
   protected $nodeStorage;
 
   /**
+   * Constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
@@ -33,7 +35,7 @@ class ParamConverterCatalog implements ParamConverterInterface {
         'type' => 'catalog',
       ];
       if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
-        /** @var \Drupal\node\NodeInterface $node */
+        /* @var \Drupal\node\NodeInterface $node */
         $node = reset($nodes);
         if ($node->getType() === 'catalog') {
           return $node;

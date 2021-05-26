@@ -7,13 +7,22 @@ dependencies:
     - field.field.node.community.colour
     - field.field.node.community.community_applications
     - field.field.node.community.community_datarequests
+    - field.field.node.community.community_datasets
     - field.field.node.community.community_description
     - field.field.node.community.community_organisations
     - field.field.node.community.field_background_image
     - field.field.node.community.field_paragraphs
     - field.field.node.community.groups
+    - field.field.node.community.html_description
+    - field.field.node.community.linked_recent
     - field.field.node.community.machine_name
     - field.field.node.community.menu
+    - field.field.node.community.relation_community_application
+    - field.field.node.community.relation_community_datarequest
+    - field.field.node.community.relation_community_dataset
+    - field.field.node.community.relation_community_group
+    - field.field.node.community.relation_community_organization
+    - field.field.node.community.relation_community_recent
     - field.field.node.community.short_name
     - field.field.node.community.themes
     - node.type.community
@@ -33,13 +42,22 @@ hidden:
   colour: true
   community_applications: true
   community_datarequests: true
+  community_datasets: true
   community_description: true
   community_organisations: true
   field_background_image: true
   field_paragraphs: true
   groups: true
+  html_description: true
   langcode: true
+  linked_recent: true
   machine_name: true
   menu: true
+  relation_community_application: true
+  relation_community_datarequest: true
+  relation_community_dataset: true
+  relation_community_group: true
+  relation_community_organization: true
+  relation_community_recent: true
   short_name: true
   themes: true

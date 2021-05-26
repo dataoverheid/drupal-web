@@ -32,6 +32,24 @@ textarea {
   font-size: .85em;
   margin: 0 0 .5em;
   display: block;
+  box-sizing: border-box;
+
+  &.input--error,
+  &.error {
+    border: 1px solid #d52b1e;
+  }
+}
+
+.form__error {
+  font-style: italic;
+  color: #d52b1e;
+  background: url(../images/icon-alert-red.svg) top -6px left;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  padding-left: 1.75em;
+  font-size: 90%;
+  line-height: .9;
+  margin-top: .25em
 }
 
 .characteristics .characteristic::before {
@@ -63,6 +81,7 @@ input[type="date"]:disabled, input[type="date"][disabled], input[type="date"][re
 
 .has-js .question-explanation__content {
   padding-bottom: 2.5em;
+  padding-top: 0.8em;
 }
 
 .no-filters {

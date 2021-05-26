@@ -1,9 +1,4 @@
 <h2 class="visible-xs">{{ 'Documentation'|t }}</h2>
-{% if text %}
-  <div class="panel-description">
-    {{ text }}
-  </div>
-{% endif %}
 
 {% for key, resource in resources %}
   <div class="resource">
@@ -15,15 +10,15 @@
     </div>
 
     <i>Download:</i>  <a href="{{ resource.url }}" class="download-link" target="_blank">{{ resource.url }}</a>
-    <p>{{ resource.description }}</p>
+    <p>{{ ckan_markdown(resource.description) }}</p>
 
     {% if resource.previewUrl %}
-      <div class="preview-action button button--primary" data-preview-id="{{ key }}" data-preview-url="{{ resource.previewUrl }}">{{ 'Preview'|t }}</div>
+      <div class="preview-action button button--primary" data-preview-id="{{ key }}" data-preview-url="{{ resource.previewUrl }}">
+        {{ 'Preview'|t }}
+      </div>
+      <div id="preview-{{ key }}" class="preview-block"></div>
     {% endif %}
 
-    {% if resource.previewUrl %}
-      <table id="preview-{{ key }}" class="preview-table"></table>
-    {% endif %}
   </div>
 {% endfor %}
 

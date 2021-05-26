@@ -1,0 +1,8 @@
+name: Support Block
+description: Support Block Dataoverheid
+core_version_requirement: ^8 || ^9
+package: Custom
+type: module
+
+dependencies:
+  - drupal:select2

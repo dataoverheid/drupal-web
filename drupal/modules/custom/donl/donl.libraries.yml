@@ -1,0 +1,8 @@
+toolbar:
+  version: 1.0.0
+  css:
+    theme:
+      css/toolbar.icons.theme.css: { }
+      css/form-addition.css: { }
+  dependencies:
+    - toolbar/toolbar

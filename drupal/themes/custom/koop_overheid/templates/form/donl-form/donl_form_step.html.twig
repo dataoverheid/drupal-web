@@ -1,0 +1,26 @@
+<div class="form-step{{ active ? ( sub_steps is not null ? ' active' : ' active-no-substeps') }}{{ completed ? ' completed' }}">
+  {% if url %}
+    <a href="{{ url }}">
+  {% endif %}
+    <div class="arrow"></div>
+
+    {% if completed %}
+      <span class="step-icon icon-checked"></span>
+    {% elseif icon %}
+      <span class="step-icon {{ icon }}"></span>
+    {% endif %}
+
+    <h3 class="title">{{ title }}</h3>
+    <span class="short-title">{{ short_title }}</span>
+
+    {% if active and sub_steps is not null %}
+      <div class="sub-steps">
+        {% for sub_step in sub_steps %}
+          {{ sub_step }}
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% if url %}
+    </a>
+  {% endif %}
+</div>

@@ -1,0 +1,6 @@
+donl_form.node.publish:
+  route_name: donl_form.node.publish
+  title: 'Publish'
+  base_route: entity.node.canonical
+  class: '\Drupal\donl_form\Plugin\Menu\LocalTask\NodePublishLocalTask'
+  weight: 50

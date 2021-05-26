@@ -3,164 +3,173 @@
 namespace Drupal\ckan;
 
 /**
- *
+ * Mapping service interface.
  */
 interface MappingServiceInterface {
 
   /**
-   * Return a themeClass name for the given theme URI..
+   * Return a themeClass name for the given theme URI.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getThemeClass($uri);
+  public function getThemeClass(?string $uri): string;
 
   /**
    * Returns the readable name for the given theme URI.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getThemeName($uri);
+  public function getThemeName(?string $uri): string;
 
   /**
    * Returns the facet_theme value for the given theme URI.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getThemeFacetValue($uri);
+  public function getThemeFacetValue(?string $uri): string;
 
   /**
    * Returns the readable name for the Status Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getStatusName($uri);
+  public function getStatusName(?string $uri): string;
 
   /**
    * Returns the readable name for the distribution Status Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getDistributiontatusName($uri);
+  public function getDistributiontatusName(?string $uri): string;
 
   /**
    * Returns the readable name for the Access rights Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getAccessRightsName($uri);
+  public function getAccessRightsName(?string $uri): string;
 
   /**
    * Returns the readable name for the License Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getLicenseName($uri);
+  public function getLicenseName(?string $uri): string;
 
   /**
    * Returns the readable name for the Language Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getLanguageName($uri);
+  public function getLanguageName(?string $uri): string;
 
   /**
    * Returns the readable name for the File format Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getFileFormatName($uri);
+  public function getFileFormatName(?string $uri): string;
 
   /**
    * Returns the readable name for the Media type Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getMediaTypeName($uri);
+  public function getMediaTypeName(?string $uri): string;
 
   /**
    * Returns the readable name for the Source Catalog Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getSourceCatalogName($uri);
+  public function getSourceCatalogName(?string $uri): string;
 
   /**
    * Returns the readable name for the Organization Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getOrganizationName($uri);
+  public function getOrganizationName(?string $uri): string;
 
   /**
    * Returns the readable name for the frequency Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getFrequencyName($uri);
+  public function getFrequencyName(?string $uri): string;
 
   /**
    * Returns the readable name for the Distribution Type Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getDistributionTypeName($uri);
+  public function getDistributionTypeName(?string $uri): string;
 
   /**
    * Returns the readable name for the spatial_scheme_name Uri.
    *
-   * @param string $uri
+   * @param string|null $uri
    *
    * @return string
    */
-  public function getSpatialSchemeName($uri);
+  public function getSpatialSchemeName(?string $uri): string;
 
+  /**
+   * Returns the readable name for the wobuitzondering Uri.
+   *
+   * @param string|null $uri
+   *
+   * @return string
+   */
+  public function getWobExceptionName(?string $uri): string;
+  
   /**
    * Returns the readable name for the spatial_value Uri.
    *
-   * @param string $schemeUri
+   * @param string|null $schemeUri
    *   The uri of the spatial_scheme_name.
-   * @param string $valueUri
+   * @param string|null $valueUri
    *   The uri of the spatial_value.
    *
    * @return string
    */
-  public function getSpatialValue($schemeUri, $valueUri);
+  public function getSpatialValue(?string $schemeUri, ?string $valueUri): string;
 
   /**
-   * Returns the qualty string for the given int.
+   * Returns the quality string for the given int.
    *
-   * @param int $quality
+   * @param int|null $quality
    *
    * @return string
    */
-  public function getQualityName($quality);
+  public function getQualityName(?int $quality): string;
 
 }

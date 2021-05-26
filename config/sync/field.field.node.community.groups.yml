@@ -10,7 +10,7 @@ id: node.community.groups
 field_name: groups
 entity_type: node
 bundle: community
-label: Groepen
+label: 'Groepen [old]'
 description: ''
 required: false
 translatable: false
@@ -23,6 +23,7 @@ settings:
       group: group
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

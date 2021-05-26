@@ -47,8 +47,7 @@ class DatasetItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    $properties['value'] = DataDefinition::create('string')
-      ->setLabel(t('Dataset'));
+    $properties['value'] = DataDefinition::create('string')->setLabel(t('Dataset'));
 
     return $properties;
   }

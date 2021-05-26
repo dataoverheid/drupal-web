@@ -1,13 +1,4 @@
 <div class="monitor-block">
-  <h2>{{ 'Dataset owners'|t }}</h2>
-  <div id="pie-chart"></div>
-  <div class="text-align-center"><strong>{{ 'Owners in chart'|t }}: {{ dataset_owners.jsOwnersCount }}</strong></div>
-  <details data-drupal-selector="rest-of-owners-1" id="rest-of-owners-1" class="form-wrapper">
-    <summary role="button" aria-controls="rest-of-owners-1" class="pull-right">{{ 'Rest of owners'|t }} ({{ dataset_owners.otherOwnersCount }})</summary>
-    {{ dataset_owners.table }}
-  </details>
-</div>
-<div class="monitor-block">
   <h2>{{ 'Dataset statuses'|t }}</h2>
   {{ status_table }}
 </div>

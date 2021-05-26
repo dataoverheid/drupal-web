@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.group.group_description
     - field.field.node.group.group_image
     - field.field.node.group.machine_name
+    - field.field.node.group.relation_group_dataset
     - node.type.group
   module:
     - user
@@ -27,3 +28,4 @@ hidden:
   group_image: true
   langcode: true
   machine_name: true
+  relation_group_dataset: true

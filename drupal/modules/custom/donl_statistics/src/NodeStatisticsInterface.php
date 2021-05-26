@@ -30,11 +30,4 @@ interface NodeStatisticsInterface {
    */
   public function getCommunityIdentifiers(): array;
 
-  /**
-   * Get all organization layers with the organization identifiers.
-   *
-   * @return array
-   */
-  public function getOrganizationLayers(): array;
-
 }

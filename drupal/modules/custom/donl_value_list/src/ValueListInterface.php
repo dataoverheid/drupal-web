@@ -17,7 +17,7 @@ interface ValueListInterface {
    *
    * @return array
    */
-  public function getList($list, $addEmptyElement = TRUE);
+  public function getList($list, $addEmptyElement = FALSE);
 
   /**
    * Returns an array with all theme uri's and there parent.

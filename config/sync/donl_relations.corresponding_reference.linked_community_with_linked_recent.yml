@@ -1,0 +1,12 @@
+uuid: 37d525c1-64d0-4027-9d68-debaeab42e7e
+langcode: nl
+status: true
+dependencies: {  }
+id: linked_community_with_linked_recent
+label: 'Community ↔ Recent'
+enabled: true
+first_field: relation_community_recent
+second_field: relation_recent_community
+bundles:
+  community: community
+  recent: recent

@@ -20,6 +20,8 @@ class DatarequestApiController extends BaseEntityApiController {
   protected function getSkipFields(): array {
     $fields = parent::getSkipFields();
     $fields[] = 'url_dataset';
+    // Old fields to be removed.
+    $fields[] = 'datasets';
     return $fields;
   }
 

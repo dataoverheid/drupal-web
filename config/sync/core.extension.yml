@@ -2,6 +2,7 @@ module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
   adminimal_admin_toolbar: 0
+  allowed_formats: 0
   block: 0
   block_content: 0
   breakpoint: 0
@@ -21,18 +22,23 @@ module:
   dblog: 0
   donl: 0
   donl_api: 0
-  donl_appliance: 0
   donl_community: 0
   donl_custom_http_4xx: 0
-  donl_migrate: 0
+  donl_dcat_validation: 0
+  donl_entities: 0
+  donl_form: 0
+  donl_identifier: 0
+  donl_markdown: 0
+  donl_piwik: 0
   donl_recent: 0
+  donl_relations: 0
   donl_search: 0
   donl_search_backlink: 0
   donl_sitemap: 0
   donl_solr_sync: 0
   donl_statistics: 0
+  donl_support: 0
   donl_value_list: 0
-  easy_breadcrumb: 0
   editor: 0
   editor_advanced_link: 0
   entity_reference_revisions: 0
@@ -45,6 +51,7 @@ module:
   image: 0
   image_widget_crop: 0
   imce: 0
+  inline_form_errors: 0
   language: 0
   layout_discovery: 0
   link: 0
@@ -66,6 +73,7 @@ module:
   schema_metatag: 0
   schema_qa_page: 0
   schema_web_page: 0
+  select2: 0
   serialization: 0
   simple_sitemap: 0
   svg_image: 0

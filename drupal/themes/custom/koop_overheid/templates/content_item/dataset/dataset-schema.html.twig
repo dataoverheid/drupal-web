@@ -11,11 +11,16 @@
     "@type": "Organization",
     "name": "{{ ckan_mapping_get_organization_name(dataset.authority) }}"
   },
+  "creator": {
+    "@context": "http://schema.org/",
+    "@type": "Organization",
+    "name": "{{ ckan_mapping_get_organization_name(dataset.authority) }}"
+  },
   "dateModified": "{{ ckan_format_date(dataset.modified) }}",
   "license": "{{ dataset.license_id }}",
   "inLanguage": "{{ ckan_mapping_get_language_name(dataset.language) }}",
   "identifier": "{{ dataset.identifier }}",
-  "description": "{{ dataset.notes }}",
+  "description": "{{ replace_line_breaks_with_new_line(dataset.notes) }}",
   "genre": "{{ ckan_mapping_get_theme_name(dataset.theme) }}",
   "workExample": "{{ dataset.sample|join(', ') }}",
   "version": "{{ dataset.version }}",

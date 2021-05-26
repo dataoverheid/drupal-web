@@ -1,0 +1,21 @@
+uuid: 736c306a-dbc9-4dcd-a5f6-0170d12a0d7a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.machine_name
+    - node.type.dataservice
+  module:
+    - donl
+id: node.dataservice.machine_name
+field_name: machine_name
+entity_type: node
+bundle: dataservice
+label: 'Machine name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

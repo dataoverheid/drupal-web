@@ -31,10 +31,10 @@ display:
           submit_button: Filter
           reset_button: true
           reset_button_label: Reset
-          exposed_sorts_label: 'Sorteren op'
+          exposed_sorts_label: 'Sort by'
           expose_sort_order: true
-          sort_asc_label: Oplopend
-          sort_desc_label: Aflopend
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         type: full
         options:
@@ -596,6 +596,72 @@ display:
           plugin_id: field
           entity_type: node
           entity_field: status
+        langcode:
+          id: langcode
+          table: node
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Taal
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: language
+          settings:
+            link_to_entity: false
+            native_language: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: langcode
+          plugin_id: field
         changed:
           id: changed
           table: node_field_data
@@ -883,7 +949,7 @@ display:
           1: AND
       display_extenders: {  }
     display_plugin: default
-    display_title: Hoofd
+    display_title: Master
     id: default
     position: 0
     cache_metadata:
@@ -915,7 +981,7 @@ display:
         weight: -10
       display_extenders: {  }
     display_plugin: page
-    display_title: Pagina
+    display_title: Page
     id: page_1
     position: 1
     cache_metadata:

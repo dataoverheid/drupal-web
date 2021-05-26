@@ -1,0 +1,12 @@
+uuid: 911ae8d5-1bfd-4b4a-8087-4686e18e6e5b
+langcode: nl
+status: true
+dependencies: {  }
+id: content_image
+label: 'Content image 400w'
+description: ''
+aspect_ratio: ''
+soft_limit_width: 400
+soft_limit_height: 225
+hard_limit_width: null
+hard_limit_height: null

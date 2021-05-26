@@ -1,8 +1,0 @@
-uuid: c2dd84b8-2983-48e9-a3f4-15324f1b7aea
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync CBSDerden Mapping Frequency'
-vid: donlsync_cbsderden_mapping_frequ
-description: ''
-weight: 0

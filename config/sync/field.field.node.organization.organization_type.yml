@@ -9,9 +9,9 @@ id: node.organization.organization_type
 field_name: organization_type
 entity_type: node
 bundle: organization
-label: 'Organisatie type'
+label: 'Organisatie type (old)'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

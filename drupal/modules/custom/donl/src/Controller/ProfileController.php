@@ -100,7 +100,7 @@ class ProfileController extends ControllerBase {
       $container->get('page_cache_kill_switch')
     );
   }
-
+  
   /**
    * Builds the profile page.
    *
@@ -142,12 +142,47 @@ class ProfileController extends ControllerBase {
         '#theme' => 'manage-content-table',
         '#links' => [Link::createFromRoute($this->t('Register new dataset'), 'ckan.dataset.create', [], ['attributes' => ['class' => ['cta']]])],
         '#rows' => $datasets['rows'],
-        '#empty_text' => $this->t('No datasets found'),
+        '#empty_text' => $this->t('No @type found', ['@type' => $this->t('datasets')]),
         '#pagination' => $datasets['pagination'],
       ],
     ];
-    $tabs['panel-datasets'] = $this->t('My datasets (@total)', [
+    $tabs['panel-datasets'] = $this->t('My @type (@total)', [
+      '@type' => $this->t('datasets'),
       '@total' => $this->numberFormatter->format($datasets['count']),
+    ]);
+
+    $datarequests = $this->getDatarequestData($user);
+    $panels['datarequests'] = [
+      '#theme' => 'panel',
+      '#id' => 'datarequests',
+      '#content' => [
+        '#theme' => 'manage-content-table',
+        '#links' => [Link::createFromRoute($this->t('Create new @type', ['@type' => $this->t('data request')]), 'node.add', ['node_type' => 'datarequest'], ['attributes' => ['class' => ['cta']]])],
+        '#rows' => $datarequests['rows'],
+        '#empty_text' => $this->t('No @type found', ['@type' => $this->t('data requests')]),
+        '#pagination' => $datarequests['pagination'],
+      ],
+    ];
+    $tabs['panel-datarequests'] = $this->t('My @type (@total)', [
+      '@type' => $this->t('data requests'),
+      '@total' => $this->numberFormatter->format($datarequests['count']),
+    ]);
+
+    $dataservices = $this->getDataserviceData($user);
+    $panels['dataservices'] = [
+      '#theme' => 'panel',
+      '#id' => 'dataservices',
+      '#content' => [
+        '#theme' => 'manage-content-table',
+        '#links' => [Link::createFromRoute($this->t('Create new @type', ['@type' => $this->t('dataservice')]), 'node.add', ['node_type' => 'dataservice'], ['attributes' => ['class' => ['cta']]])],
+        '#rows' => $dataservices['rows'],
+        '#empty_text' => $this->t('No @type found', ['@type' => $this->t('dataservices')]),
+        '#pagination' => $dataservices['pagination'],
+      ],
+    ];
+    $tabs['panel-dataservices'] = $this->t('My @type (@total)', [
+      '@type' => $this->t('dataservices'),
+      '@total' => $this->numberFormatter->format($dataservices['count']),
     ]);
 
     $applications = $this->getApplicationData($user);
@@ -156,13 +191,14 @@ class ProfileController extends ControllerBase {
       '#id' => 'applications',
       '#content' => [
         '#theme' => 'manage-content-table',
-        '#links' => [Link::createFromRoute($this->t('Create new application'), 'node.add', ['node_type' => 'appliance'], ['attributes' => ['class' => ['cta']]])],
+        '#links' => [Link::createFromRoute($this->t('Create new @type', ['@type' => $this->t('application')]), 'node.add', ['node_type' => 'appliance'], ['attributes' => ['class' => ['cta']]])],
         '#rows' => $applications['rows'],
-        '#empty_text' => $this->t('No applications found'),
+        '#empty_text' => $this->t('No @type found', ['@type' => $this->t('applications')]),
         '#pagination' => $applications['pagination'],
       ],
     ];
-    $tabs['panel-applications'] = $this->t('My applications (@total)', [
+    $tabs['panel-applications'] = $this->t('My @type (@total)', [
+      '@type' => $this->t('applications'),
       '@total' => $this->numberFormatter->format($applications['count']),
     ]);
 
@@ -230,6 +266,46 @@ class ProfileController extends ControllerBase {
   }
 
   /**
+   * Retrieves the applications from the current user.
+   *
+   * @param \Drupal\ckan\User\CkanUserInterface $user
+   *
+   * @return array
+   */
+  private function getApplicationData(CkanUserInterface $user): array {
+    $page = (int) $this->request->get('applications', 1);
+
+    $count = $this->nodeStorage->getQuery()
+      ->condition('type', 'appliance', '=')
+      ->condition('uid', $user->id(), '=')
+      ->condition('status', Node::PUBLISHED, '=')
+      ->count()->execute();
+
+    $nids = $this->nodeStorage->getQuery()
+      ->condition('type', 'appliance', '=')
+      ->condition('uid', $user->id(), '=')
+      ->condition('status', Node::PUBLISHED, '=')
+      ->sort('title', 'asc')
+      ->range((($page - 1) * self::RECORDS_PER_PAGE), self::RECORDS_PER_PAGE)
+      ->execute();
+
+    $rows = [];
+    foreach ($this->nodeStorage->loadMultiple($nids) as $node) {
+      $rows[] = [
+        Link::createFromRoute($node->label(), 'donl.application', ['application' => $node->id()]),
+        Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]),
+        Link::createFromRoute($this->t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]),
+      ];
+    }
+
+    return [
+      'count' => $count ?? 0,
+      'rows' => $rows,
+      'pagination' => $this->getPagination('applications', $count, $page, $user),
+    ];
+  }
+
+  /**
    * Retrieves the datasets from the current user.
    *
    * @param \Drupal\ckan\User\CkanUserInterface $user
@@ -241,7 +317,7 @@ class ProfileController extends ControllerBase {
 
     if ($user->isDataOwner()) {
       $rows = [];
-      if ($result = $this->ckanRequest->searchDatasets($page, $this::RECORDS_PER_PAGE, NULL, 'title asc', ['creator_user_id' => [$user->getCkanId()]])) {
+      if ($result = $this->ckanRequest->searchDatasets($page, self::RECORDS_PER_PAGE, NULL, 'title asc', ['creator_user_id' => [$user->getCkanId()]])) {
         foreach ($result['datasets'] as $dataset) {
           $rows[] = [
             Link::createFromRoute($dataset->getTitle(), 'ckan.dataset.view', ['dataset' => $dataset->getName()]),
@@ -266,33 +342,33 @@ class ProfileController extends ControllerBase {
   }
 
   /**
-   * Retrieves the applications from the current user.
+   * Retrieves the datarequests from the current user.
    *
    * @param \Drupal\ckan\User\CkanUserInterface $user
    *
    * @return array
    */
-  private function getApplicationData(CkanUserInterface $user): array {
-    $page = (int) $this->request->get('applications', 1);
+  private function getDatarequestData(CkanUserInterface $user): array {
+    $page = (int) $this->request->get('datarequests', 1);
 
     $count = $this->nodeStorage->getQuery()
-      ->condition('type', 'appliance', '=')
+      ->condition('type', 'datarequest', '=')
       ->condition('uid', $user->id(), '=')
       ->condition('status', Node::PUBLISHED, '=')
       ->count()->execute();
 
     $nids = $this->nodeStorage->getQuery()
-      ->condition('type', 'appliance', '=')
+      ->condition('type', 'datarequest', '=')
       ->condition('uid', $user->id(), '=')
       ->condition('status', Node::PUBLISHED, '=')
       ->sort('title', 'asc')
-      ->range((($page - 1) * $this::RECORDS_PER_PAGE), $this::RECORDS_PER_PAGE)
+      ->range((($page - 1) * self::RECORDS_PER_PAGE), self::RECORDS_PER_PAGE)
       ->execute();
 
     $rows = [];
     foreach ($this->nodeStorage->loadMultiple($nids) as $node) {
       $rows[] = [
-        Link::createFromRoute($node->label(), 'entity.node.canonical', ['node' => $node->id()]),
+        Link::createFromRoute($node->label(), 'donl.datarequest', ['datarequest' => $node->id()]),
         Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]),
         Link::createFromRoute($this->t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]),
       ];
@@ -301,7 +377,47 @@ class ProfileController extends ControllerBase {
     return [
       'count' => $count ?? 0,
       'rows' => $rows,
-      'pagination' => $this->getPagination('applications', $count, $page, $user),
+      'pagination' => $this->getPagination('datarequests', $count, $page, $user),
+    ];
+  }
+
+  /**
+   * Retrieves the dataservices from the current user.
+   *
+   * @param \Drupal\ckan\User\CkanUserInterface $user
+   *
+   * @return array
+   */
+  private function getDataserviceData(CkanUserInterface $user): array {
+    $page = (int) $this->request->get('dataservices', 1);
+
+    $count = $this->nodeStorage->getQuery()
+      ->condition('type', 'dataservice', '=')
+      ->condition('uid', $user->id(), '=')
+      ->condition('status', Node::PUBLISHED, '=')
+      ->count()->execute();
+
+    $nids = $this->nodeStorage->getQuery()
+      ->condition('type', 'dataservice', '=')
+      ->condition('uid', $user->id(), '=')
+      ->condition('status', Node::PUBLISHED, '=')
+      ->sort('title', 'asc')
+      ->range((($page - 1) * self::RECORDS_PER_PAGE), self::RECORDS_PER_PAGE)
+      ->execute();
+
+    $rows = [];
+    foreach ($this->nodeStorage->loadMultiple($nids) as $node) {
+      $rows[] = [
+        Link::createFromRoute($node->label(), 'donl.dataservice', ['dataservice' => $node->id()]),
+        Link::createFromRoute($this->t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]),
+        Link::createFromRoute($this->t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]),
+      ];
+    }
+
+    return [
+      'count' => $count ?? 0,
+      'rows' => $rows,
+      'pagination' => $this->getPagination('dataservices', $count, $page, $user),
     ];
   }
 
@@ -319,8 +435,8 @@ class ProfileController extends ControllerBase {
     $links = [];
 
     // Don't show paging if the results fit on a single page.
-    if ($numberOfRecords > $this::RECORDS_PER_PAGE) {
-      $last = ceil($numberOfRecords / $this::RECORDS_PER_PAGE);
+    if ($numberOfRecords > self::RECORDS_PER_PAGE) {
+      $last = ceil($numberOfRecords / self::RECORDS_PER_PAGE);
       $start = (($page - 1) > 0) ? $page - 1 : 1;
       $end = (($page + 1) < $last) ? $page + 1 : $last;
 

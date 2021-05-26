@@ -1,0 +1,23 @@
+.preview-table {
+  margin: 0;
+
+  .error {
+    padding-top: 20px;
+    color: $c-red-400;
+  }
+}
+
+.preview-block {
+  margin: 0;
+  border: 1px solid #B4B4B4;
+  background: #fff;
+
+  .preview-summary {
+    font-size: 19px;
+    font-weight: 600;
+    display: block;
+    text-decoration: none;
+    color: #154273;
+    background-size: 16px;
+  }
+}

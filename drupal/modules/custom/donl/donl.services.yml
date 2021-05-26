@@ -11,36 +11,49 @@ services:
 
   donl.paramConverter.catalog:
     class: Drupal\donl\Routing\ParamConverterCatalog
-    arguments: ['@entity.manager']
+    arguments: [ '@entity_type.manager' ]
     tags:
       - { name: paramconverter }
 
   donl.paramConverter.datarequest:
     class: Drupal\donl\Routing\ParamConverterDatarequest
-    arguments: ['@entity.manager']
+    arguments: [ '@entity_type.manager' ]
+    tags:
+      - { name: paramconverter }
+
+  donl.paramConverter.dataservice:
+    class: Drupal\donl\Routing\ParamConverterDataservice
+    arguments: [ '@entity_type.manager' ]
     tags:
       - { name: paramconverter }
 
   donl.paramConverter.group:
     class: Drupal\donl\Routing\ParamConverterGroup
-    arguments: ['@entity.manager']
+    arguments: [ '@entity_type.manager' ]
+    tags:
+      - { name: paramconverter }
+
+  donl.paramConverter.news:
+    class: Drupal\donl\Routing\ParamConverterNews
+    arguments: [ '@entity_type.manager' ]
     tags:
       - { name: paramconverter }
 
   donl.paramConverter.organization:
     class: Drupal\donl\Routing\ParamConverterOrganization
-    arguments: ['@entity.manager']
+    arguments: [ '@entity_type.manager' ]
     tags:
       - { name: paramconverter }
 
   donl.paramConverter.application:
     class: Drupal\donl\Routing\ParamConverterApplication
-    arguments: ['@entity.manager']
+    arguments: [ '@entity_type.manager' ]
     tags:
       - { name: paramconverter }
 
-  donl.exception_subscribtr:
+  donl.exception_subscriber:
     class: Drupal\donl\EventSubscriber\ExceptionSubscriber
-    arguments: ['@serializer', []]
     tags:
       - { name: event_subscriber }
+    arguments: [ '@serializer', '%serializer.formats%' ]
+

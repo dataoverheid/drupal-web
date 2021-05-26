@@ -1,8 +1,0 @@
-uuid: b22d8944-a024-4c71-87d6-0e126be1d29c
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping Resource.Language'
-vid: donlsync_ngr_mapping_r_language
-description: ''
-weight: 0

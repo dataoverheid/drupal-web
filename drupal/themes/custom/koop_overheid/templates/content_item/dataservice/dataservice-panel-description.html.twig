@@ -1,0 +1,24 @@
+{% import '@koop_overheid/global_functions.html.twig' as functions %}
+
+<div>
+  <h2 class="visible-xs">{{ 'Description'|t }}</h2>
+  <div class="characteristics">
+    {% if node.dataservice_high_value.value %}
+      {{ functions.characteristics(2, 'ok', 'High value'|t, 'A high value dataset has a high value for society.'|t ) }}
+    {% endif %}
+
+    {% if node.dataservice_reference_data.value %}
+      {{ functions.characteristics(3, '', 'Reference dataset'|t, 'Reference datasets are essential for promoting the use of government data. This data is valuable when used with other government data.'|t ) }}
+    {% endif %}
+
+    {% if node.dataserivce_base_register.value %}
+      {{ functions.characteristics(4, '', 'Basic register'|t, 'A basic registration is a registration officially designated by the government with data that is mandatory for all government institutions in the performance of public-law duties.'|t ) }}
+    {% endif %}
+
+    {% if node.dataservice_national_coverage.value %}
+      {{ functions.characteristics(7, '', 'National coverage'|t, 'This is a dataset that is nationwide. The data covers the entire Netherlands.'|t ) }}
+    {% endif %}
+  </div>
+
+  <p>{{ node.dataservice_description.value|nl2br }}</p>
+</div>

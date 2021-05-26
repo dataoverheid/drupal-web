@@ -10,7 +10,8 @@ interface translation server pattern: themes/custom/koop_overheid/translations/k
 libraries:
   - koop_overheid/componentenbibliotheek
   - koop_overheid/global
-
+ckeditor_stylesheets:
+  - editor/ckeditor.css
 base theme: stable
 
 regions:

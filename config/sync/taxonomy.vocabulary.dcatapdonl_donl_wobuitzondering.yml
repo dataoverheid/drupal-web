@@ -1,0 +1,8 @@
+uuid: 27d11c9d-542e-4f60-960e-f20a9b69fc75
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DCAT-AP-DONL - DONL:WOBUitzondering'
+vid: dcatapdonl_donl_wobuitzondering
+description: ''
+weight: 0

@@ -1,8 +1,0 @@
-uuid: a2f7b7c5-0829-4a38-9726-ec65a420e861
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping Theme'
-vid: donlsync_ngr_mapping_theme
-description: ''
-weight: 0

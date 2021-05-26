@@ -5,14 +5,14 @@
   'js-form-type-' ~ type|clean_class,
   'form-item-' ~ name|clean_class,
   'js-form-item-' ~ name|clean_class,
-  disabled == 'disabled' ? 'form-disabled',
+  disabled ? 'form-disabled',
 ] %}
 
 {% set id = attribute(element, '#id') %}
 
-{% block wrapper %}
+{% block opening_wrapper %}
   <div{{ attributes.addClass(classes) }}>
-{% endblock wrapper %}
+{% endblock opening_wrapper %}
 
   {% if label_wrapper %}
     {{ label_open }}
@@ -20,7 +20,11 @@
     {{ label }}
   {% endif %}
 
-  {% block label_suffix %}{% endblock %}
+  {% block label_suffix %}
+    {% if attribute(element, '#required') %}
+      <small>{{ 'Required field'|t }}</small>
+    {% endif %}
+  {% endblock label_suffix %}
 
   {% if prefix is not empty %}
     <span class="field-prefix">{{ prefix }}</span>
@@ -30,10 +34,15 @@
     {{ description }}
   {% endif %}
 
+  {% if suffix is not empty %}
+    <div class="suffix-wrapper">
+  {% endif %}
+
   {{ children }}
 
   {% if suffix is not empty %}
-    <span class="field-suffix">{{ suffix }}</span>
+      <span class="field-suffix">{{ suffix }}</span>
+    </div>
   {% endif %}
 
   {% if label_wrapper %}

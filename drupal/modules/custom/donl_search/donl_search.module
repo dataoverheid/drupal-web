@@ -15,6 +15,7 @@ function donl_search_theme($existing, $type, $theme, $path) {
   return [
     'donl_search_facets' => [
       'variables' => [
+        'title' => '',
         'facets' => [],
         'show_facets_with_less_than' => [],
       ],
@@ -38,6 +39,7 @@ function donl_search_theme($existing, $type, $theme, $path) {
         'facets' => NULL,
         'pagination' => NULL,
         'total_results' => NULL,
+        'context_block' => NULL,
       ],
     ],
     'donl_searchrecord' => [
@@ -66,6 +68,11 @@ function donl_search_theme($existing, $type, $theme, $path) {
       ],
     ],
     'donl_searchrecord_dataset' => [
+      'variables' => [
+        'record' => [],
+      ],
+    ],
+    'donl_searchrecord_dataservice' => [
       'variables' => [
         'record' => [],
       ],
@@ -101,8 +108,7 @@ function donl_search_theme($existing, $type, $theme, $path) {
     'search_block' => [
       'variables' => [
         'form' => NULL,
-        'bg_color' => '',
-        'icon' => '',
+        'type' => '',
         'title' => '',
       ],
     ],
@@ -143,7 +149,9 @@ function donl_search_theme($existing, $type, $theme, $path) {
     ],
     'suggester' => [
       'variables' => [
+        'searchType' => t('suggestions'),
         'suggestions' => [],
+        'did_you_mean' => '',
       ],
     ],
   ];
@@ -180,11 +188,12 @@ function donl_search_page_attachments(array &$page) {
 }
 
 /**
- * Implements taxonomy_term_insert().
+ * Implements hook_taxonomy_term_insert().
  */
 function donl_search_taxonomy_term_insert(Term $term) {
-  if ($term->getVocabularyId() === 'term_translations') {
-    donl_search_invalidate_facet_rename_cache('terms');
+  $bundle = $term->bundle();
+  if (in_array($bundle, ['term_translations', 'donl_organization_types'])) {
+    donl_search_invalidate_facet_rename_cache($bundle);
   }
 }
 
@@ -192,17 +201,19 @@ function donl_search_taxonomy_term_insert(Term $term) {
  * Implements hook_taxonomy_term_update().
  */
 function donl_search_taxonomy_term_update(Term $term) {
-  if ($term->getVocabularyId() === 'term_translations') {
-    donl_search_invalidate_facet_rename_cache('terms');
+  $bundle = $term->bundle();
+  if (in_array($bundle, ['term_translations', 'donl_organization_types'])) {
+    donl_search_invalidate_facet_rename_cache($bundle);
   }
 }
 
 /**
- * Implements taxonomy_term_delete().
+ * Implements hook_taxonomy_term_delete().
  */
 function donl_search_taxonomy_term_delete(Term $term) {
-  if ($term->getVocabularyId() === 'term_translations') {
-    donl_search_invalidate_facet_rename_cache('terms');
+  $bundle = $term->bundle();
+  if (in_array($bundle, ['term_translations', 'donl_organization_types'])) {
+    donl_search_invalidate_facet_rename_cache($bundle);
   }
 }
 
@@ -246,10 +257,11 @@ function donl_search_node_delete(Node $node) {
 }
 
 /**
- *
+ * Helper function to invalidate a cache key for multiple languages.
  */
 function donl_search_invalidate_facet_rename_cache($cid) {
   foreach (\Drupal::languageManager()->getLanguages() as $language) {
-    \Drupal::cache()->invalidate('facet_rename:' . $cid . ':' . $language->getId());
+    \Drupal::cache()
+      ->invalidate('facet_rename:' . $cid . ':' . $language->getId());
   }
 }

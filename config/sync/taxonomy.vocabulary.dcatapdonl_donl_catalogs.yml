@@ -1,8 +1,0 @@
-uuid: fe67803a-5223-41e1-bd40-4ac6b24b0030
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DCAT-AP-DONL - DONL:Catalogs'
-vid: dcatapdonl_donl_catalogs
-description: ''
-weight: 0

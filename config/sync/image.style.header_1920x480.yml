@@ -1,0 +1,25 @@
+uuid: 321ac65c-af91-4e25-8389-da009bb561d2
+langcode: nl
+status: true
+dependencies:
+  config:
+    - crop.type.header_1920x480
+  module:
+    - crop
+name: header_1920x480
+label: 'Header 1920x480'
+effects:
+  f356611e-82fa-4f65-a5be-4f567c013897:
+    uuid: f356611e-82fa-4f65-a5be-4f567c013897
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: header_1920x480
+  0189f2b0-31e8-45f2-b371-38f1645083b8:
+    uuid: 0189f2b0-31e8-45f2-b371-38f1645083b8
+    id: image_scale
+    weight: 2
+    data:
+      width: 1920
+      height: null
+      upscale: false

@@ -1,11 +1,4 @@
-{% macro metadata(label, value, class) %}
-  {% if value %}
-    <div>
-      <span>{{ label|t }}</span>
-      <span {% if class %}class="{{ class }}"{% endif %}>{{ value }}</span>
-    </div>
-  {% endif %}
-{% endmacro %}
+{% import '@koop_overheid/global_functions.html.twig' as functions %}
 
 <div class="{# columns columns--sticky-sidebar row#}">
 
@@ -30,31 +23,26 @@
 
   <div>
     <h2 class="visible-xs">{{ 'Metadata'|t }}</h2>
-    {% if text %}
-      <div class="panel-description">
-        {{ text }}
-      </div>
-    {% endif %}
     <a href="{{ url('ckan.dataset.rdf', {'dataset': dataset.name}) }}" target="_blank" class="button button--primary export-btn">{{ 'Export as RDF' |t }}</a>
     <div class="metadata-table">
       <h3 id="deel1">{{ 'Dataset data' |t }}</h3>
-      {{ _self.metadata('Title', dataset.title) }}
-      {{ _self.metadata('Identifier', ckan_link(dataset.identifier)) }}
-      {{ _self.metadata('Alternative identifier', dataset.alternate_identifier|join(', ')) }}
-      {{ _self.metadata('Permanent link', permanent_link) }}
-      {{ _self.metadata('Language', ckan_mapping_get_language_name(dataset.language)) }}
-      {{ _self.metadata('Metadata language', ckan_mapping_get_language_name(dataset.metadata_language)) }}
-      {{ _self.metadata('Description', ckan_markdown(dataset.notes, false)) }}
-      {{ _self.metadata('Tags', dataset.tags|join(', ')) }}
+      {{ functions.metadata_field('Title', dataset.title) }}
+      {{ functions.metadata_field('Identifier', ckan_link(dataset.identifier)) }}
+      {{ functions.metadata_field('Alternative identifier', dataset.alternate_identifier|join(', ')) }}
+      {{ functions.metadata_field('Permanent link', permanent_link) }}
+      {{ functions.metadata_field('Language', ckan_mapping_get_language_name(dataset.language)) }}
+      {{ functions.metadata_field('Metadata language', ckan_mapping_get_language_name(dataset.metadata_language)) }}
+      {{ functions.metadata_field('Description', ckan_markdown(dataset.notes, false)) }}
+      {{ functions.metadata_field('Tags', dataset.tags|join(', ')) }}
 
       {% set theme %}
         {% for uri in dataset.theme %}
           <dd class="icon icon--{{ ckan_mapping_get_theme_class(uri) }}">{{ ckan_mapping_get_theme_name(uri) }}</dd>
         {% endfor %}
       {% endset %}
-      {{ _self.metadata('Theme', theme) }}
+      {{ functions.metadata_field('Theme', theme) }}
 
-      {{ _self.metadata('Landing page', ckan_link(dataset.url)) }}
+      {{ functions.metadata_field('Landing page', ckan_link(dataset.url)) }}
 
       {% if dataset.documentation %}
         {% set documentation %}
@@ -62,7 +50,7 @@
             {{ ckan_link(documentation) }}{% if not loop.last %}, {% endif %}
           {% endfor %}
         {% endset %}
-        {{ _self.metadata('Documentation',  documentation) }}
+        {{ functions.metadata_field('Documentation',  documentation) }}
       {% endif %}
 
       {% if dataset.sample %}
@@ -71,7 +59,7 @@
             {{ ckan_link(sample) }}{% if not loop.last %}, {% endif %}
           {% endfor %}
         {% endset %}
-        {{ _self.metadata('Sample',  sample) }}
+        {{ functions.metadata_field('Sample',  sample) }}
       {% endif %}
 
       {% if dataset.provenance %}
@@ -80,7 +68,7 @@
             {{ ckan_link(provenance) }}{% if not loop.last %}, {% endif %}
           {% endfor %}
         {% endset %}
-        {{ _self.metadata('Provenance',  provenance) }}
+        {{ functions.metadata_field('Provenance',  provenance) }}
       {% endif %}
 
       {% set classification %}
@@ -101,9 +89,17 @@
             <th>{{ 'National coverage'|t }}:</th>
             <td>{% if dataset.national_coverage %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
           </tr>
+          <tr>
+            <th>{{ 'Sector registrations'|t }}:</th>
+            <td>{% if dataset.sector_registrations %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
+          <tr>
+            <th>{{ 'Local registrations'|t }}:</th>
+            <td>{% if dataset.local_registrations %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+          </tr>
         </table>
       {% endset %}
-      {{ _self.metadata('Dataset classification', classification) }}
+      {{ functions.metadata_field('Data classification', classification) }}
 
       {% if dataset.spatial_scheme and dataset.spatial_value %}
         {% set geo %}
@@ -113,7 +109,7 @@
           {% endfor %}
         {% endset %}
       {% endif %}
-      {{ _self.metadata('Geographical data', geo) }}
+      {{ functions.metadata_field('Geographical data', geo) }}
 
       {% set version %}
         <table class="minimal-table">
@@ -161,7 +157,7 @@
           </tbody>
         </table>
       {% endset %}
-      {{ _self.metadata('Version', version) }}
+      {{ functions.metadata_field('Version', version) }}
 
       {% if dataset.temporal_label or dataset.temporal_start or dataset.temporal_end %}
         {% set temporal %}
@@ -190,12 +186,12 @@
             </tbody>
           </table>
         {% endset %}
-        {{ _self.metadata('Time coverage', temporal) }}
+        {{ functions.metadata_field('Time coverage', temporal) }}
       {% endif %}
 
       <h3 id="deel2">{{ 'Information about the provider'|t }}</h3>
-      {{ _self.metadata('Data owner', ckan_mapping_get_organization_name(dataset.authority)) }}
-      {{ _self.metadata('Publisher', ckan_mapping_get_organization_name(dataset.publisher)) }}
+      {{ functions.metadata_field('Data owner', ckan_mapping_get_organization_name(dataset.authority)) }}
+      {{ functions.metadata_field('Publisher', ckan_mapping_get_organization_name(dataset.publisher)) }}
 
       {% if dataset.contact_point_title or dataset.contact_point_name %}
         {% set contactpoint %}
@@ -240,18 +236,23 @@
             </tbody>
           </table>
         {% endset %}
-        {{ _self.metadata('Contact point', contactpoint) }}
+        {{ functions.metadata_field('Contact point', contactpoint) }}
       {% endif %}
 
       <h3 id="deel3">{{ 'Rights and visibility'|t }}</h3>
-      {{ _self.metadata('License', ckan_mapping_get_license_name(dataset.license_id)) }}
+      {{ functions.metadata_field('License', ckan_mapping_get_license_name(dataset.license_id)) }}
       {% if dataset.restrictions_statement %}
         <div>
           <span>{{ 'License explanation'|t }}</span>
           <span>{{ dataset.restrictions_statement|nl2br }}</span>
         </div>
       {% endif %}
-      {{ _self.metadata('Publicity level', ckan_mapping_get_access_rights_name(dataset.access_rights)) }}
+      {% if dataset.access_rights %}
+        <div>
+          <span>{{ 'Publicity level'|t }}</span>
+          <span>{{ ckan_mapping_get_access_rights_name(dataset.access_rights) }}{% if dataset.access_rights_reason %} ({{ ckan_mapping_get_wob_exception_name(dataset.access_rights_reason) }}){% endif %}</span>
+        </div>
+      {% endif %}
 
       {% if dataset.legal_foundation_label or dataset.legal_foundation_uri or dataset.legal_foundation_ref %}
         {% set legal %}
@@ -281,19 +282,19 @@
       {% endif %}
 
       <h3>{{ 'Relationships and references'|t }}</h3>
-      {{ _self.metadata('Related resources', cdataset.related_resource|join(', ')) }}
+      {{ functions.metadata_field('Related resources', cdataset.related_resource|join(', ')) }}
       {% if dataset.conforms_to %}
         {% set conforms_to %}
           {% for conforms_to in dataset.conforms_to %}
             {{ ckan_link(conforms_to) }}{% if not loop.last %}, {% endif %}
           {% endfor %}
         {% endset %}
-        {{ _self.metadata('Conforms to the following standards',  conforms_to) }}
+        {{ functions.metadata_field('Conforms to the following standards',  conforms_to) }}
       {% endif %}
 
-      {{ _self.metadata('Source Catalog', ckan_mapping_get_source_catalog_name(dataset.source_catalog) ) }}
-      {{ _self.metadata('Basis', legal) }}
-      {{ _self.metadata('Groups', groupLinks|join(', ')) }}
+      {{ functions.metadata_field('Source Catalog', ckan_mapping_get_source_catalog_name(dataset.source_catalog) ) }}
+      {{ functions.metadata_field('Basis', legal) }}
+      {{ functions.metadata_field('Groups', groupLinks|join(', ')) }}
     </div>
   </div>
 

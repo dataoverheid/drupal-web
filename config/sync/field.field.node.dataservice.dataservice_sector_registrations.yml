@@ -1,0 +1,23 @@
+uuid: dc9f936c-8264-415b-86cb-573022c81901
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_sector_registrations
+    - node.type.dataservice
+id: node.dataservice.dataservice_sector_registrations
+field_name: dataservice_sector_registrations
+entity_type: node
+bundle: dataservice
+label: Sectorregistraties
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

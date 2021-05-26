@@ -1,0 +1,25 @@
+uuid: 1840b1c2-42c4-4553-8c99-f890b58945d5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_community_datarequest
+    - node.type.community
+id: node.community.relation_community_datarequest
+field_name: relation_community_datarequest
+entity_type: node
+bundle: community
+label: Datarequests
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entityreference_datarequest
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

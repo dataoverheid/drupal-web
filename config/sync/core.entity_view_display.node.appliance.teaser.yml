@@ -16,6 +16,8 @@ dependencies:
     - field.field.node.appliance.field_made_by
     - field.field.node.appliance.field_organization
     - field.field.node.appliance.field_tags
+    - field.field.node.appliance.machine_name
+    - field.field.node.appliance.relation_application_dataset
     - field.field.node.appliance.theme
     - node.type.appliance
   module:
@@ -44,4 +46,6 @@ hidden:
   field_organization: true
   field_tags: true
   langcode: true
+  machine_name: true
+  relation_application_dataset: true
   theme: true

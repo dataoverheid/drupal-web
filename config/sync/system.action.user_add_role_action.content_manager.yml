@@ -1,0 +1,14 @@
+uuid: db4be6a4-f5cb-4d6a-af9e-d19465792dd6
+langcode: nl
+status: true
+dependencies:
+  config:
+    - user.role.content_manager
+  module:
+    - user
+id: user_add_role_action.content_manager
+label: 'De rol Content beheerder toewijzen aan de geselecteerde gebruiker(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: content_manager

@@ -15,6 +15,8 @@ dependencies:
     - field.field.node.appliance.field_made_by
     - field.field.node.appliance.field_organization
     - field.field.node.appliance.field_tags
+    - field.field.node.appliance.machine_name
+    - field.field.node.appliance.relation_application_dataset
     - field.field.node.appliance.theme
     - image.style.thumbnail
     - node.type.appliance
@@ -35,39 +37,30 @@ third_party_settings:
         - field_made_by
         - field_organization
         - field_link_application
-      parent_name: ''
-      weight: 0
-      format_type: html_element
+      parent_name: group_basic
+      weight: 1
+      format_type: details
       format_settings:
-        element: div
-        show_label: true
-        label_element: h2
-        required_fields: true
-        attributes: ''
-        effect: none
-        speed: fast
-        id: ''
-        classes: well
         description: ''
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
       label: 'Over de toepassing'
       region: content
     group_welke_datasets_zijn_er_geb:
       children:
-        - datasets
+        - relation_application_dataset
         - field_tags
-      parent_name: ''
-      weight: 1
-      format_type: html_element
+      parent_name: group_advanced
+      weight: 2
+      format_type: details
       format_settings:
-        element: div
-        show_label: true
-        label_element: h2
+        description: ''
+        open: true
         required_fields: true
-        attributes: ''
-        effect: none
-        speed: fast
         id: ''
-        classes: well
+        classes: ''
       label: 'Welke datasets zijn er gebruikt?'
       region: content
     group_contact_details:
@@ -76,33 +69,61 @@ third_party_settings:
         - field_contactperson_organization
         - field_contactperson_phone
         - field_contactperson_email
-      parent_name: ''
-      weight: 2
-      format_type: html_element
+      parent_name: group_advanced
+      weight: 3
+      format_type: details
       format_settings:
+        description: ''
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Contactgegevens
+      region: content
+    group_basic:
+      children:
+        - group_over_de_toepassing
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: 'basic js-form-wrapper form-wrapper'
         element: div
-        show_label: true
-        label_element: h2
+        show_label: false
+        label_element: h3
         label_element_classes: ''
         required_fields: true
         attributes: ''
         effect: none
         speed: fast
-        id: ''
-        classes: well
-      label: Contactgegevens
+      label: Basic
+    group_advanced:
+      children:
+        - group_welke_datasets_zijn_er_geb
+        - group_contact_details
+      parent_name: ''
+      weight: 1
+      format_type: html_element
       region: content
+      format_settings:
+        id: ''
+        classes: 'advanced js-form-wrapper form-wrapper'
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Advanced
 id: node.appliance.default
 targetEntityType: node
 bundle: appliance
 mode: default
 content:
-  datasets:
-    weight: 9
-    settings: {  }
-    third_party_settings: {  }
-    type: field_dataset_text
-    region: content
   field_appliance_logo:
     weight: 2
     settings:
@@ -180,7 +201,7 @@ content:
     type: string_textfield
     region: content
   field_tags:
-    weight: 10
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -189,13 +210,12 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  status:
-    type: boolean_checkbox
-    weight: 3
-    region: content
-    settings:
-      display_label: true
+  relation_application_dataset:
+    weight: 11
+    settings: {  }
     third_party_settings: {  }
+    type: field_dataset_text
+    region: content
   theme:
     weight: 4
     settings:
@@ -212,15 +232,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  translation:
-    weight: 4
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   created: true
+  datasets: true
   langcode: true
+  machine_name: true
   path: true
   promote: true
+  status: true
   sticky: true
+  translation: true
   uid: true
+  url_redirects: true

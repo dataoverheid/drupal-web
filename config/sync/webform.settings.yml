@@ -19,7 +19,7 @@ settings:
   default_form_details_toggle: true
   form_classes: "container-inline clearfix\nform--inline clearfix\nmessages messages--error\nmessages messages--warning\nmessages messages--status\n"
   button_classes: ''
-  default_wizard_prev_button_label: '< Previous Page'
+  default_wizard_prev_button_label: '< Previous'
   default_wizard_next_button_label: 'Next Page >'
   default_wizard_start_label: Start
   default_wizard_confirmation_label: Complete
@@ -203,6 +203,8 @@ ui:
   contribute_disabled: true
 libraries:
   excluded_libraries:
+    - algolia.places
+    - choices
     - ckeditor.autogrow
     - ckeditor.codemirror
     - ckeditor.fakeobjects
@@ -210,14 +212,16 @@ libraries:
     - ckeditor.link
     - codemirror
     - jquery.chosen
-    - jquery.icheck
     - jquery.inputmask
     - jquery.intl-tel-input
+    - jquery.rateit
     - jquery.select2
     - jquery.textcounter
     - jquery.timepicker
-    - jquery.toggles
     - progress-tracker
+    - signature_pad
+    - tabby
+    - tippyjs/6.x
 requirements:
   cdn: false
   bootstrap: false

@@ -1,0 +1,11 @@
+uuid: 87cd8490-f4a5-41c7-b8a2-0c2a8d677774
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.catalog
+id: node_type_catalog
+action: page_redirect
+allow_override: 0
+redirect: '/community/catalogi/[node:machine_name:value]'
+redirect_code: 307

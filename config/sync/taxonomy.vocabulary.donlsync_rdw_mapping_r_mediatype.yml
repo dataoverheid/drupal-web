@@ -1,8 +1,0 @@
-uuid: fed7647c-f074-41b4-895b-e31252ab31af
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync RDW Mapping Resource.Mediatype'
-vid: donlsync_rdw_mapping_r_mediatype
-description: ''
-weight: 0

@@ -1,0 +1,19 @@
+uuid: acb5b5c3-d351-4514-ad31-45322032b957
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_specification_url
+    - node.type.dataservice
+id: node.dataservice.dataservice_specification_url
+field_name: dataservice_specification_url
+entity_type: node
+bundle: dataservice
+label: 'Specificatie URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

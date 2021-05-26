@@ -13,17 +13,17 @@
   </div>
 {% endmacro %}
 
-<h2 class="visible-xs">{{ alias|capitalize|replace('-', ' ')|t }}</h2>
-{% if text %}
-  <div class="panel-description">
-    {{ text }}
-  </div>
-{% endif %}
-
-{% for key, resource in resources %}
+{% macro create_resource(key, resource, alias) %}
   <div class="resource">
     <div class="resource-header">
       <h3>{{ resource.name }}</h3>
+      <span class="label label-distribution-type">
+             {% if resource.distribution_type %}
+               {{ ckan_mapping_get_distribution_type_name(resource.distribution_type) }}
+             {% else %}
+               {{ alias | replace({ '-': ' '}) | capitalize | t }}
+             {% endif %}
+        </span>
       <span class="label">{{ ckan_mapping_get_file_format_name(resource.format) }}</span>
       <span class="label label-licence">{{ ckan_mapping_get_license_name(resource.license_id) }}</span>
     </div>
@@ -50,13 +50,23 @@
       {% endif %}
     {% endif %}
 
-    <p>{{ resource.description }}</p>
+    <p>{{ ckan_markdown(resource.description) }}</p>
 
     {% if resource.previewUrl %}
-        <div class="preview-action button button--primary" data-preview-id="{{ key }}"
-             data-preview-url="{{ resource.previewUrl }}">{{ 'Preview'|t }}</div>
-        <table id="preview-{{ key }}" class="preview-table"></table>
-        <p>{{ 'This is a preview it does not contain all the data. Download the resource to access all the records.' }}</p>
+      <div class="preview-action button button--primary" data-preview-id="{{ key }}" data-preview-url="{{ resource.previewUrl }}">
+        {{ 'Preview'|t }}
+      </div>
+      <div id="preview-{{ key }}" class="details-replacement preview-block hidden" data-preview-url="{{ resource.previewUrl }}" data-drupal-selector="preview-{{ key }}" open="close">
+        <div role="button" aria-controls="#preview-' + it.getAttribute('data-preview-id') + '" aria-expanded="false" aria-pressed="false" class="details-replacement-summary preview-summary">{{ 'Preview'|t }}</div>
+        <div class="preview-content"></div>
+      </div>
     {% endif %}
+
   </div>
+{% endmacro %}
+
+<h2 class="visible-xs">{{ alias|capitalize|replace({'-': ' '})|t }}</h2>
+
+{% for key, resource in resources %}
+  {{ _self.create_resource(key, resource, alias) }}
 {% endfor %}

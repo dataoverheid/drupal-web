@@ -1,8 +1,0 @@
-uuid: 3c83d7bf-54c7-4f84-9f60-dfe3a8f56000
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync CBS Mapping Frequency'
-vid: donlsync_cbs_mapping_frequency
-description: ''
-weight: 0

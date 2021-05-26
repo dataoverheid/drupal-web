@@ -1,0 +1,25 @@
+uuid: 8c3767c5-6e80-4a12-a51d-1d3dfb04d9ac
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_community_application
+    - node.type.community
+id: node.community.relation_community_application
+field_name: relation_community_application
+entity_type: node
+bundle: community
+label: Toepassingen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entityreference_appliance
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

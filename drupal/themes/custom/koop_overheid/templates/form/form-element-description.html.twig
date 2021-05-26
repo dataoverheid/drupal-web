@@ -1,9 +1,11 @@
 {% if element_id and content %}
-    <div class="question-explanation">
-        <a class="question-explanation__link" href="#{{ element_id }}" id="{{ element_id }}-link" data-handler="toggle-explanation" tabindex="-1">{{ 'Explanation'|t }}</a>
-        <div class="question-explanation__content" id="{{ element_id }}" data-decorator="hide-self" hidden="true">
-            {{ content }}
-            <a href="{{ element_id }}-link" class="question-explanation__close" data-handler="close-explanation">{{ 'Close'|t }}</a>
-        </div>
+  <span class="more-information">
+    <span class="more-information-click js-more-information">?
+      <span class="visually-hidden">{{ 'Explanation'|t }}</span>
+    </span>
+    <div class="more-information-content">
+      {{ content }}
+      <div class="more-information-close js-close">{{ 'Close'|t }}</div>
     </div>
+  </span>
 {% endif %}

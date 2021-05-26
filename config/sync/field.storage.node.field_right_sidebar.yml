@@ -4,8 +4,12 @@ status: true
 dependencies:
   module:
     - entity_reference_revisions
+    - field_permissions
     - node
     - paragraphs
+third_party_settings:
+  field_permissions:
+    permission_type: public
 id: node.field_right_sidebar
 field_name: field_right_sidebar
 entity_type: node

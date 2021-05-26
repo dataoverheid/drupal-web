@@ -1,0 +1,23 @@
+uuid: 81fea9e4-5793-4419-9f54-029c27f0f2a3
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_national_coverage
+    - node.type.dataservice
+id: node.dataservice.dataservice_national_coverage
+field_name: dataservice_national_coverage
+entity_type: node
+bundle: dataservice
+label: 'Landelijk dekkend'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

@@ -1,10 +1,12 @@
-<p>Optional: General tekst about visualisations.</p>
+<h2 class="visible-xs">{{ alias|capitalize|replace({'-': ' '})|t }}</h2>
 
-<h3>Resource title: Bar chart met de de items</h3>
-<p>Een omschrijving van deze bar chart.</p>
+{% for key, resource in resources %}
+  <h3>{{ resource.name }}</h3>
 
-{% if text %}
-  {{ text }}
-{% endif %}
-
-<iframe title="Immigratie: IND EU Documenten Beslissingen" aria-label="Column Chart" id="datawrapper-chart-6AJfy" src="//datawrapper.dwcdn.net/6AJfy/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="661"></iframe>
+  <p>{{ ckan_markdown(resource.description) }}</p>
+  {% if resource.isImage %}
+    <img src="{{ resource.url }}" alt="{{ resource.name }}">
+  {% else %}
+    <div id="localfocus-{{ key }}" class="localfocus-div" data-url="{{ resource.url }}"></div>
+  {% endif %}
+{% endfor %}

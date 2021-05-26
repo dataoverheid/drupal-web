@@ -5,6 +5,7 @@ namespace Drupal\donl_community\Controller;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\donl\Controller\DatarequestController;
 use Drupal\donl_community\CommunityResolverInterface;
+use Drupal\donl_community\Form\CommunitySearchForm;
 use Drupal\donl_search\SolrRequestInterface;
 use Drupal\donl_search_backlink\BackLinkService;
 use Drupal\node\NodeInterface;
@@ -63,6 +64,8 @@ class DatarequestCommunityController extends DatarequestController {
     ]);
     $routeParams = ['community' => $community->getMachineName()];
     $build['#backLink'] = $this->backLinkService->createBackLink($title, 'donl_community.search.datarequest', $routeParams);
+
+    $build['#search'] = $this->formBuilder()->getForm(CommunitySearchForm::class, $community);
 
     return $build;
   }

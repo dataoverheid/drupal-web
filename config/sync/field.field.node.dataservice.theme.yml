@@ -1,0 +1,19 @@
+uuid: 761f8a03-8ae2-42dc-8a85-e273824bc326
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.theme
+    - node.type.dataservice
+id: node.dataservice.theme
+field_name: theme
+entity_type: node
+bundle: dataservice
+label: Thema
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

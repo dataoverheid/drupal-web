@@ -15,23 +15,19 @@ donl_search.autocomplete:
 # Suggestor.
 donl_search.suggest:
   suggest:
-  path: '/suggest/{term}'
+  path: '/suggest/{search}/{type}'
   defaults:
     _controller: '\Drupal\donl_search\Controller\SuggestController::resultList'
-    _title: 'Data register of the Dutch government'
+    _title: 'Suggestions'
   requirements:
     _permission: 'access content'
-  options:
-    parameters:
-      term:
-        type: string
 
 # Group page (with dataset search page).
 donl_search.group.view:
   path: '/community/group/{group}/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_search\Controller\SearchDatasetGroupController:view'
-    _title_callback: '\Drupal\donl_search\Controller\SearchDatasetGroupController:getTitle'
+    _controller: '\Drupal\donl_search\Controller\Group\GroupSearchDatasetController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Group\GroupSearchDatasetController:getTitle'
     page: 1
     recordsPerPage: 10
   options:
@@ -40,15 +36,15 @@ donl_search.group.view:
         type: 'donl-group'
   requirements:
     _permission: 'access content'
-    page: '^[0-9]*$'
-    recordsPerPage: '^[0-9]*$'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
 
 # Catalog page (with dataset search page).
 donl_search.catalog.view:
   path: '/community/catalogi/{catalog}/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_search\Controller\SearchDatasetCatalogController:view'
-    _title_callback: '\Drupal\donl_search\Controller\SearchDatasetCatalogController:getTitle'
+    _controller: '\Drupal\donl_search\Controller\Catalog\CatalogSearchDatasetController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Catalog\CatalogSearchDatasetController:getTitle'
     page: 1
     recordsPerPage: 10
   options:
@@ -57,8 +53,8 @@ donl_search.catalog.view:
         type: 'donl-catalog'
   requirements:
     _permission: 'access content'
-    page: '^[0-9]*$'
-    recordsPerPage: '^[0-9]*$'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
 
 # Reroute the old community URL.
 donl_search.search_old.catalog:
@@ -75,8 +71,8 @@ donl_search.search_old.catalog:
 donl_search.organization.view:
   path: '/community/organization/{organization}/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_search\Controller\SearchDatasetOrganizationController:view'
-    _title_callback: '\Drupal\donl_search\Controller\SearchDatasetOrganizationController:getTitle'
+    _controller: '\Drupal\donl_search\Controller\Organization\OrganizationSearchDatasetController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Organization\OrganizationSearchDatasetController:getTitle'
     page: 1
     recordsPerPage: 10
   options:
@@ -85,14 +81,78 @@ donl_search.organization.view:
         type: 'donl-organization'
   requirements:
     _permission: 'access content'
-    page: '^[0-9]*$'
-    recordsPerPage: '^[0-9]*$'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
+
+donl_search.organization.application.view:
+  path: '/community/organization/{organization}/application/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_search\Controller\Organization\OrganizationSearchApplicationController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Organization\OrganizationSearchApplicationController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      organization:
+        type: 'donl-organization'
+  requirements:
+    _permission: 'access content'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
+
+donl_search.organization.community.view:
+  path: '/community/organization/{organization}/community/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_search\Controller\Organization\OrganizationSearchCommunityController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Organization\OrganizationSearchCommunityController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      organization:
+        type: 'donl-organization'
+  requirements:
+    _permission: 'access content'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
+
+donl_search.organization.datarequest.view:
+  path: '/community/organization/{organization}/datarequest/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_search\Controller\Organization\OrganizationSearchDatarequestController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Organization\OrganizationSearchDatarequestController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      organization:
+        type: 'donl-organization'
+  requirements:
+    _permission: 'access content'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
+
+donl_search.organization.group.view:
+  path: '/community/organization/{organization}/group/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_search\Controller\Organization\OrganizationSearchGroupController:view'
+    _title_callback: '\Drupal\donl_search\Controller\Organization\OrganizationSearchGroupController:getTitle'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      organization:
+        type: 'donl-organization'
+  requirements:
+    _permission: 'access content'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
 
 # Admin pages.
 donl_search.solr_settings.request:
-  path: '/admin/config/system/ckan/solr-request'
+  path: '/admin/donl/solr'
   defaults:
     _form: '\Drupal\donl_search\Form\SolrRequestSettingsForm'
-    _title: 'SOLR settings'
+    _title: 'SOLR'
   requirements:
     _permission: 'configure sorl request settings'

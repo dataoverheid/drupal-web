@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'donl_form') . '/includes/donl_form.node_publish_form.inc';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'donl_form') . '/includes/donl_form.node_delete_form.inc';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'donl_form') . '/includes/donl_form.dataservice.inc';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'donl_form') . '/includes/donl_form.appliance.inc';
+
+/**
+ * Implements hook_form_theme().
+ */
+function donl_form_theme($existing, $type, $theme, $path) {
+  return [
+    'donl_form' => [
+      'render element' => 'form',
+      'template' => 'donl-form',
+    ],
+    'donl_form_header' => [
+      'variables' => [
+        'type' => '',
+        'summary' => '',
+        'steps' => [],
+      ],
+    ],
+    'donl_form_sidebar' => [
+      'variables' => [
+        'toggler_enabled' => FALSE,
+        'sub_steps' => [],
+        'actions' => NULL,
+      ],
+    ],
+    'donl_form_summary' => [
+      'variables' => [
+        'title' => '',
+        'step_title' => '',
+        'fields' => [],
+      ],
+    ],
+    'donl_form_step' => [
+      'variables' => [
+        'title' => '',
+        'short_title' => '',
+        'icon' => NULL,
+        'sub_steps' => NULL,
+        'active' => FALSE,
+        'completed' => FALSE,
+        'url' => '',
+      ],
+    ],
+    'donl_form_substep' => [
+      'variables' => [
+        'title' => '',
+        'id' => '',
+        'advanced' => FALSE,
+        'completed' => FALSE,
+        'active' => FALSE,
+      ],
+    ],
+  ];
+}
+
+/**
+ * General callback to add the required donl-form variables.
+ */
+function donl_form_general(&$form, FormStateInterface $form_state) {
+  $form['#theme'] = 'donl_form';
+  $form['#attributes']['class'][] = 'donl-form';
+  $form['#attached']['library'][] = 'donl_form/donl-form-content-type';
+
+  // Add select2 classes to select list.
+  foreach ($form as $k => $v) {
+    if (strpos($k, '#') !== 0 && isset($v['widget']['#type']) && $v['widget']['#type'] === 'select') {
+      $form[$k]['widget']['#attributes']['class'][] = 'select2';
+    }
+  }
+  if (isset($form['theme']['widget'][0]['value'])) {
+    $form['theme']['widget'][0]['value']['#attributes']['class'][] = 'select2';
+  }
+
+  if (isset($form['actions'])) {
+    unset($form['actions']['delete'], $form['actions']['preview']);
+
+    $form['actions']['submit']['#attributes']['id'] = 'donl-form-submit-button';
+    $form['actions']['submit']['#attributes']['class'][] = 'hidden';
+
+    if (isset($form['actions']['cancel'])) {
+      $form['actions']['cancel']['#weight'] = 6;
+    }
+
+    $form['actions']['submit-overlay-wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['submit-overlay-wrapper']],
+      '#weight' => 10,
+    ];
+
+    $form['actions']['submit-overlay-wrapper']['submit_overlay'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => t('Next step'),
+      '#attributes' => [
+        'class' => ['button', 'button--primary', 'submit-overlay'],
+        'data-in-form-text' => t('Next step'),
+        'data-next-form-text' => t('Save'),
+      ],
+    ];
+  }
+}
+
+/**
+ * Custom submit handler for donl_form.
+ */
+function donl_form_general_form_alter_submit(&$form, FormStateInterface $form_state) {
+  $form_state->setRedirect('donl_form.node.publish', ['node' => $form_state->getFormObject()->getEntity()->id()]);
+}

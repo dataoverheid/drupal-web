@@ -1,0 +1,29 @@
+uuid: 3635b038-262e-41b3-a689-0a5f222215b8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_type
+    - node.type.dataservice
+    - taxonomy.vocabulary.donl_dataservice_types
+id: node.dataservice.dataservice_type
+field_name: dataservice_type
+entity_type: node
+bundle: dataservice
+label: Soort
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      donl_dataservice_types: donl_dataservice_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

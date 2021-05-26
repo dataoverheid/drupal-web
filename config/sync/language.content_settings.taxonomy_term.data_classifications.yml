@@ -1,0 +1,16 @@
+uuid: c830eff7-17bf-4e54-8b92-9cd0e67bf9ba
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.data_classifications
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.data_classifications
+target_entity_type_id: taxonomy_term
+target_bundle: data_classifications
+default_langcode: site_default
+language_alterable: false

@@ -7,7 +7,7 @@ use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- *
+ * Application param converter
  */
 class ParamConverterApplication implements ParamConverterInterface {
 
@@ -17,7 +17,9 @@ class ParamConverterApplication implements ParamConverterInterface {
   protected $nodeStorage;
 
   /**
+   * Constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
@@ -27,8 +29,22 @@ class ParamConverterApplication implements ParamConverterInterface {
    * {@inheritdoc}
    */
   public function convert($value, $definition, $name, array $defaults) {
-    if (!empty($value) && ($node = $this->nodeStorage->load($value)) && $node->getType() === 'appliance') {
-      return $node;
+    if (!empty($value)) {
+      $properties = [
+        'machine_name' => $value,
+        'type' => 'appliance',
+      ];
+      if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
+        /* @var \Drupal\node\NodeInterface $node */
+        $node = reset($nodes);
+        if ($node->getType() === 'appliance') {
+          return $node;
+        }
+      }
+
+      if (is_numeric($value) && ($node = $this->nodeStorage->load($value)) && $node->getType() === 'appliance') {
+        return $node;
+      }
     }
     return NULL;
   }

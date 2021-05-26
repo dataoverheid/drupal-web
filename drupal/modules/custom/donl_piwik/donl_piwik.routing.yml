@@ -1,0 +1,32 @@
+# Admin paths.
+donl_piwik.piwik:
+  path: '/admin/donl/piwik'
+  defaults:
+    _title: 'PiwikPRO'
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+  requirements:
+    _permission: 'manage piwik settings'
+
+donl_piwik.piwik.settings:
+  path: '/admin/donl/piwik/settings'
+  defaults:
+    _form: '\Drupal\donl_piwik\Form\PiwikSettingsForm'
+    _title: 'Piwik settings'
+  requirements:
+    _permission: 'manage piwik settings'
+
+donl_piwik.piwik.datalayer:
+  path: '/admin/donl/piwik/datalayer'
+  defaults:
+    _form: '\Drupal\donl_piwik\Form\PiwikDataLayerForm'
+    _title: 'Piwik DataLayer'
+  requirements:
+    _permission: 'manage piwik settings'
+
+donl_piwik.list_all_routes:
+  path: '/admin/donl/piwik/list_all_routes'
+  defaults:
+    _controller: '\Drupal\donl_piwik\Controller\ListAllRoutesController::content'
+    _title: 'Available routes'
+  requirements:
+    _permission: 'manage piwik settings'

@@ -1,0 +1,12 @@
+uuid: 9ab170a2-90bf-4bae-b2da-30aacc6609dc
+langcode: nl
+status: true
+dependencies: {  }
+id: header_1920x480
+label: 'Header 1920x480'
+description: ''
+aspect_ratio: '100:25'
+soft_limit_width: 1920
+soft_limit_height: 480
+hard_limit_width: null
+hard_limit_height: null

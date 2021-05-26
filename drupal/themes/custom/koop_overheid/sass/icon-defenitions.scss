@@ -1,0 +1,10 @@
+.plus-after {
+  &::after {
+    font-weight: 300;
+    margin-left: 15px;
+    padding-left: 15px;
+    content: "+";
+    color: $c-blue-600;
+    border-left: 1px solid $c-blue-600;
+  }
+}

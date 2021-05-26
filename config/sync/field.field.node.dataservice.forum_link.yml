@@ -1,0 +1,19 @@
+uuid: 3e90da0e-773b-41d2-8eb9-7c0ab4800872
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.forum_link
+    - node.type.dataservice
+id: node.dataservice.forum_link
+field_name: forum_link
+entity_type: node
+bundle: dataservice
+label: 'Forum link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

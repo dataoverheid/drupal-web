@@ -1,0 +1,29 @@
+uuid: 05b2edea-0093-4ab8-b0bf-45b89e093aef
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_recent_datarequest
+    - node.type.datarequest
+    - node.type.recent
+id: node.recent.relation_recent_datarequest
+field_name: relation_recent_datarequest
+entity_type: node
+bundle: recent
+label: Dataverzoeken
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      datarequest: datarequest
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

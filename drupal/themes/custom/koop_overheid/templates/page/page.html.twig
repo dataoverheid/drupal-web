@@ -46,12 +46,12 @@
 {% block header %}
   {% include '@koop_overheid/page/header/header.html.twig' %}
 {% endblock header %}
-
+<div id="site-content">
 {% block content_before %}
   {{ page.content_before }}
 {% endblock content_before %}
 
-<a id="content"></a>
+<div id="content"></div>
 {% block content %}
   {% if page.sidebar_left %}
     <div class="container columns columns--sidebar-left row">
@@ -92,7 +92,7 @@
     </div>
   {% endif %}
 {% endblock content %}
-
+</div>
 {% block footer %}
   {% include '@koop_overheid/page/footer.html.twig' %}
 {% endblock footer %}

@@ -6,6 +6,6 @@ type: module
 core_version_requirement: ^8 || ^9
 
 dependencies:
-  - donl:donl
+  - donl_identifier:donl_identifier
   - donl_search:donl_search
   - drupal:datetime_range

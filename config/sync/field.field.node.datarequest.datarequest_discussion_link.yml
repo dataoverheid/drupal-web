@@ -1,0 +1,19 @@
+uuid: c65032f5-b641-4c54-979e-e773989331c5
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.datarequest_discussion_link
+    - node.type.datarequest
+id: node.datarequest.datarequest_discussion_link
+field_name: datarequest_discussion_link
+entity_type: node
+bundle: datarequest
+label: 'Discusieer mee over dit verzoek'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

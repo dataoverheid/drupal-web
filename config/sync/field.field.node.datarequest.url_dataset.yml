@@ -11,7 +11,7 @@ id: node.datarequest.url_dataset
 field_name: url_dataset
 entity_type: node
 bundle: datarequest
-label: 'URL van gevraagde datasets op data.overheid.nl'
+label: 'URL van gevraagde datasets op data.overheid.nl [old]'
 description: ''
 required: false
 translatable: false

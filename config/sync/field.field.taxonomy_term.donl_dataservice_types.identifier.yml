@@ -1,0 +1,19 @@
+uuid: 41a35779-75c7-45c7-927b-d89cba4c7bba
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.donl_dataservice_types
+id: taxonomy_term.donl_dataservice_types.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: donl_dataservice_types
+label: Identifier
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

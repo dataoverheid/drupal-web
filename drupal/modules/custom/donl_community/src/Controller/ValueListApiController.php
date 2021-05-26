@@ -55,10 +55,15 @@ class ValueListApiController extends ControllerBase {
         $translation = $node->getTranslation('en');
       }
 
+      $description = NULL;
+      if ($value = $node->get('html_description')->getValue()) {
+        $description = (string) check_markup($value[0]['value'], $value[0]['format']);
+      }
+
       if ($community = $this->communityResolver->nodeToCommunity($node)) {
         $data[] = [
           'name' => $community->getTitle(),
-          'description' => $node->get('community_description')->getValue()[0]['value'] ?? NULL,
+          'description' => $description,
           'field_identifier' => $community->getIdentifier(),
           'field_slug' => $community->getMachineName(),
           'label_nl' => $community->getTitle(),

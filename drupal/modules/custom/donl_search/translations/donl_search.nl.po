@@ -6,11 +6,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: nl\n"
 
+msgid "1 dataset"
+msgid_plural "@count datasets"
+msgstr[0] "1 dataset"
+msgstr[1] "@count datasets"
+
+msgid "1 data request"
+msgid_plural "@count data requests"
+msgstr[0] "1 dataverzoek"
+msgstr[1] "@count dataverzoeken"
+
+msgid "popular groups of datasets"
+msgstr "populaire groepen datasets"
+
+msgid "Popular groups of datasets"
+msgstr "Populaire groepen datasets"
+
+msgid "1 popular group of datasets"
+msgid_plural "@count popular groups of datasets"
+msgstr[0] "1 populaire groep datasets"
+msgstr[1] "@count populaire groepen datasets"
+
+msgid "1 community"
+msgid_plural "@count communities"
+msgstr[0] "1 community"
+msgstr[1] "@count communities"
+
+msgid "1 catalog"
+msgid_plural "@count catalogs"
+msgstr[0] "1 catalogus"
+msgstr[1] "@count catalogi"
+
+msgid "1 organization"
+msgid_plural "@count organizations"
+msgstr[0] "1 organisatie"
+msgstr[1] "@count organisaties"
+
+msgid "1 support page"
+msgid_plural "@count support pages"
+msgstr[0] "1 support pagina"
+msgstr[1] "@count support pagina's"
+
+msgid "1 application"
+msgid_plural "@count applications"
+msgstr[0] "1 toepassing"
+msgstr[1] "@count toepassingen"
+
+msgid "1 news item"
+msgid_plural "@count news items"
+msgstr[0] "1 nieuwsbericht"
+msgstr[1] "@count nieuwsberichten"
+
+msgid "1 dataservice"
+msgid_plural "@count dataservices"
+msgstr[0] "1 dataservice"
+msgstr[1] "@count dataservices"
+
 msgid "Search"
 msgstr "Zoeken"
 
-msgid "Eg 2018 election results"
-msgstr "Bv. verkiezingsuitslag 2018"
+msgid "What are you looking for?"
+msgstr "Waar ben je naar op zoek?"
 
 msgid "Fetching suggestions"
 msgstr "Resultaten ophalen"
@@ -33,7 +89,7 @@ msgstr "Selecteer het aantal resultaten dat wordt weergegeven"
 msgid "Refresh"
 msgstr "Verversen"
 
-msgid "Show sub themes"
+msgid "Show sub-themes"
 msgstr "Toon subthema's"
 
 msgid "No further refinement available."
@@ -69,131 +125,23 @@ msgid_plural "@count search results"
 msgstr[0] "1 zoekresultaat"
 msgstr[1] "@count zoekresultaten"
 
-msgid "Community"
-msgstr "Community"
-
-msgid "Communities"
-msgstr "Communities"
-
-msgid "communities"
-msgstr "communities"
-
-msgid "1 community"
-msgid_plural "@count communities"
-msgstr[0] "1 community"
-msgstr[1] "@count communities"
-
-msgid "Catalog"
-msgstr "Catalogus"
-
-msgid "Catalogs"
-msgstr "Catalogi"
-
-msgid "catalogs"
-msgstr "catalogi"
-
-msgid "1 catalog"
-msgid_plural "@count catalogs"
-msgstr[0] "1 catalogus"
-msgstr[1] "@count catalogi"
-
-msgid "Datasets"
-msgstr "Datasets"
-
-msgid "datasets"
-msgstr "datasets"
-
-msgid "1 dataset"
-msgid_plural "@count datasets"
-msgstr[0] "1 dataset"
-msgstr[1] "@count datasets"
-
-msgid "Data requests"
-msgstr "Dataverzoeken"
-
-msgid "data requests"
-msgstr "dataverzoeken"
-
-msgid "1 data request"
-msgid_plural "@count data requests"
-msgstr[0] "1 dataverzoek"
-msgstr[1] "@count dataverzoeken"
-
-msgid "Groups"
-msgstr "Groepen"
-
-msgid "groups"
-msgstr "groepen"
-
-msgid "1 group"
-msgid_plural "@count groups"
-msgstr[0] "1 groep"
-msgstr[1] "@count groepen"
-
-msgid "Organizations"
-msgstr "Organisaties"
-
-msgid "organizations"
-msgstr "organisaties"
-
-msgid "1 organization"
-msgid_plural "@count organizations"
-msgstr[0] "1 organisatie"
-msgstr[1] "@count organisaties"
-
-msgid "Applications"
-msgstr "Toepassingen"
-
-msgid "applications"
-msgstr "toepassingen"
-
-msgid "1 application"
-msgid_plural "@count applications"
-msgstr[0] "1 toepassing"
-msgstr[1] "@count toepassingen"
-
-msgid "News item"
-msgstr "Nieuwsbericht"
-
-msgid "News items"
-msgstr "Nieuwsberichten"
-
-msgid "news items"
-msgstr "nieuwsberichten"
-
-msgid "1 news item"
-msgid_plural "@count news items"
-msgstr[0] "1 nieuwsbericht"
-msgstr[1] "@count nieuwsberichten"
-
-msgid "Support page"
-msgstr "Support pagina"
-
-msgid "Support pages"
-msgstr "Support pagina's"
-
-msgid "support pages"
-msgstr "support pagina's"
-
-msgid "1 support page"
-msgid_plural "@count support pages"
-msgstr[0] "1 support pagina"
-msgstr[1] "@count support pagina's"
-
 msgid "No suggestions."
 msgstr "Geen suggesties."
 
-msgid "Suggested datasets:"
-msgstr "Voorgestelde datasets:"
+msgid "Suggested @type"
+msgstr "Voorgestelde @type"
 
-msgid "Based on title:"
-msgstr "Gebaseerd op titel:"
+msgid "suggestions"
+msgstr "suggesties"
 
-msgid "Search dataset on organisation:"
-msgstr "Filter datasets op organistatie:"
+msgid "Based on title"
+msgstr "Gebaseerd op titel"
 
-msgid "Search dataset on theme:"
-msgstr "Filter datasets op thema:"
+msgid "Search dataset on organisation"
+msgstr "Filter datasets op organistatie"
+
+msgid "Search dataset on theme"
+msgstr "Filter datasets op thema"
 
 msgid "Relates to"
 msgstr "Relateert aan"
@@ -244,3 +192,33 @@ msgstr "<span class=\"corrected\">Resultaten voor @corrected</span><span class=\
 
 msgid "View all @count @type for this organization"
 msgstr "Bekijk alle @count @type voor deze organisatie"
+
+msgid "Selected filters"
+msgstr "Geselecteerde filters"
+
+msgid "Clear all filters"
+msgstr "Wis alle filters"
+
+msgid "There were @totalResults datasets found."
+msgstr "Er zijn @totalResults datasets gevonden."
+
+msgid "There were @totalResults datasets found in the group @group."
+msgstr "Er zijn @totalResults datasets gevonden in de groep @group."
+
+msgid "There were @totalResults datasets found in the community @community."
+msgstr "Er zijn @totalResults datasets gevonden in de community @community."
+
+msgid "You searched for <b>'@search'</b>. There were <b>@totalResults datasets</b> found.<br>Can't find the dataset you are looking for below? Make a datarequest."
+msgstr "Je zocht op <b>'@search'</b>. Er zijn <b>@totalResults datasets</b> gevonden.<br>Vind je hieronder niet de dataset die je zoekt? Doe dan een dataverzoek."
+
+msgid "You searched for <b>'@search'</b>. We've found <b>@totalResults dataset</b>.<br>Can't find the dataset you are looking for below? Make a datarequest."
+msgstr "Je zocht op <b>'@search'</b>. Er is <b>@totalResults dataset</b> gevonden.<br>Vind je hieronder niet de dataset die je zoekt? Doe dan een dataverzoek."
+
+msgid "Make datarequest"
+msgstr "Dataverzoek doen"
+
+msgid "Less information"
+msgstr "Minder informatie"
+
+msgid "Level of governance"
+msgstr "Bestuurslaag"

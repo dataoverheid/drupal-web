@@ -1,0 +1,7 @@
+donl_support.settings:
+  path: '/admin/donl/support'
+  defaults:
+    _form: '\Drupal\donl_support\Form\SupportForm'
+    _title: 'Support'
+  requirements:
+    _permission: 'access content'

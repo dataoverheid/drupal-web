@@ -7,7 +7,7 @@ services:
       - '@logger.factory'
       - '@cache.default'
       - '@entity_type.manager'
-      - '@request_stack'
+      - '@current_user'
 
   ckan.mapping:
     class: Drupal\ckan\MappingService
@@ -28,33 +28,17 @@ services:
       - '@donl.value_list'
       - '@string_translation'
 
-  ckan.breadcrumb:
-    class: Drupal\ckan\BreadcrumbBuilder
-    arguments:
-      - '@string_translation'
-      - '@request_stack'
-    tags:
-      - { name: breadcrumb_builder, priority: 9999 }
-
   ckan.paramConverter.dataset:
     class: Drupal\ckan\Routing\ParamConverterDataset
-    arguments: ['@ckan.request']
+    arguments: [ '@ckan.request' ]
     tags:
       - { name: paramconverter }
 
   ckan.paramConverter.resource:
     class: Drupal\ckan\Routing\ParamConverterResource
-    arguments: ['@ckan.request']
+    arguments: [ '@ckan.request' ]
     tags:
       - { name: paramconverter }
-
-  ckan.dataset.access_check:
-    class: Drupal\ckan\Access\DatasetAccessCheck
-    arguments:
-      - '@current_user'
-      - '@current_route_match'
-    tags:
-      - { name: access_check, applies_to: '_dataset_access_check' }
 
   ckan.twig_extension:
     class: Drupal\ckan\CkanTwigExtension
@@ -63,8 +47,21 @@ services:
       - '@language_manager'
       - '@entity_type.manager'
       - '@donl_search.search_url'
-      - '@ckan.request'
+      - '@donl_search.request'
       - '@ckan.sort_dataset_resources'
       - '@date.formatter'
+      - '@config.factory'
+    tags:
+      - { name: twig.extension }
+
+  ckan.data_classifications:
+    class: Drupal\ckan\DataClassifications
+    arguments:
+      - '@entity_type.manager'
+
+  ckan.data_classifications.twig_extension:
+    class: Drupal\ckan\TwigExtension\DataClassificationsTwigExtension
+    arguments:
+      - '@ckan.data_classifications'
     tags:
       - { name: twig.extension }

@@ -1,9 +1,14 @@
 <div id="suggester">
+  {% if did_you_mean %}
+    <div class="did-you-mean">
+      {{ 'Did you mean' |t }} <span class="search-replace">{{ did_you_mean }}</span>?
+    </div>
+  {% endif %}
   {% if suggestions %}
-    <h2>{{ 'Suggested datasets:'|t }}</h2>
+    <h2>{{ searchType }}:</h2>
     {% for key, suggestion_group in suggestions %}
       <div class="suggestion-group">
-        <h4>{{ key|t }}</h4>
+        <h4>{{ key|t }}:</h4>
         <ul class="list list--linked">
           {% for link in suggestion_group %}
             <li>{{ link }}</li>

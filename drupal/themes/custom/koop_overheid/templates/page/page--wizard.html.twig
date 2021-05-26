@@ -1,0 +1,14 @@
+{% extends 'page.html.twig' %}
+
+{% block header %}
+  {% include '@koop_overheid/page/header/page-wizard-header.html.twig' %}
+{% endblock header %}
+
+{% block content_before %}
+  {# by leaving this empty we automatically hide the search block that's located
+  in this region. #}
+{% endblock content_before %}
+
+{% block container %}
+  {{ page.content }}
+{% endblock container %}

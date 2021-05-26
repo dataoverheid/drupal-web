@@ -1,0 +1,23 @@
+uuid: 74ca3324-2713-4bae-b1a3-e2d3ca807042
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.link_page
+  module:
+    - text
+id: node.link_page.body
+field_name: body
+entity_type: node
+bundle: link_page
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -2,51 +2,253 @@
   margin: 27px 0 24px 0;
 }
 
+.facets-wrapper {
+  position: relative;
+
+  @include breakpoint($laptop) {
+    margin-top: -82px;
+  }
+}
+
 #facets {
-  padding: 5px 20px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  padding-top: 1px;
   border: 1px solid $c-gray-300;
+  border-top: 0;
 
-  .facet--label {
-    position: relative;
-    margin: 0;
-    padding: 10px 0;
-    cursor: pointer;
-    transition: .5s;
-    background: url('/themes/custom/koop_overheid/images/icon-plus.svg') right center no-repeat;
-    background-size: 10px;
+  &::before {
+    position: absolute;
+    z-index: 102;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: $c-gray-300;
+  }
 
-    &:hover, &:focus, &:active {
-      color: $c-blue-600;
+  &::after {
+    position: absolute;
+    z-index: 103;
+    top: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 2px;
+    content: '';
+    background-color: $c-blue-600;
+
+    @include breakpoint($laptop) {
+      left: 10px;
+      width: calc(100% - 20px);
     }
   }
 
-  .list--facet {
-    overflow: hidden;
-    max-height: 0;
-    margin: 0 0 5px 0;
-    padding: 0;
-    transition: max-height 0.10s ease-out;
-    border-bottom: 1px solid $c-gray-200;
+  @include breakpoint($laptop) {
+    border-bottom: 0;
+  }
 
-    &.show {
-      max-height: none;
+  &.active {
+    @include breakpoint($laptop) {
+      border-bottom: 1px solid $c-gray-300;
     }
+  }
 
-    ul {
-      list-style: none;
+  .facet-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .facet-title {
+      z-index: 100;
+      width: 100%;
+      margin: 0;
+      padding: 20px 20px 10px;
+      background: $c-white;
+
+      @include breakpoint($laptop) {
+        padding: 20px 10px;
+      }
     }
+  }
 
-    a {
+  .facet-toggle {
+    display: none;
+
+    @include breakpoint($laptop) {
+      position: absolute;
+      z-index: 101;
+      top: 50%;
+      right: 10px;
       display: flex;
-      max-width: 300px;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      cursor: pointer;
+      transform: translateY(-50%);
+      color: $c-white;
+      border: 0;
+      border-radius: 50%;
+      background-color: $c-blue-600;
+      box-shadow: none;
 
-      span {
-        max-width: none;
+      .icon-plus-shape {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:before {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  &.active .facet-toggle .icon-plus-shape::before {
+    @include breakpoint($laptop) {
+      font-size: 2px;
+      content: '\e900';
+    }
+  }
+
+  .facet-list {
+    padding: 5px 10px;
+
+    @include breakpoint($laptop-and-up) {
+      display: block !important;
+    }
+
+    @include breakpoint($laptop) {
+      padding: 5px;
+    }
+  }
+
+  .facet-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 15px 0 -30px;
+    padding: 0 0 10px 0;
+
+    .facet-remove {
+      font-style: normal;
+      line-height: 30px;
+      display: inline-block;
+      margin: 0 10px 10px 0;
+      padding: 0 35px 0 10px;
+      transition: .5s;
+      text-decoration: none;
+      color: black;
+      border-radius: 10px;
+      background: white url('/themes/custom/koop_overheid/images/icon-close.svg') no-repeat center right 15px;
+      background-size: 10px;
+
+      em {
+        font-style: normal;
       }
 
-      span:last-child {
-        flex-shrink: 0;
-        margin-left: 3px;
+      &:hover, &:focus, &:active {
+        color: black;
+        background-color: $c-gray-100;
+      }
+    }
+  }
+
+  .facet--group {
+    padding: 0 10px;
+
+    @include breakpoint($laptop) {
+      padding: 0 5px;
+    }
+
+    .facet--label {
+      font-weight: 700;
+      line-height: 1.25;
+      position: relative;
+      margin: 0;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: .5s;
+      color: $c-black;
+      background: url('/themes/custom/koop_overheid/images/icon-plus.svg') right center no-repeat;
+      background-size: 10px;
+
+      &:hover, &:focus, &:active {
+        color: $c-blue-600;
+      }
+    }
+
+    .list--facet {
+      overflow: hidden;
+      max-height: 0;
+      margin: 0 0 5px 0;
+      padding: 0;
+      transition: max-height 0.10s ease-out;
+      border-bottom: 1px solid $c-gray-200;
+
+      &.show {
+        max-height: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      a {
+        display: none;
+        max-width: 300px;
+
+        span {
+          max-width: none;
+        }
+
+        span:last-child {
+          flex-shrink: 0;
+          margin-left: 3px;
+        }
+      }
+    }
+
+    .facet--content {
+      display: none;
+    }
+
+    &.active {
+      .facet--content {
+        display: block;
+      }
+
+      .list--facet {
+        a {
+          display: flex;
+        }
+      }
+    }
+
+    &.facet--group--active-facets {
+      background-color: $c-blue-100;
+
+      .button--reset {
+        line-height: 30px;
+        min-height: 30px;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        color: $c-blue-600;
+        border: 2px solid $c-blue-600;
+
+        &:hover, &:focus, &:active {
+          color: $c-white;
+          border-color: $c-blue-600;
+          background-color: $c-blue-600;
+        }
+      }
+
+      .facet-wrapper {
+        margin-bottom: 0;
       }
     }
   }
@@ -70,9 +272,14 @@
     .facet--search-wrapper {
       display: block;
 
+      small {
+        display: block;
+        margin-bottom: 4px;
+      }
+
       .facet--search {
-        width: 90%;
         position: relative;
+        width: 90%;
 
         input {
           width: 100%;
@@ -81,12 +288,12 @@
 
         img {
           position: absolute;
-          border-radius: 0 5px 5px 0;
           top: 0;
           right: 0;
-          height: 28px;
           width: 28px;
+          height: 28px;
           padding: 4px;
+          border-radius: 0 5px 5px 0;
           background: #154273;
         }
       }

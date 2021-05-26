@@ -1,0 +1,19 @@
+uuid: 92c72958-b606-4ec0-9f33-02caf24fc508
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.organization_synonyms
+    - node.type.organization
+id: node.organization.organization_synonyms
+field_name: organization_synonyms
+entity_type: node
+bundle: organization
+label: Synoniemen
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

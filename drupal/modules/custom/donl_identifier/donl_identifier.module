@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function donl_identifier_taxonomy_term_presave(Term $term) {
+  if ($term->hasField('identifier') && !$term->get('identifier')->getValue()) {
+    switch ($term->bundle()) {
+      case 'donl_api_authentication':
+        $term->set('identifier', 'https://data.overheid.nl/api-authentication/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+
+      case 'donl_api_format':
+        $term->set('identifier', 'https://data.overheid.nl/api-format/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+
+      case 'donl_dataservice_types':
+        $term->set('identifier', 'https://data.overheid.nl/dataservice-type/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+
+      case 'donl_open_standards':
+        $term->set('identifier', 'https://data.overheid.nl/open-standards/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+
+      case 'donl_organization_types':
+        $term->set('identifier', 'https://data.overheid.nl/organization-type/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+
+      case 'donl_programming_languages':
+        $term->set('identifier', 'https://data.overheid.nl/programming-languages/' . $term->get('machine_name')->getValue()[0]['value']);
+        break;
+    }
+  }
+}

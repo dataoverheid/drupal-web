@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Migrate the old description field to the new for community content types.
+ */
+function donl_update_8001(&$sandbox) {
+  $nodeStorage = \Drupal::entityTypeManager()->getStorage('node');
+
+  if (!isset($sandbox['total'])) {
+    $sandbox['current'] = 0;
+    $sandbox['count'] = 0;
+    $sandbox['total'] = $nodeStorage->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('type', 'community')
+      ->count()->execute();
+  }
+
+  $nids = $nodeStorage->getQuery()
+    ->accessCheck(FALSE)
+    ->range(0, 50)
+    ->condition('type', 'community')
+    ->condition('nid', $sandbox['current'], '>')
+    ->execute();
+
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodeStorage->loadMultiple($nids) as $node) {
+    if ($node->hasField('community_description') && $node->hasField('html_description')) {
+      if (empty($node->get('html_description')->getValue())) {
+        $oldValue = $node->get('community_description')->getValue()[0]['value'] ?? '';
+        $node->set('html_description', ['value' => '<p>' . nl2br($oldValue) . '</p>', 'format' => 'full_html']);
+      }
+      $node->save();
+    }
+
+    $sandbox['current'] = $node->id();
+    $sandbox['count']++;
+  }
+  $sandbox['#finished'] = empty($sandbox['total']) ? TRUE : $sandbox['count'] / $sandbox['total'];
+}
+
+/**
+ * Migrate the server redirects to Drupal's redirect module.
+ */
+function donl_update_8002() {
+  $redirects = [
+    'toepassingen' => '/community/toepassingen',
+    'organisaties' => '/community/organizations',
+    'overzicht-alle-overheidsorganisaties' => '/community/organizations',
+    'groups' => '/community/groepen',
+    'dataverzoeken' => '/community/dataverzoeken',
+    'nieuws' => '/actueel/nieuws',
+    'evenementen' => '/actueel/evenementen',
+    'dataset/create' => '/dataset/dataset-publiceren',
+    'high-value-datasets' => '/community/maatschappij/high-value',
+    'gemeentelijke-high-value-datalijst' => '/community/maatschappij/high-value/gemeenten',
+    'provinciale-high-value-datalijst ' => '/community/maatschappij/high-value/provincies',
+    'referentiedatasets' => '/community/maatschappij/referentie-datasets',
+    'benchmarks' => '/community/impact/benchmarks',
+    'monitor' => '/statistieken',
+    'aantal-datasets-maand' => '/statistieken/datasets-per-maand',
+    'help' => '/ondersteuning',
+    'over-deze-website' => '/ondersteuning/algemeen/over-dataoverheidnl',
+    'release-dataoverheidnl' => '/ondersteuning/algemeen/over-dataoverheidnl',
+    'contact' => '/ondersteuning/algemeen/contact',
+    'privacy-en-cookies' => '/ondersteuning/algemeen/privacy-en-cookies',
+    'toegankelijkheid' => '/ondersteuning/algemeen/toegankelijkheid',
+    'sitemap' => '/ondersteuning/algemeen/sitemap',
+    'english' => '/ondersteuning/algemeen/talen',
+    'over-open-data' => '/ondersteuning/open-data',
+    'data-kwaliteit-beleid' => '/ondersteuning/open-data/beleid',
+    'beleid' => '/ondersteuning/open-data/beleid',
+    'open-data-beleid' => '/ondersteuning/open-data/beleid',
+    'begrippenkader' => '/ondersteuning/open-data/begrippenkader',
+    'dataset-en-databron' => '/ondersteuning/open-data/begrippenkader',
+    'ipm-datamodel' => '/ondersteuning/open-data/dcat',
+    'dcat' => '/ondersteuning/open-data/dcat',
+    'voor-gebruikers' => '/ondersteuning/data-gebruiken',
+    'hulp-bij-het-zoeken-naar-data' => '/ondersteuning/data-gebruiken/zoeken-naar-data',
+    'toelichting-bij-datasets' => '/ondersteuning/data-gebruiken/vormen-van-data',
+    'bestandsformaten-open-data' => '/ondersteuning/data-gebruiken/vormen-van-data',
+    'gesloten-datasets' => '/ondersteuning/data-gebruiken/niet-beschikbare-datasets',
+    'geplande-dataset' => '/ondersteuning/data-gebruiken/datasets-in-onderzoek',
+    'absolute-weigeringsgronden' => '/ondersteuning/data-gebruiken/niet-beschikbare-datasets',
+    'toelichting-bij-dataverzoeken' => '/ondersteuning/data-gebruiken/dataverzoeken',
+    'overzicht-status-en-fase-dataverzoeken' => '/ondersteuning/data-gebruiken/dataverzoeken',
+    'afhandeling-van-dataverzoeken-door-dataoverheidn' => '/ondersteuning/data-gebruiken/dataverzoeken',
+    'voor-data-eigenaren' => '/ondersteuning/data-publiceren',
+    'technische-informatie' => '/ondersteuning/data-publiceren',
+    'handreiking-open-data' => '/ondersteuning/data-publiceren/handreiking-open-data',
+    'relatieve-uitzonderingsgronden' => '/ondersteuning/data-publiceren/handreiking-open-data',
+    'welke-openbaarheidsregeling-van-toepassing' => '/ondersteuning/data-publiceren/handreiking-open-data',
+    'aanwezigheid-van-persoonsgegevens' => '/ondersteuning/data-publiceren/persoonsgegevens',
+    'uitwisseling-dataset-informatie' => '/ondersteuning/data-publiceren/toegang-tot-dataoverheidnl',
+    'aanleveren-van-informatie-aan-dataoverheidnl-de-api' => '/ondersteuning/data-publiceren/toegang-tot-dataoverheidnl',
+    'opvragen-van-dataset-informatie-de-api-van-dataoverheidnl' => '/ondersteuning/data-publiceren/toegang-tot-dataoverheidnl',
+    'licenties-voor-hergebruik' => '/ondersteuning/data-publiceren/licentie-keuze',
+    'rechten-van-derden' => '/ondersteuning/data-publiceren/licentie-keuze',
+    'dataset-aanmelden' => '/ondersteuning/data-publiceren/datasets-publiceren',
+    'handleiding-aanmelden-dataset' => '/ondersteuning/data-publiceren/datasets-publiceren',
+    'bijwerken-en-wijzigen-van-een-dataset' => '/ondersteuning/data-publiceren/datasets-publiceren',
+    'informatie-hergebruiken' => '/ondersteuning/data-publiceren/api',
+    'data-inventarisatie' => '/ondersteuning/data-publiceren/inventarisaties',
+    'over-deze-pilot' => '/communities/ministerie-van-infrastructuur-en-waterstaat/pilot',
+    'databron-onderzoek' => '/ondersteuning/data-gebruiken/datasets-in-onderzoek',
+    'openoverheid' => '/ondersteuning/open-data/beleid',
+    'databron-gesloten' => '/ondersteuning/data-gebruiken/niet-beschikbare-datasets',
+    'handreiking-bij-openen-van-data' => '/ondersteuning/data-publiceren/handreiking-open-data',
+    'statistieken/datasets' => '/statistieken',
+    'api' => '/ondersteuning/data-publiceren/api',
+  ];
+
+  foreach ($redirects as $source => $redirect) {
+    $redirect = 'internal:' . $redirect;
+
+    // Check if its an node, if so link the redirect path to the actual node.
+    $path = \Drupal::service('path_alias.manager')->getPathByAlias($redirect);
+    if(preg_match('/node\/(\d+)/', $path, $matches)) {
+      $redirect = 'entity:' . substr($path, 1);
+    }
+
+    try {
+      \Drupal\redirect\Entity\Redirect::create([
+        'redirect_source' => $source,
+        'redirect_redirect' => $redirect,
+        'status_code' => 302,
+      ])->save();
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('donl')->error(t('Failed to create redirect for @source => @redirect', ['@source' => $source, '@redirect' => $redirect]));
+    }
+  }
+}

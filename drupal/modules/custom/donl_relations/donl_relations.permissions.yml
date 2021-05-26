@@ -1,0 +1,3 @@
+administer donl_relations:
+  title: 'Administer DONL Relation Entity References'
+  description: 'Allows user to create two-way references between entities.'

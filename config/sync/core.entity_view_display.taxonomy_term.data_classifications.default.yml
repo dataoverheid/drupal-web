@@ -1,0 +1,38 @@
+uuid: c06d408e-b4b8-415e-8350-3d40af980448
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.data_classifications.field_tooltip_forms
+    - field.field.taxonomy_term.data_classifications.field_tooltip_views
+    - taxonomy.vocabulary.data_classifications
+  module:
+    - text
+id: taxonomy_term.data_classifications.default
+targetEntityType: taxonomy_term
+bundle: data_classifications
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tooltip_forms:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_tooltip_views:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden:
+  langcode: true

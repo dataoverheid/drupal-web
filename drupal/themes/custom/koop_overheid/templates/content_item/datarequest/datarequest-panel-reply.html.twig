@@ -10,12 +10,12 @@
   </tr>
   <tr>
     <th>{{ 'Dataowner'|t }}</th>
-    <td>{{ ckan_mapping_get_organization_name(datarequest.data_owner.value) }}</td>
+    <td>{{ ckan_link_data_owner(datarequest.data_owner.value, ckan_mapping_get_organization_name(datarequest.data_owner.value), 'link') }}</td>
   </tr>
   <tr>
     <th>{{ 'Dataset'|t }}</th>
     <td>
-      {% for url in datarequest.datasets %}
+      {% for url in datarequest.relation_datarequest_dataset %}
         {{ get_dataset_link_by_identifier(url.value) }}<br />
       {% endfor %}
     </td>
@@ -27,6 +27,10 @@
   <tr>
     <th>{{ 'Explanation state'|t }}</th>
     <td>{{ datarequest.explanation_state.value|nl2br }}</td>
+  </tr>
+  <tr>
+    <th>{{ 'Join the discussion about this request'|t }}</th>
+    <td>{{ ckan_link(datarequest.datarequest_discussion_link.value) }}</td>
   </tr>
   </tbody>
 </table>

@@ -1,0 +1,25 @@
+uuid: d4a4274f-1b92-4fd9-a36e-7ac834017d5d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_community_group
+    - node.type.community
+id: node.community.relation_community_group
+field_name: relation_community_group
+entity_type: node
+bundle: community
+label: Groepen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entityreference_groups
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

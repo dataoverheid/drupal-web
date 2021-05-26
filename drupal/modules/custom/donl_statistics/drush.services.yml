@@ -3,8 +3,8 @@ services:
     class: \Drupal\donl_statistics\Commands\CollectStatistics
     arguments:
       - '@donl_statistics.node_statistics'
-      - '@donl_statistics.ckan_statistics'
+      - '@donl_statistics.dataset_statistics'
       - '@donl_statistics.piwik_statistics'
-      - '@donl_statistics.statistics_storage'
+      - '@database'
     tags:
       - { name: drush.command }

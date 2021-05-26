@@ -5,16 +5,20 @@ dependencies:
   config:
     - field.field.node.datarequest.commercial_use
     - field.field.node.datarequest.data_owner
+    - field.field.node.datarequest.datarequest_discussion_link
     - field.field.node.datarequest.datarequest_id
     - field.field.node.datarequest.datasets
     - field.field.node.datarequest.emailaddress_user
     - field.field.node.datarequest.explanation_state
+    - field.field.node.datarequest.machine_name
     - field.field.node.datarequest.name_user
     - field.field.node.datarequest.organisation_user
     - field.field.node.datarequest.phase
     - field.field.node.datarequest.phone_number_user
     - field.field.node.datarequest.possible_owner
     - field.field.node.datarequest.problems_with_search
+    - field.field.node.datarequest.relation_datarequest_community
+    - field.field.node.datarequest.relation_datarequest_dataset
     - field.field.node.datarequest.request_date
     - field.field.node.datarequest.request_source
     - field.field.node.datarequest.requested_data
@@ -140,6 +144,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  datarequest_discussion_link:
+    weight: 16
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   datarequest_id:
     weight: 7
     label: above
@@ -176,6 +188,21 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+    region: content
+  relation_datarequest_community:
+    weight: 19
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  relation_datarequest_dataset:
+    weight: 18
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: field_dataset_text
     region: content
   request_date:
     weight: 8
@@ -265,6 +292,7 @@ hidden:
   emailaddress_user: true
   langcode: true
   links: true
+  machine_name: true
   name_user: true
   organisation_user: true
   phase: true

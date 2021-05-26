@@ -1,0 +1,8 @@
+.donl-search-context-block {
+  background-color: $c-gray-100;
+  padding: 20px;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}

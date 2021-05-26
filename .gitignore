@@ -10,9 +10,6 @@
 # Include project readme file.
 !/README.md
 
-# Include PHPCS file.
-!/phpcs.xml
-
 # Include Drupal config directories.
 !/config/**
 /config/*/.htaccess
@@ -22,11 +19,16 @@
 
 # Ignore Composer owned directories to avoid git submodules.
 /vendor
-/libraries
 /drupal/core
 /drupal/modules/contrib
 /drupal/themes/contrib
 /drush/Commands/contrib
+
+# Libraries
+!/drupal/libraries/amcharts4/**
+!/drupal/libraries/leaflet/**
+!/drupal/libraries/localfocus/**
+!/drupal/libraries/papaparse/**
 
 # Include custom Drupal modules, patches, themes and translations.
 !/drupal/modules/custom/**
@@ -62,9 +64,10 @@ yarn.lock
 
 # Ignore some specific files which we don't want in our repo.
 /config/sync/block.block.*
+/config/sync/ckan.dataset.settings.yml
 /config/sync/ckan.request.settings.yml
-/config/sync/ckan.resourcetype.settings.yml
 /config/sync/donl.settings.yml
+/config/sync/donl_piwik.settings.yml
 /config/sync/donl_search.sorl_request.settings.yml
 /config/sync/donl_statistics.piwik.settings.yml
 /config/sync/donl_value_list.settings.yml
@@ -76,6 +79,7 @@ yarn.lock
 /config/sync/system.site.yml
 /config/sync/ultimate_cron.job.*
 /config/sync/webform.webform.*
+/config/sync/donl_recent.recent_content_settings.yml
 
 /config/sync/language/*/block.block.*
 /config/sync/language/*/koop_overheid.settings.yml
@@ -84,7 +88,11 @@ yarn.lock
 /config/sync/language/*/ultimate_cron.job.*
 /config/sync/language/*/webform.webform.*
 
+# Remove after config rework
+/config/sync/ckan.resourcetype.settings.yml
+
 # Specific settings we don't want on github.
+/config/acceptance/*
 /config/acceptatie/*
 /config/development/*
 /config/production/*

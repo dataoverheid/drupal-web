@@ -1,0 +1,43 @@
+uuid: 2f85e778-b62f-426a-ab3b-d456799918ff
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donl_dataservice_types.identifier
+    - field.field.taxonomy_term.donl_dataservice_types.machine_name
+    - taxonomy.vocabulary.donl_dataservice_types
+  module:
+    - donl
+id: taxonomy_term.donl_dataservice_types.default
+targetEntityType: taxonomy_term
+bundle: donl_dataservice_types
+mode: default
+content:
+  identifier:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: 'Laat dit veld leeg om Drupal zelf een passende identifier aan te laten maken'
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  machine_name:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: field_machine_name_text
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  status: true
+  translation: true

@@ -7,7 +7,7 @@ use Drupal\Core\ParamConverter\ParamConverterInterface;
 use Symfony\Component\Routing\Route;
 
 /**
- *
+ * Group param converter
  */
 class ParamConverterGroup implements ParamConverterInterface {
 
@@ -17,7 +17,9 @@ class ParamConverterGroup implements ParamConverterInterface {
   protected $nodeStorage;
 
   /**
+   * Constructor.
    *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
@@ -33,7 +35,7 @@ class ParamConverterGroup implements ParamConverterInterface {
         'type' => 'group',
       ];
       if ($nodes = $this->nodeStorage->loadByProperties($properties)) {
-        /** @var \Drupal\node\NodeInterface $node */
+        /* @var \Drupal\node\NodeInterface $node */
         $node = reset($nodes);
         if ($node->getType() === 'group') {
           return $node;

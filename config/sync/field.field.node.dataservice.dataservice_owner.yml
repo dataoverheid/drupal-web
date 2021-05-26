@@ -1,0 +1,19 @@
+uuid: 903f4d3c-e2e9-4fdf-ad8c-4f1d8fe74839
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_owner
+    - node.type.dataservice
+id: node.dataservice.dataservice_owner
+field_name: dataservice_owner
+entity_type: node
+bundle: dataservice
+label: 'Eigenaar van de service/data'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

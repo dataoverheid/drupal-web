@@ -41,7 +41,7 @@ class HomepageRecentBlock extends BlockBase implements ContainerFactoryPluginInt
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('donl_recent.recent_node_service')
+      $container->get('donl_recent.recent_node_service'),
     );
   }
 
@@ -49,7 +49,7 @@ class HomepageRecentBlock extends BlockBase implements ContainerFactoryPluginInt
    * {@inheritdoc}
    */
   public function build() {
-    $nodes = $this->recentNodeService->getNodes(NULL, 3);
+    $nodes = $this->recentNodeService->getNodes(NULL, 0, 1);
     $items = [];
     foreach ($nodes as $key => $node) {
       $items[$key]['id'] = $node->id();
@@ -75,7 +75,6 @@ class HomepageRecentBlock extends BlockBase implements ContainerFactoryPluginInt
           'node_type:recent',
         ],
       ],
-
     ];
   }
 

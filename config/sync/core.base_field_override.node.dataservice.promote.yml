@@ -1,0 +1,22 @@
+uuid: 8f0de847-c762-4ab8-8492-cd88db3e786a
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.dataservice
+id: node.dataservice.promote
+field_name: promote
+entity_type: node
+bundle: dataservice
+label: 'Aangeraden op de voorpagina'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Aan
+  off_label: Uit
+field_type: boolean

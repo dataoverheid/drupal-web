@@ -1,6 +1,6 @@
 donl_search.solr_settings.request:
-  title: 'SOLR settings'
-  parent: ckan.settings
+  title: 'SOLR'
+  parent: donl.settings
   route_name: donl_search.solr_settings.request
   description: 'Manage the SOLR connection settings.'
-  weight: 1
+  weight: 5

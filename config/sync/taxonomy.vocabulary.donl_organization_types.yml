@@ -1,0 +1,8 @@
+uuid: 313bd836-b997-43ae-8d49-05f1e46e77c8
+langcode: nl
+status: true
+dependencies: {  }
+name: 'DONL Bestuurslagen'
+vid: donl_organization_types
+description: ''
+weight: 0

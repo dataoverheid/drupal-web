@@ -15,8 +15,10 @@ settings:
         -
           name: Formatting
           items:
+            - Format
             - Bold
             - Italic
+            - Styles
         -
           name: Links
           items:
@@ -39,7 +41,7 @@ settings:
             - Source
   plugins:
     stylescombo:
-      styles: ''
+      styles: "a.button.button--primary|Button Blauw\r\na.button|Button Wit"
     language:
       language_list: un
 image_upload:

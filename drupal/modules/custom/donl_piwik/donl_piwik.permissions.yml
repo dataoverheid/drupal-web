@@ -1,0 +1,3 @@
+manage piwik settings:
+  title: 'Manage piwik settings'
+  restrict access: true

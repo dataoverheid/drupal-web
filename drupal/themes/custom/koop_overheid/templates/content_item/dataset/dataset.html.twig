@@ -3,7 +3,6 @@
 
 {% block content_item %}
   {% set content_item_type = 'dataset' %}
-  {% set content_item_background_color = 'blue' %}
   {{ parent() }}
 {% endblock content_item %}
 
@@ -28,33 +27,48 @@
 {% endblock content_item_pre_content %}
 
 {% block content_item_title %}
-  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-data.svg', dataset.theme[0]) }}
+  {{ content_item.theme_icon(dataset.theme[0]) }}
   <div>
     <p class="type">Dataset</p>
     <h1>{{ dataset.title }}</h1>
     {{ content_item.permalink(url('ckan.dataset.view', {'dataset': dataset.id})) }}
   </div>
-{% endblock content_item_title%}
+{% endblock content_item_title %}
 
 {% block content_item_description %}
   <table class="minimal-table">
     <tbody>
     <tr>
-      <th>{{ 'Owner'|t }}</th>
-      <td>{{ ckan_link_data_owner(dataset.authority, ckan_mapping_get_organization_name(dataset.authority), 'link') }}</td>
+      <th>{{ 'State'|t }}</th>
+      <td>{% if dataset.dataset_status %}{{ ckan_mapping_get_status_name(dataset.dataset_status) }}{% else %}<span class="unknown">{{ 'Unknown'|t }}</span>{% endif %}</td>
     </tr>
     <tr>
-      <th>{{ 'License'|t }}</th>
-      <td><a href="{{ dataset.license_id }}" target="_blank">{{ ckan_mapping_get_license_name(dataset.license_id) }}</a></td>
+      <th>{{ 'Data owner'|t }}</th>
+      <td>{{ ckan_link_data_owner(dataset.authority, ckan_mapping_get_organization_name(dataset.authority), 'link') }}</td>
     </tr>
     <tr>
       <th>{{ 'Updated'|t }}</th>
       <td>{{ ckan_format_date(dataset.metadata_modified) }}</td>
     </tr>
     <tr>
-      <th>{{ 'Status'|t }}</th>
-      <td>{% if dataset.dataset_status %}{{ ckan_mapping_get_status_name(dataset.dataset_status) }}{% else %}<span class="unknown">{{ 'Unknown'|t }}{% endif %}</td>
+      <th>{{ 'License'|t }}</th>
+      <td><a href="{{ dataset.license_id }}" target="_blank">{{ ckan_mapping_get_license_name(dataset.license_id) }}</a></td>
     </tr>
+    {% if dataset.access_rights %}
+      <tr>
+        <th>{{ 'Publicity level'|t }}</th>
+        <td>
+          {{ ckan_mapping_get_access_rights_name(dataset.access_rights) }}
+          {% if dataset.access_rights_reason %}({{ ckan_mapping_get_wob_exception_name(dataset.access_rights_reason) }}){% endif %}
+        </td>
+      </tr>
+    {% endif %}
+    {% if showPublished %}
+      <tr>
+        <th>{{ 'Published'|t }}</th>
+        <td>{{ dataset.private ? 'No'|t : 'Yes'|t }}</td>
+      </tr>
+    {% endif %}
     </tbody>
   </table>
 {% endblock content_item_description %}

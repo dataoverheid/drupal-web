@@ -1,0 +1,56 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function donl_piwik_schema() {
+  $schema = [];
+
+  $schema['donl_piwik_datalayer'] = [
+    'fields' => [
+      'route' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'handler' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => 'default',
+        'not null' => TRUE,
+      ],
+      'page_type' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => [
+      'route',
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Update the db format.
+ */
+function donl_piwik_update_8002() {
+  $schema = Database::getConnection()->schema();
+
+  $schema->changeField('donl_piwik_datalayer', 'type', 'page_type', [
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+  ]);
+
+  $schema->addField('donl_piwik_datalayer', 'handler', [
+    'type' => 'varchar',
+    'length' => 255,
+    'default' => 'default',
+    'not null' => TRUE,
+  ]);
+}

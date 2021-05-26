@@ -1,0 +1,16 @@
+uuid: 3f1f4154-b9a9-40c8-b936-df58cae984f7
+langcode: nl
+status: true
+dependencies:
+  config:
+    - node.type.dataservice
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.dataservice
+target_entity_type_id: node
+target_bundle: dataservice
+default_langcode: site_default
+language_alterable: false

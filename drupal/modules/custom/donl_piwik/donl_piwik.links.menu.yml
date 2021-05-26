@@ -1,0 +1,20 @@
+donl_piwik.piwik:
+  title: 'PiwikPRO'
+  parent: donl.settings
+  route_name: donl_piwik.piwik
+  description: 'Manage piwik settings.'
+  weight: 1
+
+donl_piwik.piwik.settings:
+  title: 'Piwik settings'
+  parent: donl_piwik.piwik
+  route_name: donl_piwik.piwik.settings
+  description: 'Manage piwik settings.'
+  weight: 1
+
+donl_piwik.piwik.datalayer:
+  title: 'Piwik DataLayer'
+  parent: donl_piwik.piwik
+  route_name: donl_piwik.piwik.datalayer
+  description: 'Manage piwik DataLayer settings.'
+  weight: 2

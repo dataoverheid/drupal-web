@@ -2,8 +2,6 @@
 
 namespace Drupal\donl_api\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 /**
  * The Api endpoint for community.
  */
@@ -24,6 +22,13 @@ class CommunityApiController extends BaseEntityApiController {
     $fields[] = 'colour';
     $fields[] = 'field_background_image';
     $fields[] = 'menu';
+    // Old fields to be removed.
+    $fields[] = 'community_applications';
+    $fields[] = 'community_datarequests';
+    $fields[] = 'community_datasets';
+    $fields[] = 'community_organisations';
+    $fields[] = 'groups';
+    $fields[] = 'linked_recent';
     return $fields;
   }
 

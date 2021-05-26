@@ -5,11 +5,16 @@ dependencies:
   config:
     - field.field.node.organization.identifier
     - field.field.node.organization.machine_name
+    - field.field.node.organization.organisation_logo
     - field.field.node.organization.organization_description
+    - field.field.node.organization.organization_synonyms
     - field.field.node.organization.organization_type
+    - field.field.node.organization.organization_type_term
+    - image.style.large
     - node.type.organization
   module:
     - donl
+    - svg_image
     - user
 id: node.organization.default
 targetEntityType: node
@@ -17,7 +22,7 @@ bundle: organization
 mode: default
 content:
   identifier:
-    weight: 103
+    weight: 1
     label: above
     settings:
       link_to_entity: false
@@ -25,31 +30,47 @@ content:
     type: string
     region: content
   links:
-    weight: 100
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   machine_name:
-    weight: 107
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: field_machine_name_text
     region: content
+  organisation_logo:
+    weight: 5
+    label: above
+    settings:
+      image_style: large
+      image_link: ''
+      svg_render_as_image: true
+      svg_attributes:
+        width: null
+        height: null
+    third_party_settings: {  }
+    type: image
+    region: content
   organization_description:
-    weight: 108
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
-  organization_type:
-    weight: 106
+  organization_type_term:
+    weight: 4
     label: above
     settings:
-      link_to_entity: false
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: string
+    type: entity_reference_entity_view
     region: content
 hidden:
   langcode: true
+  organization_synonyms: true
+  organization_type: true

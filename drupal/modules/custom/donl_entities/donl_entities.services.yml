@@ -1,0 +1,5 @@
+services:
+  donl_entities.entities:
+    class: Drupal\donl_entities\DonlEntitiesService
+    arguments:
+      - '@string_translation'

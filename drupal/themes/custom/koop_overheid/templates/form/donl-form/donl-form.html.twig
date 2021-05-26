@@ -1,0 +1,14 @@
+<div id="full-form-wrapper" class="advanced js-form-wrapper form-wrapper" data-drupal-selector="edit-full-form-wrapper">
+
+  {{ form.header }}
+
+  <div class="main-wrapper">
+
+    {{ form.sidebar }}
+
+    <div class="main">
+      {{ form|without('header', 'sidebar') }}
+    </div>
+  </div>
+
+</div>

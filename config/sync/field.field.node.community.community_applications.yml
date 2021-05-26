@@ -10,7 +10,7 @@ id: node.community.community_applications
 field_name: community_applications
 entity_type: node
 bundle: community
-label: Toepassingen
+label: 'Toepassingen [old]'
 description: ''
 required: false
 translatable: false
@@ -23,6 +23,7 @@ settings:
       appliance: appliance
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

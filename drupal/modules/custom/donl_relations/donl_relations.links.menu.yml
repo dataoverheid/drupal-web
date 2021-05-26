@@ -1,0 +1,5 @@
+entity.corresponding_reference.collection:
+  title: 'Relations'
+  parent: donl.settings
+  route_name: entity.corresponding_reference.collection
+  description: 'Manage DONL relations.'

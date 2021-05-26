@@ -63,15 +63,6 @@ msgstr "Telefoon"
 msgid "n/a"
 msgstr "n.v.t"
 
-msgid "Organization"
-msgstr "Organisatie"
-
-msgid "Organizations"
-msgstr "Organisaties"
-
-msgid "Catalog"
-msgstr "Catalogus"
-
 msgid "Data characteristics"
 msgstr "Kenmerken data"
 
@@ -102,14 +93,17 @@ msgstr "Alternatieve identifier"
 msgid "Metadata language"
 msgstr "Metadata taal"
 
+msgid "Data language"
+msgstr "Taal dataset"
+
 msgid "URL Landingspage"
 msgstr "URL Landingspagina"
 
 msgid "Sample"
-msgstr "Sample"
+msgstr "Voorbeeld"
 
 msgid "sample"
-msgstr "sample"
+msgstr "voorbeeld"
 
 msgid "Spatial data"
 msgstr "Geografische gegevens"
@@ -142,7 +136,7 @@ msgid "Expected publication date"
 msgstr "Verwachte publicatiedatum"
 
 msgid "Frequency of changes"
-msgstr "Wijzigingsfrequentie"
+msgstr "Frequentie van wijziging"
 
 msgid "Time coverage"
 msgstr "Tijdsdekking"
@@ -203,9 +197,6 @@ msgstr "gerelateerde bron"
 
 msgid "Manage data sources"
 msgstr "Databronnen beheren"
-
-msgid "Conforms to the following standard"
-msgstr "Standaard waar de data aan voldoet"
 
 msgid "Conforms to the following standards"
 msgstr "Standaarden waar de data aan voldoet"
@@ -303,9 +294,6 @@ msgstr "Licentie"
 msgid "License explanation"
 msgstr "Licentie toelichting"
 
-msgid "Catalog"
-msgstr "Catalogus"
-
 msgid "Publisher"
 msgstr "Publiceerder"
 
@@ -355,16 +343,16 @@ msgid "Geographical data"
 msgstr "Geografische gegevens"
 
 msgid "Information about the provider"
-msgstr "Gegevens over de aanbieder"
+msgstr "Eigenaar"
 
 msgid "Rights and visibility"
-msgstr "Rechten en zichtbaarheid"
+msgstr "Juridisch"
 
 msgid "Basis"
 msgstr "Grondslag"
 
 msgid "Relationships and references"
-msgstr "Relaties en verwijzingen"
+msgstr "Relaties"
 
 msgid "Data classification"
 msgstr "Dataclassificatie"
@@ -418,19 +406,19 @@ msgid "You can indicate here the provenance of this dataset."
 msgstr "U kunt hier aangeven op basis van welke doel de dataset tot stand is gekomen."
 
 msgid "Provenance"
-msgstr "Doel van vervaardiging"
+msgstr "Doel vervaardiging"
 
 msgid "provenance"
-msgstr "doel van vervaardiging"
+msgstr "doel vervaardiging"
 
-msgid "Indicate whether this dataset is a high value dataset or not. A high value dataset is data that contributes to a transparent and open government or data that has socio-economic added value for society. More information about high value datasets can be found here: https://data.overheid.nl/high-value-datasets"
-msgstr "Geef aan of deze dataset een high value dataset is of niet. Een high value dataset is data die bijdraagt aan een transparante en open overheid of data die sociaal-economische meerwaarde heeft voor de samenleving. Meer uitleg over high value datasets treft u hier: https://data.overheid.nl/high-value-datasets"
+msgid "Indicate whether this dataset is a high value dataset or not. A high value dataset is data that contributes to a transparent and open government or data that has socio-economic added value for society. More information about high value datasets can be found here: <a href=\"https://data.overheid.nl/referencedatasets\">Reference datasets</a>"
+msgstr "Geef aan of deze dataset een high value dataset is of niet. Een high value dataset is data die bijdraagt aan een transparante en open overheid of data die sociaal-economische meerwaarde heeft voor de samenleving. Meer uitleg over high value datasets treft u hier: <a href=\"https://data.overheid.nl/referencedatasets\">Referentie datasets</a>"
 
-msgid "Indicate whether this dataset is a basic registration or not. A basic registration is a registration officially designated by the government with information that is compulsory for all government institutions when performing public law tasks. More information can be found here: https://www.digitaleoverheid.nl/dossiers/basisregistraties/"
-msgstr "Geef aan of deze dataset een basisregistratie is of niet. Een basisregistratie is een door de overheid officieel aangewezen registratie met gegevens die door alle overheidsinstellingen verplicht worden gebruikt bij de uitvoering van publiekrechtelijke taken. Meer uitleg treft u hier: https://www.digitaleoverheid.nl/dossiers/basisregistraties/"
+msgid "Indicate whether this dataset is a basic registration or not. A basic registration is a registration officially designated by the government with information that is compulsory for all government institutions when performing public law tasks. More information can be found here: Indicate whether this dataset is a basic registration or not. A basic registration is a registration officially designated by the government with information that is compulsory for all government institutions when performing public law tasks. More information can be found here: <a href=\"https://www.digitaleoverheid.nl/dossiers/basisregistraties/\">digitaleoverheid.nl</a>"
+msgstr "Geef aan of deze dataset een basisregistratie is of niet. Een basisregistratie is een door de overheid officieel aangewezen registratie met gegevens die door alle overheidsinstellingen verplicht worden gebruikt bij de uitvoering van publiekrechtelijke taken. Meer uitleg treft u hier: Indicate whether this dataset is a basic registration or not. A basic registration is a registration officially designated by the government with information that is compulsory for all government institutions when performing public law tasks. More information can be found here: <a href=\"https://www.digitaleoverheid.nl/dossiers/basisregistraties/\">digitaleoverheid.nl</a>"
 
-msgid "Indicate whether this dataset is a reference dataset or not. A reference dataset is essential for the use of government data. More information can be found here: https://data.overheid.nl/referencedatasets"
-msgstr "Geef aan of deze dataset een referentiedataset is of niet. Een referentiedataset is essentieel voor het gebruik van overheidsdata. Meer uitleg treft u hier: https://data.overheid.nl/referentiedatasets"
+msgid "Indicate whether this dataset is a reference dataset or not. A reference dataset is essential for the use of government data. More information can be found here: <a href=\"https://data.overheid.nl/referencedatasets\">Reference datasets</a>"
+msgstr "Geef aan of deze dataset een referentiedataset is of niet. Een referentiedataset is essentieel voor het gebruik van overheidsdata. Meer uitleg treft u hier: <a href=\"https://data.overheid.nl/referencedatasets\">Referentie datasets</a>"
 
 msgid "Describe the location the data is about. For example, the Netherlands, your province or your municipality etc."
 msgstr "Beschrijf de locatie waarover de data gaat. Bijvoorbeeld Nederland, uw provincie of uw gemeente etc."
@@ -585,6 +573,12 @@ msgstr "Het dataregister"
 msgid "National coverage"
 msgstr "Landelijk dekkend"
 
+msgid "Sector registrations"
+msgstr "Sectorregistraties"
+
+msgid "local_registrations"
+msgstr "Lokale registraties"
+
 msgid "Indicate whether this dataset is national covered."
 msgstr "Geef aan of deze dataset landelijk dekkend is."
 
@@ -651,8 +645,14 @@ msgstr "Hulp bij zoeken naar datasets"
 msgid "Comparable datasets"
 msgstr "Vergelijkbare datasets"
 
-msgid "<p>Are you sure you want to delete the @entityType %title?</p>"
-msgstr "<p>Weet u zeker dat u de @entityType %title wilt verwijderen?</p>"
+msgid "Are you sure you want to delete the @entityType %title? This action cannot be undone."
+msgstr "Weet u zeker dat u de @entityType %title wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+
+msgid "delete @type"
+msgstr "@type verwijderen"
+
+msgid "Delete data source"
+msgstr "Databronn verwijderen"
 
 msgid "Delete resource"
 msgstr "Bron verwijderen"
@@ -662,6 +662,9 @@ msgstr "Bron bewerken"
 
 msgid "Resource updated"
 msgstr "Bron bijgewerkt"
+
+msgid "resource"
+msgstr "bron"
 
 msgid "Dataset updated"
 msgstr "Dataset bijgewerkt"
@@ -674,9 +677,6 @@ msgstr "Dataset verwijderen"
 
 msgid "Please note, these are webservices."
 msgstr "Let op, dit zijn webservices."
-
-msgid "Catalogs"
-msgstr "Catalogi"
 
 msgid "Downloadable files"
 msgstr "Downloadbare bestanden"
@@ -707,9 +707,6 @@ msgstr "Geen zoeksuggesties"
 
 msgid "Not the dataset that you are looking for?"
 msgstr "Is dit niet de dataset die u zoekt?"
-
-msgid "Data request"
-msgstr "Dataverzoek"
 
 msgid "Datarequest"
 msgstr "Dataverzoek"
@@ -765,8 +762,14 @@ msgstr "Geen databronnen werken"
 msgid "Not indexed"
 msgstr "Niet geindeceerd"
 
+msgid "Data source"
+msgstr "Databron"
+
 msgid "Add data source"
 msgstr "Databron toevoegen"
+
+msgid "No data sources found."
+msgstr "Geen databronnen gevonden."
 
 msgid "Other popular subjects"
 msgstr "Overige populaire onderwerpen"
@@ -856,9 +859,6 @@ msgstr "U kunt bij ons een verzoek doen om een specifieke dataset aan te vragen.
 msgid "Would you like to respond to the contents of this dataset?"
 msgstr "Wilt u inhoudelijk reageren op deze dataset?"
 
-msgid "Community"
-msgstr "Community"
-
 msgid "Preview"
 msgstr "Voorbeeld"
 
@@ -904,20 +904,202 @@ msgstr "Voorbeeld (@i)"
 msgid "Condition (@i)"
 msgstr "Conditie (@i)"
 
+msgid "Owner"
+msgstr "Eigenaar"
+
+msgid "Location and temporal"
+msgstr "Locatie & tijd"
+
+msgid "Language settings"
+msgstr "Taalinstellingen"
+
+msgid "Identifiers"
+msgstr "Identifiers"
+
+msgid "Extra options"
+msgstr "Extra opties"
+
+msgctxt "sample"
+msgid "Sample of data"
+msgstr "Voorbeeld van data"
+
+msgid "Legal ground"
+msgstr "Wettelijke basis"
+
+msgid "Status dataset"
+msgstr "Status van de dataset"
+
+msgid "Expected date available"
+msgstr "Verwachte publicatiedatum"
+
+msgid "Release date"
+msgstr "Aanmaakdatum"
+
+msgid "Owner information"
+msgstr "Gegevens van de aanbieder"
+
+msgid "Publication & catalogues"
+msgstr "Publicatie"
+
+msgid "Data publisher"
+msgstr "Publicerende organisatie"
+
+msgid "Department"
+msgstr "Afdeling"
+
+msgid "Address"
+msgstr "Adres"
+
+msgid "Access rights"
+msgstr "Toegang"
+
+msgid "Access rights reason"
+msgstr "Reden toegang"
+
+msgid "Classification"
+msgstr "Data classificaties"
+
+msgid "Licence & classifications"
+msgstr "Licentie en condities"
+
+msgid "Temporal coverage"
+msgstr "Tijdsdekking"
+
+msgid "(advanced)"
+msgstr "(uitgebreid)"
+
+msgid "Advanced"
+msgstr "Uitgebreid"
+
+msgid "Basic"
+msgstr "Basis"
+
+msgid "Extended"
+msgstr "Uitgebreid"
+
+msgid "value is empty"
+msgstr "Invoer is leeg."
+
+msgid "- Select item -"
+msgstr "- Selecteer item -"
+
+msgid "Basic data source data"
+msgstr "Basisgegevens databron"
+
+msgid "Register dataset"
+msgstr "Dataset aanmelden"
+
+msgid "Additional information"
+msgstr "Aanvullende gegevens"
+
+msgid "Continue to datasources"
+msgstr "Verder naar databronnen"
+
+msgid "Save and continue to datasources"
+msgstr "Opslaan en verder naar databronnen"
+
+msgid "Contact details (minimal of one)"
+msgstr "Contact gegevens (minimaal één)"
+
+msgid "Add another data source"
+msgstr "Nog een databron toevoegen"
+
+msgid "Publish dataset"
+msgstr "Dataset publiceren"
+
+msgid "publish @type"
+msgstr "@type publiceren"
+
+msgid "unpublish @type"
+msgstr "@type depubliceren"
+
+msgid "You are about to publish this @type, are you sure?"
+msgstr "U gaat deze @type publiceren, dit kunt u altijd wijzigen."
+
+msgid "Unpublish"
+msgstr "Depubliceren"
+
+msgid "You are about to unpublish this @type, are you sure?"
+msgstr "U gaat deze @type depubliceren, dit kunt u altijd wijzigen."
+
+msgid "@type successfully published."
+msgstr "@type is gepubliceerd"
+
+msgid "@type successfully unpublished."
+msgstr "@type is gedepubliceerd"
+
 msgid "Distribution type"
 msgstr "Distributietype"
 
-msgid "This is a preview it does not contain all the data. Download the resource to access all the records."
-msgstr "Dit is een voorbeeld deze bevalt niet alle data. Download de bron om alle data te bekijken."
+msgid "Edit dataset"
+msgstr "Dataset bewerken"
+
+msgid "This is a preview, it does not contain all the data. Download the resource to access all the records."
+msgstr "Dit is een voorbeeld, deze bevat niet alle data. Download de bron om alle data te bekijken."
+
+msgid "Version control"
+msgstr "Versiebeheer"
+
+msgid "Resource created"
+msgstr "Databron aangemaakt"
+
+msgid "Reuse information"
+msgstr "Hergebruik informatie"
+
+msgid "Rearrange resources"
+msgstr "Volgorde databronnen aanpassen"
+
+msgid "Local registrations"
+msgstr "Lokale registraties"
+
+msgid "Add datasource"
+msgstr "Databron toevoegen"
+
+msgid "Creation date"
+msgstr "Aanmaakdatum"
+
+msgid "Use drag and drop to change the order of the items. Then press store to save your changes."
+msgstr "Versleep de rijen om de volgorde van de items aan te passen. Klik vervolgens op opslaan om deze wijzigingen toe te passen."
+
+msgid "Website eg. https://data.overheid.nl"
+msgstr "Website bijvoorbeeld https://data.overheid.nl"
+
+msgid "Dataset created."
+msgstr "Dataset aangemaakt."
+
+msgid "Created"
+msgstr "Aangemaakt"
+
+msgid "Wrap up"
+msgstr "Afronden"
+
+msgid "An unknown error occurred, please try again later."
+msgstr "Er is een onbekende fout opgetreden. Probeer het later opnieuw."
+
+msgid "Data data source"
+msgstr "Gegevens databron"
+
+msgid "Description data source"
+msgstr "Beschrijving databron"
+
+msgid "Value lists"
+msgstr "Waardelijsten"
+
+msgid "Save and view"
+msgstr "Opslaan en bekijken"
+
+msgid "View dataset"
+msgstr "Dataset bekijken"
+
+msgid "The dataset has been saved. You can now view or publish the dataset."
+msgstr "De dataset is nu opgeslagen. U kunt de dataset nu bekijken of publiceren."
+
+msgid "The dataset has been saved and published. You can now view or unpublish the dataset."
+msgstr "De dataset is nu opgeslagen en gepubliceerd. U kunt de dataset nu bekijken of depubliceren."
+
+msgid "Wrap up dataset"
+msgstr "Dataset afronden"
 
 msgid ""
 msgstr ""
 
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""
-
-msgid ""
-msgstr ""

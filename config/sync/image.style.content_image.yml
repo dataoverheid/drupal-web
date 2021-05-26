@@ -1,0 +1,25 @@
+uuid: a7f8ee59-8abc-4edd-847c-1db5a80f2dfd
+langcode: nl
+status: true
+dependencies:
+  config:
+    - crop.type.content_image
+  module:
+    - crop
+name: content_image
+label: 'Content image'
+effects:
+  342be247-f3c7-45e5-a9bc-47c8a69939ab:
+    uuid: 342be247-f3c7-45e5-a9bc-47c8a69939ab
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: content_image
+  ed72ec33-0b7c-4d68-8686-61e0ed80cc2b:
+    uuid: ed72ec33-0b7c-4d68-8686-61e0ed80cc2b
+    id: image_scale
+    weight: 2
+    data:
+      width: 400
+      height: null
+      upscale: false

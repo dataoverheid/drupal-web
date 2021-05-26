@@ -1,0 +1,18 @@
+uuid: 5ff4224b-1133-46b7-aa1e-40c2adf41f55
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.donl_organization_types.identifier
+    - field.field.taxonomy_term.donl_organization_types.machine_name
+    - taxonomy.vocabulary.donl_organization_types
+id: taxonomy_term.donl_organization_types.default
+targetEntityType: taxonomy_term
+bundle: donl_organization_types
+mode: default
+content: {  }
+hidden:
+  description: true
+  identifier: true
+  langcode: true
+  machine_name: true

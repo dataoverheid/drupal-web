@@ -5,6 +5,7 @@ namespace Drupal\donl_api\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\datetime_range\Plugin\Field\FieldType\DateRangeFieldItemList;
+use Drupal\donl_identifier\ResolveIdentifierServiceInterface;
 use Drupal\donl_search\SolrRequestInterface;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,17 +39,27 @@ abstract class BaseEntityApiController extends ControllerBase {
   protected $request;
 
   /**
+   * The resolve identifier service.
+   *
+   * @var \Drupal\donl_identifier\ResolveIdentifierServiceInterface
+   */
+  protected $resolveIdentifierService;
+
+  /**
    * BaseJsonEntityApiController constructor.
    *
    * @param \Drupal\donl_search\SolrRequestInterface $solrRequest
    *   The solr request.
    * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
    *   The request stack.
+   * @param \Drupal\donl_identifier\ResolveIdentifierServiceInterface $resolveIdentifierService
+   *   The resolve identifier service.
    */
-  public function __construct(SolrRequestInterface $solrRequest, RequestStack $requestStack) {
+  public function __construct(SolrRequestInterface $solrRequest, RequestStack $requestStack, ResolveIdentifierServiceInterface $resolveIdentifierService) {
     $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
     $this->solrRequest = $solrRequest;
     $this->request = $requestStack->getCurrentRequest();
+    $this->resolveIdentifierService = $resolveIdentifierService;
   }
 
   /**
@@ -57,7 +68,8 @@ abstract class BaseEntityApiController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('donl_search.request'),
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('donl_identifier.resolver')
     );
   }
 
@@ -174,20 +186,38 @@ abstract class BaseEntityApiController extends ControllerBase {
     foreach ($node->getFields() as $key => $fieldItemList) {
       if ($fieldItemList->access('view') && !in_array($key, $this->getSkipFields(), TRUE)) {
         if (($value = $this->normalizeField($key, $fieldItemList)) !== NULL) {
-          $result[$key] = $value;
+          $result[$this->renameField($key)] = $value;
         }
         else {
           $value = $this->getValue($fieldItemList);
-          $result[$key] = $value;
+          $result[$this->renameField($key)] = $value;
 
           if (in_array($key, $this->getIntegerFields(), TRUE)) {
-            $result[$key] = (int) $value;
+            $result[$this->renameField($key)] = (int) $value;
           }
         }
       }
     }
 
     return $result;
+  }
+
+  /**
+   * Function to rename the fields in the output.
+   *
+   * @param string $key
+   *   The key.
+   *
+   * @return string
+   *   The renamed key.
+   */
+  protected function renameField(string $key): string {
+    if (preg_match('/relation_[a-z]*_[a-z]*/', $key)) {
+      $exploded = explode('_', $key);
+      return $exploded[0] . '_' . $exploded[2];
+    }
+
+    return $key;
   }
 
   /**
@@ -248,7 +278,7 @@ abstract class BaseEntityApiController extends ControllerBase {
       return $fieldItemList->getValue()[0]['alias'] ?? '';
     }
 
-    if ($key === 'datasets') {
+    if ($key === 'datasets' || (preg_match('/relation_[a-z]*_[a-z]*/', $key) && substr($key, -7) === 'dataset')) {
       $datasets = [];
       foreach ($fieldItemList->getValue() as $value) {
         $datasets[] = [
@@ -257,6 +287,92 @@ abstract class BaseEntityApiController extends ControllerBase {
         ];
       }
       return $datasets;
+    }
+
+    if (preg_match('/relation_[a-z]*_[a-z]*/', $key)) {
+      if (substr($key, -11) === 'application') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $applications = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $applications[] = [
+              'type' => 'appliance',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $applications;
+      }
+
+      if (substr($key, -9) === 'community') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $datarequests = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $datarequests[] = [
+              'type' => 'community',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $datarequests;
+      }
+
+      if (substr($key, -11) === 'datarequest') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $datarequests = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $datarequests[] = [
+              'type' => 'datarequest',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $datarequests;
+      }
+
+      if (substr($key, -5) === 'group') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $groups = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $groups[] = [
+              'type' => 'group',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $groups;
+      }
+
+      if (substr($key, -12) === 'organization') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $organizations = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $organizations[] = [
+              'type' => 'organization',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $organizations;
+      }
+
+      if (substr($key, -6) === 'recent') {
+        $nodeStorage = $this->entityTypeManager()->getStorage('node');
+        $groups = [];
+        foreach ($fieldItemList->getValue() as $v) {
+          if ($node = $nodeStorage->load($v['target_id'])) {
+            $groups[] = [
+              'type' => 'recent',
+              'identifier' => $this->resolveIdentifierService->resolve($node),
+            ];
+          }
+        }
+        return $groups;
+      }
     }
 
     return NULL;

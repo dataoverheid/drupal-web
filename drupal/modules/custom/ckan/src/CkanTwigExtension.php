@@ -5,26 +5,28 @@ namespace Drupal\ckan;
 use Drupal\ckan\Entity\Dataset;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\donl_search\SearchUrlServiceInterface;
+use Drupal\donl_search\SolrRequestInterface;
 use Drupal\field\Entity\FieldConfig;
-use League\CommonMark\CommonMarkConverter;
 use NumberFormatter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Class CkanTwigExtension.
  *
  * The twig version of the MappingService.
  *
- * @package Drupal\ckan
- *
  * @see \Drupal\ckan\MappingService
  */
-class CkanTwigExtension extends \Twig_Extension {
+class CkanTwigExtension extends AbstractExtension {
 
   /**
    * @var \Drupal\ckan\MappingServiceInterface
@@ -47,9 +49,9 @@ class CkanTwigExtension extends \Twig_Extension {
   protected $searchUrlService;
 
   /**
-   * @var \Drupal\ckan\CkanRequestInterface
+   * @var \Drupal\donl_search\SolrRequestInterface
    */
-  protected $ckanRequest;
+  protected $solrRequest;
 
   /**
    * @var \Drupal\ckan\SortDatasetResourcesServiceInterface
@@ -62,24 +64,31 @@ class CkanTwigExtension extends \Twig_Extension {
   private $dateFormatter;
 
   /**
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  private $configFactory;
+
+  /**
    * CkanTwigExtension Constructor.
    *
    * @param \Drupal\ckan\MappingServiceInterface $mappingService
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    * @param \Drupal\donl_search\SearchUrlServiceInterface $searchUrlService
-   * @param \Drupal\ckan\CkanRequestInterface $ckanRequest
+   * @param \Drupal\donl_search\SolrRequestInterface $solrRequest
    * @param \Drupal\ckan\SortDatasetResourcesServiceInterface $sortDatasetResourcesService
    * @param \Drupal\Core\Datetime\DateFormatterInterface $dateFormatter
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    */
-  public function __construct(MappingServiceInterface $mappingService, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager, SearchUrlServiceInterface $searchUrlService, CkanRequestInterface $ckanRequest, SortDatasetResourcesServiceInterface $sortDatasetResourcesService, DateFormatterInterface $dateFormatter) {
+  public function __construct(MappingServiceInterface $mappingService, LanguageManagerInterface $languageManager, EntityTypeManagerInterface $entityTypeManager, SearchUrlServiceInterface $searchUrlService, SolrRequestInterface $solrRequest, SortDatasetResourcesServiceInterface $sortDatasetResourcesService, DateFormatterInterface $dateFormatter, ConfigFactoryInterface $configFactory) {
     $this->mappingService = $mappingService;
     $this->language = $languageManager->getCurrentLanguage();
     $this->nodeStorage = $entityTypeManager->getStorage('node');
     $this->searchUrlService = $searchUrlService;
-    $this->ckanRequest = $ckanRequest;
+    $this->solrRequest = $solrRequest;
     $this->sortDatasetResourcesService = $sortDatasetResourcesService;
     $this->dateFormatter = $dateFormatter;
+    $this->configFactory = $configFactory;
   }
 
   /**
@@ -87,41 +96,72 @@ class CkanTwigExtension extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('ckan_link', [$this, 'getLink']),
-      new \Twig_SimpleFunction('ckan_format_number', [$this, 'formatNumber']),
-      new \Twig_SimpleFunction('ckan_markdown', [$this, 'formatMarkdown']),
-      new \Twig_SimpleFunction('ckan_format_date', [$this, 'formatDate']),
-      new \Twig_SimpleFunction('ckan_mapping_get_theme_class', [$this, 'getThemeClass']),
-      new \Twig_SimpleFunction('ckan_mapping_get_theme_name', [$this, 'getThemeName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_status_name', [$this, 'getStatusName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_distribution_status_name', [$this, 'getDistributiontatusName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_access_rights_name', [$this, 'getAccessRightsName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_license_name', [$this, 'getLicenseName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_language_name', [$this, 'getLanguageName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_file_format_name', [$this, 'getFileFormatName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_media_type_name', [$this, 'getMediaTypeName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_source_catalog_name', [$this, 'getSourceCatalogName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_organization_name', [$this, 'getOrganizationName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_frequency_name', [$this, 'getFrequencyName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_distribution_type_name', [$this, 'getDistributionTypeName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_spatial_scheme_name', [$this, 'getSpatialSchemeName']),
-      new \Twig_SimpleFunction('ckan_mapping_get_spatial_value', [$this, 'getSpatialValue']),
-      new \Twig_SimpleFunction('ckan_link_tag', [$this, 'getLinkTag']),
-      new \Twig_SimpleFunction('ckan_link_data_owner', [$this, 'getLinkDataOwner']),
-      new \Twig_SimpleFunction('ckan_get_select_key', [$this, 'getSelectKey']),
-      new \Twig_SimpleFunction('ckan_get_search_link_datasets', [$this, 'getSearchLinkDatasets']),
-      new \Twig_SimpleFunction('get_dataset_link_by_identifier', [$this, 'getDatasetLinkByIdentifier']),
-      new \Twig_SimpleFunction('ckan_dataset_get_sorted_resources', [$this, 'getSortedResources']),
+      new TwigFunction('ckan_link', [$this, 'getLink']),
+      new TwigFunction('ckan_format_number', [$this, 'formatNumber']),
+      new TwigFunction('ckan_markdown', [$this, 'formatMarkdown']),
+      new TwigFunction('ckan_format_date', [$this, 'formatDate']),
+      new TwigFunction('ckan_mapping_get_theme_class', [$this, 'getThemeClass']),
+      new TwigFunction('ckan_mapping_get_theme_name', [$this, 'getThemeName']),
+      new TwigFunction('ckan_mapping_get_status_name', [$this, 'getStatusName']),
+      new TwigFunction('ckan_mapping_get_distribution_status_name', [$this, 'getDistributiontatusName']),
+      new TwigFunction('ckan_mapping_get_access_rights_name', [$this, 'getAccessRightsName']),
+      new TwigFunction('ckan_mapping_get_wob_exception_name', [$this, 'getWobExceptionName']),
+      new TwigFunction('ckan_mapping_get_license_name', [$this, 'getLicenseName']),
+      new TwigFunction('ckan_mapping_get_language_name', [$this, 'getLanguageName']),
+      new TwigFunction('ckan_mapping_get_file_format_name', [$this, 'getFileFormatName']),
+      new TwigFunction('ckan_mapping_get_media_type_name', [$this, 'getMediaTypeName']),
+      new TwigFunction('ckan_mapping_get_source_catalog_name', [$this, 'getSourceCatalogName']),
+      new TwigFunction('ckan_mapping_get_organization_name', [$this, 'getOrganizationName']),
+      new TwigFunction('ckan_mapping_get_frequency_name', [$this, 'getFrequencyName']),
+      new TwigFunction('ckan_mapping_get_distribution_type_name', [$this, 'getDistributionTypeName']),
+      new TwigFunction('ckan_mapping_get_spatial_scheme_name', [$this, 'getSpatialSchemeName']),
+      new TwigFunction('ckan_mapping_get_spatial_value', [$this, 'getSpatialValue']),
+      new TwigFunction('ckan_link_tag', [$this, 'getLinkTag']),
+      new TwigFunction('ckan_link_data_owner', [$this, 'getLinkDataOwner']),
+      new TwigFunction('ckan_get_select_key', [$this, 'getSelectKey']),
+      new TwigFunction('ckan_get_search_link_datasets', [$this, 'getSearchLinkDatasets']),
+      new TwigFunction('get_dataset_link_by_identifier', [$this, 'getDatasetLinkByIdentifier']),
+      new TwigFunction('ckan_dataset_get_sorted_resources', [$this, 'getSortedResources']),
+      new TwigFunction('replace_line_breaks_with_new_line', [$this, 'replaceLineBreaksWithNewLine'])
     ];
   }
 
   /**
+   * Replaces line breaks with a '\n'.
+   *
+   * @param string $text
+   *   The text.
+   *
+   * @return string|string[]
+   *   The replaced text.
+   */
+  public function replaceLineBreaksWithNewLine(string $text) {
+    return str_replace(["\r\n", "\r", "\n"], '\n', $text);
+  }
+
+  /**
    * Make an url clickable (if possible).
+   *
+   * @param mixed $value
+   *
+   * @return \Drupal\Core\Link|string
    */
   public function getLink($value) {
-    if (($value = trim((string) $value)) && UrlHelper::isValid($value, TRUE)) {
+    if (empty($value)) {
+      return '';
+    }
+    $value = trim((string) $value);
+
+    if (UrlHelper::isValid($value, TRUE)) {
+      $options = [];
+
       try {
-        if ($url = Url::fromUri($value, ['attributes' => ['target' => '_blank']])) {
+        // Add a target "_blank" to external URL's.
+        if (UrlHelper::isExternal($value)) {
+          $options = ['attributes' => ['target' => '_blank']];
+        }
+
+        if ($url = Url::fromUri($value, $options)) {
           return Link::fromTextAndUrl($value, $url);
         }
       }
@@ -133,56 +173,72 @@ class CkanTwigExtension extends \Twig_Extension {
   }
 
   /**
+   * Format the number.
    *
+   * @param mixed $number
+   *
+   * @return string
    */
-  public function formatNumber($number) {
+  public function formatNumber($number): string {
     if (is_numeric($number)) {
       $numberFormatter = new NumberFormatter($this->language->getId(), NumberFormatter::DECIMAL);
-      return $numberFormatter->format($number);
+      if ($formattedValue = $numberFormatter->format($number)) {
+        return $formattedValue;
+      }
     }
 
-    return 0;
+    return '0';
   }
 
   /**
    * Format markdown text.
    *
-   * @param string $value
+   * @param mixed $value
    * @param bool $allowFilteredHtml
    *
-   * @return array|string
-   *   A render array if html is allowed, a string otherwise.
+   * @return \Drupal\Core\Render\Markup|string
+   *   Markup if html is allowed, a string otherwise.
    */
-  public function formatMarkdown(string $value, bool $allowFilteredHtml = TRUE) {
-    $value = nl2br($value);
-
-    $converter = new CommonMarkConverter();
-    $value = $converter->convertToHtml($value);
-
-    if ($allowFilteredHtml) {
-      $htmlTags = ['b', 'br', 'div', 'em', 'h2', 'h3', 'h4', 'hr', 'li', 'ol', 'p', 'pre', 'span', 'strong', 'ul'];
-      $value = Xss::filter($value, $htmlTags);
-      return ['#markup' => $value];
+  public function formatMarkdown($value, bool $allowFilteredHtml = TRUE) {
+    if (empty($value)) {
+      return '';
     }
 
-    return Xss::filter($value, []);
+    // Run the value through the markdown text format.
+    $value = (string) check_markup((string) trim($value), 'markdown');
+
+    // Even if html is allowed we still want to remove any <a> tags as we can't trust external datasets.
+    if ($allowFilteredHtml) {
+      if ($allowedTags = $this->configFactory->get('filter.format.markdown')->get('filters.filter_html.settings.allowed_html')) {
+        preg_match_all('/<([a-z0-9]+)[^a-z0-9]/i', $allowedTags, $out);
+        if (($key = array_search('a', $out[1], TRUE)) !== FALSE) {
+          unset($out[1][$key]);
+        }
+        $value = Xss::filter($value, $out[1]);
+      }
+    }
+    else {
+      $value = Xss::filter($value, []);
+    }
+
+    return Markup::create($value);
   }
 
   /**
    * Format a CKAN date string.
    *
-   * @param string $value
+   * @param mixed $value
    *   The given date string
    *
    * @return string
    *   The formatted date.
    */
-  public function formatDate(string $value): string {
-    if (!$value) {
+  public function formatDate($value): string {
+    if (empty($value)) {
       return '';
     }
 
-    preg_match('/^(\d{2,4})-(\d{1,2})-(\d{1,2})/', $value, $matches);
+    preg_match('/^(\d{2,4})-(\d{1,2})-(\d{1,2})/', (string) trim($value), $matches);
     $timestamp = mktime(0, 0, 0, $matches[2], $matches[3], $matches[1]);
     return $this->dateFormatter->format($timestamp, 'short');
   }
@@ -196,7 +252,7 @@ class CkanTwigExtension extends \Twig_Extension {
    *
    * @return string
    */
-  public function getSelectKey($bundle, $fieldName, $value) {
+  public function getSelectKey($bundle, $fieldName, $value): string {
     if (!empty($bundle) && !empty($fieldName) && !empty($value)) {
       if ($field = FieldConfig::loadByName('node', $bundle, $fieldName)) {
         $allowedValues = $field->getSetting('allowed_values');
@@ -210,128 +266,194 @@ class CkanTwigExtension extends \Twig_Extension {
   /**
    *
    */
-  public function getThemeClass($value) {
-    return $this->mappingService->getThemeClass($value);
+  public function getThemeClass($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getThemeClass((string) $uri);
   }
 
   /**
    *
    */
-  public function getThemeName($uri, $glue = ', ') {
+  public function getThemeName($uri, $glue = ', '): string {
+    if (empty($uri)) {
+      return '';
+    }
+
     if (is_array($uri)) {
       $return = [];
       foreach ($uri as $v) {
-        $return[] = $this->mappingService->getThemeName($v);
+        $return[] = $this->mappingService->getThemeName((string) $v);
       }
       return implode($glue, $return);
     }
 
-    return $this->mappingService->getThemeName($uri);
+    return $this->mappingService->getThemeName((string) $uri);
   }
 
   /**
    *
    */
-  public function getStatusName($uri) {
-    return $this->mappingService->getStatusName($uri);
+  public function getStatusName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getStatusName((string) $uri);
   }
 
   /**
    *
    */
-  public function getDistributiontatusName($uri) {
-    return $this->mappingService->getDistributiontatusName($uri);
+  public function getDistributiontatusName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getDistributiontatusName((string) $uri);
   }
 
   /**
    *
    */
-  public function getAccessRightsName($uri) {
-    return $this->mappingService->getAccessRightsName($uri);
+  public function getAccessRightsName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getAccessRightsName((string) $uri);
   }
 
   /**
    *
    */
-  public function getLicenseName($uri) {
-    return $this->mappingService->getLicenseName($uri);
+  public function getWobExceptionName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getWobExceptionName((string) $uri);
   }
 
   /**
    *
    */
-  public function getLanguageName($uri, $glue = ', ') {
+  public function getLicenseName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getLicenseName((string) $uri);
+  }
+
+  /**
+   *
+   */
+  public function getLanguageName($uri, $glue = ', '): string {
     if (is_array($uri)) {
       $return = [];
       foreach ($uri as $v) {
-        $return[] = $this->mappingService->getLanguageName($v);
+        $return[] = $this->mappingService->getLanguageName((string) $v);
       }
       return implode($glue, $return);
     }
 
-    return $this->mappingService->getLanguageName($uri);
+    return $this->mappingService->getLanguageName((string) $uri);
   }
 
   /**
    *
    */
-  public function getFileFormatName($uri) {
-    return $this->mappingService->getFileFormatName($uri);
+  public function getFileFormatName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getFileFormatName((string) $uri);
   }
 
   /**
    *
    */
-  public function getMediaTypeName($uri) {
-    return $this->mappingService->getMediaTypeName($uri);
+  public function getMediaTypeName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getMediaTypeName((string) $uri);
   }
 
   /**
    *
    */
-  public function getSourceCatalogName($uri) {
-    return $this->mappingService->getSourceCatalogName($uri);
+  public function getSourceCatalogName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getSourceCatalogName((string) $uri);
   }
 
   /**
    *
    */
-  public function getOrganizationName($uri) {
-    return $this->mappingService->getOrganizationName($uri);
+  public function getOrganizationName($uri, $addCategory = TRUE): string {
+    if (empty($uri)) {
+      return '';
+    }
+
+    $category = NULL;
+    if ($addCategory) {
+      $nodes = $this->nodeStorage->loadByProperties([
+        'type' => 'organization',
+        'identifier' => (string) $uri,
+      ]);
+      if ($nodes && ($node = $this->nodeStorage->load(key($nodes))) && ($term = $node->get('organization_type_term')->referencedEntities()[0] ?? NULL)) {
+        $category = $term->get('name')->getString();
+      }
+    }
+
+    return $this->mappingService->getOrganizationName((string) $uri) . (($addCategory && $category) ? ' (' . $category . ')' : '');
   }
 
   /**
    *
    */
-  public function getFrequencyName($uri) {
-    return $this->mappingService->getFrequencyName($uri);
+  public function getFrequencyName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getFrequencyName((string) $uri);
   }
 
   /**
    *
    */
-  public function getDistributionTypeName($uri) {
-    return $this->mappingService->getDistributionTypeName($uri);
+  public function getDistributionTypeName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getDistributionTypeName((string) $uri);
   }
 
   /**
    *
    */
-  public function getSpatialSchemeName($uri) {
-    return $this->mappingService->getSpatialSchemeName($uri);
+  public function getSpatialSchemeName($uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+    return $this->mappingService->getSpatialSchemeName((string) $uri);
   }
 
   /**
    *
    */
-  public function getSpatialValue($schemeUri, $valueUri) {
-    return $this->mappingService->getSpatialValue($schemeUri, $valueUri);
+  public function getSpatialValue($schemeUri, $valueUri): string {
+    if (empty($schemeUri) || empty($valueUri)) {
+      return '';
+    }
+    return $this->mappingService->getSpatialValue((string) $schemeUri, (string) $valueUri);
   }
 
   /**
    *
    */
-  public function getLinkTag($value) {
+  public function getLinkTag($value): Link {
+    $value = trim((string) $value);
     return $this->getSearchLinkDatasets(['facet_keyword' => [$value]], $value);
   }
 
@@ -339,23 +461,23 @@ class CkanTwigExtension extends \Twig_Extension {
    *
    */
   public function getLinkDataOwner($value, $title = NULL, $class = NULL) {
-    if (!isset($title)) {
-      $title = $value;
-    }
+    if ($value) {
+      $title = $title ?? $value;
+      $nodes = $this->nodeStorage->loadByProperties([
+        'type' => 'organization',
+        'identifier' => $value,
+      ]);
+      if ($nodes) {
+        $node = $this->nodeStorage->load(key($nodes));
+        $machineName = $node->get('machine_name')->getValue()[0]['value'];
 
-    $nodes = $this->nodeStorage->loadByProperties([
-      'identifier' => $value,
-    ]);
-    if ($nodes) {
-      $node = $this->nodeStorage->load(key($nodes));
-      $machineName = $node->get('machine_name')->getValue()[0]['value'];
+        $options = [];
+        if (isset($class)) {
+          $options['attributes']['class'] = $class;
+        }
 
-      $options = [];
-      if (isset($class)) {
-        $options['attributes']['class'] = $class;
+        return Link::createFromRoute($title, 'donl_search.organization.view', ['organization' => $machineName], $options);
       }
-
-      return Link::createFromRoute($title, 'donl_search.organization.view', ['organization' => $machineName], $options);
     }
 
     return $title;
@@ -364,7 +486,7 @@ class CkanTwigExtension extends \Twig_Extension {
   /**
    *
    */
-  public function getSearchLinkDatasets(array $activeFacets, $title, $class = NULL) {
+  public function getSearchLinkDatasets(array $activeFacets, $title, $class = NULL): Link {
     $options = [];
     if (isset($class)) {
       $options['attributes']['class'] = $class;
@@ -378,9 +500,12 @@ class CkanTwigExtension extends \Twig_Extension {
    *
    */
   public function getDatasetLinkByIdentifier($uri) {
-    /** @var \Drupal\ckan\Entity\Dataset $dataset */
-    if ($dataset = $this->ckanRequest->getDatasetByIdentifier($uri)) {
-      return Link::createFromRoute($dataset->getTitle(), 'ckan.dataset.view', ['dataset' => $dataset->getName()]);
+    if (empty($uri)) {
+      return '';
+    }
+
+    if ($result = $this->solrRequest->getDatasetResultByIdentifier((string) $uri)) {
+      return Link::fromTextAndUrl($result->title, $result->url);
     }
     return $uri;
   }
@@ -388,7 +513,7 @@ class CkanTwigExtension extends \Twig_Extension {
   /**
    *
    */
-  public function getSortedResources(Dataset $dataset) {
+  public function getSortedResources(Dataset $dataset): array {
     return $this->sortDatasetResourcesService->getSortedResources($dataset);
   }
 

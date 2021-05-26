@@ -1,8 +1,0 @@
-uuid: a0d4d11e-feda-4e53-9074-9c0a187f1e61
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync RDW Mapping Accessrights'
-vid: donlsync_rdw_mapping_accessright
-description: ''
-weight: 0

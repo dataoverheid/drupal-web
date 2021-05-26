@@ -41,12 +41,25 @@
 {% set classes = [
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
+  type ? 'content-characteristics',
+  type ? 'content-characteristics-' ~ type|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ] %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      {{ content }}
-    {% endblock %}
+    {% if type %}
+      <span class="content-characteristics-icon"></span>
+    {% endif %}
+    <div class="content">
+      <div class="title">
+        {% if type %}
+          <span class="content-characteristics-icon"></span>
+        {% endif %}
+        {{ content['field_heading'] }}
+      </div>
+      {% block content %}
+        {{ content|without('field_heading') }}
+      {% endblock %}
+    </div>
   </div>
 {% endblock paragraph %}

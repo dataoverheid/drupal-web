@@ -1,0 +1,25 @@
+uuid: c2f47bc8-1846-4b1d-a2ce-aabc87a00882
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_community_recent
+    - node.type.community
+id: node.community.relation_community_recent
+field_name: relation_community_recent
+entity_type: node
+bundle: community
+label: 'Linked Recent'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entityreference_recent
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

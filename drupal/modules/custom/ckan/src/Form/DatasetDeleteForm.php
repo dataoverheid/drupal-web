@@ -4,14 +4,18 @@ namespace Drupal\ckan\Form;
 
 use Drupal\ckan\Entity\Dataset;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
  */
-class DatasetDeleteForm extends BaseForm {
+class DatasetDeleteForm extends DatasetBaseForm {
+
+  /**
+   * @var \Drupal\ckan\Entity\Dataset
+   */
+  private $dataset;
 
   /**
    * {@inheritdoc}
@@ -24,86 +28,98 @@ class DatasetDeleteForm extends BaseForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, Dataset $dataset = NULL): array {
-    /** @var Dataset $dataset */
-    if ($dataset) {
-      $user = $this->getUser();
-      if ($user->isAdministrator() || $user->getCkanId() === $dataset->getCreatorUserId()) {
-        $form['editLinks'] = [
-          '#type' => 'inline_template',
-          '#template' => '<div class="container"><div class="buttonswitch">{% for editLink in editLinks %}{{ editLink }}{% endfor %}</div></div>',
-          '#context' => [
-            'editLinks' => [
-              'view' => [
-                '#type' => 'link',
-                '#title' => $this->t('View'),
-                '#url' => Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getName()]),
-                '#attributes' => [
-                  'class' => ['buttonswitch__button'],
-                ],
-              ],
-              'edit' => [
-                '#type' => 'link',
-                '#title' => $this->t('Edit'),
-                '#url' => Url::fromRoute('ckan.dataset.edit', ['dataset' => $dataset->getName()]),
-                '#attributes' => [
-                  'class' => ['buttonswitch__button'],
-                ],
-              ],
-              'delete' => [
-                '#type' => 'link',
-                '#title' => $this->t('Delete'),
-                '#url' => Url::fromRoute('ckan.dataset.delete', ['dataset' => $dataset->getId()]),
-                '#attributes' => [
-                  'class' => ['buttonswitch__button', 'is-active'],
-                ],
-              ],
-              'data-sources' => [
-                '#type' => 'link',
-                '#title' => $this->t('Manage data sources'),
-                '#url' => Url::fromRoute('ckan.dataset.datasources', ['dataset' => $dataset->getId()]),
-                '#attributes' => [
-                  'class' => ['buttonswitch__button'],
-                ],
-              ],
-            ],
-          ],
-        ];
-      }
-
-      $form['id'] = [
-        '#type' => 'hidden',
-        '#value' => $dataset->getId(),
-      ];
-
-      $form['markup'] = [
-        '#markup' => '<p>' . $this->t('Are you sure you want to delete the @entityType %title?', [
-          '@entityType' => $this->t('dataset'),
-          '%title' => $dataset->getTitle(),
-        ]) . '</p>',
-      ];
-
-      $form['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Delete'),
-      ];
-
-      $form['cancel'] = [
-        '#markup' => Link::createFromRoute($this->t('Cancel'), 'ckan.dataset.view', ['dataset' => $dataset->getName()])
-          ->toString(),
-      ];
-
-      return $form;
+    if (!$dataset) {
+      throw new NotFoundHttpException();
     }
 
-    throw new NotFoundHttpException();
+    $this->dataset = $dataset;
+
+    $form['header'] = [
+      '#theme' => 'donl_form_header',
+      '#type' => 'dataset',
+      '#summary' => [
+        '#theme' => 'donl_form_summary',
+        '#title' => $this->t('Dataset'),
+        '#step_title' => $this->t('Delete dataset'),
+        '#fields' => [
+          'title' => [
+            'title' => $this->t('Title'),
+            'value' => $dataset->getTitle(),
+          ],
+          'owner' => [
+            'title' => $this->t('Owner'),
+            'value' => $this->mappingService->getOrganizationName($dataset->getAuthority()),
+          ],
+          'licence' => [
+            'title' => $this->t('Licence'),
+            'value' => $this->mappingService->getLicenseName($dataset->getLicenseId()),
+          ],
+          'changed' => [
+            'title' => $this->t('Changed'),
+            'value' => $dataset->getModified()->format('d-m-Y H:i'),
+          ],
+          'status' => [
+            'title' => $this->t('Status'),
+            'value' => $this->mappingService->getStatusName($dataset->getDatasetStatus()),
+          ],
+          'published' => [
+            'title' => $this->t('Published'),
+            'value' => ($dataset && !$dataset->getPrivate()) ? $this->t('Yes') : $this->t('No'),
+          ],
+        ],
+      ],
+      '#steps' => [
+        'delete' => [
+          '#theme' => 'donl_form_step',
+          '#title' => $this->t('Delete'),
+          '#short_title' => $this->t('Delete'),
+          '#icon' => 'icon-bin',
+          '#active' => TRUE,
+        ],
+      ],
+    ];
+
+    $form['wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['main-wrapper']],
+    ];
+
+    $form['wrapper']['main'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['main']],
+    ];
+
+    $form['wrapper']['main']['text'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'p',
+      '#value' => $this->t('Are you sure you want to delete the @entityType %title? This action cannot be undone.', [
+        '@entityType' => $this->t('dataset'),
+        '%title' => $dataset->getTitle(),
+      ]),
+    ];
+
+    $form['wrapper']['main']['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Delete'),
+      '#attributes' => ['class' => ['button', 'button--primary']],
+    ];
+
+    $form['wrapper']['main']['cancel'] = [
+      '#title' => $this->t('Cancel'),
+      '#type' => 'link',
+      '#url' => Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getName()]),
+    ];
+
+    $form['#attributes'] = ['class' => ['donl-form', 'step-form']];
+
+    return $form;
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {
-    $this->ckanRequest->setCkanUser($this->getUser())
-      ->deleteDataset($form_state->getValue('id'));
+    $this->ckanRequest->setCkanUser($this->getUser())->deleteDataset($this->dataset->getId());
     $form_state->setRedirect('donl_search.search.dataset');
   }
 

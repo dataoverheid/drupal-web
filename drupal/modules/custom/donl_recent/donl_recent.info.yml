@@ -5,5 +5,9 @@ package: donl
 type: module
 core_version_requirement: ^8 || ^9
 
+dependencies:
+  - donl_entities:donl_entities
+  - donl_search:donl_search
+
 interface translation project: donl_recent
 interface translation server pattern: modules/custom/donl_recent/translations/donl_recent.%language.po

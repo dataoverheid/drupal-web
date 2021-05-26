@@ -13,9 +13,9 @@ donl_value_list.value_list:
     _permission: 'access content'
 
 donl_value_list.settings:
-  path: '/admin/config/system/ckan/donl-value-list'
+  path: '/admin/donl/lists'
   defaults:
     _form: '\Drupal\donl_value_list\Form\ValueListSettingsForm'
-    _title: 'Value list settings'
+    _title: 'Value lists'
   requirements:
     _permission: 'configure donl value list settings'

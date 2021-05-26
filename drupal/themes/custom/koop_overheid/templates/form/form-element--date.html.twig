@@ -9,6 +9,12 @@
   disabled == 'disabled' ? 'form-disabled',
 ] %}
 
-{% block wrapper %}
+{% block opening_wrapper %}
   <div{{ attributes.addClass(date_classes) }}>
-{% endblock wrapper %}
+{% endblock opening_wrapper %}
+
+{% block label_suffix %}{% endblock label_suffix %}
+
+{% block closing_wrapper %}
+  </div>
+{% endblock closing_wrapper %}

@@ -1,45 +1,72 @@
-toolbar:
-  version: 1.0.0
-  css:
-    theme:
-      css/toolbar.icons.theme.css: {}
-      css/form-addition.css: {}
-  dependencies:
-    - toolbar/toolbar
-
-chosen:
-  version: 1.8.7
-  css:
-    theme:
-      /libraries/chosen-js/chosen.min.css: {minified: true}
-  js:
-    /libraries/chosen-js/chosen.jquery.min.js: {minified: true}
-
-chosen_init:
-  version: 1.0.0
-  js:
-    js/chosen-init.js: {}
-  dependencies:
-    - ckan/chosen
-
-papaparse:
-  version: 5.0.2
-  js:
-    /modules/custom/ckan/libs/papaparse.min.js: {minified: true}
+# External libraries.
 
 datatables:
   version: 1.10.20
   js:
-    /libraries/datatables/media/js/jquery.dataTables.min.js: {minified: true}
+    /libraries/datatables/media/js/jquery.dataTables.min.js: { minified: true }
   css:
     theme:
-      /libraries/datatables/media/css/jquery.dataTables.min.css: {minified: true}
+      /libraries/datatables/media/css/jquery.dataTables.min.css: { minified: true }
+
+leaflet:
+  version: 1.7.1
+  js:
+    /libraries/leaflet/leaflet.js: { minified: true }
+  css:
+    theme:
+      /libraries/leaflet/leaflet.css: { }
+
+localfocus:
+  version: 1.1.19
+  js:
+    /libraries/localfocus/localfocus.min.js: { minified: true }
+
+papaparse:
+  version: 5.0.2
+  js:
+    /libraries/papaparse/papaparse.min.js: { minified: true }
+
+# End external libraries.
 
 preview:
-  version: 0.0.1
+  version: 0.0.2
   js:
-    js/preview.js: {}
+    js/preview.js: { }
   dependencies:
     - ckan/papaparse
     - ckan/datatables
     - core/drupal.message
+
+donl-form:
+  version: 2.0.0
+  js:
+    js/donl-form.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+
+dataset-form:
+  version: 1.0.3
+  js:
+    js/dataset-form.js: { weight: -1 }
+  dependencies:
+    - ckan/donl-form
+
+resource-overview:
+  version: 1.0.2
+  js:
+    js/resource-overview.js: { }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+visualisations:
+  version: 1.0.0
+  js:
+    js/visualisations.js: { }
+  dependencies:
+    - core/jquery
+    - ckan/leaflet
+    - ckan/localfocus

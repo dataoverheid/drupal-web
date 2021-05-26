@@ -1,7 +1,31 @@
+# Suggestor.
+donl_community.suggest:
+  suggest:
+  path: '/suggest/community/{search}/{type}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\CommunitySuggestController::resultList'
+    _title: 'Suggestions'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search:
+  path: '/communities/{community}/zoeken/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchController::view'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
 donl_community.search.dataset:
   path: '/communities/{community}/zoeken/datasets/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetCommunityController::content'
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchDatasetController::view'
     _title: 'Search'
     page: 1
     recordsPerPage: 10
@@ -15,7 +39,7 @@ donl_community.search.dataset:
 donl_community.search.datarequest:
   path: '/communities/{community}/zoeken/dataverzoeken/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchDatarequestCommunityController::content'
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchDatarequestController::view'
     _title: 'Search'
     page: 1
     recordsPerPage: 10
@@ -29,7 +53,7 @@ donl_community.search.datarequest:
 donl_community.search.group:
   path: '/communities/{community}/zoeken/groepen/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchGroupCommunityController::content'
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchGroupController::view'
     _title: 'Search'
     page: 1
     recordsPerPage: 10
@@ -43,7 +67,21 @@ donl_community.search.group:
 donl_community.search.application:
   path: '/communities/{community}/zoeken/toepassingen/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchApplicationCommunityController::content'
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchApplicationController::view'
+    _title: 'Search'
+    page: 1
+    recordsPerPage: 10
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+  requirements:
+    _permission: 'access content'
+
+donl_community.search.news:
+  path: '/communities/{community}/zoeken/nieuws/{page}/{recordsPerPage}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchNewsController::view'
     _title: 'Search'
     page: 1
     recordsPerPage: 10
@@ -57,7 +95,7 @@ donl_community.search.application:
 donl_community.search.organization:
   path: '/communities/{community}/zoeken/organisaties/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchOrganizationCommunityController::content'
+    _controller: '\Drupal\donl_community\Controller\Search\CommunitySearchOrganizationController::view'
     _title: 'Search'
     page: 1
     recordsPerPage: 10
@@ -80,7 +118,21 @@ donl_community.dataset.view:
       dataset:
         type: 'ckan-dataset'
   requirements:
-    _dataset_access_check: 'TRUE'
+    _permission: 'access content'
+
+donl_community.news.view:
+  path: '/communities/{community}/actueel/{news}'
+  defaults:
+    _controller: '\Drupal\donl_community\Controller\NewsCommunityController::content'
+    _title_callback: '\Drupal\donl_community\Controller\NewsCommunityController::title'
+  options:
+    parameters:
+      community:
+        type: 'donl-community'
+      news:
+        type: 'donl-news'
+  requirements:
+    _permission: 'access content'
 
 donl_community.datarequest.view:
   path: '/communities/{community}/community/datarequest/{datarequest}'
@@ -114,8 +166,8 @@ donl_community.application.view:
 donl_community.group.view:
   path: '/communities/{community}/community/group/{group}/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetGroupCommunityController:view'
-    _title_callback: '\Drupal\donl_community\Controller\Search\SearchDatasetGroupCommunityController:getTitle'
+    _controller: '\Drupal\donl_community\Controller\Search\Group\CommunityGroupSearchDatasetController:view'
+    _title_callback: '\Drupal\donl_community\Controller\Search\Group\CommunityGroupSearchDatasetController:getTitle'
     page: 1
     recordsPerPage: 10
   options:
@@ -126,15 +178,15 @@ donl_community.group.view:
         type: 'donl-group'
   requirements:
     _permission: 'access content'
-    page: '^[0-9]*$'
-    recordsPerPage: '^[0-9]*$'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
 
 # Organization page (with dataset search page).
 donl_community.organization.view:
   path: '/communities/{community}/community/organization/{organization}/{page}/{recordsPerPage}'
   defaults:
-    _controller: '\Drupal\donl_community\Controller\Search\SearchDatasetOrganizationCommunityController:view'
-    _title_callback: '\Drupal\donl_community\Controller\Search\SearchDatasetOrganizationCommunityController:getTitle'
+    _controller: '\Drupal\donl_community\Controller\Search\Organization\CommunityOrganizationSearchDatasetController:view'
+    _title_callback: '\Drupal\donl_community\Controller\Search\Organization\CommunityOrganizationSearchDatasetController:getTitle'
     page: 1
     recordsPerPage: 10
   options:
@@ -145,8 +197,8 @@ donl_community.organization.view:
         type: 'donl-organization'
   requirements:
     _permission: 'access content'
-    page: '^[0-9]*$'
-    recordsPerPage: '^[0-9]*$'
+    page: '^[1-9][0-9]*$'
+    recordsPerPage: '^[1-9][0-9]*$'
 
 donl_community.value_list.communities:
   path: '/service/waardelijsten/donl_communities'

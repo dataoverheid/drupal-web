@@ -9,8 +9,6 @@ use Drupal\Core\Url;
 
 /**
  * Defines the form that processes the result page pagination filters.
- *
- * @package \Drupal\ckan\Form
  */
 class PaginationFiltersForm extends FormBase {
 

@@ -1,0 +1,11 @@
+uuid: 31ef77c9-4203-48f8-bff3-463288fd0ab8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.dcatapdonl_donl_wobuitzondering
+id: taxonomy_term.dcatapdonl_donl_wobuitzondering
+target_entity_type_id: taxonomy_term
+target_bundle: dcatapdonl_donl_wobuitzondering
+default_langcode: site_default
+language_alterable: false

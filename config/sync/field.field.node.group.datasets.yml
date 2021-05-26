@@ -11,7 +11,7 @@ id: node.group.datasets
 field_name: datasets
 entity_type: node
 bundle: group
-label: Datasets
+label: 'Datasets [old]'
 description: ''
 required: false
 translatable: false

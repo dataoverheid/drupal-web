@@ -508,12 +508,12 @@ class Resource {
       return $this->resourceType;
     }
 
-    $config = \Drupal::configFactory()->get('ckan.resourcetype.settings');
-    if (in_array($this->getFormat(), $config->get('webservice') ?? [], TRUE)) {
+    $config = \Drupal::configFactory()->get('ckan.dataset.settings');
+    if (in_array($this->getFormat(), $config->get('resource.webservice') ?? [], TRUE)) {
       return $this->resourceType = 'https://data.overheid.nl/distributiontype/webservice';
     }
 
-    if (in_array($this->getFormat(), $config->get('documentation') ?? [], TRUE)) {
+    if (in_array($this->getFormat(), $config->get('resource.documentation') ?? [], TRUE)) {
       return $this->resourceType = 'https://data.overheid.nl/distributiontype/documentation';
     }
 

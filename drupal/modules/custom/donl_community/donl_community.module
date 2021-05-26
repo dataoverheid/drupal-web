@@ -49,10 +49,12 @@ function donl_community_preprocess_page(&$variables, $hook) {
  */
 function donl_community_preprocess_field(&$variables) {
   $fields = [
-    'community_applications',
-    'community_datarequests',
-    'community_organisations',
-    'groups',
+    'relation_community_application',
+    'relation_community_dataset',
+    'relation_community_datarequest',
+    'relation_community_recent',
+    'relation_community_organization',
+    'relation_community_group',
   ];
   /** @var \Drupal\donl_community\Entity\Community $community */
   if (isset($variables['element']['#field_name']) && in_array($variables['element']['#field_name'], $fields, TRUE) && ($community = Drupal::service('donl_community.community_resolver')->resolve())) {

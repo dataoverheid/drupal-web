@@ -1,11 +1,16 @@
 settings:
-  library_url: ''
-  css_url: ''
-  crop_preview_image_style: crop_thumbnail
-  crop_list: {  }
-  crop_types_required: {  }
-  warn_multiple_usages: false
+  library_url: libraries/cropper/dist/cropper.min.js
+  css_url: libraries/cropper/dist/cropper.min.css
+  crop_preview_image_style: full_image
+  crop_list:
+    content_image: content_image
+  crop_types_required:
+    content_image: content_image
+  warn_multiple_usages: true
   show_default_crop: true
+  notify_apply: true
+  notify_update: true
+  show_crop_area: true
 _core:
-  default_config_hash: JTiHOl3PIo9Nyv7j53xwY5OwbwJWwCItksgv_X-NcbE
+  default_config_hash: UYGkeE2iH3UGp9lBPsELb3VSgHz9vkMJeaGzcYwE7Uw
 langcode: nl

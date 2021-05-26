@@ -30,6 +30,18 @@ donl.datarequest:
   requirements:
     _permission: 'access content'
 
+donl.dataservice:
+  path: '/dataservices/{dataservice}'
+  defaults:
+    _controller: '\Drupal\donl\Controller\DataserviceController:content'
+    _title_callback: '\Drupal\donl\Controller\DataserviceController:getTitle'
+  options:
+    parameters:
+      dataservice:
+        type: 'donl-dataservice'
+  requirements:
+    _permission: 'access content'
+
 donl.value_list.organizations:
   path: '/service/waardelijsten/dcatapdonl_donl_organization'
   defaults:
@@ -44,10 +56,19 @@ donl.value_list.catalog:
   requirements:
     _permission: 'access content'
 
+# Admin paths.
 donl.settings:
-  path: '/admin/config/system/ckan/settings'
+  path: '/admin/donl'
+  defaults:
+    _title: 'DONL Settings'
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+  requirements:
+    _permission: 'configure donl settings'
+
+donl.settings.search:
+  path: '/admin/donl/search'
   defaults:
     _form: '\Drupal\donl\Form\DonlSettingsForm'
-    _title: 'DONL settings'
+    _title: 'Search engine'
   requirements:
-    _permission: 'configure ckan request settings'
+    _permission: 'configure donl search settings'

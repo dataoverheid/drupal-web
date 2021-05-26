@@ -1,0 +1,5 @@
+donl_support.settings:
+  title: 'Support'
+  parent: donl.settings
+  route_name: donl_support.settings
+  description: 'Edit links for support block.'

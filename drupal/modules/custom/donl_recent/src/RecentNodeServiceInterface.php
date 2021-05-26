@@ -3,7 +3,6 @@
 namespace Drupal\donl_recent;
 
 use Drupal\Core\StringTranslation\TranslatableMarkup;
-use Drupal\node\NodeInterface;
 
 /**
  * Defines an interface for classes that support the recent node service.
@@ -45,25 +44,14 @@ interface RecentNodeServiceInterface {
    * @param string|null $type
    *   The current type of recent items to filter on.
    *
-   * @param int|null $limit
-   *   Optional limit to nodes.
+   * @param int|null $start
+   *   Optional start to nodes.
+   *
+   * @param int|null $end
+   *   Optional end to nodes.
    *
    * @return \Drupal\Core\Entity\EntityInterface[]
    */
-  public function getNodes(string $type = NULL, int $limit = NULL): array;
-
-  /**
-   * Build the menu for 'recent' nodes.
-   *
-   * @param string|null $type
-   *   The 'recent' type to filter on.
-   * @param \Drupal\node\NodeInterface $current_node
-   *   The current node if there is one.
-   * @param bool $returnTypeOnly
-   *   Boolean to indicate whether to return full menu or only type menu.
-   *
-   * @return array
-   */
-  public function buildMenuItems(string $type = NULL, NodeInterface $current_node = NULL, bool $returnTypeOnly = FALSE): array;
+  public function getNodes(string $type = NULL, int $start = 0, $end = NULL): array;
 
 }

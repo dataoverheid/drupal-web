@@ -1,7 +1,16 @@
 .community {
   margin: 0;
-  padding: 40px 80px;
-  @include breakpoint(mobileonly) {
+  padding: 30px 40px;
+
+
+  @include breakpoint($laptop-and-up) {
+    display: flex;
+    .left, .right {
+      width: 50%;
+    }
+  }
+
+  @include breakpoint($mobileonly) {
     padding: 20px 15px;
   }
 
@@ -9,14 +18,22 @@
     margin-bottom: 10px;
   }
 
-  .donl-community-search-form {
-    .searchbar {
-      margin-bottom: 15px;
-    }
-  }
-
   .description {
-    margin-bottom: 15px;
+    margin-top: 15px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        background-position: 0 .5em;
+        background-repeat: no-repeat;
+        background-image: url('/themes/custom/koop_overheid/images/icon-dart-right-blue.svg');
+        background-size: 6px 9px;
+        padding-left: 1em;
+        clear: both;
+      }
+    }
   }
 }
 
@@ -37,7 +54,12 @@
 
 .community-banner {
   padding: 60px 0;
-  background-position: center;
+  background-position: center center;
+  background-size: cover;
+
+  .donl-community-search-form {
+    margin-top: 16px;
+  }
 }
 
 .header-cta {
@@ -58,6 +80,10 @@
 .community-menu-wrapper {
   background: $c-blue-100;
 
+  @include breakpoint($laptop) {
+    display: none;
+  }
+
   .community-menu {
     margin: 0 -15px;
     padding: 15px 0;
@@ -70,7 +96,6 @@
 
 #body .community-related {
   display: grid;
-  padding-top: 60px;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 30px;
 
@@ -92,8 +117,9 @@
       padding: 0;
       border: 0;
 
-      .type-icon {
+      .content-characteristics-icon {
         width: 40px;
+        height: 40px;
         margin-right: 10px;
       }
 
@@ -115,3 +141,10 @@
     }
   }
 }
+
+.container-landing-page {
+  max-width: 70em;
+  margin: 0 auto;
+}
+
+

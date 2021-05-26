@@ -6,8 +6,11 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.organization.identifier
     - field.field.node.organization.machine_name
+    - field.field.node.organization.organisation_logo
     - field.field.node.organization.organization_description
+    - field.field.node.organization.organization_synonyms
     - field.field.node.organization.organization_type
+    - field.field.node.organization.organization_type_term
     - node.type.organization
   module:
     - user
@@ -25,5 +28,8 @@ hidden:
   identifier: true
   langcode: true
   machine_name: true
+  organisation_logo: true
   organization_description: true
+  organization_synonyms: true
   organization_type: true
+  organization_type_term: true

@@ -1,0 +1,29 @@
+uuid: 77f5a660-c08c-4e3d-8343-ad57b96f61e9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_recent_dataservice
+    - node.type.dataservice
+    - node.type.recent
+id: node.recent.relation_recent_dataservice
+field_name: relation_recent_dataservice
+entity_type: node
+bundle: recent
+label: Dataservices
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      dataservice: dataservice
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

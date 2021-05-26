@@ -1,14 +1,9 @@
 services:
-  donl_statistics.statistics_storage:
-    class: Drupal\donl_statistics\StatisticsStorage
-    arguments:
-      - '@database'
-      - '@logger.factory'
-
-  donl_statistics.ckan_statistics:
-    class: Drupal\donl_statistics\CkanStatistics
+  donl_statistics.dataset_statistics:
+    class: Drupal\donl_statistics\DatasetStatistics
     arguments:
       - '@ckan.request'
+      - '@donl_search.request'
 
   donl_statistics.piwik_statistics:
     class: Drupal\donl_statistics\PiwikStatistics
@@ -20,16 +15,12 @@ services:
     class: Drupal\donl_statistics\NodeStatistics
     arguments:
       - '@entity_type.manager'
-
-  donl_statistics.current_statistics:
-    class: Drupal\donl_statistics\getCurrentStatistics
-    arguments:
-      - '@database'
+      - '@donl_identifier.resolver'
 
   donl_statistics.collect:
     class: Drupal\donl_statistics\Commands\CollectStatistics
     arguments:
       - '@donl_statistics.node_statistics'
-      - '@donl_statistics.ckan_statistics'
+      - '@donl_statistics.dataset_statistics'
       - '@donl_statistics.piwik_statistics'
-      - '@donl_statistics.statistics_storage'
+      - '@database'

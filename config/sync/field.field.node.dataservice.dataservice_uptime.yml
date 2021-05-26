@@ -1,0 +1,23 @@
+uuid: 8d2e20f0-c70d-46c8-8e99-7626ac511c56
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_uptime
+    - node.type.dataservice
+id: node.dataservice.dataservice_uptime
+field_name: dataservice_uptime
+entity_type: node
+bundle: dataservice
+label: 'Garantie uptime'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: !!float 100
+  prefix: ''
+  suffix: '%'
+field_type: decimal

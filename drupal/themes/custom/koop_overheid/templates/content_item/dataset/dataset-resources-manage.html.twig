@@ -1,0 +1,66 @@
+{% import '@koop_overheid/content_item/dataset/dataset-panel-resources.html.twig' as resource_macro %}
+
+{% if editLinks %}
+  <div class="container">
+    <div class="buttonswitch">
+      {% for editLink in editLinks %}
+        {{ editLink }}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+<div class="donl-form">
+  {{ header }}
+
+  <div class="main-wrapper">
+    <div class="donl-form-sidebar">
+      <div class="sidebar-nav">
+        <div class="sub-steps">
+          {% for alias, resourceType in sortedResources %}
+            <a href="#{{ alias }}" class="form-sub-step form-sub-step-{{ alias }}" data-sub-step="{{ alias }}">
+              <div class="title">{{ alias|capitalize|replace({'-': ' '})|t }} ({{ resourceType|length }})</div>
+            </a>
+          {% endfor %}
+        </div>
+        <div class="sidebar-actions">
+          {% if sortedResources %}
+            <a href="{{ path('ckan.dataset.order', {'dataset': dataset.id}) }}" class="button secondary">{{ 'Rearrange resources'|t }}</a>
+            <a href="{{ path('ckan.resource.create', {'dataset': dataset.id}) }}" class="button secondary plus-after">{{ 'Add another data source'|t }}</a>
+            <div class="sidebar-nav-actions">
+              <a href="{{ path('ckan.dataset.view', {'dataset': dataset.id}) }}">{{ 'Cancel'|t }}</a>
+              <a href="{{ path('ckan.dataset.publish', {'dataset': dataset.name}) }}" class="button button--primary">{{ 'Next step'|t }}</a>
+            </div>
+          {% else %}
+            <a href="{{ path('ckan.resource.create', {'dataset': dataset.id}) }}" class="button secondary plus-after">{{ 'Add data source'|t }}</a>
+            <div class="sidebar-nav-actions">
+              <a href="{{ path('ckan.dataset.view', {'dataset': dataset.id}) }}">{{ 'Cancel'|t }}</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div id="data-sources" class="main">
+      <div class="form-wrapper">
+        {% if sortedResources %}
+          {% for alias, resourceType in sortedResources %}
+            <div class="details-replacement {{ alias }}">
+              <div class="details-replacement-summary">{{ alias|capitalize|replace({'-': ' '})|t }}</div>
+              {% for key, resource in resourceType %}
+                <div class="resource-edit-wrapper">
+                  {{ resource_macro.create_resource(key, resource, alias) }}
+                  <div class="edit-links">
+                    <a href="{{ path('ckan.resource.edit', {'dataset': dataset.id, 'resource': resource.id}) }}">{{ 'Edit resource'|t }}</a> |
+                    <a href="{{ path('ckan.resource.delete', {'dataset': dataset.id, 'resource': resource.id}) }}">{{ 'Delete resource'|t }}</a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>{{ 'No data sources found.'|t }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.linklist_block.field_heading
     - field.field.paragraph.linklist_block.field_links
     - field.field.paragraph.linklist_block.field_text
+    - field.field.paragraph.linklist_block.field_type
     - paragraphs.paragraphs_type.linklist_block
   module:
     - link
@@ -41,4 +42,5 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-hidden: {  }
+hidden:
+  field_type: true

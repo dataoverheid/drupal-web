@@ -1,0 +1,3 @@
+services:
+  donl_identifier.resolver:
+    class: Drupal\donl_identifier\ResolveIdentifierService

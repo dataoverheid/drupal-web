@@ -7,6 +7,9 @@ core_version_requirement: ^8 || ^9
 
 dependencies:
   - drupal:datetime
+  - donl_dcat_validation:donl_dcat_validation
+  - donl_form:donl_form
+  - donl_identifier:donl_identifier
   - donl_search:donl_search
   - donl_search_backlink:donl_search_backlink
   - donl_value_list:donl_value_list

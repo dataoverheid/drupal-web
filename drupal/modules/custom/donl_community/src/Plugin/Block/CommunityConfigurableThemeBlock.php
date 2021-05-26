@@ -89,14 +89,13 @@ class CommunityConfigurableThemeBlock extends BlockBase implements ContainerFact
    * {@inheritdoc}
    */
   public function build(): array {
-    $themeList = [];
-    if ($community = $this->communityResolver->resolve()) {
-      $themeList = $this->solrRequest->getCountForSelectedThemes($community->getThemes(), $community->getIdentifier());
+    $community = $this->communityResolver->resolve();
+    if (!$community) {
+      return [];
     }
 
     $themes = [];
-    foreach ($themeList as $uri => $count) {
-
+    foreach ($this->solrRequest->getCountForSelectedThemes($community->getThemes(), $community->getIdentifier()) as $uri => $count) {
       $themes[$uri] = [
         'count' => $count,
         'url' => $this->searchUrlService->simpleSearchUrlWithRouteParams('donl_community.search.dataset', ['community' => $community->getMachineName()], ['facet_theme' => [$this->mappingService->getThemeFacetValue($uri)]]),

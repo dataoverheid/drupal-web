@@ -1,0 +1,784 @@
+.donl-form {
+  .file-upload-js-error {
+    color: $c-red-400;
+  }
+
+  .donl-form-header {
+    .container {
+      display: flex;
+      align-items: center;
+      @include breakpoint($mobileonly) {
+        flex-wrap: wrap-reverse;
+      }
+    }
+
+    .summary {
+      flex-basis: 35%;
+
+      margin-right: 2*$gutter;
+
+      .minimal-table {
+        width: 100% !important;
+
+        td {
+          width: 65% !important;
+          padding: 0 !important;
+        }
+      }
+
+      .summary-header {
+        display: flex;
+        align-items: center;
+
+        .summary-title {
+          flex-basis: 65%;
+        }
+
+        .content-characteristics-icon {
+          width: 62px;
+          height: 62px;
+          margin-right: $gutter;
+          margin-bottom: $gutter/2;
+        }
+
+        h1, h2 {
+          margin: 0;
+        }
+
+        h1 {
+          font-size: 19px;
+        }
+
+        h2 {
+          font-size: 16px;
+          font-weight: 200;
+        }
+      }
+    }
+
+    .steps {
+      display: flex;
+      flex-basis: 70%;
+      @include breakpoint($mobileonly) {
+        overflow: auto;
+        flex-basis: 100%;
+        margin-bottom: 15px;
+      }
+
+      .form-step {
+        position: relative;
+        width: max-content;
+        margin-right: $gutter*2;
+        padding: $gutter;
+        color: $c-white;
+        border-radius: 15px;
+        background-color: $c-gray-300;
+        @include breakpoint($mobileonly) {
+          margin-right: 23px;
+        }
+
+        a {
+          text-decoration: none;
+          color: $c-white;
+        }
+
+        > .title {
+          font-size: 19px;
+          font-weight: bold;
+          display: none;
+        }
+
+        > .short-title {
+          font-size: 16px;
+          position: relative;
+        }
+
+        .step-icon {
+          font-size: 50px;
+          position: relative;
+          z-index: 1;
+          display: block;
+          margin-bottom: 5px;
+          text-align: center;
+
+          &.icon-checked {
+            font-size: 45px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .sub-steps {
+          .form-sub-step {
+            z-index: 1;
+            display: none;
+            margin-right: $gutter;
+
+            .title {
+              display: none;
+            }
+
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+
+        &:last-child {
+          .arrow {
+            display: none;
+          }
+        }
+
+        .arrow {
+          position: absolute;
+          z-index: 0;
+          top: 66px;
+          width: calc(100% + 5px);
+          height: 4px;
+          background: $c-gray-300;
+
+          &:before {
+            position: absolute;
+            right: -17px;
+            width: 15px;
+            content: '';
+            transform: translateX(-14px) translateY(-4px) rotate(45deg);
+            border: 2px solid $c-gray-300;
+          }
+
+          &:after {
+            position: absolute;
+            right: -17px;
+            width: 15px;
+            content: '';
+            transform: translateX(-14px) translateY(4px) rotate(-45deg);
+            border: 2px solid $c-gray-300;
+          }
+        }
+
+        &.active {
+          color: $c-blue-600;
+          background-color: $c-blue-200;
+
+          .step-icon {
+            font-size: 23px;
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding-right: 10px;
+            color: $c-blue-600;
+            border-right: 1px solid $c-blue-600;
+            @include breakpoint($mobileonly) {
+              display: none;
+            }
+          }
+
+          > .title {
+            display: inline-block;
+            transform: translateY(-4px);
+          }
+
+          .short-title {
+            display: none;
+          }
+
+          .form-sub-step {
+            display: flex;
+
+            &:before {
+              display: block;
+            }
+          }
+
+          .arrow {
+            background-color: $c-blue-600;
+
+            &:before, &:after {
+              border: 2px solid $c-blue-600;
+            }
+          }
+        }
+
+        &.completed {
+          color: $c-white;
+          background-color: $c-blue-600;
+
+          .title {
+            display: none;
+          }
+
+          .short-title {
+            display: block;
+          }
+
+          .form-sub-step {
+            .title {
+              display: none;
+            }
+          }
+
+          .arrow {
+            background-color: $c-blue-600;
+
+            &:before, &:after {
+              border: 2px solid $c-blue-600;
+            }
+          }
+        }
+
+        &.error {
+          .status {
+            border: none;
+            background-color: $c-red-400;
+
+            &:before {
+              font-size: 30px;
+              content: "X";
+              color: $c-white;
+            }
+          }
+        }
+
+        &.active-no-substeps {
+          color: $c-blue-600;
+          background: $c-blue-200;
+        }
+      }
+    }
+  }
+
+  .main {
+    width: 65%;
+    margin: 2*$gutter 0;
+    counter-reset: sub-steps;
+    @include breakpoint($tablet) {
+      width: 100%;
+      margin: 0;
+    }
+
+    .form-wrapper > .details-replacement {
+      margin: 0;
+      margin-bottom: $gutter;
+
+      counter-increment: sub-steps;
+      border: 1px solid $c-gray-400;
+      background: $c-white;
+
+      &[open] {
+        background: $c-gray-150;
+      }
+
+      & > .details-replacement-summary {
+        font-size: 19px;
+        font-weight: 600;
+        display: block;
+        text-decoration: none;
+        color: $c-blue-600;
+        background-size: 16px;
+
+        &:before {
+          font-weight: bold;
+          line-height: 2*$gutter;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          margin-right: $gutter;
+          content: counter(sub-steps);
+          color: $c-blue-600;
+          border: 2px solid $c-blue-600;
+          border-radius: 50%;
+          background-color: $c-white;
+        }
+      }
+
+      &.started > .details-replacement-summary:before {
+        color: $c-white;
+        border: 2px solid $c-blue-600;
+        background-color: $c-blue-600;
+      }
+
+      &.completed > .details-replacement-summary:before {
+        font-family: 'icomoon';
+        font-size: 12px;
+        content: "\e90b";
+        color: $c-white;
+        border: none;
+        background-color: $c-green-200;
+      }
+
+      &.error > .details-replacement-summary:before {
+        content: "X";
+        color: $c-white;
+      }
+    }
+  }
+
+  .main-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 290px;
+    max-width: 90em;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .donl-form-sidebar {
+    width: 35%;
+
+    @include breakpoint($tablet) {
+      width: 100%;
+    }
+
+    .sidebar-nav {
+      height: min-content;
+      margin: 2*$gutter;
+      margin-left: 0;
+      border-radius: $gutter/2;
+      background-color: $c-blue-100;
+
+      @include breakpoint($tablet) {
+        margin-right: 0;
+      }
+
+      .sidebar-actions {
+        padding: 15px;
+
+        a.button {
+          margin-bottom: 0;
+
+          & + a.button {
+            margin-top: 15px;
+          }
+        }
+
+        .plus-after {
+          &::after {
+            font-size: 20px;
+          }
+        }
+      }
+
+      .form-step {
+        > .title {
+          display: none;
+        }
+      }
+
+      .short-title {
+        display: none;
+      }
+
+      .sub-steps {
+        flex-direction: column;
+
+        .form-sub-step {
+          display: flex;
+          align-items: center;
+          padding: $gutter/2 $gutter;
+          background-color: $c-blue-100;
+
+          .title {
+            font-size: 19px;
+            font-weight: 600;
+            text-decoration: none;
+            color: $c-blue-600;
+          }
+
+          .status {
+            font-size: 14px;
+            line-height: 30px;
+            width: 23px;
+            height: 23px;
+            margin-right: $gutter;
+          }
+
+          &:after {
+            font-family: 'icomoon';
+            font-size: 10px;
+            display: inline-block;
+            margin-left: auto;
+            content: "\e938";
+            color: $c-blue-600;
+          }
+
+          &:hover, &:focus, &:active {
+            outline: none;
+            background-color: $c-blue-150;
+          }
+
+          &.active {
+            background-color: $c-blue-200;
+          }
+
+          &.completed {
+            .status {
+              &:before {
+                font-size: 9px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sub-steps {
+    display: flex;
+    counter-reset: sub-steps;
+
+    .form-sub-step {
+      user-select: none;
+      text-decoration: none;
+
+      .status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2*$gutter;
+        height: 2*$gutter;
+        counter-increment: sub-steps;
+        color: $c-blue-600;
+        border: 2px solid $c-blue-600;
+
+        border-radius: 50%;
+        background-color: $c-white;
+
+        &:before {
+          font-weight: bold;
+          line-height: 2*$gutter;
+          content: counter(sub-steps);
+        }
+
+        .title {
+          display: none;
+        }
+      }
+
+      &.started {
+        .status {
+          color: $c-white;
+          border: 2px solid $c-blue-600;
+          background-color: $c-blue-600;
+        }
+      }
+
+      &.completed {
+        .status {
+          border: none;
+          background-color: $c-green-200;
+
+          &:before {
+            font-family: 'icomoon';
+            font-size: 12px;
+            content: "\e90b";
+            color: $c-white;
+          }
+        }
+      }
+
+      &.error {
+        .status {
+          border: none;
+          background-color: $c-red-400;
+
+          &:before {
+            content: "X";
+            color: $c-white;
+          }
+        }
+      }
+    }
+  }
+
+  .form__element input.error {
+    border-color: $c-red-400;
+  }
+
+  .error-messages {
+    padding: 5px 15px;
+    color: $c-red-400;
+    border: 1px solid $c-red-400;
+    border-radius: 3px;
+    background: $c-red-100;
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+
+    .more-information {
+      margin-right: 5px;
+    }
+
+    label {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
+  .form-item {
+    margin-bottom: 15px;
+
+    .suffix-wrapper {
+      position: relative;
+      display: inline-block;
+
+      .field-suffix {
+        position: absolute;
+        top: 9px;
+        right: 9px;
+      }
+
+      input {
+        padding-right: 30px;
+      }
+    }
+  }
+
+  .new-loader {
+    display: none;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 2px;
+  }
+
+  & > div:not(.advanced) {
+    .donl-form-header {
+      .form-step .sub-steps .form-sub-step {
+        &.advanced {
+          display: none;
+        }
+      }
+    }
+
+    .main {
+      & > .form-wrapper.advanced > .details-replacement {
+        pointer-events: none;
+
+        & > .details-replacement-summary {
+          color: $c-gray-300;
+          background-image: url('../images/icon-plus-disabled.svg');
+
+          a {
+            color: $c-gray-300;
+          }
+
+          &:before {
+            color: $c-gray-300;
+            border: 2px solid $c-gray-300;
+            background-color: $c-white;
+          }
+        }
+      }
+    }
+
+    .donl-form-sidebar {
+      .sidebar-nav {
+        .sub-steps .form-sub-step {
+          &.advanced {
+            pointer-events: none;
+
+            &.focused, &:hover {
+              background-color: $c-blue-100;
+            }
+
+            .status {
+              color: $c-gray-300;
+              border: 2px solid $c-gray-300;
+              background-color: $c-white;
+            }
+
+            .title {
+              cursor: auto;
+              color: $c-gray-300;
+            }
+
+            &:after {
+              color: $c-gray-300;
+            }
+
+            &.started {
+              .status {
+                color: $c-white;
+                border-color: lighten($c-blue-600, 40);
+                background-color: lighten($c-blue-600, 40);
+              }
+            }
+
+            &.completed {
+              .status {
+                border-color: lighten($c-green-200, 40);
+                background-color: lighten($c-green-200, 40);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Must be important to overrule the #states API inline styling.
+  .details-replacement:not([open]) {
+    & > div.form-wrapper,
+    & > div.form__element {
+      display: none !important;
+    }
+  }
+}
+
+.sidebar-nav-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+  padding: $gutter;
+  border-top: 2px solid white;
+
+  & > * {
+    margin: 0 7px;
+  }
+
+  .button--datasources {
+    margin-top: 8px;
+  }
+}
+
+.submit-overlay-wrapper {
+  text-align: right;
+
+  .submit-overlay {
+    margin: 0;
+  }
+}
+
+.sidebar-nav [id^=edit-advanced-] {
+  display: none;
+}
+
+.advance-swap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+
+  .selects {
+    margin-left: 10px;
+  }
+
+  .swap-label {
+    line-height: 35px;
+    cursor: default;
+
+    .selects {
+      height: 25px;
+    }
+  }
+
+  .option {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 5px;
+    user-select: none;
+
+    .radio {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      margin: 0 10px 0 0;
+      border: 1px solid black;
+      border-radius: 50%;
+      background: white;
+    }
+
+    &:hover, &:focus, &:active {
+      color: $c-blue-600;
+    }
+  }
+
+  .option {
+    &.checked .radio {
+      background: $c-blue-400;
+      background: radial-gradient(ellipse at center, $c-blue-400 0, $c-blue-400 6px, white 6px);
+    }
+  }
+}
+
+a.details-title {
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.publish-text {
+  margin-top: 30px;
+}
+
+.sidebar-text {
+  padding: 15px;
+}
+
+.form-wrapper {
+  .form-item {
+    table {
+      thead {
+        th {
+          width: 100%;
+          padding: 0;
+          border-bottom: 1px solid $c-blue-600;
+
+          h4.label {
+            font-size: 100%;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            color: $c-blue-600;
+            background: none;
+          }
+
+          small {
+            font-weight: normal;
+            float: right;
+            color: #555;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          td {
+            margin: 0;
+            padding: 0.5em 0 0 0;
+            border: none;
+
+            &.field-multiple-drag {
+              display: none;
+            }
+
+            .form-item {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tabledrag-toggle-weight-wrapper {
+  display: none;
+}
+

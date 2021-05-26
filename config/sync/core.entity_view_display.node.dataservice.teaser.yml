@@ -1,0 +1,85 @@
+uuid: 9f2e43ac-dd68-4079-a58c-b14dafbdcbf8
+langcode: nl
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.dataservice.dataserivce_base_register
+    - field.field.node.dataservice.dataserivce_state
+    - field.field.node.dataservice.dataservice_acceptance_url
+    - field.field.node.dataservice.dataservice_api_authentication
+    - field.field.node.dataservice.dataservice_api_format
+    - field.field.node.dataservice.dataservice_api_output
+    - field.field.node.dataservice.dataservice_contact_email
+    - field.field.node.dataservice.dataservice_contact_name
+    - field.field.node.dataservice.dataservice_costs_for_use
+    - field.field.node.dataservice.dataservice_demo_url
+    - field.field.node.dataservice.dataservice_description
+    - field.field.node.dataservice.dataservice_documentation_url
+    - field.field.node.dataservice.dataservice_explanation_costs
+    - field.field.node.dataservice.dataservice_high_value
+    - field.field.node.dataservice.dataservice_license
+    - field.field.node.dataservice.dataservice_location_datasets
+    - field.field.node.dataservice.dataservice_national_coverage
+    - field.field.node.dataservice.dataservice_open_standards
+    - field.field.node.dataservice.dataservice_owner
+    - field.field.node.dataservice.dataservice_production_url
+    - field.field.node.dataservice.dataservice_programming_language
+    - field.field.node.dataservice.dataservice_reference_data
+    - field.field.node.dataservice.dataservice_sector_registrations
+    - field.field.node.dataservice.dataservice_source_code_url
+    - field.field.node.dataservice.dataservice_specification_url
+    - field.field.node.dataservice.dataservice_supplier
+    - field.field.node.dataservice.dataservice_type
+    - field.field.node.dataservice.dataservice_uptime
+    - field.field.node.dataservice.forum_link
+    - field.field.node.dataservice.machine_name
+    - field.field.node.dataservice.relation_dataservice_dataset
+    - field.field.node.dataservice.theme
+    - node.type.dataservice
+  module:
+    - user
+id: node.dataservice.teaser
+targetEntityType: node
+bundle: dataservice
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  dataserivce_base_register: true
+  dataserivce_state: true
+  dataservice_acceptance_url: true
+  dataservice_api_authentication: true
+  dataservice_api_format: true
+  dataservice_api_output: true
+  dataservice_contact_email: true
+  dataservice_contact_name: true
+  dataservice_costs_for_use: true
+  dataservice_demo_url: true
+  dataservice_description: true
+  dataservice_documentation_url: true
+  dataservice_explanation_costs: true
+  dataservice_high_value: true
+  dataservice_license: true
+  dataservice_location_datasets: true
+  dataservice_national_coverage: true
+  dataservice_open_standards: true
+  dataservice_owner: true
+  dataservice_production_url: true
+  dataservice_programming_language: true
+  dataservice_reference_data: true
+  dataservice_sector_registrations: true
+  dataservice_source_code_url: true
+  dataservice_specification_url: true
+  dataservice_supplier: true
+  dataservice_type: true
+  dataservice_uptime: true
+  forum_link: true
+  langcode: true
+  machine_name: true
+  relation_dataservice_dataset: true
+  theme: true

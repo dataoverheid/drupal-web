@@ -21,6 +21,9 @@ trait SearchRoutesTrait {
   public function getSearchRoute(string $type, $communityRoutes = FALSE): string {
     $searchRoutes = $this->getSearchRoutes($communityRoutes);
 
+    if ($communityRoutes) {
+      return $searchRoutes[$type] ?? 'donl_community.search';
+    }
     return $searchRoutes[$type] ?? 'donl_search.search';
   }
 
@@ -40,6 +43,7 @@ trait SearchRoutesTrait {
         'datarequest' => 'donl_community.search.datarequest',
         'dataset' => 'donl_community.search.dataset',
         'group' => 'donl_community.search.group',
+        'news' => 'donl_community.search.news',
         'organization' => 'donl_community.search.organization',
       ];
     }
@@ -50,6 +54,7 @@ trait SearchRoutesTrait {
       'community' => 'donl_search.search.community',
       'datarequest' => 'donl_search.search.datarequest',
       'dataset' => 'donl_search.search.dataset',
+      'dataservice' => 'donl_search.search.dataservice',
       'group' => 'donl_search.search.group',
       'news' => 'donl_search.search.news',
       'organization' => 'donl_search.search.organization',
@@ -82,6 +87,7 @@ trait SearchRoutesTrait {
     $routes['donl_community.datarequest.view'] = 'datarequest';
     $routes['donl_community.dataset.view'] = 'dataset';
     $routes['donl_community.group.view'] = 'group';
+    $routes['donl_community.news.view'] = 'news';
     $routes['donl_community.organization.view'] = 'organization';
 
     return $routes[$route] ?? NULL;

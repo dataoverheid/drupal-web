@@ -17,7 +17,7 @@ class CkanUser extends User implements CkanUserInterface {
 
     // Return everything if the user is an administrator.
     if ($this->isAdministrator()) {
-      return \Drupal::service('donl.value_list')->getList('donl:catalogs');
+      return \Drupal::service('donl.value_list')->getList('donl:catalogs', TRUE);
     }
 
     if ($this->hasField('field_catalog') && ($catalog = $this->get('field_catalog')->getValue()[0]['value'] ?? NULL)) {

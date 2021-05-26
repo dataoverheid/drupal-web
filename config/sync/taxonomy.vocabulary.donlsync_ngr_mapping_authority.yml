@@ -1,8 +1,0 @@
-uuid: 6340d5dc-7487-4194-8a51-9aae044cebc1
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync NGR Mapping Authority'
-vid: donlsync_ngr_mapping_authority
-description: ''
-weight: 0

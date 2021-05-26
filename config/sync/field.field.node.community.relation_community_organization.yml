@@ -1,0 +1,25 @@
+uuid: 770ae4ba-ba32-48bd-95ac-a7abb194a89d
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_community_organization
+    - node.type.community
+id: node.community.relation_community_organization
+field_name: relation_community_organization
+entity_type: node
+bundle: community
+label: Organisaties
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entityreference_organizations
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

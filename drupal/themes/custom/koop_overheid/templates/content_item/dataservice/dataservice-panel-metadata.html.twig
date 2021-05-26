@@ -1,0 +1,42 @@
+{% import '@koop_overheid/global_functions.html.twig' as functions %}
+
+<h2 class="visible-xs">{{ 'Metadata'|t }}</h2>
+
+<div class="metadata-table">
+  <h3>{{ 'Dataservice data' |t }}</h3>
+  {{ functions.metadata_field('Title', node.title.value) }}
+  {{ functions.metadata_field('Kind', node.dataservice_type.entity.name.value) }}
+  {{ functions.metadata_field('Theme', ckan_mapping_get_theme_name(node.theme.value)) }}
+  {{ functions.metadata_field('State', ckan_mapping_get_status_name(node.dataserivce_state.value)) }}
+  {% set classification %}
+    <table class="minimal-table">
+      <tr>
+        <th>{{ 'High value'|t }}:</th>
+        <td>{% if node.dataservice_high_value.value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+      </tr>
+      <tr>
+        <th>{{ 'Reference data'|t }}:</th>
+        <td>{% if node.dataservice_reference_data.value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+      </tr>
+      <tr>
+        <th>{{ 'National coverage'|t }}:</th>
+        <td>{% if node.dataservice_national_coverage.value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+      </tr>
+      <tr>
+        <th>{{ 'Base register'|t }}:</th>
+        <td>{% if node.dataserivce_base_register.value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+      </tr>
+      <tr>
+        <th>{{ 'Sector registrations'|t }}:</th>
+        <td>{% if node.dataservice_sector_registrations.value %}{{ 'Yes'|t }}{% else %}{{ 'No'|t }}{% endif %}</td>
+      </tr>
+    </table>
+  {% endset %}
+  {{ functions.metadata_field('Data classification', classification) }}
+  {{ functions.metadata_field('Forum link', ckan_link(node.forum_link.value)) }}
+
+  <h3>{{ 'Access'|t }}</h3>
+  {{ functions.metadata_field('Production URL', ckan_link(node.dataservice_production_url.value)) }}
+  {{ functions.metadata_field('Acceptance URL', ckan_link(node.dataservice_acceptance_url.value)) }}
+  {{ functions.metadata_field('Demo URL', ckan_link(node.dataservice_demo_url.value)) }}
+</div>

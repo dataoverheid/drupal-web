@@ -1,15 +1,17 @@
-manage datasets:
-  title: 'Manage datasets'
+manage own datasets:
+  title: 'Manage own datasets'
+
+manage all datasets:
+  title: 'Manage all datasets'
   restrict access: true
 
 manage ckan settings:
   title: 'Manage Ckan settings'
-  restrict access: true
 
 configure ckan request settings:
   title: 'Configure the CKAN Request settings'
   restrict access: true
 
-configure ckan resource type settings:
-  title: 'Configure the resource type settings'
+configure ckan dataset settings:
+  title: 'Configure ckan dataset settings'
   restrict access: true

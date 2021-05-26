@@ -4,6 +4,7 @@
  * @file
  */
 
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Markup;
@@ -16,6 +17,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 function donl_theme($existing, $type, $theme, $path) {
   return [
+    'donl_content_header_block' => [
+      'variables' => [
+        'title' => '',
+        'type' => '',
+        'image' => '',
+        'content' => [],
+        'links' => [],
+        'search_form' => [],
+        'mobile_search_form' => [],
+        'suggestions' => [],
+      ],
+    ],
     'donl_privacy_statement' => [
       'variables' => [],
     ],
@@ -34,8 +47,7 @@ function donl_theme($existing, $type, $theme, $path) {
       'variables' => [
         'tags' => [],
         'node' => NULL,
-        'datasets_links' => [],
-        '#logo' => NULL,
+        'logo' => NULL,
       ],
     ],
     'datarequest' => [
@@ -62,6 +74,26 @@ function donl_theme($existing, $type, $theme, $path) {
     'datarequest-panel-relations' => [
       'variables' => [
         'datarequest' => NULL,
+      ],
+    ],
+    'dataservice' => [
+      'variables' => [
+        'node' => NULL,
+        'backLink' => NULL,
+        'editLinks' => [],
+        'search' => '',
+        'tabs' => '',
+        'panels' => '',
+      ],
+    ],
+    'dataservice-panel-description' => [
+      'variables' => [
+        'node' => NULL,
+      ],
+    ],
+    'dataservice-panel-metadata' => [
+      'variables' => [
+        'node' => NULL,
       ],
     ],
     'donl_user_profile' => [
@@ -97,6 +129,16 @@ function donl_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_element_info_alter().
+ */
+function donl_element_info_alter(array &$types) {
+  // Attach our extra CSS for toolbar icons.
+  if (isset($types['toolbar'])) {
+    $types['toolbar']['#attached']['library'][] = 'donl/toolbar';
+  }
+}
+
+/**
  * Implements hook_preprocess_html().
  */
 function donl_preprocess_html(&$variables) {
@@ -116,11 +158,24 @@ function donl_preprocess_html(&$variables) {
 }
 
 /**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function donl_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if (!empty($fields['identifier']) && in_array($bundle, ['catalog', 'organization'])) {
+    $fields['identifier']->addConstraint('UniqueDonlIdentifier');
+  }
+  if (!empty($fields['forum_link'])) {
+    $fields['forum_link']->addConstraint('DonlForumUrlConstraint');
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function donl_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $valueList = \Drupal::service('donl.value_list');
 
+  // Globally alter the following fields.
   if (isset($form['theme']) && $form_id !== 'block_form') {
     $form['theme']['widget'][0]['value']['#type'] = 'select';
     $form['theme']['widget'][0]['value']['#options'] = $valueList->getPreparedHierarchicalThemeList(TRUE);
@@ -128,10 +183,11 @@ function donl_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     $form['theme']['widget'][0]['value']['#size'] = 1;
   }
 
+  // Alter the datarequest form.
   if (in_array($form_id, ['node_datarequest_form', 'node_datarequest_edit_form'])) {
     $form['#title'] = t('Make a new data request');
     if ($form_id === 'node_datarequest_edit_form') {
-      $form['#title'] = t('Edit data request');
+      $form['#title'] = t('Edit @type', ['@type' => 'data request']);
     }
 
     $request = \Drupal::request();
@@ -140,14 +196,17 @@ function donl_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     $form['data_owner']['widget'][0]['value']['#type'] = 'select';
     $form['data_owner']['widget'][0]['value']['#options'] = $valueList->getList('donl:organization');
+    $form['data_owner']['widget'][0]['value']['#empty_option'] = t('- Select item -');
     $form['data_owner']['widget'][0]['value']['#size'] = 1;
 
     $form['requested_dataformat']['widget'][0]['value']['#type'] = 'select';
     $form['requested_dataformat']['widget'][0]['value']['#options'] = $valueList->getList('mdr:filetype_nal');
+    $form['requested_dataformat']['widget'][0]['value']['#empty_option'] = t('- Select item -');
     $form['requested_dataformat']['widget'][0]['value']['#size'] = 1;
 
     $form['possible_owner']['widget'][0]['value']['#type'] = 'select';
     $form['possible_owner']['widget'][0]['value']['#options'] = $valueList->getList('donl:organization');
+    $form['possible_owner']['widget'][0]['value']['#empty_option'] = t('- Select item -');
     $form['possible_owner']['widget'][0]['value']['#size'] = 1;
     if (!empty($possibleOwner)) {
       $form['possible_owner']['widget'][0]['value']['#default_value'] = $possibleOwner;
@@ -205,8 +264,32 @@ function donl_form_node_feedback_dataset_form_alter_submit(&$form, FormStateInte
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+function donl_form_node_appliance_form_alter(&$form, FormStateInterface $form_state) {
+  $form['actions']['submit']['#submit'][] = 'donl_form_node_appliance_form_alter_submit';
+}
+
+/**
+ * Custom sumbit handler for node_appliance_form.
+ */
+function donl_form_node_appliance_form_alter_submit(array $form, FormStateInterface $form_state) {
+  $messenger = \Drupal::messenger();
+  if ($messenger->messagesByType('status')) {
+    $messenger->deleteByType('status');
+    $messenger->addMessage(t('The application is being verified and awaiting approval.'));
+  }
+  $form_state->setRedirect('donl_search.search.application');
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function donl_form_node_form_alter(&$form, FormStateInterface $form_state) {
-  if ($form['#form_id'] === 'node_appliance_form' || $form['#form_id'] === 'node_datarequest_form') {
+  $formIds = [
+    'node_appliance_form',
+    'node_datarequest_form',
+    'node_feedback_dataset_form'
+  ];
+  if (in_array($form['#form_id'], $formIds)) {
     donl_add_privacy_fields($form);
   }
   return $form;
@@ -265,14 +348,37 @@ function donl_add_privacy_fields(array &$form) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function donl_node_presave(NodeInterface $node) {
-  if ($node->getType() === 'datarequest') {
-    if ($node->id() === NULL && !$node->get('datarequest_id')->getValue()) {
-      $query = \Drupal::database()->select('node__datarequest_id', 'n');
-      $query->addExpression('MAX(datarequest_id_value)', 'max');
-      $query->range(0, 1);
-      $max = (int) $query->execute()->fetchField();
-      $node->set('datarequest_id', $max + 1);
+  // Add the auto-increment datarequest number.
+  if ($node->getType() === 'datarequest' && $node->id() === NULL && !$node->get('datarequest_id')->getValue()) {
+    $query = \Drupal::database()->select('node__datarequest_id', 'n');
+    $query->addExpression('MAX(datarequest_id_value)', 'max');
+    $query->range(0, 1);
+    $max = (int) $query->execute()->fetchField();
+    $node->set('datarequest_id', $max + 1);
+  }
+
+  // Automatically set the machine name.
+  if (in_array($node->getType(), ['appliance', 'datarequest', 'dataservice']) && !$node->get('machine_name')->getValue()) {
+    $title = $node->getTitle();
+    $title = preg_replace('~[^\pL\d_]+~u', '-', $title);
+    $title = iconv('utf-8', 'us-ascii//TRANSLIT', $title);
+    $title = preg_replace('~[^-\w]+~', '', $title);
+    $title = trim($title, '-');
+    $title = preg_replace('~-+~', '-', $title);
+    $title = strtolower($title);
+    if (mb_strwidth($title, 'UTF-8') > 100) {
+      $title = rtrim(mb_substr($title, 0, 100, 'UTF-8'));
     }
+
+    $i = 0;
+    do {
+      $machineName = $title . ($i > 0 ? '_' . $i : '');
+      $query = \Drupal::entityQuery('node');
+      $query->condition('type', $node->getType(), '=');
+      $query->condition('machine_name', $machineName, '=');
+      $i++;
+    } while (count($query->execute()) !== 0);
+    $node->set('machine_name', $machineName);
   }
 }
 

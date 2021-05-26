@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'icomoon';
   src:
-    url('fonts/icomoon.ttf?czcaom') format('truetype'),
-    url('fonts/icomoon.woff?czcaom') format('woff'),
-    url('fonts/icomoon.svg?czcaom#icomoon') format('svg');
+    url('fonts/icomoon.ttf?1690rz') format('truetype'),
+    url('fonts/icomoon.woff?1690rz') format('woff'),
+    url('fonts/icomoon.svg?1690rz#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  speak: none;
+  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -24,6 +24,67 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-bin:before {
+  content: "\e902";
+}
+.icon-minus-shape:before {
+  content: "\e900";
+}
+.icon-plus-shape:before {
+  content: "\e901";
+}
+.icon-close .path1:before {
+  content: "\e903";
+  color: rgb(255, 255, 255);
+}
+.icon-close .path2:before {
+  content: "\e904";
+  margin-left: -1em;
+  color: rgb(21, 66, 115);
+}
+.icon-info .path1:before {
+  content: "\e905";
+  color: rgb(255, 255, 255);
+}
+.icon-info .path2:before {
+  content: "\e906";
+  margin-left: -1em;
+  color: rgb(21, 66, 115);
+}
+.icon-title:before {
+  content: "\e907";
+  color: #154273;
+}
+.icon-databron:before {
+  content: "\e909";
+}
+.icon-connected-globe:before {
+  content: "\e90a";
+}
+.icon-checked:before {
+  content: "\e90b";
+}
+.icon-minus .path1:before {
+  content: "\e90c";
+  color: rgb(255, 255, 255);
+}
+.icon-minus .path2:before {
+  content: "\e90d";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
+.icon-pijl-rechts:before {
+  content: "\e90f";
+}
+.icon-plus .path1:before {
+  content: "\e911";
+  color: rgb(255, 255, 255);
+}
+.icon-plus .path2:before {
+  content: "\e912";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
 .icon-arrow-up:before {
   content: "\e934";
 }

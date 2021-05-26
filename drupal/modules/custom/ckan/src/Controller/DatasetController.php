@@ -2,15 +2,14 @@
 
 namespace Drupal\ckan\Controller;
 
+use Drupal\ckan\DatasetEditLinksTrait;
 use Drupal\ckan\Entity\Dataset;
 use Drupal\ckan\LanguageCheckServiceInterface;
 use Drupal\ckan\SortDatasetResourcesServiceInterface;
-use Drupal\ckan\User\CkanUserInterface;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Link;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\donl_search_backlink\BackLinkService;
@@ -22,6 +21,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  */
 class DatasetController extends ControllerBase {
+
+  use DatasetEditLinksTrait;
 
   /**
    * @var \Drupal\user\UserStorageInterface
@@ -41,7 +42,7 @@ class DatasetController extends ControllerBase {
   /**
    * @var string
    */
-  private $language;
+  private $languageCode;
 
   /**
    * @var \Drupal\Core\Routing\RouteMatchInterface
@@ -80,7 +81,7 @@ class DatasetController extends ControllerBase {
     $this->solrRequest = $solrRequest;
     $this->languageCheckService = $languageCheckService;
     $this->formBuilder = $this->formBuilder();
-    $this->language = $languageManager->getCurrentLanguage()->getName();
+    $this->languageCode = $languageManager->getCurrentLanguage()->getId();
     $this->routeMatch = $routeMatch;
     $this->backLinkService = $backLinkService;
     $this->sortDatasetResourcesService = $sortDatasetResourcesService;
@@ -118,16 +119,11 @@ class DatasetController extends ControllerBase {
     $links['feedback'] = Link::createFromRoute($this->t('Feedback'), 'node.add', ['node_type' => 'feedback_dataset'], [
       'query' => [
         'dataset' => $dataset->getId(),
-        'destination' => Url::fromRoute($this->routeMatch->getRouteName(), $this->routeMatch->getRawParameters()->all())->toString(),
+        'destination' => Url::fromRoute($this->routeMatch->getRouteName(), $this->routeMatch->getRawParameters()
+          ->all())->toString(),
       ],
     ])->toRenderable();
     $links['feedback']['#attributes']['class'] = ['button', 'bordered'];
-
-    $textConfig = $this->config('ckan.datasettext.settings');
-    $suffix = '';
-    if ($this->language === 'English') {
-      $suffix = '_en';
-    }
 
     if (strlen($dataset->getNotes()) > 4999) {
       $dataset->setNotes(substr($dataset->getNotes(), 0, 4996) . '...');
@@ -154,7 +150,6 @@ class DatasetController extends ControllerBase {
         '#theme' => 'dataset-panel-description',
         '#dataset' => $dataset,
         '#links' => $links,
-        '#text' => Markup::create($textConfig->get('description_text' . $suffix)['value'] ?? NULL),
       ],
     ];
 
@@ -162,7 +157,7 @@ class DatasetController extends ControllerBase {
     if ($sortedResources = $this->sortDatasetResourcesService->getSortedResources($dataset)) {
       foreach ($sortedResources as $title => $sortedResource) {
         $key = strtolower(str_replace(' ', '-', $title));
-        $tabs['panel-' . $key] = $this->t($title) . ' (' . count($sortedResource) . ')';
+        $tabs['panel-' . $key] = $title . ' (' . count($sortedResource) . ')';
         $panels[$key] = [
           '#theme' => 'panel',
           '#id' => $key,
@@ -170,9 +165,15 @@ class DatasetController extends ControllerBase {
             '#theme' => 'dataset-panel-resources',
             '#alias' => $key,
             '#resources' => $sortedResource,
-            '#text' => Markup::create($textConfig->get($key . '_text' . $suffix)['value'] ?? NULL),
           ],
         ];
+        if ($title === 'Visualization' || $title === 'Visualisatie') {
+          $fileType = explode('.', $sortedResource[0]->url);
+          $last = end($fileType);
+          $sortedResource[0]->isImage = str_contains($last, 'png') || str_contains($last, 'jpg') || str_contains($last, 'jpeg');
+          $panels[$key]['#content']['#theme'] = 'dataset-panel-visualisations';
+          $panels[$key]['#attached']['library'][] = 'ckan/visualisations';
+        }
       }
     }
 
@@ -186,31 +187,21 @@ class DatasetController extends ControllerBase {
       $confirmsTo[] = $this->createClickableUrl($url);
     }
     if ($documentation || $confirmsTo) {
-      $documentationResources = $panels['documentation']['#content']['#resources'] ?? [];
-      $tabs['panel-documentation'] = $this->t('Documentation') . ' (' . (count($documentationResources) + count($documentation) + count($confirmsTo)) . ')';
-      $panels['documentation'] = [
+      $key = 'documentatie';
+      if ($this->languageCode === 'en') {
+        $key = 'documentation';
+      }
+
+      $documentationResources = $panels[$key]['#content']['#resources'] ?? [];
+      $tabs['panel-' . $key] = $this->t('Documentation') . ' (' . (count($documentationResources) + count($documentation) + count($confirmsTo)) . ')';
+      $panels[$key] = [
         '#theme' => 'panel',
-        '#id' => 'documentation',
+        '#id' => $key,
         '#content' => [
           '#theme' => 'dataset-panel-documentation',
           '#resources' => $documentationResources,
           '#documentation' => $documentation,
           '#confirmsTo' => $confirmsTo,
-          '#text' => Markup::create($textConfig->get($key . '_text' . $suffix)['value'] ?? NULL),
-        ],
-      ];
-    }
-
-    // Visualisation tab (demo).
-    if ($dataset->id === '033b322c-1eb0-4f0a-a623-ce1056bb31e5') {
-      $tabs['panel-visualisations'] = $this->t('Visualisations');
-      $panels['visualisations'] = [
-        '#theme' => 'panel',
-        '#id' => 'visualisations',
-        '#title' => $this->t('Visualisations'),
-        '#content' => [
-          '#theme' => 'dataset-panel-visualisations',
-          '#text' => Markup::create($textConfig->get('visualisations_text' . $suffix)['value'] ?? NULL),
         ],
       ];
     }
@@ -244,12 +235,6 @@ class DatasetController extends ControllerBase {
           '#groupLinks' => $groupLinks,
           '#relatedResourceLinks' => $relatedResourceLinks,
           '#sourceLinks' => $sourceLinks,
-          '#texts' => [
-            'groups' => Markup::create($textConfig->get('relations_groups_text' . $suffix)['value'] ?? NULL),
-            'comparable' => Markup::create($textConfig->get('relations_comparable_text' . $suffix)['value'] ?? NULL),
-            'related_resources' => Markup::create($textConfig->get('relations_related_resources_text' . $suffix)['value'] ?? NULL),
-            'sources' => Markup::create($textConfig->get('relations_sourcess_text' . $suffix)['value'] ?? NULL),
-          ],
           '#dataset' => $dataset,
         ],
       ];
@@ -267,7 +252,6 @@ class DatasetController extends ControllerBase {
         '#id' => 'condition',
         '#title' => $this->t('Condition'),
         '#content' => [
-          $this->getDescriptionRender($textConfig->get('condition_text' . $suffix)['value'] ?? NULL),
           $this->getLinkedListRender($provenanceLinks),
         ],
       ];
@@ -285,7 +269,6 @@ class DatasetController extends ControllerBase {
         '#id' => 'example',
         '#title' => $this->t('Example'),
         '#content' => [
-          $this->getDescriptionRender($textConfig->get('example_text' . $suffix)['value'] ?? NULL),
           $this->getLinkedListRender($sampleLinks),
         ],
       ];
@@ -305,7 +288,6 @@ class DatasetController extends ControllerBase {
         '#id' => 'forum',
         '#title' => $this->t('Forum'),
         '#content' => [
-          $this->getDescriptionRender($textConfig->get('example_forum' . $suffix)['value'] ?? NULL),
           $this->getLinkedListRender($forumLinks),
         ],
       ];
@@ -321,83 +303,42 @@ class DatasetController extends ControllerBase {
         '#theme' => 'dataset-panel-metadata',
         '#dataset' => $dataset,
         '#permanent_link' => Link::fromTextAndUrl($permanentUrl->toString(), $permanentUrl),
-        '#text' => Markup::create($textConfig->get('metadata_text' . $suffix)['value'] ?? NULL),
       ],
     ];
 
+    $editLinks = [];
+    $showPublished = FALSE;
+    /* @var \Drupal\ckan\User\CkanUserInterface $ckanUser */
+    if ($ckanUser = $this->userStorage->load($this->currentUser()->id())) {
+      $editLinks = $this->getEditLinks($dataset, $ckanUser, 'view');
+      if ($editLinks) {
+        $showPublished = TRUE;
+      }
+    }
+
+    $dataset->setOrgLogoUrl($this->getOrgLogo($dataset));
     $build = [
       '#theme' => 'dataset',
       '#dataset' => $dataset,
       '#panels' => $panels,
-      '#backLink' => $this->backLinkService->createBackLink($this->t('Back to all datasets'), 'donl_search.search.dataset'),
-      '#editLinks' => $this->getEditLinks($dataset),
+      '#backLink' => $this->backLinkService->createBackLink($this->t('Back to all @type', ['@type' => $this->t('datasets')]), 'donl_search.search.dataset'),
+      '#editLinks' => $editLinks,
       '#warnings' => $warnings,
       '#tabs' => $tabs,
       '#schema' => $schema,
+      '#showPublished' => $showPublished,
       '#search' => $this->formBuilder->getForm(SearchForm::class),
       '#cache' => [
         'max-age' => 86400,
       ],
     ];
 
-    if ($this->config('ckan.request.settings')->get('preview_functionality')) {
+    if ($this->config('ckan.dataset.settings')->get('preview_functionality')) {
       $build['#attached'] = [
         'library' => ['ckan/preview'],
       ];
     }
     return $build;
-  }
-
-  /**
-   *
-   */
-  protected function getEditLinks(Dataset $dataset) {
-    $editLinks = [];
-    if ($user = $this->getUser()) {
-      if ($user->isAdministrator() || $user->getCkanId() === $dataset->getCreatorUserId()) {
-        $editLinks['view'] = [
-          '#type' => 'link',
-          '#title' => $this->t('View'),
-          '#url' => Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getName()]),
-          '#attributes' => [
-            'class' => ['buttonswitch__button', 'is-active'],
-          ],
-        ];
-        $editLinks['edit'] = [
-          '#type' => 'link',
-          '#title' => $this->t('Edit'),
-          '#url' => Url::fromRoute('ckan.dataset.edit', ['dataset' => $dataset->getName()]),
-          '#attributes' => [
-            'class' => ['buttonswitch__button'],
-          ],
-        ];
-        $editLinks['delete'] = [
-          '#type' => 'link',
-          '#title' => $this->t('Delete'),
-          '#url' => Url::fromRoute('ckan.dataset.delete', ['dataset' => $dataset->getId()]),
-          '#attributes' => [
-            'class' => ['buttonswitch__button'],
-          ],
-        ];
-        $editLinks['data-sources'] = [
-          '#type' => 'link',
-          '#title' => $this->t('Manage data sources'),
-          '#url' => Url::fromRoute('ckan.dataset.datasources', ['dataset' => $dataset->getId()]),
-          '#attributes' => [
-            'class' => ['buttonswitch__button'],
-          ],
-        ];
-      }
-    }
-
-    return $editLinks;
-  }
-
-  /**
-   * @return \Drupal\ckan\User\CkanUserInterface|null
-   */
-  protected function getUser(): ?CkanUserInterface {
-    return $this->userStorage->load($this->currentUser()->id());
   }
 
   /**
@@ -418,24 +359,6 @@ class DatasetController extends ControllerBase {
   }
 
   /**
-   * Returns the render array for a description text.
-   *
-   * @param string|null $text
-   *
-   * @return array
-   */
-  private function getDescriptionRender($text) {
-    if ($text) {
-      return [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['panel-description']],
-        '#children' => Markup::create($text),
-      ];
-    }
-    return [];
-  }
-
-  /**
    * Returns the render array for a linked list text.
    *
    * @param array $items
@@ -450,6 +373,11 @@ class DatasetController extends ControllerBase {
       '#items' => $items,
       '#attributes' => ['class' => ['list', 'list--linked', 'group-links']],
     ];
+  }
+
+  private function getOrgLogo(Dataset $dataset) {
+    $result = $this->solrRequest->getResultBySysuri($dataset->getAuthority(), 'organization', 'asset_logo');
+    return $result['asset_logo'] ?? NULL;
   }
 
 }

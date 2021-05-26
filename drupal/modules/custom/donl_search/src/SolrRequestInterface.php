@@ -2,6 +2,8 @@
 
 namespace Drupal\donl_search;
 
+use Drupal\donl_search\Entity\SolrResult;
+
 /**
  *
  */
@@ -44,6 +46,18 @@ interface SolrRequestInterface {
   public function getSearchCount($search, array $activeFacets = [], $type = ''): int;
 
   /**
+   * Return a list with all relations for the given content.
+   *
+   * @param string $sysId
+   *   The sys_id for the given content
+   * @param string $type
+   *   The type for the given content
+   *
+   * @return array
+   */
+  public function getRelations(string $sysId, string $type): array;
+
+  /**
    * Get a hierarchical theme list with usages.
    *
    * @return array
@@ -70,6 +84,22 @@ interface SolrRequestInterface {
   public function getTagCloud($communityIdentifier = NULL): array;
 
   /**
+   * Get a list with recent content.
+   *
+   * @param string|null $communityIdentifier
+   *   The community identifier to filter on or null to show all.
+   * @param int $limit
+   *   The number of results to return.
+   * @param string|null $type
+   *   Limit result to a specific type.
+   * @param array $excludeTypes
+   *   Exclude types from result.
+   *
+   * @return array
+   */
+  public function getRecentContentData(?string $communityIdentifier = NULL, int $limit = 1, ?string $type = NULL, array $excludeTypes = []): array;
+
+  /**
    * Get a list with comparable datasets.
    *
    * @param string $type
@@ -83,21 +113,37 @@ interface SolrRequestInterface {
    * Autocomplete function for the dataset field.
    *
    * @param string $type
+   *   The type for the given content.
    * @param string $search
+   *   The search term
    *
    * @return array
    */
   public function autocomplete($type, $search): array;
 
   /**
+   * Find a dataset based on the identifier.
+   *
+   * @param string $identifier
+   *   The identifier.
+   *
+   * @return \Drupal\donl_search\Entity\SolrResult|null
+   */
+  public function getDatasetResultByIdentifier($identifier): ?SolrResult;
+
+  /**
    * Get an array with search suggestions.
    *
+   * @param string $type
+   *   The type for the given content.
    * @param string $search
-   *   The search string we want suggestions for.
+   *   The search term.
+   * @param string|null $communitySysName
+   *   The community sys_name.
    *
    * @return array
    */
-  public function getSearchSuggestions($search): array;
+  public function getSearchSuggestions($type, $search, $communitySysName = NULL): array;
 
   /**
    * Add/Update the given document to SOLR.
@@ -120,5 +166,16 @@ interface SolrRequestInterface {
    *   Returns the decoded json response on success or FALSE on failure.
    */
   public function deleteIndex($id);
+
+  /**
+   * Check if the identifier is in use.
+   *
+   * @param string $identifier
+   * @param string|null $id
+   *   The entity id (sys_id without language code).
+   *
+   * @return bool
+   */
+  public function checkIdentifierUsage($identifier, $id = NULL): bool;
 
 }

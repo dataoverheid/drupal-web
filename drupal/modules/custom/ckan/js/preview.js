@@ -15,7 +15,9 @@
 
       $(document).on('click', '.preview-action', function () {
         const it = this;
-        const pHolder = $('#preview-' + it.getAttribute('data-preview-id'));
+        const preview = $('#preview-' + it.getAttribute('data-preview-id'));
+        const pHolder = preview.find('.preview-content');
+        preview.removeClass('hidden');
         pHolder.html('<div class="loader"></div>');
         it.remove();
         $.ajax({
@@ -32,7 +34,8 @@
             //When done, put it into datatables and generate a table.
             complete: function (csvJson) {
               pHolder.empty();
-              pHolder.dataTable({
+              pHolder.html('<div class="alert alert--info" role="alert"><div class="alert__inner">' + Drupal.t('This is a preview, it does not contain all the data. Download the resource to access all the records.') + '</div></div><table class="preview-table" style="width:100%;"></table>');
+              pHolder.find('table.preview-table').dataTable({
                 data: csvJson.data,
                 columns: createColumns(csvJson.meta.fields),
                 autoWidth: true,
@@ -68,8 +71,8 @@
             }
           });
         }).fail(function () {
-          pHolder.empty();
-          pHolder.html('<div class="container"><p class="error">' + Drupal.t('We were unable to generate a preview for this file. Please try again later or contact an administrator.') + '</p></div>');
+          preview.empty().removeClass('details-replacement').removeClass('preview-block');
+          preview.html('<div class="alert alert--warning" role="alert"><div class="alert__inner">' + Drupal.t('We were unable to generate a preview for this file. Please try again later or contact an administrator.') + '</div></div>');
         });
       });
     }

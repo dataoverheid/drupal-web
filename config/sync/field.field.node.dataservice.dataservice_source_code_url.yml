@@ -1,0 +1,19 @@
+uuid: e8e7c116-534b-4a74-a517-5f1d15de5fb9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_source_code_url
+    - node.type.dataservice
+id: node.dataservice.dataservice_source_code_url
+field_name: dataservice_source_code_url
+entity_type: node
+bundle: dataservice
+label: 'Source code URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,7 @@
+donl_form.node.publish:
+  path: '/node/{node}/publish'
+  defaults:
+    _form: '\Drupal\donl_form\Form\PublishNodeForm'
+    _title_callback: '\Drupal\donl_form\Form\PublishNodeForm::title'
+  requirements:
+    _entity_access: 'node.edit'

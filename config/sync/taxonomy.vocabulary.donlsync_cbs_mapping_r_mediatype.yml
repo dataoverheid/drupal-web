@@ -1,8 +1,0 @@
-uuid: 223f94d1-868d-4a07-801d-b1505fc78352
-langcode: nl
-status: true
-dependencies: {  }
-name: 'DonlSync CBS Mapping Resource.Mediatype'
-vid: donlsync_cbs_mapping_r_mediatype
-description: ''
-weight: 0

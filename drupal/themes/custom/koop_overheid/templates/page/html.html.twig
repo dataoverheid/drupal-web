@@ -23,16 +23,37 @@
  * @see template_preprocess_html()
  */
 #}
+{% set body_classes = [
+  logged_in ? 'user-logged-in',
+  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  node_type ? 'page-node-type-' ~ node_type|clean_class,
+  db_offline ? 'db-offline',
+  route_name ? 'route-' ~ route_name|clean_class,
+] %}
 <!DOCTYPE html>
 <html{{ html_attributes }}>
   <head>
+    {% if piwik.dataLayer %}
+      <!-- Start Piwik PRO DataLayer Tag -->
+      <script type="application/javascript">
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({{ piwik.dataLayer|raw }});
+      </script>
+      <!-- End Piwik PRO DataLayer Tag -->
+    {% endif %}
+
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
-    {{ piwik.header|raw }}
+
+    {% if piwik.header %}
+      <!-- Start Piwik PRO Header Tag -->{{ piwik.header|raw }}<!-- End Piwik PRO Header Tag -->
+    {% endif %}
   </head>
-  <body{{ attributes }} id="body">
-    {{ piwik.body|raw }}
+  <body{{ attributes.addClass(body_classes) }} id="body">
+  {% if piwik.body %}
+    <!-- Start Piwik PRO Body Tag -->{{ piwik.body|raw }}<!-- End Piwik PRO Body Tag -->
+  {% endif %}
 
     {{ page_top }}
     {{ page }}

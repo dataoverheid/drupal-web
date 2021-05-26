@@ -3,29 +3,29 @@ componentenbibliotheek:
   header: true
   css:
     base:
-      componentenbibliotheek/css/generic.css: {}
-  js:
-    componentenbibliotheek/js/main.js: {minified: true}
+      componentenbibliotheek/css/generic.css: { }
 
-chosen:
-  version: 3.1.3
+select2:
+  version: 4.0.13
   css:
     theme:
-      /libraries/chosen-js/chosen.min.css: {preprocess: false, minified: true}
+      /libraries/select2/dist/css/select2.min.css: { minified: true }
   js:
-    /libraries/chosen-js/chosen.jquery.min.js: {preprocess: false, minified: true}
+    /libraries/select2/dist/js/select2.min.js: { minified: true }
 
 global:
-  version: 1.0.0
+  version: 1.0.2
   css:
     theme:
-      icons/style.css: {}
-      css/dataoverheid.css: {}
+      icons/style.css: { }
+      css/dataoverheid.css: { }
   js:
-    js/indicia.js: {}
-    js/read_more.js: {}
+    js/componentlib-replace.js: { }
+    js/indicia.js: { }
+    js/read_more.js: { }
   dependencies:
     - core/drupal
     - core/jquery
     - core/jquery.ui
-    - koop_overheid/chosen
+    - core/jquery.once
+    - koop_overheid/select2

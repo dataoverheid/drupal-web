@@ -1,0 +1,19 @@
+uuid: a511dee6-1fa0-41c2-87bb-84fbde5394a9
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.label_nl
+    - taxonomy.vocabulary.dcatapdonl_donl_wobuitzondering
+id: taxonomy_term.dcatapdonl_donl_wobuitzondering.label_nl
+field_name: label_nl
+entity_type: taxonomy_term
+bundle: dcatapdonl_donl_wobuitzondering
+label: 'Label NL'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

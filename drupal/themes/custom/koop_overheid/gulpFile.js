@@ -4,7 +4,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
-const rename = require('gulp-rename');
 const header = require('gulp-header');
 
 sass.compiler = require('node-sass');
@@ -18,11 +17,8 @@ try {
 catch (error) {
   console.log(' ---------------------------------------', '\n', '   No config found. Using default.', '\n', '---------------------------------------');
   config = {
-    "siteUrl": "dataoverheid.local",
-    "browserSyncPort": 1547,
-    "browsers": [
-      "firefox"
-    ]
+    siteUrl: "dataoverheid.local",
+    browserSyncPort: 1547
   }
 }
 
@@ -51,9 +47,9 @@ gulp.task('browserSync', function () {
     proxy: config.siteUrl,
     port: config.browserSyncPort,
     baseDir: "./",
-    open: true,
+    open: false,
     notify: false,
-    browser: config.browsers
+    ui: false
   });
 });
 

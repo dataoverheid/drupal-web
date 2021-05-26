@@ -1,0 +1,21 @@
+uuid: 436c9588-f6e0-40c9-991b-c8b784e97d50
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_location_datasets
+    - node.type.dataservice
+  module:
+    - options
+id: node.dataservice.dataservice_location_datasets
+field_name: dataservice_location_datasets
+entity_type: node
+bundle: dataservice
+label: 'Data in de service'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

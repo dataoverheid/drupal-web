@@ -1,0 +1,19 @@
+uuid: 81ccd385-3a9c-4ec4-a8f5-e900b2a7a484
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.identifier
+    - taxonomy.vocabulary.donl_api_authentication
+id: taxonomy_term.donl_api_authentication.identifier
+field_name: identifier
+entity_type: taxonomy_term
+bundle: donl_api_authentication
+label: Identifier
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -2,11 +2,10 @@
 
 namespace Drupal\ckan\Plugin\Field\FieldFormatter;
 
-use Drupal\ckan\CkanRequestInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Url;
+use Drupal\donl_search\SolrRequestInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -23,9 +22,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class DatasetFormatter extends FormatterBase {
 
   /**
-   * @var \Drupal\ckan\CkanRequestInterface
+   * @var \Drupal\donl_search\SolrRequestInterface
    */
-  protected $ckanRequest;
+  protected $solrRequest;
 
   /**
    * {@inheritdoc}
@@ -39,16 +38,16 @@ class DatasetFormatter extends FormatterBase {
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('ckan.request')
+      $container->get('donl_search.request')
     );
   }
 
   /**
    *
    */
-  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, CkanRequestInterface $ckanRequest) {
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, SolrRequestInterface $solrRequest) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
-    $this->ckanRequest = $ckanRequest;
+    $this->solrRequest = $solrRequest;
   }
 
   /**
@@ -67,14 +66,12 @@ class DatasetFormatter extends FormatterBase {
     $element = [];
 
     foreach ($items as $delta => $item) {
-      /** @var \Drupal\ckan\Entity\Dataset $dataset */
-      if ($dataset = $this->ckanRequest->getDatasetByIdentifier($item->value)) {
-
+      if ($result = $this->solrRequest->getDatasetResultByIdentifier($item->value)) {
         // Render each element as markup.
         $element[$delta] = [
-          '#title' => $dataset->getTitle(),
+          '#title' => $result->title,
           '#type' => 'link',
-          '#url' => Url::fromRoute('ckan.dataset.view', ['dataset' => $dataset->getId()]),
+          '#url' => $result->url,
         ];
       }
       else {

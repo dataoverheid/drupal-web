@@ -1,0 +1,23 @@
+uuid: 024b8aa5-95c3-4303-a773-0b38c6492d0c
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type
+    - node.type.link_page
+  module:
+    - options
+id: node.link_page.field_type
+field_name: field_type
+entity_type: node
+bundle: link_page
+label: Type
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: all
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -4,7 +4,7 @@ namespace Drupal\ckan\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Url;
+use Drupal\donl_identifier\ResolveIdentifierServiceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,21 +25,32 @@ class JsonEndpointController extends ControllerBase {
   protected $requestStack;
 
   /**
+   * @var \Drupal\donl_identifier\ResolveIdentifierServiceInterface
+   */
+  protected $resolveIdentifierService;
+
+  /**
+   * JsonEndpointController constructor.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   * @param \Drupal\donl_identifier\ResolveIdentifierServiceInterface $resolveIdentifierService
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, RequestStack $requestStack, ResolveIdentifierServiceInterface $resolveIdentifierService) {
+    $this->nodeStorage = $entityTypeManager->getStorage('node');
+    $this->requestStack = $requestStack;
+    $this->resolveIdentifierService = $resolveIdentifierService;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity_type.manager'),
-      $container->get('request_stack')
+      $container->get('request_stack'),
+      $container->get('donl_identifier.resolver')
     );
-  }
-
-  /**
-   *
-   */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, RequestStack $requestStack) {
-    $this->nodeStorage = $entityTypeManager->getStorage('node');
-    $this->requestStack = $requestStack;
   }
 
   /**
@@ -50,41 +61,24 @@ class JsonEndpointController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\JsonResponse
    */
   public function datasetRelations() {
-    $applications = [];
-    $communities = [];
-    $datarequests = [];
-    $groups = [];
-
+    $relations = [];
     if ($identifier = $this->requestStack->getCurrentRequest()->query->get('identifier')) {
       $nids = $this->nodeStorage->getQuery()
         ->condition('datasets', $identifier, '=')
         ->execute();
 
-      $nodes = $this->nodeStorage->loadMultiple($nids);
       /** @var \Drupal\node\Entity\Node $node */
-      foreach ($nodes as $node) {
-        switch ($node->getType()) {
-          case 'appliance':
-            $applications[] = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
-            break;
-
-          case 'datarequest':
-            $datarequests[] = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
-            break;
-
-          case 'group':
-            $groups[] = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])->toString();
-            break;
-        }
+      foreach ($this->nodeStorage->loadMultiple($nids) as $node) {
+        $relations[$node->getType()][] = $this->resolveIdentifierService->resolve($node);
       }
     }
 
     return JsonResponse::create([
       'identifier' => $identifier,
-      'applications' => $applications,
-      'communities' => $communities,
-      'datarequests' => $datarequests,
-      'groups' => $groups,
+      'applications' => $relations['appliance'] ?? [],
+      'communities' => $relations['community'] ?? [],
+      'datarequests' => $relations['datarequest'] ?? [],
+      'groups' => $relations['group'] ?? [],
     ]);
   }
 

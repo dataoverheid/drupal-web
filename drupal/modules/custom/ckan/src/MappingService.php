@@ -7,7 +7,7 @@ use Drupal\Core\StringTranslation\TranslationInterface;
 use Drupal\donl_value_list\ValueListInterface;
 
 /**
- *
+ * Mapping service.
  */
 class MappingService implements MappingServiceInterface {
   use StringTranslationTrait;
@@ -18,7 +18,10 @@ class MappingService implements MappingServiceInterface {
   private $valueList;
 
   /**
+   * MappingService constructor.
    *
+   * @param \Drupal\donl_value_list\ValueListInterface $valueList
+   * @param \Drupal\Core\StringTranslation\TranslationInterface $stringTranslation
    */
   public function __construct(ValueListInterface $valueList, TranslationInterface $stringTranslation) {
     $this->valueList = $valueList;
@@ -28,8 +31,8 @@ class MappingService implements MappingServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getThemeClass($uri) {
-    if (!$uri) {
+  public function getThemeClass(?string $uri): string {
+    if (empty($uri)) {
       return '';
     }
 
@@ -62,20 +65,20 @@ class MappingService implements MappingServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getThemeName($uri) {
+  public function getThemeName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:taxonomiebeleidsagenda', FALSE);
+    $list = $this->valueList->getList('overheid:taxonomiebeleidsagenda');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getThemeFacetValue($uri) {
-    if (!$uri) {
+  public function getThemeFacetValue(?string $uri): string {
+    if (empty($uri)) {
       return '';
     }
 
@@ -90,166 +93,182 @@ class MappingService implements MappingServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getStatusName($uri) {
+  public function getStatusName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:datasetStatus', FALSE);
+    $list = $this->valueList->getList('overheid:datasetStatus');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDistributiontatusName($uri) {
+  public function getDistributiontatusName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('adms:distributiestatus', FALSE);
+    $list = $this->valueList->getList('adms:distributiestatus');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getAccessRightsName($uri) {
+  public function getAccessRightsName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:openbaarheidsniveau', FALSE);
+    $list = $this->valueList->getList('overheid:openbaarheidsniveau');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getLicenseName($uri) {
+  public function getLicenseName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:license', FALSE);
+    $list = $this->valueList->getList('overheid:license');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getLanguageName($uri) {
+  public function getLanguageName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('donl:language', FALSE);
+    $list = $this->valueList->getList('donl:language');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFileFormatName($uri) {
+  public function getFileFormatName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('mdr:filetype_nal', FALSE);
+    $list = $this->valueList->getList('mdr:filetype_nal');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getMediaTypeName($uri) {
+  public function getMediaTypeName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('iana:mediatypes', FALSE);
+    $list = $this->valueList->getList('iana:mediatypes');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getSourceCatalogName($uri) {
+  public function getSourceCatalogName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('donl:catalogs', FALSE);
+    $list = $this->valueList->getList('donl:catalogs');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getOrganizationName($uri) {
+  public function getOrganizationName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('donl:organization', FALSE);
+    $list = $this->valueList->getList('donl:organization');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFrequencyName($uri) {
+  public function getFrequencyName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:frequency', FALSE);
+    $list = $this->valueList->getList('overheid:frequency');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getDistributionTypeName($uri) {
+  public function getDistributionTypeName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('donl:distributiontype', FALSE);
+    $list = $this->valueList->getList('donl:distributiontype');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getSpatialSchemeName($uri) {
+  public function getSpatialSchemeName(?string $uri): string {
     if (empty($uri)) {
       return '';
     }
 
-    $list = $this->valueList->getList('overheid:spatial_scheme', FALSE);
+    $list = $this->valueList->getList('overheid:spatial_scheme');
     return $list[$uri] ?? $uri;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getSpatialValue($schemeUri, $valueUri) {
+  public function getWobExceptionName(?string $uri): string {
+    if (empty($uri)) {
+      return '';
+    }
+
+    $list = $this->valueList->getList('donl:wobuitzondering');
+    return $list[$uri] ?? $uri;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSpatialValue(?string $schemeUri, ?string $valueUri): string {
+    if (empty($schemeUri) || empty($valueUri)) {
+      return '';
+    }
+
     switch ($schemeUri) {
       case 'http://standaarden.overheid.nl/owms/4.0/doc/waardelijsten/overheid.koninkrijksdeel':
-        $list = $this->valueList->getList('overheid:spatial_koninkrijksdeel', FALSE);
+        $list = $this->valueList->getList('overheid:spatial_koninkrijksdeel');
         return $list[$valueUri] ?? $valueUri;
 
       case 'http://standaarden.overheid.nl/owms/4.0/doc/waardelijsten/overheid.waterschap':
-        $list = $this->valueList->getList('overheid:spatial_waterschap', FALSE);
+        $list = $this->valueList->getList('overheid:spatial_waterschap');
         return $list[$valueUri] ?? $valueUri;
 
       case 'http://standaarden.overheid.nl/owms/4.0/doc/waardelijsten/overheid.gemeente':
-        $list = $this->valueList->getList('overheid:spatial_gemeente', FALSE);
+        $list = $this->valueList->getList('overheid:spatial_gemeente');
         return $list[$valueUri] ?? $valueUri;
 
       case 'http://standaarden.overheid.nl/owms/4.0/doc/waardelijsten/overheid.provincie':
-        $list = $this->valueList->getList('overheid:spatial_provincie', FALSE);
+        $list = $this->valueList->getList('overheid:spatial_provincie');
         return $list[$valueUri] ?? $valueUri;
 
       case 'http://standaarden.overheid.nl/owms/4.0/doc/syntax-codeerschemas/overheid.epsg28992':
@@ -263,7 +282,7 @@ class MappingService implements MappingServiceInterface {
   /**
    * {@inheritdoc}
    */
-  public function getQualityName($quality) {
+  public function getQualityName(?int $quality): string {
     switch ($quality) {
       case 1:
         return $this->t('All working');

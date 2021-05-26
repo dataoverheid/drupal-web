@@ -1,7 +1,7 @@
 services:
   donl_community.paramConverter.community:
     class: Drupal\donl_community\Routing\ParamConverterCommunity
-    arguments: ['@entity.manager']
+    arguments: ['@entity_type.manager']
     tags:
       - { name: paramconverter }
 
@@ -10,3 +10,4 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@current_route_match'
+      - '@donl_identifier.resolver'

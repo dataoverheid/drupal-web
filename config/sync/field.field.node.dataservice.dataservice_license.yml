@@ -1,0 +1,19 @@
+uuid: 9fb1d344-81bd-4707-85b5-ad8bbff00317
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_license
+    - node.type.dataservice
+id: node.dataservice.dataservice_license
+field_name: dataservice_license
+entity_type: node
+bundle: dataservice
+label: Licentie
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

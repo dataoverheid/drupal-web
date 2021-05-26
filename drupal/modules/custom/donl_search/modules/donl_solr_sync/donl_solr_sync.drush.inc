@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * Contains the code to generate the custom drush commands.
  */
 
 /**
@@ -22,7 +23,7 @@ function donl_solr_sync_drush_command() {
 }
 
 /**
- *
+ * Call back function drush_donl_solr_sync_update_solr_index().
  */
 function drush_donl_solr_sync_update_solr_index($type) {
   \Drupal::service('donl_solr_sync.commands')->update($type);

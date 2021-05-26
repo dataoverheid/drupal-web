@@ -3,6 +3,7 @@
 namespace Drupal\donl_solr_sync;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\donl_identifier\ResolveIdentifierServiceInterface;
 use Drupal\donl_search\SolrRequestInterface;
 use Drupal\node\Entity\Node;
 
@@ -22,11 +23,21 @@ abstract class SyncService implements SyncServiceInterface {
   protected $entityTypeManager;
 
   /**
-   *
+   * @var \Drupal\donl_identifier\ResolveIdentifierServiceInterface
    */
-  public function __construct(SolrRequestInterface $solrRequest, EntityTypeManagerInterface $entityTypeManager) {
+  protected $resolveIdentifierService;
+
+  /**
+   * SyncService constructor.
+   *
+   * @param \Drupal\donl_search\SolrRequestInterface $solrRequest
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\donl_identifier\ResolveIdentifierServiceInterface $resolveIdentifierService
+   */
+  public function __construct(SolrRequestInterface $solrRequest, EntityTypeManagerInterface $entityTypeManager, ResolveIdentifierServiceInterface $resolveIdentifierService) {
     $this->solrRequest = $solrRequest;
     $this->entityTypeManager = $entityTypeManager;
+    $this->resolveIdentifierService = $resolveIdentifierService;
   }
 
   /**
@@ -55,11 +66,55 @@ abstract class SyncService implements SyncServiceInterface {
    *
    * @return mixed|null
    */
-  protected function getNodeValue(Node $node, $key) {
+  protected function getNodeValue(Node $node, string $key) {
     if ($node->hasField($key)) {
-      return $node->get($key)->getValue()[0]['value'] ?? NULL;
+      $value = $node->get($key)->getValue()[0]['value'] ?? NULL;
+      $format = $node->get($key)->getValue()[0]['format'] ?? NULL;
+      if ($value && $format) {
+        return (string) check_markup($value, $format);
+      }
+
+      return $value;
     }
     return NULL;
+  }
+
+  /**
+   * Helper function to get the relation values from a node object.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   * @param string $key
+   *
+   * @return array
+   */
+  protected function getRelations(Node $node, string $key): array {
+    $values = [];
+    if ($node->hasField($key)) {
+      foreach ($node->get($key)->referencedEntities() as $entity) {
+        $values[] = $this->resolveIdentifierService->resolve($entity);
+      }
+    }
+
+    return $values;
+  }
+
+  /**
+   * Helper function to get the dataset relations from a node object.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   * @param string $key
+   *
+   * @return array
+   */
+  protected function getDatasetRelations(Node $node, string $key): array {
+    $values = [];
+    if ($node->hasField($key)) {
+      foreach ($node->get($key)->getValue() ?? [] as $v) {
+        $values[] = $v['value'];
+      }
+    }
+
+    return $values;
   }
 
   /**
@@ -70,7 +125,7 @@ abstract class SyncService implements SyncServiceInterface {
    *
    * @return array
    */
-  protected function getParagraphData(Node $node, $key) {
+  protected function getParagraphData(Node $node, string $key): array {
     try {
       $paragraphStorage = $this->entityTypeManager->getStorage('paragrah');
     }
@@ -102,7 +157,7 @@ abstract class SyncService implements SyncServiceInterface {
    *
    * @return string
    */
-  protected function cleanupText($text, $allowable_tags = '<a>') {
+  protected function cleanupText($text, string $allowable_tags = '<a>'): string {
     $text = (string) $text;
     $text = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $text);
     $text = strip_tags($text, $allowable_tags);
@@ -118,7 +173,7 @@ abstract class SyncService implements SyncServiceInterface {
    *
    * @return mixed|null
    */
-  protected function getSelectKey(Node $node, $key) {
+  protected function getSelectKey(Node $node, string $key) {
     try {
       $fieldConfig = $this->entityTypeManager->getStorage('field_config');
     }
@@ -166,7 +221,7 @@ abstract class SyncService implements SyncServiceInterface {
    *
    * @return string
    */
-  protected function langidToUri($langid) {
+  protected function langidToUri(string $langid): string {
     $languages = [
       'nl' => 'http://publications.europa.eu/resource/authority/language/NLD',
       'en' => 'http://publications.europa.eu/resource/authority/language/ENG',
@@ -181,6 +236,22 @@ abstract class SyncService implements SyncServiceInterface {
    * @param \Drupal\node\Entity\Node $node
    */
   abstract protected function update(Node $node);
+
+  /**
+   * Send the update request to SOLR.
+   *
+   * @param array $values
+   */
+  protected function updateIndex(array $values) {
+    $collection = [
+      'sys_id' => $values['sys_id'],
+    ];
+    unset($values['sys_id']);
+    foreach ($values as $k => $v) {
+      $collection[$k] = ['set' => $v];
+    }
+    $this->solrRequest->updateIndex(json_encode([$collection]));
+  }
 
   /**
    * Remove the node from the SOLR schema.

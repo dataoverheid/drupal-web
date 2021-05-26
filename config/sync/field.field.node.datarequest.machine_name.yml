@@ -1,0 +1,21 @@
+uuid: a4b4458a-9717-485a-9c81-c6c5a555b994
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.machine_name
+    - node.type.datarequest
+  module:
+    - donl
+id: node.datarequest.machine_name
+field_name: machine_name
+entity_type: node
+bundle: datarequest
+label: 'Machine name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

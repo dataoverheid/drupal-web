@@ -10,7 +10,7 @@ id: node.community.community_datarequests
 field_name: community_datarequests
 entity_type: node
 bundle: community
-label: Datarequests
+label: 'Datarequests [old]'
 description: ''
 required: false
 translatable: false
@@ -23,6 +23,7 @@ settings:
       datarequest: datarequest
     sort:
       field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

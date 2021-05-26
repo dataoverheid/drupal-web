@@ -1,0 +1,21 @@
+uuid: d42c50af-1ecb-4e21-b91e-ec637946872b
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.machine_name
+    - taxonomy.vocabulary.donl_programming_languages
+  module:
+    - donl
+id: taxonomy_term.donl_programming_languages.machine_name
+field_name: machine_name
+entity_type: taxonomy_term
+bundle: donl_programming_languages
+label: machine_name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_machine_name

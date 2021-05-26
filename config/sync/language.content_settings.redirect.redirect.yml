@@ -1,4 +1,4 @@
-uuid: 0217e0a4-ab2c-47ad-a836-b6f4aedcde10
+uuid: a1f5290a-1a05-4392-9bb5-1d7dfd078ee1
 langcode: nl
 status: true
 dependencies:
@@ -10,4 +10,4 @@ id: redirect.redirect
 target_entity_type_id: redirect
 target_bundle: redirect
 default_langcode: und
-language_alterable: false
+language_alterable: true

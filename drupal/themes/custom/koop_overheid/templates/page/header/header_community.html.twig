@@ -1,7 +1,38 @@
 {% extends '@koop_overheid/page/header/header.html.twig' %}
 
-{% block logo %}
-  <div class="header-cta">
-    <a href="/community" class="link cta__backwards">{{ 'Back to all datacommunities' |t }}</a>
-  </div>
-{% endblock logo %}
+{% block header_top %}
+  <header class="header">
+    <div class="header__start">
+      <div class="container">
+        <button type="button" class="hidden-desktop button button--icon-hamburger" data-handler="toggle-nav"
+                aria-controls="nav" aria-expanded="false">Menu
+        </button>
+        <div class="logo ">
+          {% block logo %}
+            <div class="header-cta">
+              <a href="/community" class="link cta__backwards">{{ 'Back to all datacommunities' |t }}</a>
+            </div>
+          {% endblock logo %}
+        </div>
+        <ul class="skiplinks">
+          <li><a href="#content">Direct naar content</a></li>
+          <li><a href="#search">Direct zoeken</a></li>
+        </ul>
+        {{ page.header_meta }}
+      </div>
+    </div>
+    <nav class="header__nav secondary header__nav--closed" id="nav">
+      <h2 class="visually-hidden">Primaire navigatie</h2>
+      <div class="container">
+        <ul class="list list--unstyled">
+          {% for item in page.menu %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+        <a href="#other-sites" class="hidden-desktop" data-handler="toggle-other-sites"
+           data-decorator="init-toggle-other-sites"><span
+            class="visually-hidden">Andere sites binnen </span>Overheid.nl</a>
+      </div>
+    </nav>
+  </header>
+{% endblock header_top %}

@@ -67,52 +67,51 @@ class SearchBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
-    $route = $this->currentRouteMatch->getRouteName();
-    $routeName = explode('.', $route);
-    $type = array_pop($routeName);
-    $bgColor = 'bg';
+    $type = $this->getType();
 
-    switch ($type) {
-      case 'dataset':
-      case 'datarequest':
-        $icon = 'icon-data';
-        break;
-
-      case 'catalog':
-      case 'community':
-      case 'organization':
-      case 'group':
-        $icon = 'icon-community';
-        $bgColor = 'bg--green';
-        break;
-
-      case 'application':
-        $icon = 'icon-informatie';
-        $bgColor = 'bg--purple';
-        break;
-
-      case 'support':
-      case 'news':
-        $icon = 'icon-nieuws';
-        $bgColor = 'bg--orange';
-        break;
+    $title = $this->t(ucfirst($type));
+    if ($type === 'group') {
+      $title = $this->t('Popular groups of datasets');
     }
 
     $build = [
+      '#theme' => 'search_block',
       '#form' => $this->formBuilder->getForm(SearchForm::class),
-      '#bg_color' => $bgColor,
-      '#icon' => $icon ?? NULL,
-      '#title' => ucfirst($type),
+      '#type' => $type,
+      '#title' => $title,
     ];
 
     if ($this->pathMatcher->isFrontPage()) {
       $build['#theme'] = 'homepage_search_block';
     }
-    else {
-
-      $build['#theme'] = 'search_block';
-    }
     return $build;
+  }
+
+  /**
+   * Get the type.
+   */
+  private function getType() {
+    $route = $this->currentRouteMatch->getRouteName();
+    $routeName = explode('.', $route);
+    $type = array_pop($routeName);
+
+    $validTypes = [
+      'dataset',
+      'datarequest',
+      'dataservice',
+      'catalog',
+      'community',
+      'organization',
+      'group',
+      'application',
+      'support',
+      'news',
+    ];
+    if (in_array($type, $validTypes, TRUE)) {
+      return $type;
+    }
+
+    return '';
   }
 
   /**

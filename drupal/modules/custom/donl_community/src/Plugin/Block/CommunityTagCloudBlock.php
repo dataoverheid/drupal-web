@@ -4,7 +4,6 @@ namespace Drupal\donl_community\Plugin\Block;
 
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\donl\Plugin\Block\TagCloudBlock;
 use Drupal\donl_community\CommunityResolverInterface;
@@ -52,7 +51,7 @@ class CommunityTagCloudBlock extends TagCloudBlock {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, SolrRequestInterface $solrRequest, SearchUrlServiceInterface $searchUrlService, ModuleHandlerInterface $moduleHandler,CommunityResolverInterface $communityResolver, RouteMatchInterface $routeMatch) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, SolrRequestInterface $solrRequest, SearchUrlServiceInterface $searchUrlService, ModuleHandlerInterface $moduleHandler, CommunityResolverInterface $communityResolver, RouteMatchInterface $routeMatch) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $solrRequest, $searchUrlService, $moduleHandler);
 
     $this->communityResolver = $communityResolver;

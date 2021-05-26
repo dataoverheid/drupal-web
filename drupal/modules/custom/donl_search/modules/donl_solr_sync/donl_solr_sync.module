@@ -23,6 +23,10 @@ function donl_solr_sync_node_insert(Node $node) {
       \Drupal::service('donl_solr_sync.community')->sync($node, 'update');
       break;
 
+    case 'dataservice':
+      \Drupal::service('donl_solr_sync.dataservice')->sync($node, 'update');
+      break;
+
     case 'datarequest':
       \Drupal::service('donl_solr_sync.datarequest')->sync($node, 'update');
       break;
@@ -69,6 +73,10 @@ function donl_solr_sync_node_delete(Node $node) {
 
     case 'community':
       \Drupal::service('donl_solr_sync.community')->sync($node, 'delete');
+      break;
+
+    case 'dataservice':
+      \Drupal::service('donl_solr_sync.dataservice')->sync($node, 'delete');
       break;
 
     case 'datarequest':

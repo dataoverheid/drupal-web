@@ -11,9 +11,9 @@ id: node.appliance.datasets
 field_name: datasets
 entity_type: node
 bundle: appliance
-label: ' Welke datasets zijn gebruikt'
+label: ' Welke datasets zijn gebruikt [old]'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

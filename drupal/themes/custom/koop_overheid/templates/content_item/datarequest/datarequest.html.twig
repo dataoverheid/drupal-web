@@ -3,12 +3,11 @@
 
 {% block content_item %}
   {% set content_item_type = 'datarequest' %}
-  {% set content_item_background_color = 'blue' %}
   {{ parent() }}
 {% endblock content_item %}
 
 {% block content_item_title %}
-  {{ content_item.theme_icon('/' ~ base_path ~ directory ~ '/images/icon-data.svg', node.theme.value) }}
+  {{ content_item.theme_icon(node.theme.value) }}
   <div>
     <p class="type">{{ 'Data request'|t }}</p>
     <h1>{{ node.title.value }}</h1>
@@ -25,11 +24,11 @@
     </tr>
     <tr>
       <th>{{ 'Fase'|t }}</th>
-      <td>{{ node.phase.value }}</td>
+      <td>{{ ckan_get_select_key('datarequest', 'phase', node.phase.value) }}</td>
     </tr>
     <tr>
       <th>{{ 'State'|t }}</th>
-      <td>{{ node.state.value }}</td>
+      <td>{{ ckan_get_select_key('datarequest', 'state', node.state.value) }}</td>
     </tr>
     <tr>
       <th>{{ 'Last changed'|t }}</th>

@@ -5,23 +5,27 @@ namespace Drupal\donl_search\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Link;
-use Drupal\donl_search_backlink\BackLinkService;
-use Drupal\donl_search\FacetRenameServiceInterface;
-use Drupal\donl_search\SearchFacetsInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+use Drupal\donl_identifier\ResolveIdentifierServiceInterface;
+use Drupal\donl_search\SearchFacetsInterface;
 use Drupal\donl_search\SearchPaginationInterface;
+use Drupal\donl_search\SearchRoutesTrait;
 use Drupal\donl_search\SearchUrlServiceInterface;
 use Drupal\donl_search\SolrRequestInterface;
+use Drupal\donl_search_backlink\BackLinkService;
+use NumberFormatter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use NumberFormatter;
 
 /**
- *
+ * Search controller.
  */
 class SearchController extends ControllerBase {
 
-  protected const DEFAULT_SORT = 'sys_modified desc';
+  use SearchRoutesTrait;
 
   /**
    * @var \Symfony\Component\HttpFoundation\Request
@@ -54,11 +58,6 @@ class SearchController extends ControllerBase {
   protected $solrRequest;
 
   /**
-   * @var \Drupal\donl_search\FacetRenameServiceInterface
-   */
-  protected $facetRename;
-
-  /**
    * @var \Drupal\donl_search\SearchUrlServiceInterface
    */
   protected $searchUrlService;
@@ -69,9 +68,57 @@ class SearchController extends ControllerBase {
   protected $backLinkService;
 
   /**
+   * @var \Drupal\donl_identifier\ResolveIdentifierServiceInterface
+   */
+  protected $resolveIdentifierService;
+
+  /**
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
+
+  /**
+   * Constructor.
+   *
+   * @param \Drupal\donl_search\SolrRequestInterface $solrRequest
+   *   The solr request service.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   The request stack service.
+   * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatch
+   *   The route match service.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager service.
+   * @param \Drupal\donl_search\SearchFacetsInterface $searchFacets
+   *   The search facets service.
+   * @param \Drupal\donl_search\SearchPaginationInterface $searchPagination
+   *   The search pagination service.
+   * @param \Drupal\donl_search\SearchUrlServiceInterface $searchUrlService
+   *   The search url service.
+   * @param \Drupal\donl_search_backlink\BackLinkService $backLinkService
+   *   The back link service.
+   * @param \Drupal\donl_identifier\ResolveIdentifierServiceInterface $resolveIdentifierService
+   *   Identifier resolver service.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer service.
+   */
+  public function __construct(SolrRequestInterface $solrRequest, RequestStack $requestStack, RouteMatchInterface $routeMatch, LanguageManagerInterface $languageManager, SearchFacetsInterface $searchFacets, SearchPaginationInterface $searchPagination, SearchUrlServiceInterface $searchUrlService, BackLinkService $backLinkService, ResolveIdentifierServiceInterface $resolveIdentifierService, RendererInterface $renderer) {
+    $this->solrRequest = $solrRequest;
+    $this->currentRequest = $requestStack->getCurrentRequest();
+    $this->routeMatch = $routeMatch;
+    $this->numberFormatter = new NumberFormatter($languageManager->getCurrentLanguage()->getId(), NumberFormatter::DECIMAL);
+    $this->searchPagination = $searchPagination;
+    $this->searchFacets = $searchFacets;
+    $this->searchUrlService = $searchUrlService;
+    $this->backLinkService = $backLinkService;
+    $this->renderer = $renderer;
+    $this->resolveIdentifierService = $resolveIdentifierService;
+    $this->userStorage = $this->entityTypeManager()->getStorage('user');
+  }
 
   /**
    * {@inheritdoc}
@@ -84,26 +131,11 @@ class SearchController extends ControllerBase {
       $container->get('language_manager'),
       $container->get('donl_search.search.facets'),
       $container->get('donl_search.search.pagination'),
-      $container->get('donl_search.search.facetRename'),
       $container->get('donl_search.search_url'),
-      $container->get('donl_search_backlink.backlink')
+      $container->get('donl_search_backlink.backlink'),
+      $container->get('donl_identifier.resolver'),
+      $container->get('renderer')
     );
-  }
-
-  /**
-   *
-   */
-  public function __construct(SolrRequestInterface $solrRequest, RequestStack $requestStack, RouteMatchInterface $routeMatch, LanguageManagerInterface $languageManager, SearchFacetsInterface $searchFacets, SearchPaginationInterface $searchPagination, FacetRenameServiceInterface $facetRename, SearchUrlServiceInterface $searchUrlService, BackLinkService $backLinkService) {
-    $this->solrRequest = $solrRequest;
-    $this->currentRequest = $requestStack->getCurrentRequest();
-    $this->routeMatch = $routeMatch;
-    $this->numberFormatter = new NumberFormatter($languageManager->getCurrentLanguage()->getId(), NumberFormatter::DECIMAL);
-    $this->searchPagination = $searchPagination;
-    $this->searchFacets = $searchFacets;
-    $this->facetRename = $facetRename;
-    $this->searchUrlService = $searchUrlService;
-    $this->backLinkService = $backLinkService;
-    $this->userStorage = $this->entityTypeManager()->getStorage('user');
   }
 
   /**
@@ -117,14 +149,14 @@ class SearchController extends ControllerBase {
    * @return array
    *   A Drupal render array.
    */
-  public function content($page, $recordsPerPage) {
+  public function content($page, $recordsPerPage): array {
     $page = (int) ($page ?? 1);
     $recordsPerPage = (int) ($recordsPerPage ?? 10);
     // Limit the records per page to 200 items max.
     $recordsPerPage = ($recordsPerPage > 200 ? 200 : $recordsPerPage);
 
     $values = $this->currentRequest->query->all();
-    $sort = $values['sort'] ?? $this::DEFAULT_SORT;
+    $sort = $values['sort'] ?? $this->getDefaultSort();
     $search = isset($values['search']) ? trim($values['search']) : NULL;
     $spellcheck = isset($values['spellcheck']) ? (bool) $values['spellcheck'] : TRUE;
     unset($values['sort'], $values['search'], $values['spellcheck']);
@@ -193,6 +225,7 @@ class SearchController extends ControllerBase {
     // If we have any facet active add an robots noindex, nofollow header to the
     // page to prevent duplicated index pages in search engines like Google.
     $http_headers = [];
+
     if (!empty($values)) {
       $http_headers[] = ['X-Robots-Tag', 'noindex, nofollow'];
     }
@@ -211,12 +244,25 @@ class SearchController extends ControllerBase {
       return $build;
     }
 
+    // Store these values in the session so we can use them in the piwik module.
+    $searchFilters = [];
+    foreach ($this->searchFacets->activeFacetsToReadable($activeFacets) as $k => $v) {
+      $searchFilters[$k] = implode(', ', $v);
+    }
+    $this->currentRequest->getSession()->set('donl_piwik.search', [
+      'search_term' => $search,
+      'search_page' => $page,
+      'search_results' => $result['numFound'] ?? 0,
+      'search_filters' => $searchFilters,
+    ]);
+
     return [
       '#theme' => 'donl_searchpage',
       '#rows' => $this->themeRows($result['rows'] ?? []),
       '#facets' => $this->getFacets($result['facets'] ?? $this->getRouteParams(), $recordsPerPage, $search, $sort, $activeFacets),
       '#pagination' => $this->searchPagination->getPagination($this->getRouteName(), $this->getRouteParams(), $result['numFound'] ?? 0, $page, $recordsPerPage, $search, $sort, $activeFacets),
       '#total_results' => $this->getTotalResultsMessage($result['numFound'] ?? 0),
+      '#context_block' => $search ? $this->getContextBlock($search, $result['numFound'] ?? 0) : [],
       '#attached' => [
         'http_header' => $http_headers,
       ],
@@ -231,7 +277,7 @@ class SearchController extends ControllerBase {
    *
    * @return string
    */
-  protected function getType() {
+  protected function getType(): string {
     return '';
   }
 
@@ -240,7 +286,7 @@ class SearchController extends ControllerBase {
    *
    * @return string
    */
-  protected function getRouteName() {
+  protected function getRouteName(): string {
     return 'donl_search.search';
   }
 
@@ -249,7 +295,7 @@ class SearchController extends ControllerBase {
    *
    * @return array
    */
-  protected function getRouteParams() {
+  protected function getRouteParams(): array {
     return [];
   }
 
@@ -260,58 +306,39 @@ class SearchController extends ControllerBase {
    *
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    */
-  protected function getTotalResultsMessage($numFound) {
+  protected function getTotalResultsMessage($numFound): TranslatableMarkup {
     $count = $this->numberFormatter->format($numFound);
     return $this->formatPlural($count, '1 search result', '@count search results');
   }
 
   /**
-   * Return an array with all available sorting options.
+   * Get the default sorting.
    *
-   * @return array
+   * @return string
    */
-  protected function getAvailableSorting() {
-    return [
-      [
-        'label' => $this->t('Title'),
-        'sort' => ['title'],
-      ],
-      [
-        'label' => $this->t('Last modified'),
-        'sort' => ['sys_modified'],
-      ],
-    ];
+  protected function getDefaultSort(): string {
+    return 'score desc,sys_modified desc';
   }
 
   /**
-   * Determine the correct template.
+   * Get the row template file.
    *
-   * @param string $type
-   *   The type of the record.
+   * @param string $routeName
+   *   (optional) The route name.
    *
    * @return string
-   *   The name of the template.
    */
-  protected function determineTemplate($type): string {
-    $templates = [
-      'donl_searchrecord_application',
-      'donl_searchrecord_catalog',
-      'donl_searchrecord_community',
-      'donl_searchrecord_datarequest',
-      'donl_searchrecord_dataset',
-      'donl_searchrecord_group',
-      'donl_searchrecord_news',
-      'donl_searchrecord_organization',
-      'donl_searchrecord_support',
-    ];
+  protected function getRowTemplate(string $routeName = ''): string {
+    switch ($routeName) {
+      case 'ckan.dataset.view':
+        return 'donl_searchrecord_dataset';
 
-    $template = 'donl_searchrecord_' . $type;
-    if (in_array($template, $templates, TRUE)) {
-      return $template;
+      case 'donl_search.catalog.view':
+        return 'donl_searchrecord_catalog';
+
+      case 'donl.datarequest':
+        return 'donl_searchrecord_datarequest';
     }
-
-    $this->getLogger('donl_search')
-      ->warning("Search result template '$template' not found.");
     return 'donl_searchrecord';
   }
 
@@ -325,9 +352,15 @@ class SearchController extends ControllerBase {
    */
   protected function themeRows(array $result): array {
     $rows = [];
+
+    /** @var \Drupal\donl_search\Entity\SolrResult $row */
     foreach ($result as $row) {
+      $routeName = '';
+      if ($row->url instanceof Url) {
+        $routeName = $row->url->getRouteName();
+      }
       $rows[] = [
-        '#theme' => $this->determineTemplate($row->type),
+        '#theme' => $this->getRowTemplate($routeName),
         '#record' => $row,
       ];
     }
@@ -352,8 +385,12 @@ class SearchController extends ControllerBase {
    * @return array
    *   A Drupal render array.
    */
-  protected function getFacets(array $availableFacets, $recordsPerPage, $search, $sort, array $activeFacets) {
+  protected function getFacets(array $availableFacets, $recordsPerPage, $search, $sort, array $activeFacets): array {
     unset($availableFacets['facet_publisher'], $availableFacets['facet_frequency']);
+
+    foreach (array_keys($this->getHiddenFacets()) as $key) {
+      unset($availableFacets[$key]);
+    }
 
     return $this->searchFacets->getFacets($this->getRouteName(), $this->getRouteParams(), $availableFacets, $recordsPerPage, $search, $sort, $activeFacets);
   }
@@ -364,13 +401,59 @@ class SearchController extends ControllerBase {
    * In some cases we need to search on a specific subset of the data without
    * showing the user an active facet. For example a search page for all
    * datasets for a given group. With this setting we can actively filter the
-   * datasets on that given group withouth showing it as an active facet in the
+   * datasets on that given group without showing it as an active facet in the
    * facet list.
    *
    * @return array
    *   An array with hidden active facets.
    */
-  protected function getHiddenFacets() {
+  protected function getHiddenFacets(): array {
+    return [];
+  }
+
+  /**
+   * Builds the context block for the search page.
+   *
+   * @param string $search
+   *   The search parameter.
+   * @param int $totalResults
+   *   The total amount of results.
+   *
+   * @return array
+   *   The context block build array.
+   */
+  protected function getContextBlock(string $search, $totalResults = 0): array {
+    if ($this->routeMatch->getRouteName() === 'donl_search.search.dataset') {
+      $formattedTotal = $this->numberFormatter->format($totalResults);
+      $build = [
+        '#type' => 'container',
+        '#attributes' => [
+          'class' => ['donl-search-context-block'],
+        ],
+      ];
+
+      $build['content'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'p',
+        '#value' => $this->t("You searched for <b>'@search'</b>. There were <b>@totalResults datasets</b> found.<br>Can't find the dataset you are looking for below? Make a datarequest.", [
+          '@search' => $search,
+          '@totalResults' => $formattedTotal,
+        ]),
+      ];
+
+      if ($totalResults === 1) {
+        $build['content']['#value'] = $this->t("You searched for <b>'@search'</b>. We've found <b>@totalResults dataset</b>.<br>Can't find the dataset you are looking for below? Make a datarequest.", [
+          '@search' => $search,
+          '@totalResults' => $formattedTotal,
+        ]);
+      }
+
+      $build['action'] = Link::createFromRoute($this->t('Make datarequest'), 'node.add', ['node_type' => 'datarequest'])->toRenderable();
+      $build['action']['#attributes']['class'] = ['button', 'bordered'];
+
+      return $build;
+    }
+
     return [];
   }
 

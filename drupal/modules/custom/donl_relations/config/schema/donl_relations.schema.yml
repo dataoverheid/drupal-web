@@ -1,0 +1,27 @@
+donl_relations.corresponding_reference.*:
+  type: config_entity
+  label: 'Corresponding reference config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    enabled:
+      type: boolean
+      label: 'Enabled'
+    first_field:
+      type: string
+      label: 'First field'
+    second_field:
+      type: string
+      label: 'Second field'
+    bundles:
+      type: mapping
+      label: 'Bundles'
+      mapping:
+        id:
+          type: string
+        bundle:
+          type: string

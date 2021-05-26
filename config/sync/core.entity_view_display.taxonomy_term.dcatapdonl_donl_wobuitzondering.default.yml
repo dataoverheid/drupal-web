@@ -1,0 +1,41 @@
+uuid: 1b6ad0b3-cf74-49c2-a2f0-76bbe7bbcb25
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.dcatapdonl_donl_wobuitzondering.identifier
+    - field.field.taxonomy_term.dcatapdonl_donl_wobuitzondering.label_en
+    - field.field.taxonomy_term.dcatapdonl_donl_wobuitzondering.label_nl
+    - taxonomy.vocabulary.dcatapdonl_donl_wobuitzondering
+id: taxonomy_term.dcatapdonl_donl_wobuitzondering.default
+targetEntityType: taxonomy_term
+bundle: dcatapdonl_donl_wobuitzondering
+mode: default
+content:
+  identifier:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_en:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  label_nl:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  langcode: true

@@ -19,7 +19,7 @@ class SortDatasetResourcesService implements SortDatasetResourcesServiceInterfac
    * @param \Drupal\donl_value_list\ValueListInterface $valueList
    */
   public function __construct(ValueListInterface $valueList) {
-    $this->distributionTypes = $valueList->getList('donl:distributiontype', FALSE);
+    $this->distributionTypes = $valueList->getList('donl:distributiontype');
   }
 
   /**

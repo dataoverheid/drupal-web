@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Path\PathMatcher;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\donl_entities\DonlEntitiesServiceInterface;
 use Drupal\donl_search\SearchFacetsInterface;
 use Drupal\donl_search\SearchRoutesTrait;
 use Drupal\donl_search\SearchUrlServiceInterface;
@@ -52,6 +53,11 @@ class SearchForm extends FormBase {
   protected $searchUrlService;
 
   /**
+   * @var \Drupal\donl_entities\DonlEntitiesServiceInterface
+   */
+  protected $donlEntitiesService;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -61,20 +67,30 @@ class SearchForm extends FormBase {
       $container->get('donl_search.search.facets'),
       $container->get('path.matcher'),
       $container->get('current_route_match'),
-      $container->get('donl_search.search_url')
+      $container->get('donl_search.search_url'),
+      $container->get('donl_entities.entities'),
     );
   }
 
   /**
+   * SearchForm constructor.
    *
+   * @param \Drupal\donl_search\SolrRequestInterface $solrRequest
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   * @param \Drupal\donl_search\SearchFacetsInterface $searchFacets
+   * @param \Drupal\Core\Path\PathMatcher $pathMatcher
+   * @param \Drupal\Core\Routing\RouteMatchInterface $routeMatch
+   * @param \Drupal\donl_search\SearchUrlServiceInterface $searchUrlService
+   * @param \Drupal\donl_entities\DonlEntitiesServiceInterface $donlEntitiesService
    */
-  public function __construct(SolrRequestInterface $solrRequest, LanguageManagerInterface $languageManager, SearchFacetsInterface $searchFacets, PathMatcher $pathMatcher, RouteMatchInterface $routeMatch, SearchUrlServiceInterface $searchUrlService) {
+  public function __construct(SolrRequestInterface $solrRequest, LanguageManagerInterface $languageManager, SearchFacetsInterface $searchFacets, PathMatcher $pathMatcher, RouteMatchInterface $routeMatch, SearchUrlServiceInterface $searchUrlService, DonlEntitiesServiceInterface $donlEntitiesService) {
     $this->solrRequest = $solrRequest;
     $this->languageManager = $languageManager;
     $this->searchFacets = $searchFacets;
     $this->isFrontPage = $pathMatcher->isFrontPage();
     $this->currentRoute = $routeMatch->getRouteName();
     $this->searchUrlService = $searchUrlService;
+    $this->donlEntitiesService = $donlEntitiesService;
   }
 
   /**
@@ -88,8 +104,6 @@ class SearchForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $routeName = $this->getRouteMatch()->getRouteName();
-    $routeParams = $this->getRouteMatch()->getRawParameters()->all();
     $searchTerms = $this->getRequest()->query->all();
 
     if ($this->isFrontPage) {
@@ -97,7 +111,8 @@ class SearchForm extends FormBase {
         '#type' => 'inline_template',
         '#template' => "<h2>{{ 'Find one of the <a href=\"@url\">@count</a> available search results'|t({ '@url': url, '@count': ckan_format_number(count) }) }}</h2>",
         '#context' => [
-          'url' => $this->searchUrlService->simpleSearchUrl('donl_search.search')->toString(),
+          'url' => $this->searchUrlService->simpleSearchUrl('donl_search.search')
+            ->toString(),
           'count' => $this->solrRequest->getSearchCount(''),
         ],
       ];
@@ -112,27 +127,20 @@ class SearchForm extends FormBase {
     $form['searchbar']['type_select'] = [
       '#type' => 'select',
       '#default_value' => $this->getTypeFromRoute($this->currentRoute) ?? '',
-      '#options' => [
-        '' => $this->t('All', [], ['context' => 'Dutch: Alles']),
-        'catalog' => $this->t('Catalog'),
-        'community' => $this->t('Community'),
-        'dataset' => $this->t('Datasets'),
-        'datarequest' => $this->t('Data requests'),
-        'group' => $this->t('Groups'),
-        'news' => $this->t('News items'),
-        'organization' => $this->t('Organizations'),
-        'support' => $this->t('Support pages'),
-        'application' => $this->t('Applications'),
-      ],
+      '#options' => $this->donlEntitiesService->getEntitiesAsOptionsList('search'),
+      '#empty_option' => $this->t('All', [], ['context' => 'Dutch: Alles']),
       '#attributes' => [
-        'class' => ['chosen'],
+        'class' => ['select2'],
+        'data-minimum-results-for-search' => -1,
       ],
     ];
 
     $form['searchbar']['search'] = [
       '#type' => 'textfield',
+      '#title' => $this->t('Search'),
+      '#title_display' => 'invisible',
       '#default_value' => $searchTerms['search'] ?? '',
-      '#placeholder' => $this->t('Eg 2018 election results'),
+      '#placeholder' => $this->t('What are you looking for?'),
       '#attributes' => [
         'autocomplete' => 'off',
         'class' => ['suggester-input'],
@@ -162,24 +170,22 @@ class SearchForm extends FormBase {
       ],
     ];
 
-    $form['suggestions_ajax_wrapper'] = [
+    $form['suggestions_full_form_wrapper'] = [
       '#type' => 'container',
       '#attributes' => [
         'class' => 'suggester-result-container',
       ],
     ];
 
-    $activeFacets = $this->searchFacets->getFacetDeleteLinks($routeName, $routeParams, $searchTerms);
-    $form['facet_wrapper'] = [
-      '#type' => 'container',
-      '#attributes' => [
-        'class' => 'facet-wrapper',
+    $form['#attributes']['class'][] = 'donl-suggester-form';
+    $form['#attached'] = [
+      'library' => ['donl_search/donl_search'],
+      'drupalSettings' => [
+        'donl_search' => [
+          'suggestor_url' => '/suggest/',
+        ],
       ],
     ];
-
-    $form['facet_wrapper'][] = $activeFacets;
-
-    $form['#attached']['library'][] = 'donl_search/donl_search';
 
     return $form;
   }

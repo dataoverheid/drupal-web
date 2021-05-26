@@ -1,0 +1,16 @@
+uuid: 91184564-4b0b-43f8-bad7-c343a1a1c49f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donl_api_authentication
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.donl_api_authentication
+target_entity_type_id: taxonomy_term
+target_bundle: donl_api_authentication
+default_langcode: site_default
+language_alterable: false

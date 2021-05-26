@@ -1,0 +1,21 @@
+uuid: 96281faa-58c1-4bb9-be54-a894801fc6ac
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.relation_application_dataset
+    - node.type.appliance
+  module:
+    - ckan
+id: node.appliance.relation_application_dataset
+field_name: relation_application_dataset
+entity_type: node
+bundle: appliance
+label: ' Welke datasets zijn gebruikt'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_dataset

@@ -1,0 +1,15 @@
+uuid: 2fabf043-fa58-46a0-87dc-07d19a13acb7
+langcode: nl
+status: true
+dependencies: {  }
+id: content_manager
+label: 'Content beheerder'
+weight: 5
+is_admin: null
+permissions:
+  - 'access toolbar'
+  - 'configure ckan dataset settings'
+  - 'configure donl recent content settings'
+  - 'configure donl search settings'
+  - 'configure donl settings'
+  - 'view the administration theme'

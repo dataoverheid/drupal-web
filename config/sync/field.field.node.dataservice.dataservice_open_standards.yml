@@ -1,0 +1,29 @@
+uuid: a0eef1a6-8207-4efe-ac80-85539612807f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_open_standards
+    - node.type.dataservice
+    - taxonomy.vocabulary.donl_open_standards
+id: node.dataservice.dataservice_open_standards
+field_name: dataservice_open_standards
+entity_type: node
+bundle: dataservice
+label: Standaarden
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      donl_open_standards: donl_open_standards
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

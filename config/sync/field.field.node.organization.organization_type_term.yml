@@ -1,0 +1,29 @@
+uuid: 63b9fe64-fe91-424c-a3ec-36f87bb329fa
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.organization_type_term
+    - node.type.organization
+    - taxonomy.vocabulary.donl_organization_types
+id: node.organization.organization_type_term
+field_name: organization_type_term
+entity_type: node
+bundle: organization
+label: Bestuurslaag
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      donl_organization_types: donl_organization_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

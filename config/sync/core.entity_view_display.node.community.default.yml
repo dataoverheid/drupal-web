@@ -6,17 +6,27 @@ dependencies:
     - field.field.node.community.colour
     - field.field.node.community.community_applications
     - field.field.node.community.community_datarequests
+    - field.field.node.community.community_datasets
     - field.field.node.community.community_description
     - field.field.node.community.community_organisations
     - field.field.node.community.field_background_image
     - field.field.node.community.field_paragraphs
     - field.field.node.community.groups
+    - field.field.node.community.html_description
+    - field.field.node.community.linked_recent
     - field.field.node.community.machine_name
     - field.field.node.community.menu
+    - field.field.node.community.relation_community_application
+    - field.field.node.community.relation_community_datarequest
+    - field.field.node.community.relation_community_dataset
+    - field.field.node.community.relation_community_group
+    - field.field.node.community.relation_community_organization
+    - field.field.node.community.relation_community_recent
     - field.field.node.community.short_name
     - field.field.node.community.themes
     - node.type.community
   module:
+    - ckan
     - entity_reference_revisions
     - field_group
     - user
@@ -24,12 +34,13 @@ third_party_settings:
   field_group:
     group_related:
       children:
-        - community_organisations
-        - community_datasets
-        - community_applications
-        - community_datarequests
+        - relation_community_organization
+        - relation_community_dataset
+        - relation_community_application
+        - relation_community_datarequest
+        - relation_community_recent
       parent_name: ''
-      weight: 6
+      weight: 2
       format_type: html_element
       region: content
       format_settings:
@@ -42,21 +53,22 @@ third_party_settings:
         speed: fast
         id: ''
         classes: 'community-related container'
-      label: 'Related content'
+      label: 'Gerelateerde inhoud'
 id: node.community.default
 targetEntityType: node
 bundle: community
 mode: default
 content:
-  community_applications:
-    weight: 4
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
     region: content
-  community_datarequests:
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  relation_community_application:
     weight: 5
     label: above
     settings:
@@ -64,25 +76,23 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  community_organisations:
-    weight: 2
+  relation_community_datarequest:
+    weight: 6
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
+  relation_community_dataset:
+    weight: 4
+    label: above
+    settings: {  }
     third_party_settings: {  }
-  groups:
-    weight: 0
+    type: field_dataset_text
+    region: content
+  relation_community_group:
+    weight: 1
     label: hidden
     settings:
       link: true
@@ -90,11 +100,34 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
+  relation_community_organization:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  relation_community_recent:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
 hidden:
   colour: true
+  community_applications: true
+  community_datarequests: true
+  community_datasets: true
   community_description: true
+  community_organisations: true
   field_background_image: true
+  groups: true
+  html_description: true
   langcode: true
+  linked_recent: true
   links: true
   machine_name: true
   menu: true

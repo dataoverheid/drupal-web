@@ -1,0 +1,9 @@
+name: DONL identifier
+description: Module which handles the correct generation of the identifiers.
+package: donl
+
+type: module
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:taxonomy

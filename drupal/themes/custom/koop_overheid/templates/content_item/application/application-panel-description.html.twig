@@ -7,10 +7,10 @@
 
   <p>{{ node.field_description.value|nl2br }}</p>
 
-  {% if(datasets_links) %}
+  {% if(node.relation_application_dataset[0].value) %}
     <h2>{{ 'Datasets' }}</h2>
-    {% for link in datasets_links %}
-      {{ link }}<br />
+    {% for url in node.relation_application_dataset %}
+      {{ get_dataset_link_by_identifier(url.value) }}<br />
     {% endfor %}
   {% endif %}
 </div>

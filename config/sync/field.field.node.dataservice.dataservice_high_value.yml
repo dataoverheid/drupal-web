@@ -1,0 +1,23 @@
+uuid: d134453f-b4d2-4ec8-9f57-b4250c529938
+langcode: nl
+status: true
+dependencies:
+  config:
+    - field.storage.node.dataservice_high_value
+    - node.type.dataservice
+id: node.dataservice.dataservice_high_value
+field_name: dataservice_high_value
+entity_type: node
+bundle: dataservice
+label: 'High value'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'true'
+  off_label: 'false'
+field_type: boolean

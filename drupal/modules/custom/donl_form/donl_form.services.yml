@@ -1,0 +1,7 @@
+services:
+  donl_form.theme.negotiator:
+    class: Drupal\donl_form\Theme\ThemeNegotiator
+    arguments:
+      - '@theme_handler'
+    tags:
+      - { name: theme_negotiator }

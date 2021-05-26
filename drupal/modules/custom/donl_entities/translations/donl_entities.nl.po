@@ -1,0 +1,127 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "Catalog"
+msgstr "Catalogus"
+
+msgid "catalog"
+msgstr "catalogus"
+
+msgid "Catalogs"
+msgstr "Catalogi"
+
+msgid "catalogs"
+msgstr "catalogi"
+
+msgid "Community"
+msgstr "Community"
+
+msgid "community"
+msgstr "community"
+
+msgid "Communities"
+msgstr "Communities"
+
+msgid "communities"
+msgstr "communities"
+
+msgid "Dataset"
+msgstr "Dataset"
+
+msgid "dataset"
+msgstr "dataset"
+
+msgid "Datasets"
+msgstr "Datasets"
+
+msgid "datasets"
+msgstr "datasets"
+
+msgid "Data request"
+msgstr "Dataverzoek"
+
+msgid "data request"
+msgstr "dataverzoek"
+
+msgid "Data requests"
+msgstr "Dataverzoeken"
+
+msgid "data requests"
+msgstr "dataverzoeken"
+
+msgid "Dataservice"
+msgstr "Dataservice"
+
+msgid "dataservice"
+msgstr "dataservice"
+
+msgid "Dataservices"
+msgstr "Dataservices"
+
+msgid "dataservices"
+msgstr "dataservices"
+
+msgid "Group"
+msgstr "Groep"
+
+msgid "groep"
+msgstr "groep"
+
+msgid "Groups"
+msgstr "Groepen"
+
+msgid "groups"
+msgstr "groepen"
+
+msgid "News item"
+msgstr "Nieuwsbericht"
+
+msgid "news item"
+msgstr "nieuwsbericht"
+
+msgid "News items"
+msgstr "Nieuwsberichten"
+
+msgid "news items"
+msgstr "nieuwsberichten"
+
+msgid "Organization"
+msgstr "Organisatie"
+
+msgid "organization"
+msgstr "organisatie"
+
+msgid "Organizations"
+msgstr "Organisaties"
+
+msgid "organizations"
+msgstr "organisaties"
+
+msgid "Support page"
+msgstr "Support pagina"
+
+msgid "support page"
+msgstr "support pagina"
+
+msgid "Support pages"
+msgstr "Support pagina's"
+
+msgid "support pages"
+msgstr "support pagina's"
+
+msgid "Application"
+msgstr "Toepassing"
+
+msgid "application"
+msgstr "toepassing"
+
+msgid "Applications"
+msgstr "Toepassingen"
+
+msgid "applications"
+msgstr "toepassingen"

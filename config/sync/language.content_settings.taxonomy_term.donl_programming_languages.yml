@@ -1,0 +1,16 @@
+uuid: 7baefcdc-008f-41c1-a15d-ae9c54ebb09f
+langcode: nl
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.donl_programming_languages
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.donl_programming_languages
+target_entity_type_id: taxonomy_term
+target_bundle: donl_programming_languages
+default_langcode: site_default
+language_alterable: false

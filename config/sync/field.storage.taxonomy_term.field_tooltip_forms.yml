@@ -1,0 +1,23 @@
+uuid: 004e1b1c-6465-44a1-9630-c56e897bd457
+langcode: nl
+status: true
+dependencies:
+  module:
+    - field_permissions
+    - taxonomy
+third_party_settings:
+  field_permissions:
+    permission_type: public
+id: taxonomy_term.field_tooltip_forms
+field_name: field_tooltip_forms
+entity_type: taxonomy_term
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

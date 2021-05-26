@@ -4,8 +4,8 @@ namespace Drupal\donl_search_backlink;
 
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\TempStore\TempStoreException;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -33,10 +33,10 @@ class PreviousSearchSubscriber implements EventSubscriberInterface {
   /**
    * Save the current and previous request url to the PHP session.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   The Event to process.
    */
-  public function saveRequestUrl(GetResponseEvent $event): void {
+  public function saveRequestUrl(RequestEvent $event): void {
     $request = $event->getRequest();
     $savedRequestUri = $this->tempStore->get('current_request');
     $currentRequestUri = $request->getSchemeAndHttpHost() . $request->getRequestUri();

@@ -22,6 +22,10 @@
   .search-content {
     margin-left: 30px;
 
+    @include breakpoint($mobileonly) {
+      margin-left: 0;
+    }
+
     .short-links {
       margin-top: 8px;
 
@@ -38,10 +42,41 @@
       margin-bottom: 0;
     }
   }
+
+  &.content-characteristics-organization {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint($mobileonly) {
+      display: block;
+    }
+
+    div {
+      width: 100%;
+      margin-right: 16px;
+    }
+
+    .org-unit-logo {
+      max-height: 60px;
+      max-width: 250px;
+      flex-shrink: 0;
+      margin-left: 16px;
+
+      @include breakpoint($mobileonly) {
+        margin: 16px 0 0 0;
+      }
+    }
+  }
+
 }
 
 .content-item-title {
-  margin-bottom: 10px;
+  margin: 0;
+
+  + .search-content {
+    margin-top: 10px;
+  }
 
   h2 {
     transition: .5s;
@@ -51,6 +86,7 @@
     }
   }
 }
+
 .columns--sidebar-left > div > .well {
   margin: 13px 0 30px;
   padding: 0;
@@ -77,3 +113,4 @@
     white-space: nowrap;
   }
 }
+

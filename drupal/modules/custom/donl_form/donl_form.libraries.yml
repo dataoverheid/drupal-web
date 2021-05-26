@@ -1,0 +1,6 @@
+donl-form-content-type:
+  version: 1.0.0
+  js:
+    js/donl-form-content-type.js: { weight: -1 }
+  dependencies:
+    - ckan/donl-form
